@@ -19,6 +19,8 @@ end
 
 vim.cmd [[ let g:neo_tree_remove_legacy_commands = 1 ]]
 
+vim.keymap.set('i', '<C-h>', function() vim.lsp.buf.signature_help() end, { desc = 'Lsp [H]elp ' })
+
 -- Move to next and previous buffer with ease
 vim.keymap.set('n', '<S-h>', '<cmd>bprevious<cr>', { desc = 'Prev buffer' })
 vim.keymap.set('n', '<S-l>', '<cmd>bnext<cr>', { desc = 'Next buffer' })
