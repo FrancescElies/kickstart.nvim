@@ -294,9 +294,12 @@ vim.keymap.set('n', '<leader>gg', '<cmd>Git<cr>', { desc = '[G]it' })
 vim.keymap.set('n', '<leader>gf', telescope_builtin.git_files, { desc = 'Search [G]it [F]iles' })
 vim.keymap.set('n', '<leader>ff', telescope_builtin.find_files, { desc = '[S]earch [F]iles' })
 vim.keymap.set('n', '<leader>fy', ":let @+ = expand('%:p')<cr>", { desc = 'File Yank (copy path)' })
+vim.keymap.set('n', '<leader>sc', '<cmd>Telescope command_history<cr>', { desc = '[S]earch [C]ommand history' })
 vim.keymap.set('n', '<leader>sh', telescope_builtin.help_tags, { desc = '[S]earch [H]elp' })
 vim.keymap.set('n', '<leader>sw', telescope_builtin.grep_string, { desc = '[S]earch current [W]ord' })
 vim.keymap.set('n', '<leader>sg', telescope_builtin.live_grep, { desc = '[S]earch by [G]rep' })
+vim.keymap.set('n', '<leader>sk', '<cmd>Telescope keymaps<cr>', { desc = '[S]earch [K]eymaps' })
+vim.keymap.set('n', '<leader>sr', '<cmd>Telescope resume<cr>', { desc = '[S]earch [R]esume' })
 vim.keymap.set('n', '<leader>sd', telescope_builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
 
 vim.keymap.set('n', '<F4>', ':edit $MYVIMRC<cr>', { desc = 'Reload Config' })
@@ -388,7 +391,9 @@ local on_attach = function(_, bufnr)
   -- In this case, we create a function that lets us more easily define mappings specific
   -- for LSP related items. It sets the mode, buffer and description for us each time.
   local nmap = function(keys, func, desc)
-    if desc then desc = 'LSP: ' .. desc end
+    if desc then
+      desc = 'LSP: ' .. desc
+    end
 
     vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
   end
