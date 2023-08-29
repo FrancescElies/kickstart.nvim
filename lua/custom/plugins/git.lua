@@ -1,4 +1,4 @@
-vim.keymap.set('n', '<leader>gg', vim.cmd.Git)
+vim.keymap.set('n', '<leader>gg', vim.cmd.Git, { desc = '[G]it (fugitive)' })
 
 local cesc_fugitive = vim.api.nvim_create_augroup('cesc_fugitive', {})
 
@@ -23,11 +23,9 @@ autocmd('BufWinEnter', {
 })
 
 return {
+  { 'tpope/vim-fugitive' },
+  { 'tpope/vim-rhubarb' },
   {
-    -- Git related plugins
-    'tpope/vim-fugitive',
-    'tpope/vim-rhubarb',
-
     -- Adds git releated signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
     opts = {
