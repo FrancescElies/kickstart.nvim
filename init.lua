@@ -68,8 +68,7 @@ require('lazy').setup({
   -- NOTE: First, some plugins that don't require any configuration
 
   -- Git related plugins
-  'tpope/vim-fugitive',
-  'tpope/vim-rhubarb',
+  -- src\kickstart.nvim\init.lua
 
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
@@ -290,7 +289,6 @@ end, { desc = '[/] Fuzzily search in current buffer' })
 
 local lazygit = require 'lazygit'
 local telescope_builtin = require 'telescope.builtin'
-vim.keymap.set('n', '<leader>gg', '<cmd>Git<cr>', { desc = '[G]it' })
 vim.keymap.set('n', '<leader>gf', telescope_builtin.git_files, { desc = 'Search [G]it [F]iles' })
 vim.keymap.set('n', '<leader>ff', telescope_builtin.find_files, { desc = '[S]earch [F]iles' })
 vim.keymap.set('n', '<leader>fy', ":let @+ = expand('%:p')<cr>", { desc = 'File Yank (copy path)' })

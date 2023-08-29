@@ -19,9 +19,11 @@ end
 
 vim.cmd [[ let g:neo_tree_remove_legacy_commands = 1 ]]
 
--- vim.keymap.set('n', 'gh', '<cmd>diffget //2<cr>', { desc = 'get left diff' })
--- vim.keymap.set('n', 'gl', '<cmd>diffget //3<cr>', { desc = 'get right diff' })
-vim.keymap.set('i', 'gl', function() vim.lsp.buf.signature_help() end, { desc = 'Lsp [H]elp ' })
+vim.keymap.set('i', 'C-h', function() vim.lsp.buf.signature_help() end, { desc = 'Lsp [H]elp ' })
+
+-- vimdiff
+vim.keymap.set('n', 'gh', '<cmd>diffget //2<cr>', { desc = 'get left diff' })
+vim.keymap.set('n', 'gl', '<cmd>diffget //3<cr>', { desc = 'get right diff' })
 
 -- Move to next and previous buffer with ease
 vim.keymap.set('n', '<S-h>', '<cmd>bprevious<cr>', { desc = 'Prev buffer' })

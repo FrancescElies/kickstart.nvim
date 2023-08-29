@@ -1,7 +1,33 @@
-local opts = { noremap = false, silent = false }
+vim.keymap.set('n', '<leader>gg', vim.cmd.Git)
+
+local cesc_fugitive = vim.api.nvim_create_augroup('cesc_fugitive', {})
+
+local autocmd = vim.api.nvim_create_autocmd
+autocmd('BufWinEnter', {
+  group = cesc_fugitive,
+  pattern = '*',
+  callback = function()
+    if vim.bo.ft ~= 'fugitive' then
+      return
+    end
+
+    local bufnr = vim.api.nvim_get_current_buf()
+    vim.keymap.set('n', '<leader>p', ':Git push<cr>', { desc = '[G]it [P]ush', buffer = bufnr, remap = false })
+
+    vim.keymap.set('n', '<leader>P', ':Git pull --rebase<cr>',
+      { desc = '[G]it [P]ull rebase', buffer = bufnr, remap = false })
+
+    vim.keymap.set('n', '<leader>o', ':Git push -u origin ',
+      { desc = '[G]it Push [O]rigin', buffer = bufnr, remap = false })
+  end,
+})
 
 return {
   {
+    -- Git related plugins
+    'tpope/vim-fugitive',
+    'tpope/vim-rhubarb',
+
     -- Adds git releated signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
     opts = {
@@ -41,9 +67,11 @@ return {
 
         -- Actions
         map('n', '<leader>gr', gs.reset_hunk, { desc = '[G]it Hunk [R]eset' })
-        map('v', '<leader>gr', function() gs.reset_hunk { vim.fn.line '.', vim.fn.line 'v' } end, { desc = '[G]it Hunk Reset Selection' })
+        map('v', '<leader>gr', function() gs.reset_hunk { vim.fn.line '.', vim.fn.line 'v' } end,
+          { desc = '[G]it Hunk Reset Selection' })
         map('n', '<leader>gs', gs.stage_hunk, { desc = '[G]it Hunk [S]tage' })
-        map('v', '<leader>gs', function() gs.stage_hunk { vim.fn.line '.', vim.fn.line 'v' } end, { desc = '[G]it Hunk Stage Selection' })
+        map('v', '<leader>gs', function() gs.stage_hunk { vim.fn.line '.', vim.fn.line 'v' } end,
+          { desc = '[G]it Hunk Stage Selection' })
 
         map('n', '<leader>hD', function() gs.diffthis '~' end, { desc = 'Hunk Diff' })
 
@@ -66,9 +94,9 @@ return {
 
     'NeogitOrg/neogit',
     dependencies = {
-      'nvim-lua/plenary.nvim', -- required
+      'nvim-lua/plenary.nvim',         -- required
       'nvim-telescope/telescope.nvim', -- optional
-      'sindrets/diffview.nvim', -- optional
+      'sindrets/diffview.nvim',        -- optional
     },
     config = true,
     keys = {
