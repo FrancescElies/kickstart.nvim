@@ -2,6 +2,7 @@ vim.keymap.set('n', '<leader>gg', vim.cmd.Git, { desc = '[G]it (fugitive)' })
 
 local cesc_fugitive = vim.api.nvim_create_augroup('cesc_fugitive', {})
 
+vim.keymap.set('n', '<leader>gc', ':Git checkout ', { desc = '[G]it [C]heckout' })
 local autocmd = vim.api.nvim_create_autocmd
 autocmd('BufWinEnter', {
   group = cesc_fugitive,
@@ -12,9 +13,9 @@ autocmd('BufWinEnter', {
     end
 
     local bufnr = vim.api.nvim_get_current_buf()
-    vim.keymap.set('n', '<leader>p', ':Git push<cr>', { desc = '[G]it [P]ush', buffer = bufnr, remap = false })
+    vim.keymap.set('n', '<leader>p', ':Git push ', { desc = '[G]it [P]ush', buffer = bufnr, remap = false })
 
-    vim.keymap.set('n', '<leader>P', ':Git pull --rebase<cr>',
+    vim.keymap.set('n', '<leader>P', ':Git pull --rebase ',
       { desc = '[G]it [P]ull rebase', buffer = bufnr, remap = false })
 
     vim.keymap.set('n', '<leader>o', ':Git push -u origin ',
