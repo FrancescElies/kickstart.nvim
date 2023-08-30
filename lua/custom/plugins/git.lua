@@ -61,12 +61,12 @@ return {
 
         map('n', '<leader>gh', gs.preview_hunk, { desc = '[G]it [H]unk Preview' })
 
-        map('n', '<leader>gB', function() gs.blame_line { full = true } end, { desc = '[G]it Hunk [B]lame' })
-        map('n', '<leader>gb', gs.toggle_current_line_blame, { desc = '[G]it [B]lame line' })
+        map('n', '<leader>gb', function() gs.blame_line { full = true } end, { desc = '[G]it Hunk [B]lame' })
 
         map('n', '<leader>gd', gs.diffthis, { desc = '[G]it Hunk [D]iff' })
         map('n', '<leader>gD', function() gs.diffthis '~' end, { desc = '[G]it [D]iff' })
 
+        map('n', '<leader>vb', gs.toggle_current_line_blame, { desc = '[Vim] toggle git [B]lame line' })
         map('n', '<leader>vd', gs.toggle_deleted, { desc = '[V]im toggle git [D]eleted' })
 
         -- Text object
