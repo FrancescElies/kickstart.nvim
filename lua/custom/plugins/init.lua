@@ -31,6 +31,12 @@ vim.keymap.set('n', '<S-l>', '<cmd>bnext<cr>', { desc = 'Next buffer' })
 vim.keymap.set('n', '[b', '<cmd>bprevious<cr>', { desc = 'Prev buffer' })
 vim.keymap.set('n', ']b', '<cmd>bnext<cr>', { desc = 'Next buffer' })
 
+-- quickfix
+vim.keymap.set('n', '[q', '<cmd>cprevious<cr>', { desc = '[Q]uickfix next' })
+vim.keymap.set('n', '[q', '<cmd>cprevious<cr>', { desc = '[Q]uickfix next' })
+vim.keymap.set('n', ']Q', '<cmd>cfirst<cr>', { desc = '[Q]uickfix next' })
+vim.keymap.set('n', ']Q', '<cmd>clast<cr>', { desc = 'Prev buffer' })
+
 -- Keep things vertically centered during searches
 vim.keymap.set('n', '<C-d>', '<C-d>zz')
 vim.keymap.set('n', '<C-u>', '<C-u>zz')
@@ -52,7 +58,7 @@ return {
   -- automatically follow symlinks
   { 'aymericbeaumet/vim-symlink', requires = { 'moll/vim-bbye' } },
   -- markdown preview
-  { 'ellisonleao/glow.nvim', config = true, cmd = 'Glow' },
+  { 'ellisonleao/glow.nvim',      config = true,                 cmd = 'Glow' },
   -- You find yourself frequenting a small set of files and you are tired of using a fuzzy finder,
   -- :bnext & :bprev are getting too repetitive, alternate file doesn't quite cut it, etc etc.
   {
@@ -60,13 +66,18 @@ return {
     config = function()
       require('harpoon').setup()
       vim.keymap.set('n', '<leader>ha', require('harpoon.mark').add_file, { desc = '[H]arpoon [A]dd file' })
-      vim.keymap.set('n', '<leader>ht', require('harpoon.ui').toggle_quick_menu, { desc = '[H]arpoon [T]oggle quick menu' })
+      vim.keymap.set('n', '<leader>ht', require('harpoon.ui').toggle_quick_menu,
+        { desc = '[H]arpoon [T]oggle quick menu' })
       vim.keymap.set('n', '<leader>hn', require('harpoon.ui').nav_next, { desc = '[H]arpoon nav [N]ext' })
       vim.keymap.set('n', '<leader>hp', require('harpoon.ui').nav_prev, { desc = '[H]arpoon nav [P]revious' })
-      vim.keymap.set('n', '<leader>h1', function() require('harpoon.ui').nav_file(1) end, { desc = '[H]arpoon goto file [1]' })
-      vim.keymap.set('n', '<leader>h2', function() require('harpoon.ui').nav_file(2) end, { desc = '[H]arpoon goto file [2]' })
-      vim.keymap.set('n', '<leader>h3', function() require('harpoon.ui').nav_file(3) end, { desc = '[H]arpoon goto file [3]' })
-      vim.keymap.set('n', '<leader>h4', function() require('harpoon.ui').nav_file(4) end, { desc = '[H]arpoon goto file [4]' })
+      vim.keymap.set('n', '<leader>h1', function() require('harpoon.ui').nav_file(1) end,
+        { desc = '[H]arpoon goto file [1]' })
+      vim.keymap.set('n', '<leader>h2', function() require('harpoon.ui').nav_file(2) end,
+        { desc = '[H]arpoon goto file [2]' })
+      vim.keymap.set('n', '<leader>h3', function() require('harpoon.ui').nav_file(3) end,
+        { desc = '[H]arpoon goto file [3]' })
+      vim.keymap.set('n', '<leader>h4', function() require('harpoon.ui').nav_file(4) end,
+        { desc = '[H]arpoon goto file [4]' })
     end,
     dependencies = {
       'nvim-lua/plenary.nvim',
@@ -115,12 +126,12 @@ return {
       local plugin = require('lazy.core.config').spec.plugins['mini.surround']
       local opts = require('lazy.core.plugin').values(plugin, 'opts', false)
       local mappings = {
-        { opts.mappings.add, desc = 'Add surrounding', mode = { 'n', 'v' } },
-        { opts.mappings.delete, desc = 'Delete surrounding' },
-        { opts.mappings.find, desc = 'Find right surrounding' },
-        { opts.mappings.find_left, desc = 'Find left surrounding' },
-        { opts.mappings.highlight, desc = 'Highlight surrounding' },
-        { opts.mappings.replace, desc = 'Replace surrounding' },
+        { opts.mappings.add,            desc = 'Add surrounding',                     mode = { 'n', 'v' } },
+        { opts.mappings.delete,         desc = 'Delete surrounding' },
+        { opts.mappings.find,           desc = 'Find right surrounding' },
+        { opts.mappings.find_left,      desc = 'Find left surrounding' },
+        { opts.mappings.highlight,      desc = 'Highlight surrounding' },
+        { opts.mappings.replace,        desc = 'Replace surrounding' },
         { opts.mappings.update_n_lines, desc = 'Update `MiniSurround.config.n_lines`' },
       }
       mappings = vim.tbl_filter(function(m) return m[1] and #m[1] > 0 end, mappings)
@@ -128,12 +139,12 @@ return {
     end,
     opts = {
       mappings = {
-        add = 'gza', -- Add surrounding in Normal and Visual modes
-        delete = 'gzd', -- Delete surrounding
-        find = 'gzf', -- Find surrounding (to the right)
-        find_left = 'gzF', -- Find surrounding (to the left)
-        highlight = 'gzh', -- Highlight surrounding
-        replace = 'gzr', -- Replace surrounding
+        add = 'gza',            -- Add surrounding in Normal and Visual modes
+        delete = 'gzd',         -- Delete surrounding
+        find = 'gzf',           -- Find surrounding (to the right)
+        find_left = 'gzF',      -- Find surrounding (to the left)
+        highlight = 'gzh',      -- Highlight surrounding
+        replace = 'gzr',        -- Replace surrounding
         update_n_lines = 'gzn', -- Update `n_lines`
       },
     },
