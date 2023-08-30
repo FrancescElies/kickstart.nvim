@@ -32,10 +32,10 @@ vim.keymap.set('n', '[b', '<cmd>bprevious<cr>', { desc = 'Prev buffer' })
 vim.keymap.set('n', ']b', '<cmd>bnext<cr>', { desc = 'Next buffer' })
 
 -- quickfix
-vim.keymap.set('n', '[q', '<cmd>cprevious<cr>', { desc = '[Q]uickfix next' })
-vim.keymap.set('n', '[q', '<cmd>cprevious<cr>', { desc = '[Q]uickfix next' })
-vim.keymap.set('n', ']Q', '<cmd>cfirst<cr>', { desc = '[Q]uickfix next' })
-vim.keymap.set('n', ']Q', '<cmd>clast<cr>', { desc = 'Prev buffer' })
+vim.keymap.set('n', '[q', '<cmd>cprevious<cr>', { desc = '[Q]uickfix previous' })
+vim.keymap.set('n', ']q', '<cmd>cnext<cr>', { desc = '[Q]uickfix next' })
+vim.keymap.set('n', '[Q', '<cmd>cfirst<cr>', { desc = '[Q]uickfix [F]irst]' })
+vim.keymap.set('n', ']Q', '<cmd>clast<cr>', { desc = '[Q]uickfix [L]ast' })
 
 -- Keep things vertically centered during searches
 vim.keymap.set('n', '<C-d>', '<C-d>zz')
