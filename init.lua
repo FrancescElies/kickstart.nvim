@@ -85,7 +85,7 @@ require('lazy').setup({
 
       -- Useful status updates for LSP
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-      { 'j-hui/fidget.nvim', tag = 'legacy', opts = {} },
+      { 'j-hui/fidget.nvim',       tag = 'legacy', opts = {} },
 
       -- Additional lua configuration, makes nvim stuff amazing!
       'folke/neodev.nvim',
@@ -109,7 +109,7 @@ require('lazy').setup({
   },
 
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim', opts = {} },
+  { 'folke/which-key.nvim',   opts = {} },
   {
     -- Theme inspired by Atom
     'navarasu/onedark.nvim',
@@ -143,7 +143,7 @@ require('lazy').setup({
   },
 
   -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim', opts = {} },
+  { 'numToStr/Comment.nvim',  opts = {} },
 
   -- Fuzzy Finder (files, lsp, etc)
   {
@@ -275,6 +275,35 @@ require('telescope').setup {
 -- Enable telescope fzf native, if installed
 pcall(require('telescope').load_extension, 'fzf')
 
+local function from_git_root_do(action)
+  return function()
+    local function is_git_repo()
+      vim.fn.system 'git rev-parse --is-inside-work-tree'
+
+      return vim.v.shell_error == 0
+    end
+
+    local function get_git_root()
+      local dot_git_path = vim.fn.finddir('.git', '.;')
+      return vim.fn.fnamemodify(dot_git_path, ':h')
+    end
+
+    local opts = {}
+
+    if is_git_repo() then
+      opts = {
+        cwd = get_git_root(),
+      }
+    end
+
+    if action == 'live_grep' then
+      require('telescope.builtin').live_grep(opts)
+    elseif action == 'grep_string' then
+      require('telescope.builtin').grep_string(opts)
+    end
+  end
+end
+
 -- See `:help telescope.builtin`
 vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
 vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
@@ -287,14 +316,16 @@ vim.keymap.set('n', '<leader>/', function()
 end, { desc = '[/] Fuzzily search in current buffer' })
 
 local telescope_builtin = require 'telescope.builtin'
-vim.keymap.set('n', '<leader>gf', telescope_builtin.git_files, { desc = 'Search [G]it [F]iles' })
-vim.keymap.set('n', '<leader>ff', telescope_builtin.find_files, { desc = '[S]earch [F]iles' })
+vim.keymap.set('n', '<leader>fF', telescope_builtin.git_files, { desc = '[F]ind [F]iles (git root)' })
+vim.keymap.set('n', '<leader>ff', telescope_builtin.find_files, { desc = '[F]ind [F]iles' })
 vim.keymap.set('n', '<leader>fy', ":let @+ = expand('%:p')<cr>", { desc = 'File Yank (copy absolute path)' })
 vim.keymap.set('n', '<leader>fY', ":let @+=expand('%:t')<cr>", { desc = 'Filename Yank (copy filename)' })
 vim.keymap.set('n', '<leader>sc', '<cmd>Telescope command_history<cr>', { desc = '[S]earch [C]ommand history' })
 vim.keymap.set('n', '<leader>sh', telescope_builtin.help_tags, { desc = '[S]earch [H]elp' })
 vim.keymap.set('n', '<leader>sw', telescope_builtin.grep_string, { desc = '[S]earch current [W]ord' })
+vim.keymap.set('n', '<leader>sW', from_git_root_do 'grep_string', { desc = '[S]earch current [W]ord (git root)' })
 vim.keymap.set('n', '<leader>sg', telescope_builtin.live_grep, { desc = '[S]earch by [G]rep' })
+vim.keymap.set('n', '<leader>sG', from_git_root_do 'live_grep', { desc = '[S]earch by [G]rep (git root)' })
 vim.keymap.set('n', '<leader>sk', '<cmd>Telescope keymaps<cr>', { desc = '[S]earch [K]eymaps' })
 vim.keymap.set('n', '<leader>sr', '<cmd>Telescope resume<cr>', { desc = '[S]earch [R]esume' })
 vim.keymap.set('n', '<leader>sd', telescope_builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
@@ -306,7 +337,8 @@ vim.keymap.set('n', '<F5>', ':source $MYVIMRC<cr>', { desc = 'Reload Config' })
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'c', 'cpp', 'go', 'html', 'lua', 'markdown', 'mermaid', 'python', 'rust', 'tsx', 'typescript', 'vimdoc', 'vim', 'yaml' },
+  ensure_installed = { 'c', 'cpp', 'go', 'html', 'lua', 'markdown', 'mermaid', 'python', 'rust', 'tsx', 'typescript',
+    'vimdoc', 'vim', 'yaml' },
 
   -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
   auto_install = true,
@@ -371,10 +403,14 @@ require('nvim-treesitter.configs').setup {
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
-vim.keymap.set('n', '[w', function() vim.diagnostic.goto_prev { severity = 'WARN' } end, { desc = 'Go to previous warning message' })
-vim.keymap.set('n', ']w', function() vim.diagnostic.goto_next { severity = 'WARN' } end, { desc = 'Go to next warning message' })
-vim.keymap.set('n', '[e', function() vim.diagnostic.goto_prev { severity = 'ERROR' } end, { desc = 'Go to previous error message' })
-vim.keymap.set('n', ']e', function() vim.diagnostic.goto_next { severity = 'ERROR' } end, { desc = 'Go to next error message' })
+vim.keymap.set('n', '[w', function() vim.diagnostic.goto_prev { severity = 'WARN' } end,
+  { desc = 'Go to previous warning message' })
+vim.keymap.set('n', ']w', function() vim.diagnostic.goto_next { severity = 'WARN' } end,
+  { desc = 'Go to next warning message' })
+vim.keymap.set('n', '[e', function() vim.diagnostic.goto_prev { severity = 'ERROR' } end,
+  { desc = 'Go to previous error message' })
+vim.keymap.set('n', ']e', function() vim.diagnostic.goto_next { severity = 'ERROR' } end,
+  { desc = 'Go to next error message' })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 vim.keymap.set('n', '<leader>E', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
@@ -413,10 +449,12 @@ local on_attach = function(_, bufnr)
   nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
   nmap('<leader>wa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [A]dd Folder')
   nmap('<leader>wr', vim.lsp.buf.remove_workspace_folder, '[W]orkspace [R]emove Folder')
-  nmap('<leader>wl', function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, '[W]orkspace [L]ist Folders')
+  nmap('<leader>wl', function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end,
+    '[W]orkspace [L]ist Folders')
 
   -- Create a command `:Format` local to the LSP buffer
-  vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_) vim.lsp.buf.format() end, { desc = 'Format current buffer with LSP' })
+  vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_) vim.lsp.buf.format() end,
+    { desc = 'Format current buffer with LSP' })
 end
 
 -- Enable the following language servers
