@@ -1,52 +1,28 @@
--- nnoremap <Leader>gs :Gstatus<CR>
--- nnoremap <Leader>gd :Gdiff<CR>
--- nnoremap <Leader>gb :Gblame<CR>
--- nnoremap <Leader>gL :exe ':!cd ' . expand('%:p:h') . '; git la'<CR>
--- nnoremap <Leader>gl :exe ':!cd ' . expand('%:p:h') . '; git las'<CR>
--- nnoremap <Leader>gh :Silent Glog<CR>
--- nnoremap <Leader>gH :Silent Glog<CR>:set nofoldenable<CR>
--- nnoremap <Leader>gr :Gread<CR>
--- nnoremap <Leader>gw :Gwrite<CR>
--- nnoremap <Leader>gp :Git push<CR>
--- nnoremap <Leader>g- :Silent Git stash<CR>:e<CR>
--- nnoremap <Leader>g+ :Silent Git stash pop<CR>:e<CR>
--- These are some of my git aliases, which some of my vim mappings use:
---
--- alias.la=log --oneline --all --decorate --graph
--- alias.las=!git --no-pager log --oneline --all --decorate --graph -40
--- alias.lass=!git --no-pager log --oneline --all --decorate --graph -10
--- alias.lb=log --oneline --decorate --graph
--- alias.lbs=!git --no-pager log --oneline --decorate --graph -40
--- alias.lbss=!git --no-pager log --oneline --decorate --graph -10
---
--- " fugitive git bindings
--- nnoremap <space>ga :Git add %:p<CR><CR>
--- nnoremap <space>gs :Gstatus<CR>
--- nnoremap <space>gc :Gcommit -v -q<CR>
--- nnoremap <space>gt :Gcommit -v -q %:p<CR>
--- nnoremap <space>gd :Gdiff<CR>
--- nnoremap <space>ge :Gedit<CR>
--- nnoremap <space>gr :Gread<CR>
--- nnoremap <space>gw :Gwrite<CR><CR>
--- nnoremap <space>gl :silent! Glog<CR>:bot copen<CR>
--- nnoremap <space>gp :Ggrep<Space>
--- nnoremap <space>gm :Gmove<Space>
--- nnoremap <space>gb :Git branch<Space>
--- nnoremap <space>go :Git checkout<Space>
--- nnoremap <space>gps :Dispatch! git push<CR>
--- nnoremap <space>gpl :Dispatch! git pull<CR>
-
-vim.keymap.set('n', '<leader>gg', vim.cmd.Git, { desc = '[G]it (fugitive)' })
-
-local cesc_fugitive = vim.api.nvim_create_augroup('cesc_fugitive', {})
-
-vim.keymap.set('n', '<leader>gc', ':Git checkout ', { desc = '[G]it [C]heckout' })
-vim.keymap.set('n', '<leader>gp', ':Git push  -u origin ', { desc = '[G]it [P]ush', buffer = bufnr, remap = false })
-vim.keymap.set('n', '<leader>gP', ':Git pull --rebase ', { desc = '[G]it [P]ull rebase', buffer = bufnr, remap = false })
+vim.keymap.set('n', '<leader>g-', ':Git stash <cr>')
+vim.keymap.set('n', '<leader>g=', ':Git stash pop <cr>')
+vim.keymap.set('n', '<leader>gP', ':Git pull --rebase ')
+vim.keymap.set('n', '<leader>gR', ':GRemove ')
+vim.keymap.set('n', '<leader>ga', ':Git add %:p ')
+vim.keymap.set('n', '<leader>gb', ':Git branch ')
+vim.keymap.set('n', '<leader>gB', ':Git blame <cr>')
+vim.keymap.set('n', '<leader>gc', ':Git commit <cr>')
+vim.keymap.set('n', '<leader>gd', ':Gdiffsplit <cr>')
+vim.keymap.set('n', '<leader>gg', ':Ggrep ')
+vim.keymap.set('n', '<leader>gl', ':Gclog <cr>')
+vim.keymap.set('n', '<leader>gm', ':Gmove ')
+vim.keymap.set('n', '<leader>gn', ':Git branch ')
+vim.keymap.set('n', '<leader>go', ':Git checkout ')
+vim.keymap.set('n', '<leader>gp', ':Git push  -u origin ')
+vim.keymap.set('n', '<leader>gr', ':Gread <cr>')
+vim.keymap.set('n', '<leader>gs', vim.cmd.Git, { desc = '[G]it [S]tatus' })
+vim.keymap.set('n', '<leader>gw', ':Gwrite <cr>')
 
 return {
   { 'tpope/vim-fugitive' },
+  -- GitHub extension for fugitive.vim
   { 'tpope/vim-rhubarb' },
+  -- Azure DevOps extension for fugitive.vim
+  { 'cedarbaum/fugitive-azure-devops.vim' },
   {
     -- Adds git releated signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
@@ -86,23 +62,23 @@ return {
         end, { expr = true, desc = 'Previous Hunk' })
 
         -- Actions
-        map('n', '<leader>gr', gs.reset_hunk, { desc = '[G]it Hunk [R]eset' })
-        map('v', '<leader>gr', function() gs.reset_hunk { vim.fn.line '.', vim.fn.line 'v' } end,
-          { desc = '[G]it Hunk Reset Selection' })
+        map('n', '<leader>hr', gs.reset_hunk, { desc = '[H]unk [R]eset' })
+        map('v', '<leader>hr', function() gs.reset_hunk { vim.fn.line '.', vim.fn.line 'v' } end,
+          { desc = '[H]unk [R]eset Selection' })
 
-        map('n', '<leader>gs', gs.stage_hunk, { desc = '[G]it Hunk [S]tage' })
-        map('v', '<leader>gs', function() gs.stage_hunk { vim.fn.line '.', vim.fn.line 'v' } end,
-          { desc = '[G]it Hunk Stage Selection' })
-        map('n', '<leader>gS', gs.stage_buffer, { desc = '[G]it [S]tage Buffer' })
+        map('n', '<leader>hs', gs.stage_hunk, { desc = '[H]unk [S]tage' })
+        map('v', '<leader>hs', function() gs.stage_hunk { vim.fn.line '.', vim.fn.line 'v' } end,
+          { desc = '[H]unk s[t]age Selection' })
+        map('n', '<leader>hS', gs.stage_buffer, { desc = '[H]unk [S]tage Buffer' })
 
-        map('n', '<leader>gR', gs.reset_buffer, { desc = '[G]it [R]eset Buffer' })
+        map('n', '<leader>hr', gs.reset_buffer, { desc = '[H]unk [R]eset Buffer' })
 
-        map('n', '<leader>gh', gs.preview_hunk, { desc = '[G]it [H]unk Preview' })
+        map('n', '<leader>hp', gs.preview_hunk, { desc = '[H]unk Preview' })
 
-        map('n', '<leader>gb', function() gs.blame_line { full = true } end, { desc = '[G]it Hunk [B]lame' })
+        map('n', '<leader>hb', function() gs.blame_line { full = true } end, { desc = '[H]unk [B]lame' })
 
-        map('n', '<leader>gd', gs.diffthis, { desc = '[G]it Hunk [D]iff' })
-        map('n', '<leader>gD', function() gs.diffthis '~' end, { desc = '[G]it [D]iff' })
+        map('n', '<leader>hd', gs.diffthis, { desc = '[H]unk [D]iff' })
+        map('n', '<leader>hD', function() gs.diffthis '~' end, { desc = '[D]iff' })
 
         map('n', '<leader>vb', gs.toggle_current_line_blame, { desc = '[Vim] toggle git [B]lame line' })
         map('n', '<leader>vd', gs.toggle_deleted, { desc = '[V]im toggle git [D]eleted' })
@@ -122,7 +98,7 @@ return {
     },
     config = true,
     keys = {
-      { '<leader>gG', ":lua require('neogit').open()<CR>", desc = 'Neo[G]it' },
+      { '<leader>gS', ":lua require('neogit').open()<CR>", desc = 'Neo[G]it [S]tatus' },
     },
   },
   {
