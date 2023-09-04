@@ -52,6 +52,18 @@ function get_buffer_by_name_or_scratch(name, clean)
   return buffer
 end
 
+function string_not_empty(str)
+  -- Remove leading and trailing whitespace using the gsub function
+  local trimmedStr = str:gsub('^%s*(.-)%s*$', '%1')
+
+  -- Check if the trimmed string is empty
+  if trimmedStr == '' then
+    return false
+  else
+    return true
+  end
+end
+
 vim.api.nvim_create_autocmd('BufWritePost', {
   group = vim.api.nvim_create_augroup('MyTypescript', { clear = true }),
   pattern = '*.ts',
@@ -60,16 +72,28 @@ vim.api.nvim_create_autocmd('BufWritePost', {
     local window = vim.api.nvim_get_current_win()
     vim.api.nvim_buf_set_lines(buffer, 0, -1, false, {}) -- clear contents
 
-    vim.fn.jobstart({ 'npm', 'run', 'ci' }, {
+    vim.fn.jobstart({ 'npm', 'run', 'build' }, {
       stdout_buffered = true,
       on_stdout = function(_, data)
         if data then
           vim.api.nvim_buf_set_lines(buffer, -1, -1, false, { 'stdout' })
           vim.api.nvim_buf_set_lines(buffer, -1, -1, false, data)
+
+          -- check for typescript errors
+          for _, line in ipairs(data) do
+            if string.find(line, ': error ') ~= nil then
+              vim.api.nvim_buf_set_lines(buffer, -1, -1, false, { '❌' })
+              vim.api.nvim_win_set_buf(window, buffer) -- make buffer visible
+              return
+            end
+          end
+          vim.api.nvim_buf_set_lines(buffer, -1, -1, false, { '✅' })
+          vim.api.nvim_win_set_buf(window, buffer) -- make buffer visible
         end
       end,
       on_stderr = function(_, data)
-        if data then
+        if data and #data >= 1 and string_not_empty(data[1]) then
+          print(data[1])
           vim.api.nvim_buf_set_lines(buffer, -1, -1, false, { 'stderr' })
           vim.api.nvim_buf_set_lines(buffer, -1, -1, false, data)
           vim.api.nvim_win_set_buf(window, buffer) -- make buffer visible
