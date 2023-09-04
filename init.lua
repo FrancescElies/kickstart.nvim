@@ -335,6 +335,7 @@ vim.keymap.set('n', '<F5>', ':source $MYVIMRC<cr>', { desc = 'Reload Config' })
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
+---@diagnostic disable-next-line: missing-fields
 require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
   ensure_installed = { 'c', 'cpp', 'go', 'html', 'lua', 'markdown', 'mermaid', 'python', 'rust', 'tsx', 'typescript', 'vimdoc', 'vim', 'yaml' },
@@ -508,6 +509,7 @@ local luasnip = require 'luasnip'
 require('luasnip.loaders.from_vscode').lazy_load()
 luasnip.config.setup {}
 
+---@diagnostic disable-next-line: missing-fields
 cmp.setup {
   snippet = {
     expand = function(args) luasnip.lsp_expand(args.body) end,
