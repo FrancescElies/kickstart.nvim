@@ -7,14 +7,13 @@ vim.keymap.set('n', '<leader>gb', ':Git branch ')
 vim.keymap.set('n', '<leader>gB', ':Git blame <cr>')
 vim.keymap.set('n', '<leader>gc', ':Git commit <cr>')
 vim.keymap.set('n', '<leader>gd', ':Gdiffsplit <cr>')
-vim.keymap.set('n', '<leader>gg', ':Ggrep ')
+vim.keymap.set('n', '<leader>gg', vim.cmd.Git, { desc = '[G]it status' })
 vim.keymap.set('n', '<leader>gl', ':Gclog <cr>')
 vim.keymap.set('n', '<leader>gm', ':Gmove ')
 vim.keymap.set('n', '<leader>gn', ':Git branch ')
 vim.keymap.set('n', '<leader>go', ':Git checkout ')
 vim.keymap.set('n', '<leader>gp', ':Git push  -u origin ')
 vim.keymap.set('n', '<leader>gr', ':Gread <cr>')
-vim.keymap.set('n', '<leader>gs', vim.cmd.Git, { desc = '[G]it [S]tatus' })
 vim.keymap.set('n', '<leader>gw', ':Gwrite <cr>')
 
 return {
@@ -63,12 +62,10 @@ return {
 
         -- Actions
         map('n', '<leader>hr', gs.reset_hunk, { desc = '[H]unk [R]eset' })
-        map('v', '<leader>hr', function() gs.reset_hunk { vim.fn.line '.', vim.fn.line 'v' } end,
-          { desc = '[H]unk [R]eset Selection' })
+        map('v', '<leader>hr', function() gs.reset_hunk { vim.fn.line '.', vim.fn.line 'v' } end, { desc = '[H]unk [R]eset Selection' })
 
         map('n', '<leader>hs', gs.stage_hunk, { desc = '[H]unk [S]tage' })
-        map('v', '<leader>hs', function() gs.stage_hunk { vim.fn.line '.', vim.fn.line 'v' } end,
-          { desc = '[H]unk s[t]age Selection' })
+        map('v', '<leader>hs', function() gs.stage_hunk { vim.fn.line '.', vim.fn.line 'v' } end, { desc = '[H]unk s[t]age Selection' })
         map('n', '<leader>hS', gs.stage_buffer, { desc = '[H]unk [S]tage Buffer' })
 
         map('n', '<leader>hr', gs.reset_buffer, { desc = '[H]unk [R]eset Buffer' })
@@ -92,9 +89,9 @@ return {
 
     'NeogitOrg/neogit',
     dependencies = {
-      'nvim-lua/plenary.nvim',         -- required
+      'nvim-lua/plenary.nvim', -- required
       'nvim-telescope/telescope.nvim', -- optional
-      'sindrets/diffview.nvim',        -- optional
+      'sindrets/diffview.nvim', -- optional
     },
     config = true,
     keys = {
