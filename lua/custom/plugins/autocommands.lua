@@ -34,7 +34,7 @@ vim.api.nvim_create_autocmd('BufReadPost', {
   end,
 })
 
-function get_buffer_by_name(name, clean)
+function get_buffer_by_name_or_scratch(name, clean)
   for _, buffer in ipairs(vim.api.nvim_list_bufs()) do
     local buf_name = vim.fn.bufname(buffer)
     if buf_name == name then
@@ -47,7 +47,7 @@ function get_buffer_by_name(name, clean)
   end
 
   -- buffer not found
-  local buffer = vim.api.nvim_create_buf(true, false)
+  local buffer = vim.api.nvim_create_buf(true, true)
   vim.api.nvim_buf_set_name(buffer, name)
   return buffer
 end
@@ -56,7 +56,7 @@ vim.api.nvim_create_autocmd('BufWritePost', {
   group = vim.api.nvim_create_augroup('MyTypescript', { clear = true }),
   pattern = '*.ts',
   callback = function()
-    local buffer = get_buffer_by_name 'typescript output'
+    local buffer = get_buffer_by_name_or_scratch 'typescript output'
     local window = vim.api.nvim_get_current_win()
     vim.api.nvim_buf_set_lines(buffer, 0, -1, false, {}) -- clear contents
 
