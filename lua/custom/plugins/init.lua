@@ -19,8 +19,6 @@ end
 
 vim.cmd [[ let g:neo_tree_remove_legacy_commands = 1 ]]
 
-vim.keymap.set('i', 'C-h', function() vim.lsp.buf.signature_help() end, { desc = 'Lsp [H]elp ' })
-
 -- vimdiff
 vim.keymap.set('n', 'gh', '<cmd>diffget //2<cr>', { desc = 'get left diff' })
 vim.keymap.set('n', 'gl', '<cmd>diffget //3<cr>', { desc = 'get right diff' })
@@ -48,20 +46,24 @@ vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
 vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
 
 -- Reload configuration
-vim.keymap.set('n', '<leader>vr', ':source $MYVIMRC<CR>', { desc = '[V]im [R]eload' })
 vim.keymap.set('n', '<leader>vf', ':FormatToggle<CR>', { desc = '[V]im toggle [F]ormat' })
 vim.keymap.set('n', '<leader>vn', toggle_number, { desc = '[V]im toggle [N]umber' })
 
 return {
   -- navigate panes
   {
-    'jonboh/wezterm-mux.nvim',
+    'mrjones2014/smart-splits.nvim',
     config = function()
-      vim.keymap.set('n', '<C-h>', require('wezterm-mux').wezterm_move_left)
-      vim.keymap.set('n', '<C-l>', require('wezterm-mux').wezterm_move_right)
-      vim.keymap.set('n', '<C-j>', require('wezterm-mux').wezterm_move_down)
-      vim.keymap.set('n', '<C-k>', require('wezterm-mux').wezterm_move_up)
-      vim.keymap.set('n', '<A-x>', '<C-w>q') -- some actions dont need from a specific function
+      local ss = require 'smart-splits'
+      vim.keymap.set('n', '<A-h>', ss.resize_left)
+      vim.keymap.set('n', '<A-j>', ss.resize_down)
+      vim.keymap.set('n', '<A-k>', ss.resize_up)
+      vim.keymap.set('n', '<A-l>', ss.resize_right)
+      -- moving between splits
+      vim.keymap.set('n', '<C-h>', ss.move_cursor_left)
+      vim.keymap.set('n', '<C-j>', ss.move_cursor_down)
+      vim.keymap.set('n', '<C-k>', ss.move_cursor_up)
+      vim.keymap.set('n', '<C-l>', ss.move_cursor_right)
     end,
   },
   -- use your text editor in the browser
@@ -69,7 +71,7 @@ return {
   -- automatically follow symlinks
   { 'aymericbeaumet/vim-symlink', requires = { 'moll/vim-bbye' } },
   -- markdown preview
-  { 'ellisonleao/glow.nvim',      config = true,                 cmd = 'Glow' },
+  { 'ellisonleao/glow.nvim', config = true, cmd = 'Glow' },
   -- You find yourself frequenting a small set of files and you are tired of using a fuzzy finder,
   -- :bnext & :bprev are getting too repetitive, alternate file doesn't quite cut it, etc etc.
   {
@@ -114,10 +116,6 @@ return {
       position = 'right',
     },
   },
-  {
-    'willothy/wezterm.nvim',
-    config = true,
-  },
   -- buffer remove which saves window layout
   {
     'echasnovski/mini.bufremove',
@@ -135,12 +133,12 @@ return {
       local plugin = require('lazy.core.config').spec.plugins['mini.surround']
       local opts = require('lazy.core.plugin').values(plugin, 'opts', false)
       local mappings = {
-        { opts.mappings.add,            desc = 'Add surrounding',                     mode = { 'n', 'v' } },
-        { opts.mappings.delete,         desc = 'Delete surrounding' },
-        { opts.mappings.find,           desc = 'Find right surrounding' },
-        { opts.mappings.find_left,      desc = 'Find left surrounding' },
-        { opts.mappings.highlight,      desc = 'Highlight surrounding' },
-        { opts.mappings.replace,        desc = 'Replace surrounding' },
+        { opts.mappings.add, desc = 'Add surrounding', mode = { 'n', 'v' } },
+        { opts.mappings.delete, desc = 'Delete surrounding' },
+        { opts.mappings.find, desc = 'Find right surrounding' },
+        { opts.mappings.find_left, desc = 'Find left surrounding' },
+        { opts.mappings.highlight, desc = 'Highlight surrounding' },
+        { opts.mappings.replace, desc = 'Replace surrounding' },
         { opts.mappings.update_n_lines, desc = 'Update `MiniSurround.config.n_lines`' },
       }
       mappings = vim.tbl_filter(function(m) return m[1] and #m[1] > 0 end, mappings)
@@ -148,12 +146,12 @@ return {
     end,
     opts = {
       mappings = {
-        add = 'gza',            -- Add surrounding in Normal and Visual modes
-        delete = 'gzd',         -- Delete surrounding
-        find = 'gzf',           -- Find surrounding (to the right)
-        find_left = 'gzF',      -- Find surrounding (to the left)
-        highlight = 'gzh',      -- Highlight surrounding
-        replace = 'gzr',        -- Replace surrounding
+        add = 'gza', -- Add surrounding in Normal and Visual modes
+        delete = 'gzd', -- Delete surrounding
+        find = 'gzf', -- Find surrounding (to the right)
+        find_left = 'gzF', -- Find surrounding (to the left)
+        highlight = 'gzh', -- Highlight surrounding
+        replace = 'gzr', -- Replace surrounding
         update_n_lines = 'gzn', -- Update `n_lines`
       },
     },
