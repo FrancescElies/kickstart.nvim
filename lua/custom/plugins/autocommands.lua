@@ -52,45 +52,25 @@ function get_buffer_by_name_or_scratch(name, clean)
   return buffer
 end
 
-function string_not_empty(str)
-  -- Remove leading and trailing whitespace using the gsub function
-  local trimmedStr = str:gsub('^%s*(.-)%s*$', '%1')
-
-  -- Check if the trimmed string is empty
-  if trimmedStr == '' then
-    return false
-  else
-    return true
-  end
-end
-
-function check_for_typescript_errors(buffer, data)
-  for _, line in ipairs(data) do
-    if string.find(line, ': error ') ~= nil then
-      vim.api.nvim_buf_set_lines(buffer, -1, -1, false, { '❌' })
-      return
-    end
-  end
-  vim.api.nvim_buf_set_lines(buffer, -1, -1, false, { '✅' })
-end
-
-local function attach_to_buffer(command)
+local function attach_to_buffer(pattern, command)
   vim.api.nvim_create_autocmd('BufWritePost', {
-    group = vim.api.nvim_create_augroup('MyAutoRun', { clear = true }),
+
+    group = vim.api.nvim_create_augroup('AutoRun', { clear = true }),
+    pattern = pattern,
     callback = function()
-      local buffer = get_buffer_by_name_or_scratch 'my-autorun'
+      local src_buf_name = vim.api.nvim_buf_get_name(vim.api.nvim_get_current_buf())
+      local buffer = get_buffer_by_name_or_scratch('autorun:' .. src_buf_name)
       local window = vim.api.nvim_get_current_win()
       -- clear contents
       vim.api.nvim_buf_set_lines(buffer, 0, -1, false, {})
       local function append(_, data)
         if data then
           vim.api.nvim_buf_set_lines(buffer, -1, -1, false, data)
-          check_for_typescript_errors(buffer, data)
         end
         vim.api.nvim_win_set_buf(window, buffer) -- make buffer visible
       end
 
-      vim.fn.jobstart({ 'npm', 'run', 'build' }, {
+      vim.fn.jobstart(command, {
         stdout_buffered = true,
         on_stdout = append,
         on_stderr = append,
@@ -99,7 +79,9 @@ local function attach_to_buffer(command)
   })
 end
 
-vim.api.nvim_create_user_command('MyAutoRun', function()
+attach_to_buffer('*.ts', { 'npm', 'run', 'build' })
+
+vim.api.nvim_create_user_command('AutoRun', function()
   local command = vim.split(vim.fn.input 'Command:', ' ')
   attach_to_buffer(command)
 end, {})
