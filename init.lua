@@ -424,6 +424,14 @@ local on_attach = function(_, bufnr)
   --
   -- In this case, we create a function that lets us more easily define mappings specific
   -- for LSP related items. It sets the mode, buffer and description for us each time.
+  local imap = function(keys, func, desc)
+    if desc then
+      desc = 'LSP: ' .. desc
+    end
+
+    vim.keymap.set('i', keys, func, { buffer = bufnr, desc = desc })
+  end
+
   local nmap = function(keys, func, desc)
     if desc then
       desc = 'LSP: ' .. desc
@@ -444,10 +452,9 @@ local on_attach = function(_, bufnr)
 
   -- See `:help K` for why this keymap
   nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
-  -- conflicts with wezterm remap to change window
+  -- c-k in normal mode collides with move pane up
   -- nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
-  vim.keymap.set('i', 'C-k', function() vim.lsp.buf.signature_help() end,
-    { buffer = bufnr, desc = 'LSP: Signature Documentation' })
+  imap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
 
   -- Lesser used LSP functionality
   nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
