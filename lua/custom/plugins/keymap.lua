@@ -38,6 +38,7 @@ vim.keymap.set('n', 'N', 'Nzzzv')
 -- Move lines in visual mode
 vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
 vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
+vim.keymap.set('v', '<leader>\\', ':s/\\\\/\\//g<cr>', { desc = '[R]eplace [\\] with /' })
 
 -- Reload configuration
 vim.keymap.set('n', '<leader>vf', ':FormatToggle<CR>', { desc = '[V]im toggle [F]ormat' })
