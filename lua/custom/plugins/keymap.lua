@@ -42,26 +42,27 @@ vim.keymap.set('n', 'N', 'Nzzzv')
 -- Move lines in visual mode
 vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
 vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
-vim.keymap.set('v', '<leader>\\', ':s/\\\\/\\//g<cr>', { desc = '[R]eplace [\\] with /' })
+vim.keymap.set('v', '<leader>/', ':s/\\\\/\\//g<cr>', { desc = '[R]eplace \\ -> [/]' })
+vim.keymap.set('v', '<leader>\\', ':s/\\//\\\\/g<cr>', { desc = '[R]eplace / -> [\\]' })
 
 -- Reload configuration
 vim.keymap.set('n', '<leader>vf', ':FormatToggle<CR>', { desc = '[V]im toggle [F]ormat' })
-vim.keymap.set('n', '<leader>vn', toggle_number, { desc = '[V]im toggle [N]umber' })
+vim.keymap.set('n', '<leader>vn', toggle_number, { desc = '[V]im toggle line [N]umber' })
 
 -- tabs
-map('n', '<leader><tab>l', '<cmd>tablast<cr>', { desc = 'Last Tab' })
-map('n', '<leader><tab>f', '<cmd>tabfirst<cr>', { desc = 'First Tab' })
-map('n', '<leader><tab><tab>', '<cmd>tabnew<cr>', { desc = 'New Tab' })
-map('n', '<leader><tab>]', '<cmd>tabnext<cr>', { desc = 'Next Tab' })
-map('n', '<leader><tab>d', '<cmd>tabclose<cr>', { desc = 'Close Tab' })
-map('n', '<leader><tab>[', '<cmd>tabprevious<cr>', { desc = 'Previous Tab' })
+vim.keymap.set('n', '<leader>tl', '<cmd>tablast<cr>', { desc = 'Last Tab' })
+vim.keymap.set('n', '<leader>tf', '<cmd>tabfirst<cr>', { desc = 'First Tab' })
+vim.keymap.set('n', '<leader>tn', '<cmd>tabnew<cr>', { desc = 'New Tab' })
+vim.keymap.set('n', '<leader>td', '<cmd>tabclose<cr>', { desc = '[D]elete/Close Tab' })
+vim.keymap.set('n', ']t', '<cmd>tabnext<cr>', { desc = 'Next Tab' })
+vim.keymap.set('n', '[T', '<cmd>tabprevious<cr>', { desc = 'Previous Tab' })
 
 -- Terminal Mappings
-map('t', '<esc><esc>', '<c-\\><c-n>', { desc = 'Enter Normal Mode' })
-map('t', '<C-h>', '<cmd>wincmd h<cr>', { desc = 'Go to left window' })
-map('t', '<C-j>', '<cmd>wincmd j<cr>', { desc = 'Go to lower window' })
-map('t', '<C-k>', '<cmd>wincmd k<cr>', { desc = 'Go to upper window' })
-map('t', '<C-l>', '<cmd>wincmd l<cr>', { desc = 'Go to right window' })
-map('t', '<C-/>', '<cmd>close<cr>', { desc = 'Hide Terminal' })
-map('t', '<c-_>', '<cmd>close<cr>', { desc = 'which_key_ignore' })
+vim.keymap.set('t', '<esc><esc>', '<c-\\><c-n>', { desc = 'Enter Normal Mode' })
+vim.keymap.set('t', '<C-h>', '<cmd>wincmd h<cr>', { desc = 'Go to left window' })
+vim.keymap.set('t', '<C-j>', '<cmd>wincmd j<cr>', { desc = 'Go to lower window' })
+vim.keymap.set('t', '<C-k>', '<cmd>wincmd k<cr>', { desc = 'Go to upper window' })
+vim.keymap.set('t', '<C-l>', '<cmd>wincmd l<cr>', { desc = 'Go to right window' })
+vim.keymap.set('t', '<C-/>', '<cmd>close<cr>', { desc = 'Hide Terminal' })
+vim.keymap.set('t', '<c-_>', '<cmd>close<cr>', { desc = 'which_key_ignore' })
 return {}
