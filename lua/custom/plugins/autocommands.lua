@@ -67,7 +67,7 @@ local function attach_to_buffer(pattern, command)
         if data then
           vim.api.nvim_buf_set_lines(buffer, -1, -1, false, data)
         end
-        vim.api.nvim_win_set_buf(window, buffer) -- make buffer visible
+        -- vim.api.nvim_win_set_buf(window, buffer) -- make buffer visible
       end
 
       vim.fn.jobstart(command, {
@@ -79,7 +79,7 @@ local function attach_to_buffer(pattern, command)
   })
 end
 
-attach_to_buffer('*.ts', { 'npm', 'run', 'build' })
+-- attach_to_buffer('*.ts', { 'npm', 'run', 'build' })
 
 vim.api.nvim_create_user_command('AutoRun', function()
   local command = vim.split(vim.fn.input 'Command:', ' ')

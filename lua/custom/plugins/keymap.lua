@@ -13,6 +13,10 @@ end
 
 vim.cmd [[ let g:neo_tree_remove_legacy_commands = 1 ]]
 
+-- buffer
+vim.keymap.set('n', '<leader>bb', '<cmd>e #<cr>', { desc = 'Switch to Other Buffer' })
+vim.keymap.set('n', '<leader>`', '<cmd>e #<cr>', { desc = 'Switch to Other Buffer' })
+
 -- vimdiff
 vim.keymap.set('n', 'gh', '<cmd>diffget //2<cr>', { desc = 'get left diff' })
 vim.keymap.set('n', 'gl', '<cmd>diffget //3<cr>', { desc = 'get right diff' })
@@ -44,4 +48,20 @@ vim.keymap.set('v', '<leader>\\', ':s/\\\\/\\//g<cr>', { desc = '[R]eplace [\\] 
 vim.keymap.set('n', '<leader>vf', ':FormatToggle<CR>', { desc = '[V]im toggle [F]ormat' })
 vim.keymap.set('n', '<leader>vn', toggle_number, { desc = '[V]im toggle [N]umber' })
 
+-- tabs
+map('n', '<leader><tab>l', '<cmd>tablast<cr>', { desc = 'Last Tab' })
+map('n', '<leader><tab>f', '<cmd>tabfirst<cr>', { desc = 'First Tab' })
+map('n', '<leader><tab><tab>', '<cmd>tabnew<cr>', { desc = 'New Tab' })
+map('n', '<leader><tab>]', '<cmd>tabnext<cr>', { desc = 'Next Tab' })
+map('n', '<leader><tab>d', '<cmd>tabclose<cr>', { desc = 'Close Tab' })
+map('n', '<leader><tab>[', '<cmd>tabprevious<cr>', { desc = 'Previous Tab' })
+
+-- Terminal Mappings
+map('t', '<esc><esc>', '<c-\\><c-n>', { desc = 'Enter Normal Mode' })
+map('t', '<C-h>', '<cmd>wincmd h<cr>', { desc = 'Go to left window' })
+map('t', '<C-j>', '<cmd>wincmd j<cr>', { desc = 'Go to lower window' })
+map('t', '<C-k>', '<cmd>wincmd k<cr>', { desc = 'Go to upper window' })
+map('t', '<C-l>', '<cmd>wincmd l<cr>', { desc = 'Go to right window' })
+map('t', '<C-/>', '<cmd>close<cr>', { desc = 'Hide Terminal' })
+map('t', '<c-_>', '<cmd>close<cr>', { desc = 'which_key_ignore' })
 return {}
