@@ -59,7 +59,7 @@ local function attach_to_buffer(pattern, command)
     pattern = pattern,
     callback = function()
       local src_buf_name = vim.api.nvim_buf_get_name(vim.api.nvim_get_current_buf())
-      local buffer = get_buffer_by_name_or_scratch('autorun:' .. src_buf_name)
+      local buffer = get_buffer_by_name_or_scratch(src_buf_name .. ':autorun')
       local window = vim.api.nvim_get_current_win()
       -- clear contents
       vim.api.nvim_buf_set_lines(buffer, 0, -1, false, {})
@@ -68,6 +68,7 @@ local function attach_to_buffer(pattern, command)
           vim.api.nvim_buf_set_lines(buffer, -1, -1, false, data)
         end
         -- vim.api.nvim_win_set_buf(window, buffer) -- make buffer visible
+        print 'autorun done'
       end
 
       vim.fn.jobstart(command, {
@@ -79,7 +80,7 @@ local function attach_to_buffer(pattern, command)
   })
 end
 
--- attach_to_buffer('*.ts', { 'npm', 'run', 'build' })
+attach_to_buffer('*.ts', { 'npm', 'run', 'build' })
 
 vim.api.nvim_create_user_command('AutoRun', function()
   local command = vim.split(vim.fn.input 'Command:', ' ')
