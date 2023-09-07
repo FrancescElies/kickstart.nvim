@@ -55,7 +55,7 @@ vim.keymap.set('n', '<leader>tf', '<cmd>tabfirst<cr>', { desc = 'First Tab' })
 vim.keymap.set('n', '<leader>tn', '<cmd>tabnew<cr>', { desc = 'New Tab' })
 vim.keymap.set('n', '<leader>td', '<cmd>tabclose<cr>', { desc = '[D]elete/Close Tab' })
 vim.keymap.set('n', ']t', '<cmd>tabnext<cr>', { desc = 'Next Tab' })
-vim.keymap.set('n', '[T', '<cmd>tabprevious<cr>', { desc = 'Previous Tab' })
+vim.keymap.set('n', '[t', '<cmd>tabprevious<cr>', { desc = 'Previous Tab' })
 
 -- Terminal Mappings
 vim.keymap.set('t', '<esc><esc>', '<c-\\><c-n>', { desc = 'Enter Normal Mode' })
