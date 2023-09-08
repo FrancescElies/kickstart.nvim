@@ -1,3 +1,5 @@
+-- https://ofirgall.github.io/learn-nvim/chapters/12-git.html
+
 vim.keymap.set('n', '<leader>g-', ':Git stash <cr>')
 vim.keymap.set('n', '<leader>g=', ':Git stash pop <cr>')
 vim.keymap.set('n', '<leader>gP', ':Git pull --rebase <cr>')
@@ -9,7 +11,7 @@ vim.keymap.set('n', '<leader>gc', ':Git commit <cr>')
 vim.keymap.set('n', '<leader>gd', ':Gdiffsplit <cr>')
 vim.keymap.set('n', '<leader>gg', vim.cmd.Git, { desc = '[G]it status' })
 vim.keymap.set('n', '<leader>gl', ':Gclog <cr>')
-vim.keymap.set('n', '<leader>gm', ':Gmove ')
+vim.keymap.set('n', '<leader>gM', ':Gmove ')
 vim.keymap.set('n', '<leader>gn', ':Git branch ')
 vim.keymap.set('n', '<leader>go', ':Git checkout ')
 vim.keymap.set('n', '<leader>gp', ':Git push <cr>')
@@ -86,7 +88,6 @@ return {
     },
   },
   {
-
     'NeogitOrg/neogit',
     dependencies = {
       'nvim-lua/plenary.nvim', -- required
@@ -98,6 +99,14 @@ return {
       { '<leader>gS', ":lua require('neogit').open()<CR>", desc = 'Neo[G]it [S]tatus' },
     },
   },
+  {
+    'rhysd/git-messenger.vim',
+    keys = {
+      { '<leader>gm', ':GitMessenger<CR>', desc = '[G]it [M]essenger' },
+      { '<leader>hs', ':GitMessenger<CR>', desc = '[H]unk [H]istory' },
+    },
+  },
+  { 'sindrets/diffview.nvim' },
   {
     'kdheepak/lazygit.nvim',
     -- optional for floating window border decoration
