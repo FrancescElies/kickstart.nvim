@@ -33,6 +33,19 @@ vim.api.nvim_create_autocmd('BufReadPost', {
     end
   end,
 })
+--
+-- Return to last edit position when opening files
+vim.api.nvim_create_autocmd('BufReadPost', {
+  group = 'bufcheck',
+  pattern = '*',
+  callback = function()
+    if vim.fn.line '\'"' > 0 and vim.fn.line '\'"' <= vim.fn.line '$' then
+      vim.fn.setpos('.', vim.fn.getpos '\'"')
+      -- vim.cmd('normal zz') -- how do I center the buffer in a sane way??
+      vim.cmd 'silent! foldopen'
+    end
+  end,
+})
 
 function get_buffer_by_name_or_scratch(name, clean)
   for _, buffer in ipairs(vim.api.nvim_list_bufs()) do
