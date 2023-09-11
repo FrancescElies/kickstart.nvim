@@ -36,11 +36,11 @@ vim.api.nvim_create_user_command('InsertStory', function()
   for _, line in pairs(lines) do
     local story = string.match(line, '[sS]tory(%d+)')
     if story ~= nil then
-      vim.api.nvim_buf_set_lines(buffnr, 1, 1, false, { 'story #' .. story })
+      vim.api.nvim_buf_set_lines(buffnr, 2, 2, false, { 'story #' .. story })
     end
     local task = string.match(line, '[Tt]ask(%d+)')
     if task ~= nil then
-      vim.api.nvim_buf_set_lines(buffnr, 2, 2, false, { 'task #' .. task })
+      vim.api.nvim_buf_set_lines(buffnr, 3, 3, false, { 'task #' .. task })
     end
   end
 end, {})
@@ -91,10 +91,12 @@ return {
 
         -- Actions
         map('n', '<leader>hr', gs.reset_hunk, { desc = '[H]unk [R]eset' })
-        map('v', '<leader>hr', function() gs.reset_hunk { vim.fn.line '.', vim.fn.line 'v' } end, { desc = '[H]unk [R]eset Selection' })
+        map('v', '<leader>hr', function() gs.reset_hunk { vim.fn.line '.', vim.fn.line 'v' } end,
+          { desc = '[H]unk [R]eset Selection' })
 
         map('n', '<leader>hs', gs.stage_hunk, { desc = '[H]unk [S]tage' })
-        map('v', '<leader>hs', function() gs.stage_hunk { vim.fn.line '.', vim.fn.line 'v' } end, { desc = '[H]unk s[t]age Selection' })
+        map('v', '<leader>hs', function() gs.stage_hunk { vim.fn.line '.', vim.fn.line 'v' } end,
+          { desc = '[H]unk s[t]age Selection' })
         map('n', '<leader>hS', gs.stage_buffer, { desc = '[H]unk [S]tage Buffer' })
 
         map('n', '<leader>hr', gs.reset_buffer, { desc = '[H]unk [R]eset Buffer' })
@@ -117,9 +119,9 @@ return {
   {
     'NeogitOrg/neogit',
     dependencies = {
-      'nvim-lua/plenary.nvim', -- required
+      'nvim-lua/plenary.nvim',         -- required
       'nvim-telescope/telescope.nvim', -- optional
-      'sindrets/diffview.nvim', -- optional
+      'sindrets/diffview.nvim',        -- optional
     },
     config = true,
     keys = {
