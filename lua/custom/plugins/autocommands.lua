@@ -14,12 +14,12 @@ vim.api.nvim_create_autocmd('TermOpen', {
   command = 'startinsert | set winfixheight',
 })
 
--- start git messages in insert mode
-vim.api.nvim_create_autocmd('FileType', {
-  group = 'bufcheck',
-  pattern = { 'gitcommit', 'gitrebase' },
-  command = 'startinsert | 1',
-})
+-- -- start git messages in insert mode
+-- vim.api.nvim_create_autocmd('FileType', {
+--   group = 'bufcheck',
+--   pattern = { 'gitcommit', 'gitrebase' },
+--   command = 'startinsert | 1',
+-- })
 
 -- Return to last edit position when opening files
 vim.api.nvim_create_autocmd('BufReadPost', {
