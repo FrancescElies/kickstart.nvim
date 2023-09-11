@@ -18,6 +18,33 @@ vim.keymap.set('n', '<leader>gp', ':Git push <cr>')
 vim.keymap.set('n', '<leader>gr', ':Gread <cr>')
 vim.keymap.set('n', '<leader>gw', ':Gwrite <cr>')
 
+vim.api.nvim_create_augroup('my_commands', { clear = true })
+
+vim.api.nvim_create_autocmd('BufWinEnter', {
+  group = 'my_commands',
+  pattern = 'COMMIT_EDITMSG',
+  callback = function()
+    local bufnr = vim.api.nvim_get_current_buf()
+    local opts = { buffer = bufnr, remap = false }
+    vim.keymap.set('n', '<leader>i', function() vim.cmd.InsertStory() end, opts)
+  end,
+})
+
+vim.api.nvim_create_user_command('InsertStory', function()
+  local buffnr = vim.api.nvim_get_current_buf()
+  local lines = vim.api.nvim_buf_get_lines(buffnr, 0, -1, false)
+  for _, line in pairs(lines) do
+    local story = string.match(line, '[sS]tory(%d+)')
+    if story ~= nil then
+      vim.api.nvim_buf_set_lines(buffnr, 1, 1, false, { 'story #' .. story })
+    end
+    local task = string.match(line, '[Tt]ask(%d+)')
+    if task ~= nil then
+      vim.api.nvim_buf_set_lines(buffnr, 2, 2, false, { 'task #' .. task })
+    end
+  end
+end, {})
+
 return {
   { 'tpope/vim-fugitive' },
   -- GitHub extension for fugitive.vim
