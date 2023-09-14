@@ -476,7 +476,7 @@ end
 local jsonls_capabilities = vim.lsp.protocol.make_client_capabilities()
 jsonls_capabilities.textDocument.completion.completionItem.snippetSupport = true
 local servers = {
-  clangd = {},
+  clangd = { filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda' } },
   biome = { filetypes = { 'typescript', 'json' } },
   gopls = {},
   pyright = {},
