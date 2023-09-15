@@ -34,6 +34,24 @@ vim.api.nvim_create_autocmd('BufReadPost', {
   end,
 })
 
+vim.api.nvim_create_autocmd('BufWritePost', {
+  group = 'bufcheck',
+  pattern = '*.py',
+  callback = function()
+    vim.cmd '!ruff --fix %'
+    vim.cmd '!black --quiet %'
+  end,
+})
+
+vim.api.nvim_create_autocmd('BufWritePost', {
+  group = 'bufcheck',
+  pattern = '*.ts',
+  callback = function()
+    vim.cmd '!biome format --write %'
+  end,
+})
+
+
 -- When opening a javascript file opens it's associated
 -- typescript file if a mapping is found
 -- Searches for something like
