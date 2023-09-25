@@ -485,7 +485,12 @@ local servers = {
     capabilities = jsonls_capabilities
   },
   ruff_lsp = {},
-  rust_analyzer = {},
+  rust_analyzer = {
+    ["rust-analyzer"] = {
+      diagnostics = { enable = true },
+      check = { command = "clippy" },
+    },
+  },
   tsserver = {
     init_options = { provideFormatter = false },
   },
