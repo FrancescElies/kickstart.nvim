@@ -11,6 +11,7 @@ local function toggle_number()
   end
 end
 
+vim.o.spell = true
 vim.cmd [[ let g:neo_tree_remove_legacy_commands = 1 ]]
 
 -- buffer
@@ -48,6 +49,7 @@ vim.keymap.set('v', '<leader>\\', ':s/\\//\\\\/g<cr>', { desc = '[R]eplace / -> 
 -- Reload configuration
 vim.keymap.set('n', '<leader>vf', ':FormatToggle<CR>', { desc = '[V]im toggle [F]ormat' })
 vim.keymap.set('n', '<leader>vn', toggle_number, { desc = '[V]im toggle line [N]umber' })
+vim.keymap.set('n', '<leader>vs', ':set invspell<cr>', { desc = '[V]im toggle [S]pell' })
 
 -- tabs
 vim.keymap.set('n', '<leader>tl', '<cmd>tablast<cr>', { desc = 'Last Tab' })
