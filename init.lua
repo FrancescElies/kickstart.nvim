@@ -85,7 +85,7 @@ require('lazy').setup({
 
       -- Useful status updates for LSP
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-      { 'j-hui/fidget.nvim',       tag = 'legacy', opts = {} },
+      { 'j-hui/fidget.nvim', tag = 'legacy', opts = {} },
 
       -- Additional lua configuration, makes nvim stuff amazing!
       'folke/neodev.nvim',
@@ -109,7 +109,7 @@ require('lazy').setup({
   },
 
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim',   opts = {} },
+  { 'folke/which-key.nvim', opts = {} },
   {
     -- Theme inspired by Atom
     'navarasu/onedark.nvim',
@@ -134,16 +134,12 @@ require('lazy').setup({
   {
     -- Add indentation guides even on blank lines
     'lukas-reineke/indent-blankline.nvim',
-    -- Enable `lukas-reineke/indent-blankline.nvim`
-    -- See `:help indent_blankline.txt`
-    opts = {
-      char = '┊',
-      show_trailing_blankline_indent = false,
-    },
+    main = 'ibl',
+    opts = {},
   },
 
   -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim',  opts = {} },
+  { 'numToStr/Comment.nvim', opts = {} },
 
   -- Fuzzy Finder (files, lsp, etc)
   {
@@ -344,8 +340,7 @@ vim.keymap.set('n', '<F5>', ':source $MYVIMRC<cr>', { desc = 'Reload Config' })
 ---@diagnostic disable-next-line: missing-fields
 require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'c', 'cpp', 'go', 'html', 'lua', 'markdown', 'mermaid', 'python', 'rust', 'tsx', 'typescript',
-    'vimdoc', 'vim', 'yaml' },
+  ensure_installed = { 'c', 'cpp', 'go', 'html', 'lua', 'markdown', 'mermaid', 'python', 'rust', 'tsx', 'typescript', 'vimdoc', 'vim', 'yaml' },
 
   -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
   auto_install = true,
@@ -410,14 +405,10 @@ require('nvim-treesitter.configs').setup {
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
-vim.keymap.set('n', '[w', function() vim.diagnostic.goto_prev { severity = 'WARN' } end,
-  { desc = 'Go to previous warning message' })
-vim.keymap.set('n', ']w', function() vim.diagnostic.goto_next { severity = 'WARN' } end,
-  { desc = 'Go to next warning message' })
-vim.keymap.set('n', '[e', function() vim.diagnostic.goto_prev { severity = 'ERROR' } end,
-  { desc = 'Go to previous error message' })
-vim.keymap.set('n', ']e', function() vim.diagnostic.goto_next { severity = 'ERROR' } end,
-  { desc = 'Go to next error message' })
+vim.keymap.set('n', '[w', function() vim.diagnostic.goto_prev { severity = 'WARN' } end, { desc = 'Go to previous warning message' })
+vim.keymap.set('n', ']w', function() vim.diagnostic.goto_next { severity = 'WARN' } end, { desc = 'Go to next warning message' })
+vim.keymap.set('n', '[e', function() vim.diagnostic.goto_prev { severity = 'ERROR' } end, { desc = 'Go to previous error message' })
+vim.keymap.set('n', ']e', function() vim.diagnostic.goto_next { severity = 'ERROR' } end, { desc = 'Go to next error message' })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 vim.keymap.set('n', '<leader>E', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
@@ -456,12 +447,10 @@ local on_attach = function(_, bufnr)
   nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
   nmap('<leader>wa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [A]dd Folder')
   nmap('<leader>wr', vim.lsp.buf.remove_workspace_folder, '[W]orkspace [R]emove Folder')
-  nmap('<leader>wl', function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end,
-    '[W]orkspace [L]ist Folders')
+  nmap('<leader>wl', function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, '[W]orkspace [L]ist Folders')
 
   -- Create a command `:Format` local to the LSP buffer
-  vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_) vim.lsp.buf.format() end,
-    { desc = 'Format current buffer with LSP' })
+  vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_) vim.lsp.buf.format() end, { desc = 'Format current buffer with LSP' })
 end
 
 -- Enable the following language servers
@@ -480,8 +469,11 @@ local servers = {
   biome = { filetypes = { 'typescript', 'json' }, init_options = { provideFormatter = true } },
   gopls = {},
   pyright = {},
-  jsonls = { filetypes = { 'maxpat', 'json' }, init_options = { provideFormatter = false },
-    capabilities = jsonls_capabilities },
+  jsonls = {
+    filetypes = { 'maxpat', 'json' },
+    init_options = { provideFormatter = false },
+    capabilities = jsonls_capabilities,
+  },
   ruff_lsp = {},
   rust_analyzer = {
     ['rust-analyzer'] = { diagnostics = { enable = true }, check = { command = 'clippy' } },
