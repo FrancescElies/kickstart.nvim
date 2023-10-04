@@ -45,15 +45,17 @@ return {
         local bufnr = args.buf
 
         -- Only attach to clients that support document formatting
-        if not client.server_capabilities.documentFormattingProvider then
+        if not client.server_capabilities.documentFormattingProvider and client.name ~= 'biome' then
+          print(client.name .. "documentFormattingProvider false/nil")
           return
         end
 
         -- Tsserver usually works poorly. Sorry you work with bad languages
         -- You can remove this line if you know what you're doing :)
-        -- if client.name == 'tsserver' then
-        --   return
-        -- end
+        if client.name == 'tsserver' then
+          print("skipping tsserver formatting")
+          return
+        end
 
         -- Create an autocmd that will run *before* we save the buffer.
         --  Run the formatting command for the LSP that has just attached.
@@ -64,6 +66,7 @@ return {
             if not format_is_enabled then
               return
             end
+            print("document formatted with " .. client.name)
 
             vim.lsp.buf.format {
               async = false,

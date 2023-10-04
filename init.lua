@@ -477,30 +477,19 @@ local jsonls_capabilities = vim.lsp.protocol.make_client_capabilities()
 jsonls_capabilities.textDocument.completion.completionItem.snippetSupport = true
 local servers = {
   clangd = { filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda' } },
-  biome = { filetypes = { 'typescript', 'json' } },
+  biome = { filetypes = { 'typescript', 'json' }, init_options = { provideFormatter = true } },
   gopls = {},
   pyright = {},
-  jsonls = {
-    init_options = { provideFormatter = false },
-    capabilities = jsonls_capabilities
-  },
+  jsonls = { filetypes = { 'maxpat', 'json' }, init_options = { provideFormatter = false },
+    capabilities = jsonls_capabilities },
   ruff_lsp = {},
   rust_analyzer = {
-    ["rust-analyzer"] = {
-      diagnostics = { enable = true },
-      check = { command = "clippy" },
-    },
+    ['rust-analyzer'] = { diagnostics = { enable = true }, check = { command = 'clippy' } },
   },
-  tsserver = {
-    init_options = { provideFormatter = false },
-  },
+  tsserver = { init_options = { provideFormatter = false } },
   html = { filetypes = { 'html', 'twig', 'hbs' } },
-
   lua_ls = {
-    Lua = {
-      workspace = { checkThirdParty = false },
-      telemetry = { enable = false },
-    },
+    Lua = { workspace = { checkThirdParty = false }, telemetry = { enable = false } },
   },
 }
 

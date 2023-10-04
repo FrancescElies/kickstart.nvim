@@ -15,6 +15,7 @@ vim.keymap.set('n', '<leader>gM', ':Gmove ')
 vim.keymap.set('n', '<leader>gn', ':Git branch ')
 vim.keymap.set('n', '<leader>go', ':Git checkout ')
 vim.keymap.set('n', '<leader>gp', ':Git push <cr>')
+vim.keymap.set('n', '<leader>gt', ':Git push -u origin<cr>')
 vim.keymap.set('n', '<leader>gr', ':Gread <cr>')
 vim.keymap.set('n', '<leader>gw', ':Gwrite <cr>')
 
