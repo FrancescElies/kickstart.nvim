@@ -10,10 +10,14 @@ return {
   -- { 'subnut/nvim-ghost.nvim' },
 
   -- automatically follow symlinks
-  { 'aymericbeaumet/vim-symlink', requires = { 'moll/vim-bbye' } },
+  { 'aymericbeaumet/vim-symlink', dependencies = { 'moll/vim-bbye' } },
 
   -- markdown preview
-  { 'ellisonleao/glow.nvim',      config = true,                 cmd = 'Glow' },
+  {
+    'ellisonleao/glow.nvim',
+    config = true,
+    cmd = 'Glow'
+  },
 
   -- Navigate and manipulate file system
   {
@@ -96,6 +100,6 @@ return {
   {
     'LhKipp/nvim-nu',
     config = function() require('nu').setup() end,
-    on_attach = function() vim.keymap.set('n', 'K', vim.lsp.buf.hover, { buffer = true }) end,
+    callback = function() vim.keymap.set('n', 'K', vim.lsp.buf.hover, { buffer = true }) end,
   },
 }
