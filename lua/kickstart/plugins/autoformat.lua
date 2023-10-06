@@ -45,8 +45,8 @@ return {
         local bufnr = args.buf
 
         -- Only attach to clients that support document formatting
-        if not client.server_capabilities.documentFormattingProvider and client.name ~= 'biome' then
-          print(client.name .. "documentFormattingProvider false/nil")
+        if not client.server_capabilities.documentFormattingProvider then
+          -- print(client.name .. "documentFormattingProvider false/nil")
           return
         end
 
