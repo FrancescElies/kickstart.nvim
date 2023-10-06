@@ -133,7 +133,7 @@ return {
     'rhysd/git-messenger.vim',
     keys = {
       { '<leader>gm', ':GitMessenger<CR>', desc = '[G]it [M]essenger' },
-      { '<leader>hs', ':GitMessenger<CR>', desc = '[H]unk [H]istory' },
+      { '<leader>hh', ':GitMessenger<CR>', desc = '[H]unk [H]istory' },
     },
   },
   { 'sindrets/diffview.nvim' },
