@@ -1,23 +1,25 @@
 -- https://ofirgall.github.io/learn-nvim/chapters/12-git.html
+vim.keymap.set('n', '<leader>gg', vim.cmd.Git, { desc = '[G]it status' })
 
 vim.keymap.set('n', '<leader>g-', ':Git stash <cr>')
 vim.keymap.set('n', '<leader>g=', ':Git stash pop <cr>')
-vim.keymap.set('n', '<leader>gP', ':Git pull --rebase <cr>')
-vim.keymap.set('n', '<leader>gR', ':GRemove ')
+
 vim.keymap.set('n', '<leader>ga', ':Git add %:p ')
 vim.keymap.set('n', '<leader>gb', ':Git branch ')
 vim.keymap.set('n', '<leader>gB', ':Git blame <cr>')
-vim.keymap.set('n', '<leader>gc', ':Git commit <cr>')
 vim.keymap.set('n', '<leader>gd', ':Gdiffsplit <cr>')
-vim.keymap.set('n', '<leader>gg', vim.cmd.Git, { desc = '[G]it status' })
 vim.keymap.set('n', '<leader>gl', ':Gclog <cr>')
-vim.keymap.set('n', '<leader>gM', ':Gmove ')
-vim.keymap.set('n', '<leader>gn', ':Git branch ')
 vim.keymap.set('n', '<leader>go', ':Git checkout ')
-vim.keymap.set('n', '<leader>gp', ':Git push <cr>')
-vim.keymap.set('n', '<leader>gt', ':Git push -u origin<cr>')
-vim.keymap.set('n', '<leader>gr', ':Gread <cr>')
-vim.keymap.set('n', '<leader>gw', ':Gwrite <cr>')
+
+vim.keymap.set('n', '<leader>gp', ':Git push --force-with-lease <cr>')
+vim.keymap.set('n', '<leader>gu', ':Git push -u origin<cr>')
+vim.keymap.set('n', '<leader>gP', ':Git pull --rebase <cr>')
+
+-- vim.keymap.set('n', '<leader>gr', ':Gread <cr>')
+-- vim.keymap.set('n', '<leader>gw', ':Gwrite <cr>')
+-- vim.keymap.set('n', '<leader>gR', ':GRemove ')
+-- vim.keymap.set('n', '<leader>gM', ':Gmove ')
+
 
 vim.api.nvim_create_augroup('my_commands', { clear = true })
 
