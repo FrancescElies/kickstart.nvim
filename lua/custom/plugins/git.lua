@@ -8,7 +8,7 @@ vim.keymap.set('n', '<leader>ga', ':Git add %:p ')
 vim.keymap.set('n', '<leader>gb', ':Git branch ')
 vim.keymap.set('n', '<leader>gB', ':Git blame <cr>')
 vim.keymap.set('n', '<leader>gd', ':Gdiffsplit <cr>')
-vim.keymap.set('n', '<leader>gl', ':Gclog <cr>')
+vim.keymap.set('n', '<leader>gl', ':G log <cr>')
 vim.keymap.set('n', '<leader>go', ':Git checkout ')
 
 vim.keymap.set('n', '<leader>gp', ':Git push --force-with-lease <cr>')
