@@ -3,7 +3,9 @@
 --
 -- See the kickstart.nvim README for more information
 -- local Util = require 'lazy.core.util'
-vim.api.nvim_set_option('grepprg', 'rg --vimgrep --smart-case --follow')
+vim.opt.grepprg = 'rg --vimgrep --smart-case --follow'
+vim.opt.splitright = true
+vim.opt.splitbelow = true
 
 return {
   -- use your text editor in the browser
