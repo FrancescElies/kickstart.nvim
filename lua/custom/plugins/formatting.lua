@@ -7,6 +7,9 @@ return {
     -- Use a sub-list to run only the first available formatter
     -- javascript = { { 'prettierd', 'prettier' } },
     javascript = { 'biome' },
+    typescript = { 'biome' },
+    rust = { 'rustfmt' },
+    -- typescript = { { 'prettierd', 'prettier' } },
     json = { 'biome' },
     markdown = { 'taplo' },
   },
