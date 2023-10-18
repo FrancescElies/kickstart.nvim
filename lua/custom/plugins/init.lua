@@ -98,10 +98,9 @@ return {
       cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
     end,
   },
-
   {
     'LhKipp/nvim-nu',
     config = function() require('nu').setup() end,
     callback = function() vim.keymap.set('n', 'K', vim.lsp.buf.hover, { buffer = true }) end,
-  },
+  }
 }
