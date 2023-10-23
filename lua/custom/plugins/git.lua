@@ -20,7 +20,6 @@ vim.keymap.set('n', '<leader>gP', ':Git pull --rebase <cr>')
 -- vim.keymap.set('n', '<leader>gR', ':GRemove ')
 -- vim.keymap.set('n', '<leader>gM', ':Gmove ')
 
-
 vim.api.nvim_create_augroup('my_commands', { clear = true })
 
 vim.api.nvim_create_autocmd('BufWinEnter', {
@@ -94,12 +93,10 @@ return {
 
         -- Actions
         map('n', '<leader>hr', gs.reset_hunk, { desc = '[H]unk [R]eset' })
-        map('v', '<leader>hr', function() gs.reset_hunk { vim.fn.line '.', vim.fn.line 'v' } end,
-          { desc = '[H]unk [R]eset Selection' })
+        map('v', '<leader>hr', function() gs.reset_hunk { vim.fn.line '.', vim.fn.line 'v' } end, { desc = '[H]unk [R]eset Selection' })
 
         map('n', '<leader>hs', gs.stage_hunk, { desc = '[H]unk [S]tage' })
-        map('v', '<leader>hs', function() gs.stage_hunk { vim.fn.line '.', vim.fn.line 'v' } end,
-          { desc = '[H]unk s[t]age Selection' })
+        map('v', '<leader>hs', function() gs.stage_hunk { vim.fn.line '.', vim.fn.line 'v' } end, { desc = '[H]unk s[t]age Selection' })
         map('n', '<leader>hS', gs.stage_buffer, { desc = '[H]unk [S]tage Buffer' })
 
         map('n', '<leader>hr', gs.reset_buffer, { desc = '[H]unk [R]eset Buffer' })
@@ -122,9 +119,9 @@ return {
   {
     'NeogitOrg/neogit',
     dependencies = {
-      'nvim-lua/plenary.nvim',         -- required
+      'nvim-lua/plenary.nvim', -- required
       'nvim-telescope/telescope.nvim', -- optional
-      'sindrets/diffview.nvim',        -- optional
+      'sindrets/diffview.nvim', -- optional
     },
     config = true,
     keys = {
@@ -139,4 +136,44 @@ return {
     },
   },
   { 'sindrets/diffview.nvim' },
+  {
+    'ThePrimeagen/git-worktree.nvim',
+    callback = function()
+      require('telescope').load_extension 'git_worktree'
+      local Worktree = require 'git-worktree'
+
+      -- op = Operations.Switch, Operations.Create, Operations.Delete
+      -- metadata = table of useful values (structure dependent on op)
+      --      Switch
+      --          path = path you switched to
+      --          prev_path = previous worktree path
+      --      Create
+      --          path = path where worktree created
+      --          branch = branch name
+      --          upstream = upstream remote name
+      --      Delete
+      --          path = path where worktree deleted
+
+      Worktree.on_tree_change(function(op, metadata)
+        if op == Worktree.Operations.Switch then
+          print('Switched from ' .. metadata.prev_path .. ' to ' .. metadata.path)
+        end
+      end)
+    end,
+    keys = {
+      {
+        '<leader>gws',
+        ":lua require('telescope').extensions.git_worktree.git_worktrees()<CR>",
+        desc = '[G]it [W]orkspace [S]earch',
+      },
+      -- <Enter> - switches to that worktree
+      -- <c-d> - deletes that worktree
+      -- <c-f> - toggles forcing of the next deletion
+      {
+        '<leader>gwc',
+        ":lua require('telescope').extensions.git_worktree.create_git_worktree()<CR>",
+        desc = '[G]it [W]orkspace [C]reate',
+      },
+    },
+  },
 }
