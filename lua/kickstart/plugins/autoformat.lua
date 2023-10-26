@@ -53,7 +53,7 @@ return {
         -- Tsserver usually works poorly. Sorry you work with bad languages
         -- You can remove this line if you know what you're doing :)
         if client.name == 'tsserver' then
-          print("skipping tsserver formatting")
+          -- print("skipping tsserver formatting")
           return
         end
 
@@ -66,7 +66,7 @@ return {
             if not format_is_enabled then
               return
             end
-            print("document formatted with " .. client.name)
+            -- print("document formatted with " .. client.name)
 
             vim.lsp.buf.format {
               async = false,
