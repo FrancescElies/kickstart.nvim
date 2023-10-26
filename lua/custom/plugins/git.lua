@@ -1,25 +1,3 @@
--- https://ofirgall.github.io/learn-nvim/chapters/12-git.html
-vim.keymap.set('n', '<leader>gg', vim.cmd.Git, { desc = '[G]it status' })
-
-vim.keymap.set('n', '<leader>g-', ':Git stash <cr>')
-vim.keymap.set('n', '<leader>g=', ':Git stash pop <cr>')
-
-vim.keymap.set('n', '<leader>ga', ':Git add %:p ')
-vim.keymap.set('n', '<leader>gb', ':Git branch ')
-vim.keymap.set('n', '<leader>gB', ':Git blame <cr>')
-vim.keymap.set('n', '<leader>gd', ':Gdiffsplit <cr>')
-vim.keymap.set('n', '<leader>gl', ':G log <cr>')
-vim.keymap.set('n', '<leader>go', ':Git checkout ')
-
-vim.keymap.set('n', '<leader>gp', ':Git push --force-with-lease <cr>')
-vim.keymap.set('n', '<leader>gu', ':Git push -u origin<cr>')
-vim.keymap.set('n', '<leader>gP', ':Git pull --rebase <cr>')
-
--- vim.keymap.set('n', '<leader>gr', ':Gread <cr>')
--- vim.keymap.set('n', '<leader>gw', ':Gwrite <cr>')
--- vim.keymap.set('n', '<leader>gR', ':GRemove ')
--- vim.keymap.set('n', '<leader>gM', ':Gmove ')
-
 vim.api.nvim_create_augroup('my_commands', { clear = true })
 
 vim.api.nvim_create_autocmd('BufWinEnter', {
@@ -48,11 +26,6 @@ vim.api.nvim_create_user_command('InsertStory', function()
 end, {})
 
 return {
-  { 'tpope/vim-fugitive' },
-  -- GitHub extension for fugitive.vim
-  { 'tpope/vim-rhubarb' },
-  -- Azure DevOps extension for fugitive.vim
-  { 'cedarbaum/fugitive-azure-devops.vim' },
   {
     -- Adds git releated signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
@@ -92,24 +65,25 @@ return {
         end, { expr = true, desc = 'Previous Hunk' })
 
         -- Actions
-        map('n', '<leader>hr', gs.reset_hunk, { desc = '[H]unk [R]eset' })
-        map('v', '<leader>hr', function() gs.reset_hunk { vim.fn.line '.', vim.fn.line 'v' } end, { desc = '[H]unk [R]eset Selection' })
+        map('n', '<leader>gr', gs.reset_hunk, { desc = '[g]it [r]eset hunk' })
+        map('v', '<leader>gr', function() gs.reset_hunk { vim.fn.line '.', vim.fn.line 'v' } end,
+          { desc = '[g]it hunk [r]eset selection' })
+        map('n', '<leader>gR', gs.reset_buffer, { desc = '[g]it [R]eset Buffer' })
 
-        map('n', '<leader>hs', gs.stage_hunk, { desc = '[H]unk [S]tage' })
-        map('v', '<leader>hs', function() gs.stage_hunk { vim.fn.line '.', vim.fn.line 'v' } end, { desc = '[H]unk s[t]age Selection' })
-        map('n', '<leader>hS', gs.stage_buffer, { desc = '[H]unk [S]tage Buffer' })
+        map('n', '<leader>gt', gs.stage_hunk, { desc = '[g]it s[t]age hunk' })
+        map('v', '<leader>gt', function() gs.stage_hunk { vim.fn.line '.', vim.fn.line 'v' } end,
+          { desc = '[g]it s[t]age selection' })
+        map('n', '<leader>gT', gs.stage_buffer, { desc = '[g]it hunk s[t]age buffer' })
 
-        map('n', '<leader>hr', gs.reset_buffer, { desc = '[H]unk [R]eset Buffer' })
+        map('n', '<leader>gp', gs.preview_hunk, { desc = '[g]it [p]review hunk' })
 
-        map('n', '<leader>hp', gs.preview_hunk, { desc = '[H]unk Preview' })
+        map('n', '<leader>gb', function() gs.blame_line { full = true } end, { desc = '[g]it [b]lame line' })
 
-        map('n', '<leader>hb', function() gs.blame_line { full = true } end, { desc = '[H]unk [B]lame' })
+        map('n', '<leader>gd', gs.diffthis, { desc = '[g]it [d]iff this' })
 
-        map('n', '<leader>hd', gs.diffthis, { desc = '[H]unk [D]iff' })
-        map('n', '<leader>hD', function() gs.diffthis '~' end, { desc = '[D]iff' })
-
-        map('n', '<leader>vb', gs.toggle_current_line_blame, { desc = '[Vim] toggle git [B]lame line' })
-        map('n', '<leader>vd', gs.toggle_deleted, { desc = '[V]im toggle git [D]eleted' })
+        -- Controlling Vim Git global behaviour
+        map('n', '<leader>vb', gs.toggle_current_line_blame, { desc = '[G]it toggle git [B]lame line' })
+        map('n', '<leader>vd', gs.toggle_deleted, { desc = '[G]it  toggle git [D]eleted' })
 
         -- Text object
         map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
@@ -118,22 +92,13 @@ return {
   },
   {
     'NeogitOrg/neogit',
-    dependencies = {
-      'nvim-lua/plenary.nvim', -- required
-      'nvim-telescope/telescope.nvim', -- optional
-      'sindrets/diffview.nvim', -- optional
-    },
+    dependencies = { 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope.nvim', 'sindrets/diffview.nvim' },
     config = true,
-    keys = {
-      { '<leader>gS', ":lua require('neogit').open()<CR>", desc = 'Neo[G]it [S]tatus' },
-    },
+    keys = { { '<leader>gs', ":lua require('neogit').open()<CR>", desc = '[g]it [s]tatus' } },
   },
   {
     'rhysd/git-messenger.vim',
-    keys = {
-      { '<leader>gm', ':GitMessenger<CR>', desc = '[G]it [M]essenger' },
-      { '<leader>hh', ':GitMessenger<CR>', desc = '[H]unk [H]istory' },
-    },
+    keys = { { '<leader>gm', ':GitMessenger<CR>', desc = '[g]it [m]essenger' } },
   },
   { 'sindrets/diffview.nvim' },
   {
@@ -164,7 +129,7 @@ return {
       {
         '<leader>gws',
         ":lua require('telescope').extensions.git_worktree.git_worktrees()<CR>",
-        desc = '[G]it [W]orkspace [S]earch',
+        desc = '[g]it [w]orkspace [s]earch',
       },
       -- <Enter> - switches to that worktree
       -- <c-d> - deletes that worktree
@@ -172,7 +137,7 @@ return {
       {
         '<leader>gwc',
         ":lua require('telescope').extensions.git_worktree.create_git_worktree()<CR>",
-        desc = '[G]it [W]orkspace [C]reate',
+        desc = '[g]it [w]orkspace [c]reate',
       },
     },
   },
