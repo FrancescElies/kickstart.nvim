@@ -1,3 +1,20 @@
+-- https://ofirgall.github.io/learn-nvim/chapters/12-git.html
+vim.keymap.set('n', '<leader>gs', vim.cmd.Git, { desc = '[G]it [s]tatus' })
+
+vim.keymap.set('n', '<leader>g-', ':Git stash <cr>')
+vim.keymap.set('n', '<leader>g=', ':Git stash pop <cr>')
+
+vim.keymap.set('n', '<leader>ga', ':Git add %:p ')
+vim.keymap.set('n', '<leader>gB', ':Git branch ')
+-- vim.keymap.set('n', '<leader>gB', ':Git blame <cr>')
+vim.keymap.set('n', '<leader>gd', ':Gdiffsplit <cr>')
+vim.keymap.set('n', '<leader>gl', ':G log <cr>')
+vim.keymap.set('n', '<leader>go', ':Git checkout ')
+
+vim.keymap.set('n', '<leader>gp', ':Git push --force-with-lease <cr>')
+vim.keymap.set('n', '<leader>gu', ':Git push -u origin<cr>')
+vim.keymap.set('n', '<leader>gP', ':Git pull --rebase <cr>')
+
 vim.api.nvim_create_augroup('my_commands', { clear = true })
 
 vim.api.nvim_create_autocmd('BufWinEnter', {
@@ -26,6 +43,7 @@ vim.api.nvim_create_user_command('InsertStory', function()
 end, {})
 
 return {
+  { 'tpope/vim-fugitive' },
   {
     -- Adds git releated signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
@@ -79,7 +97,7 @@ return {
 
         map('n', '<leader>gb', function() gs.blame_line { full = true } end, { desc = '[g]it [b]lame line' })
 
-        map('n', '<leader>gd', gs.diffthis, { desc = '[g]it [d]iff this' })
+        -- map('n', '<leader>gd', gs.diffthis, { desc = '[g]it [d]iff this' })
 
         -- Controlling Vim Git global behaviour
         map('n', '<leader>vb', gs.toggle_current_line_blame, { desc = '[G]it toggle git [B]lame line' })
@@ -94,7 +112,7 @@ return {
     'NeogitOrg/neogit',
     dependencies = { 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope.nvim', 'sindrets/diffview.nvim' },
     config = true,
-    keys = { { '<leader>gs', ":lua require('neogit').open()<CR>", desc = '[g]it [s]tatus' } },
+    keys = { { '<leader>gN', ":lua require('neogit').open()<CR>", desc = '[g]it [s]tatus' } },
   },
   {
     'rhysd/git-messenger.vim',
