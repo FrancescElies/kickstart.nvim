@@ -1,5 +1,16 @@
 -- https://github.com/nvimtools/none-ls.nvim/blob/main/doc/BUILTINS.md
 
+vim.api.nvim_create_user_command('FormatDiagnostic', function()
+  local buf = vim.api.nvim_get_current_buf()
+  if vim.diagnostic.is_disabled(buf) then
+    vim.diagnostic.enable(vim.api.nvim_get_current_buf())
+    print('Enabling diagnostic for buffer: ' .. vim.api.nvim_buf_get_name(buf))
+  else
+    vim.diagnostic.disable()
+    print('Disabling diagnostic for buffer: ' .. vim.api.nvim_buf_get_name(buf))
+  end
+end, {})
+
 return {
   'nvimtools/none-ls.nvim',
   event = { 'BufReadPre', 'BufNewFile' },
