@@ -16,6 +16,13 @@ vim.keymap.set('n', '<leader>gu', ':Git push -u origin<cr>')
 vim.keymap.set('n', '<leader>gP', ':Git pull --rebase <cr>')
 
 vim.api.nvim_create_augroup('my_commands', { clear = true })
+--
+-- start git messages in insert mode
+vim.api.nvim_create_autocmd('FileType', {
+  group = 'bufcheck',
+  pattern = { 'gitcommit', 'gitrebase' },
+  command = 'startinsert | 1',
+})
 
 vim.api.nvim_create_autocmd('BufWinEnter', {
   group = 'my_commands',
@@ -84,13 +91,11 @@ return {
 
         -- Actions
         map('n', '<leader>gr', gs.reset_hunk, { desc = '[g]it [r]eset hunk' })
-        map('v', '<leader>gr', function() gs.reset_hunk { vim.fn.line '.', vim.fn.line 'v' } end,
-          { desc = '[g]it hunk [r]eset selection' })
+        map('v', '<leader>gr', function() gs.reset_hunk { vim.fn.line '.', vim.fn.line 'v' } end, { desc = '[g]it hunk [r]eset selection' })
         map('n', '<leader>gR', gs.reset_buffer, { desc = '[g]it [R]eset Buffer' })
 
         map('n', '<leader>gt', gs.stage_hunk, { desc = '[g]it s[t]age hunk' })
-        map('v', '<leader>gt', function() gs.stage_hunk { vim.fn.line '.', vim.fn.line 'v' } end,
-          { desc = '[g]it s[t]age selection' })
+        map('v', '<leader>gt', function() gs.stage_hunk { vim.fn.line '.', vim.fn.line 'v' } end, { desc = '[g]it s[t]age selection' })
         map('n', '<leader>gT', gs.stage_buffer, { desc = '[g]it hunk s[t]age buffer' })
 
         map('n', '<leader>gp', gs.preview_hunk, { desc = '[g]it [p]review hunk' })

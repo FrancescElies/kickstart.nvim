@@ -14,13 +14,6 @@ vim.api.nvim_create_autocmd('TermOpen', {
   command = 'startinsert | set winfixheight',
 })
 
--- -- start git messages in insert mode
--- vim.api.nvim_create_autocmd('FileType', {
---   group = 'bufcheck',
---   pattern = { 'gitcommit', 'gitrebase' },
---   command = 'startinsert | 1',
--- })
-
 -- Return to last edit position when opening files
 vim.api.nvim_create_autocmd('BufReadPost', {
   group = 'bufcheck',
@@ -33,24 +26,6 @@ vim.api.nvim_create_autocmd('BufReadPost', {
     end
   end,
 })
-
--- vim.api.nvim_create_autocmd('BufWritePost', {
---   group = 'bufcheck',
---   pattern = '*.py',
---   callback = function()
---     vim.cmd '!ruff --fix %'
---     vim.cmd '!black --quiet %'
---   end,
--- })
-
--- vim.api.nvim_create_autocmd('BufWritePost', {
---   group = 'bufcheck',
---   pattern = '*.ts',
---   callback = function()
---     vim.cmd '!biome format --write %'
---   end,
--- })
-
 
 -- When opening a javascript file opens it's associated
 -- typescript file if a mapping is found
@@ -67,17 +42,17 @@ vim.api.nvim_create_autocmd('BufReadPost', {
       local map_file = string.match(line, '//# sourceMappingURL=(.+)')
       if map_file ~= nil then
         local bufpath = vim.fn.getcwd()
-        local mapping_file_path = vim.fn.resolve(bufpath .. "/" .. map_file)
+        local mapping_file_path = vim.fn.resolve(bufpath .. '/' .. map_file)
         local mapping_file = io.open(mapping_file_path)
         if mapping_file == nil then
           return
         end
-        print("js file mapping found: " .. mapping_file_path)
-        local mapping_file_contents = mapping_file:read("*a")
+        print('js file mapping found: ' .. mapping_file_path)
+        local mapping_file_contents = mapping_file:read '*a'
         mapping_file:close()
         local ts_file = string.match(mapping_file_contents, '%["(.-%.ts)"%]')
         vim.cmd('e ' .. ts_file)
-        vim.cmd(':set filetype=typescript')
+        vim.cmd ':set filetype=typescript'
         return
       end
     end

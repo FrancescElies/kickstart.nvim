@@ -1,3 +1,18 @@
+-- vim.api.nvim_create_autocmd('BufWritePost', {
+--   group = 'bufcheck',
+--   pattern = '*.py',
+--   callback = function()
+--     vim.cmd '!ruff --fix %'
+--     vim.cmd '!black --quiet %'
+--   end,
+-- })
+--
+-- vim.api.nvim_create_autocmd('BufWritePost', {
+--   group = 'bufcheck',
+--   pattern = '*.ts',
+--   callback = function() vim.cmd '!biome format --write %' end,
+-- })
+--
 return {
   -- 'stevearc/conform.nvim',
   -- opts = {
