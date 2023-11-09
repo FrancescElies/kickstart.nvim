@@ -471,8 +471,12 @@ end
 --Enable (broadcasting) snippet capability for completion
 local jsonls_capabilities = vim.lsp.protocol.make_client_capabilities()
 jsonls_capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+local clangd_capabilities = vim.lsp.protocol.make_client_capabilities()
+clangd_capabilities.offsetEncoding = { 'utf-16' }
+
 local servers = {
-  clangd = { filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda' } },
+  clangd = { filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda' }, capabilities = clangd_capabilities },
   biome = { filetypes = { 'typescript', 'json' }, init_options = { provideFormatter = true } },
   gopls = {},
   pyright = {},
