@@ -340,8 +340,7 @@ vim.keymap.set('n', '<F5>', ':source $MYVIMRC<cr>', { desc = 'Reload Config' })
 ---@diagnostic disable-next-line: missing-fields
 require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'c', 'cpp', 'go', 'html', 'lua', 'markdown', 'mermaid', 'python', 'rust', 'tsx', 'typescript',
-    'vimdoc', 'vim', 'yaml' },
+  ensure_installed = { 'c', 'cpp', 'go', 'html', 'lua', 'markdown', 'mermaid', 'python', 'rust', 'tsx', 'typescript', 'vimdoc', 'vim', 'yaml' },
 
   -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
   auto_install = true,
@@ -475,10 +474,19 @@ jsonls_capabilities.textDocument.completion.completionItem.snippetSupport = true
 local clangd_capabilities = vim.lsp.protocol.make_client_capabilities()
 clangd_capabilities.offsetEncoding = { 'utf-16' }
 
+-- nushell not recognized by mason
+local lspconfig = require 'lspconfig'
+lspconfig.nushell.setup {
+  cmd = { 'nu', '--lsp' },
+  filetypes = { 'nu' },
+  root_dir = require('lspconfig.util').find_git_ancestor,
+  single_file_support = true,
+}
+
 local servers = {
   clangd = { filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda' }, capabilities = clangd_capabilities },
   biome = { filetypes = { 'typescript', 'json' }, init_options = { provideFormatter = true } },
-  gopls = {},
+  -- gopls = {},
   pyright = {},
   jsonls = {
     filetypes = { 'maxpat', 'json' },
