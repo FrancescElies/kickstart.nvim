@@ -4,7 +4,6 @@ vim.keymap.set('n', '<leader>gs', vim.cmd.Git, { desc = '[G]it [s]tatus' })
 vim.keymap.set('n', '<leader>g-', ':Git stash <cr>')
 vim.keymap.set('n', '<leader>g=', ':Git stash pop <cr>')
 
-vim.keymap.set('n', '<leader>ga', ':Git add %:p ')
 vim.keymap.set('n', '<leader>gB', ':Git branch ')
 -- vim.keymap.set('n', '<leader>gB', ':Git blame <cr>')
 vim.keymap.set('n', '<leader>gd', ':Gdiffsplit <cr>')
@@ -94,7 +93,7 @@ return {
         map('v', '<leader>gr', function() gs.reset_hunk { vim.fn.line '.', vim.fn.line 'v' } end, { desc = '[g]it hunk [r]eset selection' })
         map('n', '<leader>gR', gs.reset_buffer, { desc = '[g]it [R]eset Buffer' })
 
-        map('n', '<leader>gt', gs.stage_hunk, { desc = '[g]it s[t]age hunk' })
+        map('n', '<leader>ga', gs.stage_hunk, { desc = '[g]it st[a]ge hunk' })
         map('v', '<leader>gt', function() gs.stage_hunk { vim.fn.line '.', vim.fn.line 'v' } end, { desc = '[g]it s[t]age selection' })
         map('n', '<leader>gT', gs.stage_buffer, { desc = '[g]it hunk s[t]age buffer' })
 
@@ -124,44 +123,44 @@ return {
     keys = { { '<leader>gm', ':GitMessenger<CR>', desc = '[g]it [m]essenger' } },
   },
   { 'sindrets/diffview.nvim' },
-  {
-    'ThePrimeagen/git-worktree.nvim',
-    callback = function()
-      require('telescope').load_extension 'git_worktree'
-      local Worktree = require 'git-worktree'
-
-      -- op = Operations.Switch, Operations.Create, Operations.Delete
-      -- metadata = table of useful values (structure dependent on op)
-      --      Switch
-      --          path = path you switched to
-      --          prev_path = previous worktree path
-      --      Create
-      --          path = path where worktree created
-      --          branch = branch name
-      --          upstream = upstream remote name
-      --      Delete
-      --          path = path where worktree deleted
-
-      Worktree.on_tree_change(function(op, metadata)
-        if op == Worktree.Operations.Switch then
-          print('Switched from ' .. metadata.prev_path .. ' to ' .. metadata.path)
-        end
-      end)
-    end,
-    keys = {
-      {
-        '<leader>gws',
-        ":lua require('telescope').extensions.git_worktree.git_worktrees()<CR>",
-        desc = '[g]it [w]orkspace [s]earch',
-      },
-      -- <Enter> - switches to that worktree
-      -- <c-d> - deletes that worktree
-      -- <c-f> - toggles forcing of the next deletion
-      {
-        '<leader>gwc',
-        ":lua require('telescope').extensions.git_worktree.create_git_worktree()<CR>",
-        desc = '[g]it [w]orkspace [c]reate',
-      },
-    },
-  },
+  -- {
+  --   'ThePrimeagen/git-worktree.nvim',
+  --   callback = function()
+  --     require('telescope').load_extension 'git_worktree'
+  --     local Worktree = require 'git-worktree'
+  --
+  --     -- op = Operations.Switch, Operations.Create, Operations.Delete
+  --     -- metadata = table of useful values (structure dependent on op)
+  --     --      Switch
+  --     --          path = path you switched to
+  --     --          prev_path = previous worktree path
+  --     --      Create
+  --     --          path = path where worktree created
+  --     --          branch = branch name
+  --     --          upstream = upstream remote name
+  --     --      Delete
+  --     --          path = path where worktree deleted
+  --
+  --     Worktree.on_tree_change(function(op, metadata)
+  --       if op == Worktree.Operations.Switch then
+  --         print('Switched from ' .. metadata.prev_path .. ' to ' .. metadata.path)
+  --       end
+  --     end)
+  --   end,
+  --   keys = {
+  --     {
+  --       '<leader>gws',
+  --       ":lua require('telescope').extensions.git_worktree.git_worktrees()<CR>",
+  --       desc = '[g]it [w]orkspace [s]earch',
+  --     },
+  --     -- <Enter> - switches to that worktree
+  --     -- <c-d> - deletes that worktree
+  --     -- <c-f> - toggles forcing of the next deletion
+  --     {
+  --       '<leader>gwc',
+  --       ":lua require('telescope').extensions.git_worktree.create_git_worktree()<CR>",
+  --       desc = '[g]it [w]orkspace [c]reate',
+  --     },
+  --   },
+  -- },
 }
