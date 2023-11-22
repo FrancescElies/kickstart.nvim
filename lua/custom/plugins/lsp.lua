@@ -20,20 +20,19 @@ return {
     return {
       root_dir = require('null-ls.utils').root_pattern('.null-ls-root', '.neoconf.json', 'Makefile', '.git'),
       sources = {
-        nls.builtins.formatting.fish_indent,
-        nls.builtins.diagnostics.fish,
+        -- lua
         nls.builtins.formatting.stylua,
+        -- javascript, typescript
         nls.builtins.formatting.biome,
-        -- nls.builtins.formatting.spell,
-        nls.builtins.formatting.shfmt,
-        nls.builtins.formatting.buf,
+        -- python
         nls.builtins.formatting.black,
         nls.builtins.formatting.ruff,
         nls.builtins.diagnostics.ruff,
-        nls.builtins.diagnostics.ltrs,
+        -- rust
         nls.builtins.formatting.rustfmt,
-        nls.builtins.diagnostics.typos,
-        -- nls.builtins.diagnostics.flake8,
+        -- other
+        nls.builtins.formatting.buf, -- https://github.com/bufbuild/buf
+        nls.builtins.diagnostics.typos, -- https://github.com/crate-ci/typos#install
       },
     }
   end,
