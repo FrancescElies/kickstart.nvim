@@ -488,6 +488,7 @@ local servers = {
   biome = { filetypes = { 'typescript', 'json' }, init_options = { provideFormatter = true } },
   -- gopls = {},
   pyright = {},
+  meson = {},
   jsonls = {
     filetypes = { 'maxpat', 'json' },
     init_options = { provideFormatter = false },
