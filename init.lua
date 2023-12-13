@@ -335,6 +335,7 @@ vim.keymap.set('n', '<leader>sd', telescope_builtin.diagnostics, { desc = '[S]ea
 vim.keymap.set('n', '<F4>', ':edit $MYVIMRC<cr>', { desc = 'Reload Config' })
 vim.keymap.set('n', '<F5>', ':source $MYVIMRC<cr>', { desc = 'Reload Config' })
 
+require('nvim-treesitter.install').compilers = { 'clang' }
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
 ---@diagnostic disable-next-line: missing-fields
