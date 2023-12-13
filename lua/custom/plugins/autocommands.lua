@@ -27,37 +27,41 @@ vim.api.nvim_create_autocmd('BufReadPost', {
   end,
 })
 
+local function find_typescript_for_javascript_file()
+  local buffnr = vim.api.nvim_get_current_buf()
+  local bufname = vim.fn.bufname(buffnr)
+  local lines = vim.api.nvim_buf_get_lines(buffnr, 0, -1, false)
+  for _, line in pairs(lines) do
+    local map_file = string.match(line, '//# sourceMappingURL=(.+)')
+    if map_file ~= nil then
+      local bufpath = vim.fn.getcwd()
+      local mapping_file_path = vim.fn.resolve(bufpath .. '/' .. map_file)
+      local mapping_file = io.open(mapping_file_path)
+      if mapping_file == nil then
+        return
+      end
+      print('js file mapping found: ' .. mapping_file_path)
+      local mapping_file_contents = mapping_file:read '*a'
+      mapping_file:close()
+      local ts_file = string.match(mapping_file_contents, '%["(.-%.ts)"%]')
+      vim.cmd('e ' .. ts_file)
+      vim.cmd ':set filetype=typescript'
+      return
+    end
+  end
+end
+
+vim.api.nvim_create_user_command('FindTSForCurrentJSfile', find_typescript_for_javascript_file, {})
+
 -- When opening a javascript file opens it's associated
 -- typescript file if a mapping is found
 -- Searches for something like
 --     //# sourceMappingURL=my.file.js.map
-vim.api.nvim_create_autocmd('BufReadPost', {
-  group = 'bufcheck',
-  pattern = '*.js',
-  callback = function()
-    local buffnr = vim.api.nvim_get_current_buf()
-    local bufname = vim.fn.bufname(buffnr)
-    local lines = vim.api.nvim_buf_get_lines(buffnr, 0, -1, false)
-    for _, line in pairs(lines) do
-      local map_file = string.match(line, '//# sourceMappingURL=(.+)')
-      if map_file ~= nil then
-        local bufpath = vim.fn.getcwd()
-        local mapping_file_path = vim.fn.resolve(bufpath .. '/' .. map_file)
-        local mapping_file = io.open(mapping_file_path)
-        if mapping_file == nil then
-          return
-        end
-        print('js file mapping found: ' .. mapping_file_path)
-        local mapping_file_contents = mapping_file:read '*a'
-        mapping_file:close()
-        local ts_file = string.match(mapping_file_contents, '%["(.-%.ts)"%]')
-        vim.cmd('e ' .. ts_file)
-        vim.cmd ':set filetype=typescript'
-        return
-      end
-    end
-  end,
-})
+-- vim.api.nvim_create_autocmd('BufReadPost', {
+--   group = 'bufcheck',
+--   pattern = '*.js',
+--   callback = find_typescript_for_javascript_file,
+-- })
 
 function get_buffer_by_name_or_scratch(name, clean)
   for _, buffer in ipairs(vim.api.nvim_list_bufs()) do
