@@ -341,7 +341,7 @@ require('nvim-treesitter.install').compilers = { 'clang' }
 ---@diagnostic disable-next-line: missing-fields
 require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'c', 'cpp', 'go', 'html', 'lua', 'markdown', 'mermaid', 'nu', 'python', 'rust', 'tsx', 'typescript', 'vimdoc', 'vim', 'yaml' },
+  ensure_installed = { 'c', 'cpp', 'go', 'html', 'lua', 'markdown', 'mermaid', 'nu', 'python', 'rust', 'tsx', 'typescript', 'vimdoc', 'vim', 'yaml', 'slint' },
 
   -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
   auto_install = true,
@@ -472,13 +472,20 @@ end
 local jsonls_capabilities = vim.lsp.protocol.make_client_capabilities()
 jsonls_capabilities.textDocument.completion.completionItem.snippetSupport = true
 
+-- local offsetEncoding = { 'utf-16' }
+-- local offsetEncoding = { 'utf-8', 'utf-16' }
+local offsetEncoding = 'utf-16'
 local clangd_capabilities = vim.lsp.protocol.make_client_capabilities()
-clangd_capabilities.offsetEncoding = { 'utf-16' }
+clangd_capabilities.offsetEncoding = offsetEncoding
 
 -- nushell not recognized by mason
 local lspconfig = require 'lspconfig'
 lspconfig.swift_mesonls.setup {}
 lspconfig.nushell.setup {}
+
+vim.cmd [[ autocmd BufRead,BufNewFile *.slint set filetype=slint ]]
+local slint_capabilities = vim.lsp.protocol.make_client_capabilities()
+slint_capabilities.offsetEncoding = offsetEncoding
 
 local servers = {
   clangd = { filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda' }, capabilities = clangd_capabilities },
@@ -491,6 +498,7 @@ local servers = {
     capabilities = jsonls_capabilities,
   },
   ruff_lsp = {},
+  slint_lsp = { filetypes = { 'slint' }, capabilities = slint_capabilities },
   rust_analyzer = {
     ['rust-analyzer'] = { diagnostics = { enable = true }, check = { command = 'clippy' } },
   },
