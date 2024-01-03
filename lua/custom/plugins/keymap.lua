@@ -47,10 +47,10 @@ vim.keymap.set('v', '<leader>/', ':s/\\\\/\\//g<cr>', { desc = '[R]eplace \\ -> 
 vim.keymap.set('v', '<leader>\\', ':s/\\//\\\\/g<cr>', { desc = '[R]eplace / -> [\\]' })
 
 -- Reload configuration
-vim.keymap.set('n', '<leader>vi', ':FormatToggle<CR>', { desc = '[V]im toggle D[i]agnostic' })
 vim.keymap.set('n', '<leader>vf', ':FormatToggle<CR>', { desc = '[V]im toggle [F]ormat' })
 vim.keymap.set('n', '<leader>vn', toggle_number, { desc = '[V]im toggle line [N]umber' })
 vim.keymap.set('n', '<leader>vs', ':set invspell<cr>', { desc = '[V]im toggle [S]pell' })
+vim.keymap.set('n', '<leader>vh', ':set invhlsearch<cr>', { desc = '[H]ighlight search' })
 
 -- tabs
 vim.keymap.set('n', '<leader>tl', '<cmd>tablast<cr>', { desc = 'Last Tab' })
