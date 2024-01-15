@@ -322,6 +322,9 @@ vim.keymap.set('n', '<leader>fF', telescope_builtin.git_files, { desc = '[F]ind 
 vim.keymap.set('n', '<leader>ff', telescope_builtin.find_files, { desc = '[F]ind [F]iles' })
 vim.keymap.set('n', '<leader>fy', ":let @+ = expand('%:p')<cr>", { desc = 'File Yank (copy absolute path)' })
 vim.keymap.set('n', '<leader>fY', ":let @+=expand('%:t')<cr>", { desc = 'Filename Yank (copy filename)' })
+
+vim.keymap.set('n', '<leader>sb', function() require('telescope.builtin').live_grep { grep_open_files = true } end,
+  { desc = '[S]earch [b]uffers' })
 vim.keymap.set('n', '<leader>sc', '<cmd>Telescope command_history<cr>', { desc = '[S]earch [C]ommand history' })
 vim.keymap.set('n', '<leader>sh', telescope_builtin.help_tags, { desc = '[S]earch [H]elp' })
 vim.keymap.set('n', '<leader>sw', telescope_builtin.grep_string, { desc = '[S]earch current [W]ord' })
@@ -341,7 +344,25 @@ require('nvim-treesitter.install').compilers = { 'clang' }
 ---@diagnostic disable-next-line: missing-fields
 require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'c', 'cpp', 'go', 'html', 'lua', 'markdown', 'mermaid', 'nu', 'python', 'rust', 'tsx', 'typescript', 'vimdoc', 'vim', 'yaml', 'slint' },
+  ensure_installed = {
+    'c',
+    'c_sharp',
+    'cpp',
+    'go',
+    'html',
+    'lua',
+    'markdown',
+    'mermaid',
+    'nu',
+    'python',
+    'rust',
+    'tsx',
+    'typescript',
+    'vimdoc',
+    'vim',
+    'yaml',
+    'zig',
+  },
 
   -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
   auto_install = true,
@@ -504,6 +525,16 @@ local servers = {
   },
   tsserver = { init_options = { provideFormatter = false } },
   html = { filetypes = { 'html', 'twig', 'hbs' } },
+  omnisharp = {
+    cmd = { 'dotnet', '~/bin/omnisharp/Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.dll' },
+    enable_editorconfig_support = true,
+    enable_ms_build_load_projects_on_demand = false,
+    enable_roslyn_analyzers = true,
+    organize_imports_on_format = true,
+    enable_import_completion = false,
+    sdk_include_prereleases = true,
+    analyze_open_documents_only = false,
+  },
   lua_ls = {
     Lua = { workspace = { checkThirdParty = false }, telemetry = { enable = false } },
   },
