@@ -14,6 +14,8 @@ end
 vim.o.spell = true
 vim.cmd [[ let g:neo_tree_remove_legacy_commands = 1 ]]
 
+vim.keymap.set('n', 'za', '1z=') -- fix word under cursor https://nanotipsforvim.prose.sh/autofix-misspellings
+
 -- buffer
 vim.keymap.set('n', '<leader>bb', '<cmd>e #<cr>', { desc = 'Switch to Other Buffer' })
 vim.keymap.set('n', '<leader>`', '<cmd>e #<cr>', { desc = 'Switch to Other Buffer' })
