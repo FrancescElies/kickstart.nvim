@@ -18,3 +18,10 @@ https
 sdk
 bugfix
 endianness
+ctrl
+venv
+PowerShell
+virtualenv
+autoenv
+py312
+cmd

@@ -58,7 +58,10 @@ vim.api.nvim_create_autocmd('BufWinEnter', {
 vim.api.nvim_create_user_command('InsertStory', insert_story, {})
 
 return {
-  { 'tpope/vim-fugitive' },
+  {
+    'tpope/vim-fugitive',
+    keys = { { '<leader>gs', vim.cmd.Git, desc = '[g]it [s]tatus' } },
+  },
   {
     -- Adds git releated signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
@@ -99,11 +102,13 @@ return {
 
         -- Actions
         map('n', '<leader>gr', gs.reset_hunk, { desc = '[g]it [r]eset hunk' })
-        map('v', '<leader>gr', function() gs.reset_hunk { vim.fn.line '.', vim.fn.line 'v' } end, { desc = '[g]it hunk [r]eset selection' })
+        map('v', '<leader>gr', function() gs.reset_hunk { vim.fn.line '.', vim.fn.line 'v' } end,
+          { desc = '[g]it hunk [r]eset selection' })
         map('n', '<leader>gR', gs.reset_buffer, { desc = '[g]it [R]eset Buffer' })
 
         map('n', '<leader>ga', gs.stage_hunk, { desc = '[g]it st[a]ge hunk' })
-        map('v', '<leader>gt', function() gs.stage_hunk { vim.fn.line '.', vim.fn.line 'v' } end, { desc = '[g]it s[t]age selection' })
+        map('v', '<leader>gt', function() gs.stage_hunk { vim.fn.line '.', vim.fn.line 'v' } end,
+          { desc = '[g]it s[t]age selection' })
         map('n', '<leader>gT', gs.stage_buffer, { desc = '[g]it hunk s[t]age buffer' })
 
         map('n', '<leader>gp', gs.preview_hunk, { desc = '[g]it [p]review hunk' })
@@ -121,12 +126,12 @@ return {
       end,
     },
   },
-  {
-    'NeogitOrg/neogit',
-    dependencies = { 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope.nvim', 'sindrets/diffview.nvim' },
-    config = true,
-    keys = { { '<leader>gN', ":lua require('neogit').open()<CR>", desc = '[g]it [s]tatus' } },
-  },
+  -- {
+  --   'NeogitOrg/neogit',
+  --   dependencies = { 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope.nvim', 'sindrets/diffview.nvim' },
+  --   config = true,
+  --   keys = { { '<leader>gs', ":lua require('neogit').open()<CR>", desc = '[g]it [s]tatus' } },
+  -- },
   {
     'rhysd/git-messenger.vim',
     keys = { { '<leader>gm', ':GitMessenger<CR>', desc = '[g]it [m]essenger' } },
