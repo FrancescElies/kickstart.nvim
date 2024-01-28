@@ -31,7 +31,7 @@ return {
         -- rust
         nls.builtins.formatting.rustfmt,
         -- other
-        nls.builtins.formatting.buf, -- https://github.com/bufbuild/buf
+        nls.builtins.formatting.buf,    -- https://github.com/bufbuild/buf
         nls.builtins.diagnostics.typos, -- https://github.com/crate-ci/typos#install
       },
     }

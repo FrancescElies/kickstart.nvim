@@ -126,12 +126,6 @@ return {
       end,
     },
   },
-  -- {
-  --   'NeogitOrg/neogit',
-  --   dependencies = { 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope.nvim', 'sindrets/diffview.nvim' },
-  --   config = true,
-  --   keys = { { '<leader>gs', ":lua require('neogit').open()<CR>", desc = '[g]it [s]tatus' } },
-  -- },
   {
     'rhysd/git-messenger.vim',
     keys = { { '<leader>gm', ':GitMessenger<CR>', desc = '[g]it [m]essenger' } },
