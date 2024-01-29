@@ -14,6 +14,9 @@ end
 vim.o.spell = true
 vim.cmd [[ let g:neo_tree_remove_legacy_commands = 1 ]]
 
+vim.keymap.set("i", "jk", "<Esc>")
+vim.keymap.set("i", ";;", "<Esc>")
+
 vim.keymap.set('n', 'za', '1z=') -- fix word under cursor https://nanotipsforvim.prose.sh/autofix-misspellings
 
 -- buffer
