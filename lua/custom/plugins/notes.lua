@@ -4,9 +4,11 @@ if home == nil or home == '' then
 end
 
 return {
-  {
     'renerocksai/telekasten.nvim',
-    dependencies = { 'nvim-telescope/telescope.nvim', 'renerocksai/calendar-vim' },
+    dependencies = { 
+      'nvim-telescope/telescope.nvim', 
+      -- 'renerocksai/calendar-vim' 
+    },
     config = function()
       require('telekasten').setup {
         home = vim.fn.expand '~/zettelkasten',
@@ -18,8 +20,8 @@ return {
       { '<leader>#',  ":lua require('telekasten').show_tags()<CR>",                 desc = 'Show [#] Tags' },
       { '<leader>za', ":lua require('telekasten').show_tags()<CR>",                 desc = 'Show T[a]gs' },
       { '<leader>zb', ":lua require('telekasten').show_backlinks()<CR>",            desc = 'Show [B]acklinks' },
-      { '<leader>zc', ":lua require('telekasten').show_calendar()<CR>",             desc = 'Show [C]al' },
-      { '<leader>zC', ':CalendarT<CR>',                                             desc = '[C]alendar' },
+      -- { '<leader>zc', ":lua require('telekasten').show_calendar()<CR>",             desc = 'Show [C]al' },
+      -- { '<leader>zC', ':CalendarT<CR>',                                             desc = '[C]alendar' },
       { '<leader>zd', ":lua require('telekasten').find_daily_notes()<CR>",          desc = 'Find [D]ailies' },
       { '<leader>zf', ":lua require('telekasten').find_notes()<CR>",                desc = '[F]ind Notes' },
       { '<leader>zF', ":lua require('telekasten').find_friends()<CR>",              desc = '[F]ind Friends' },
@@ -38,12 +40,5 @@ return {
       { '<leader>zw', ":lua require('telekasten').find_weekly_notes()<CR>",         desc = 'Find [W]eeklies' },
       { '<leader>zW', ":lua require('telekasten').goto_thisweek()<CR>",             desc = 'Goto [W]eekly' },
       { '<leader>zy', ":lua require('telekasten').yank_notelink()<CR>",             desc = '[Y]ank Noteline' },
-    },
-  },
-  {
-    'iamcco/markdown-preview.nvim',
-    cmd = { 'MarkdownPreviewToggle', 'MarkdownPreview', 'MarkdownPreviewStop' },
-    ft = { 'markdown' },
-    build = function() vim.fn['mkdp#util#install']() end,
-  },
+    }
 }
