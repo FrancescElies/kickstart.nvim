@@ -1,13 +1,16 @@
 -- https://ofirgall.github.io/learn-nvim/chapters/12-git.html
 vim.keymap.set('n', '<leader>gs', vim.cmd.Git, { desc = '[G]it [s]tatus' })
 
+vim.keymap.set('n', '<leader>gz', require('telescope.builtin').git_stash, { desc = '[G]it [z]stash' })
 vim.keymap.set('n', '<leader>g-', ':Git stash <cr>')
 vim.keymap.set('n', '<leader>g=', ':Git stash pop <cr>')
 
-vim.keymap.set('n', '<leader>gB', ':Git branch ')
+vim.keymap.set('n', '<leader>gb', require('telescope.builtin').git_branches, { desc = '[G]it [b]ranches' })
 -- vim.keymap.set('n', '<leader>gB', ':Git blame <cr>')
 vim.keymap.set('n', '<leader>gd', ':Gdiffsplit <cr>')
-vim.keymap.set('n', '<leader>gl', ':G log <cr>')
+vim.keymap.set('n', '<leader>gl', require('telescope.builtin').git_bcommits, { desc = '[G]it [l]ist commits current buffer' })
+vim.keymap.set('n', '<leader>gll', require('telescope.builtin').git_commits, { desc = '[G]it [l]ist commits' })
+vim.keymap.set('n', '<leader>glL', ':G log <cr>')
 vim.keymap.set('n', '<leader>go', ':Git checkout ')
 
 vim.keymap.set('n', '<leader>gp', ':Git push --force-with-lease <cr>')
@@ -113,7 +116,7 @@ return {
 
         map('n', '<leader>gp', gs.preview_hunk, { desc = '[g]it [p]review hunk' })
 
-        map('n', '<leader>gb', function() gs.blame_line { full = true } end, { desc = '[g]it [b]lame line' })
+        map('n', '<leader>gB', function() gs.blame_line { full = true } end, { desc = '[g]it [b]lame line' })
 
         -- map('n', '<leader>gd', gs.diffthis, { desc = '[g]it [d]iff this' })
 

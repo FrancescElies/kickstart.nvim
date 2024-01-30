@@ -28,15 +28,15 @@ return {
   },
 
   -- tree like view for document symbols
-  {
-    'simrat39/symbols-outline.nvim',
-    cmd = 'SymbolsOutline',
-    keys = { { '<leader>do', '<cmd>SymbolsOutline<cr>', desc = '[D]ocument symbols [O]utline' } },
-    opts = {
-      -- add your options that should be passed to the setup() function here
-      position = 'right',
-    },
-  },
+  -- {
+  --   'simrat39/symbols-outline.nvim',
+  --   cmd = 'SymbolsOutline',
+  --   keys = { { '<leader>do', '<cmd>SymbolsOutline<cr>', desc = '[D]ocument symbols [O]utline' } },
+  --   opts = {
+  --     -- add your options that should be passed to the setup() function here
+  --     position = 'right',
+  --   },
+  -- },
   -- buffer remove which saves window layout
   {
     'echasnovski/mini.bufremove',

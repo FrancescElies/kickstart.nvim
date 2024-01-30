@@ -323,6 +323,8 @@ vim.keymap.set('n', '<leader>ff', telescope_builtin.find_files, { desc = '[F]ind
 vim.keymap.set('n', '<leader>fy', ":let @+ = expand('%:p')<cr>", { desc = 'File Yank (copy absolute path)' })
 vim.keymap.set('n', '<leader>fY', ":let @+=expand('%:t')<cr>", { desc = 'Filename Yank (copy filename)' })
 
+vim.keymap.set('n', '<leader>dt', telescope_builtin.treesitter, { desc = '[d]ocument treesitter symbols (functions, vars)' })
+
 vim.keymap.set('n', '<leader>sb', function() require('telescope.builtin').live_grep { grep_open_files = true } end,
   { desc = '[S]earch [b]uffers' })
 vim.keymap.set('n', '<leader>sc', '<cmd>Telescope command_history<cr>', { desc = '[S]earch [C]ommand history' })
