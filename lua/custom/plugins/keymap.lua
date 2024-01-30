@@ -14,6 +14,11 @@ end
 vim.o.spell = true
 vim.cmd [[ let g:neo_tree_remove_legacy_commands = 1 ]]
 
+vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
+vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
+vim.keymap.set("n", "<C-S-k>", "<cmd>lnext<CR>zz")
+vim.keymap.set("n", "<C-S-j>", "<cmd>lprev<CR>zz")
+
 vim.keymap.set("i", "jk", "<Esc>")
 vim.keymap.set("i", ";;", "<Esc>")
 

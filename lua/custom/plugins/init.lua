@@ -7,6 +7,9 @@ vim.opt.grepprg = 'rg --vimgrep --smart-case --follow'
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 
+vim.keymap.set('n', '<leader>m', require("telescope.builtin").marks, { desc = '[m]arks' })
+vim.keymap.set('n', '<C-m>', require("telescope.builtin").marks)
+
 return {
   -- use your text editor in the browser
   -- { 'subnut/nvim-ghost.nvim' },
