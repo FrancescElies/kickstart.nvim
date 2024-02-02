@@ -20,7 +20,6 @@ vim.keymap.set('n', '<C-S-k>', '<cmd>lnext<CR>zz')
 vim.keymap.set('n', '<C-S-j>', '<cmd>lprev<CR>zz')
 
 vim.keymap.set('i', 'jk', '<Esc>')
-vim.keymap.set('i', ';;', '<Esc>')
 
 vim.keymap.set('n', 'za', '1z=') -- fix word under cursor https://nanotipsforvim.prose.sh/autofix-misspellings
 
