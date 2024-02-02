@@ -7,8 +7,8 @@ vim.opt.grepprg = 'rg --vimgrep --smart-case --follow'
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 
-vim.keymap.set('n', '<leader>m', require("telescope.builtin").marks, { desc = '[m]arks' })
-vim.keymap.set('n', '<C-m>', require("telescope.builtin").marks)
+vim.keymap.set('n', '<leader>m', require('telescope.builtin').marks, { desc = '[m]arks' })
+vim.keymap.set('n', '<C-m>', require('telescope.builtin').marks)
 
 return {
   -- use your text editor in the browser
@@ -24,7 +24,9 @@ return {
     keys = {
       {
         '<leader>fm',
-        function() require('mini.files').open() end,
+        function()
+          require('mini.files').open()
+        end,
         desc = '[M]ini [Files]',
       },
     },
@@ -65,7 +67,9 @@ return {
         { opts.mappings.replace, desc = 'Replace surrounding' },
         { opts.mappings.update_n_lines, desc = 'Update `MiniSurround.config.n_lines`' },
       }
-      mappings = vim.tbl_filter(function(m) return m[1] and #m[1] > 0 end, mappings)
+      mappings = vim.tbl_filter(function(m)
+        return m[1] and #m[1] > 0
+      end, mappings)
       return vim.list_extend(mappings, keys)
     end,
     opts = {
@@ -96,7 +100,11 @@ return {
   },
   {
     'LhKipp/nvim-nu',
-    config = function() require('nu').setup() end,
-    callback = function() vim.keymap.set('n', 'K', vim.lsp.buf.hover, { buffer = true }) end,
+    config = function()
+      require('nu').setup()
+    end,
+    callback = function()
+      vim.keymap.set('n', 'K', vim.lsp.buf.hover, { buffer = true })
+    end,
   },
 }

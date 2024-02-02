@@ -91,7 +91,9 @@ return {
           if vim.wo.diff then
             return ']c'
           end
-          vim.schedule(function() gs.next_hunk() end)
+          vim.schedule(function()
+            gs.next_hunk()
+          end)
           return '<Ignore>'
         end, { expr = true, desc = 'Next Hunk' })
 
@@ -99,24 +101,30 @@ return {
           if vim.wo.diff then
             return '[c'
           end
-          vim.schedule(function() gs.prev_hunk() end)
+          vim.schedule(function()
+            gs.prev_hunk()
+          end)
           return '<Ignore>'
         end, { expr = true, desc = 'Previous Hunk' })
 
         -- Actions
         map('n', '<leader>gr', gs.reset_hunk, { desc = '[g]it [r]eset hunk' })
-        map('v', '<leader>gr', function() gs.reset_hunk { vim.fn.line '.', vim.fn.line 'v' } end,
-          { desc = '[g]it hunk [r]eset selection' })
+        map('v', '<leader>gr', function()
+          gs.reset_hunk { vim.fn.line '.', vim.fn.line 'v' }
+        end, { desc = '[g]it hunk [r]eset selection' })
         map('n', '<leader>gR', gs.reset_buffer, { desc = '[g]it [R]eset Buffer' })
 
         map('n', '<leader>ga', gs.stage_hunk, { desc = '[g]it st[a]ge hunk' })
-        map('v', '<leader>gt', function() gs.stage_hunk { vim.fn.line '.', vim.fn.line 'v' } end,
-          { desc = '[g]it s[t]age selection' })
+        map('v', '<leader>gt', function()
+          gs.stage_hunk { vim.fn.line '.', vim.fn.line 'v' }
+        end, { desc = '[g]it s[t]age selection' })
         map('n', '<leader>gT', gs.stage_buffer, { desc = '[g]it hunk s[t]age buffer' })
 
         map('n', '<leader>gp', gs.preview_hunk, { desc = '[g]it [p]review hunk' })
 
-        map('n', '<leader>gB', function() gs.blame_line { full = true } end, { desc = '[g]it [b]lame line' })
+        map('n', '<leader>gB', function()
+          gs.blame_line { full = true }
+        end, { desc = '[g]it [b]lame line' })
 
         -- map('n', '<leader>gd', gs.diffthis, { desc = '[g]it [d]iff this' })
 

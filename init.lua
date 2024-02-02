@@ -85,7 +85,7 @@ require('lazy').setup({
 
       -- Useful status updates for LSP
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-      { 'j-hui/fidget.nvim',       tag = 'legacy', opts = {} },
+      { 'j-hui/fidget.nvim', tag = 'legacy', opts = {} },
 
       -- Additional lua configuration, makes nvim stuff amazing!
       'folke/neodev.nvim',
@@ -109,12 +109,14 @@ require('lazy').setup({
   },
 
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim',   opts = {} },
+  { 'folke/which-key.nvim', opts = {} },
   {
     -- Theme inspired by Atom
     'navarasu/onedark.nvim',
     priority = 1000,
-    config = function() vim.cmd.colorscheme 'onedark' end,
+    config = function()
+      vim.cmd.colorscheme 'onedark'
+    end,
   },
 
   {
@@ -139,7 +141,7 @@ require('lazy').setup({
   },
 
   -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim',  opts = {} },
+  { 'numToStr/Comment.nvim', opts = {} },
 
   -- Fuzzy Finder (files, lsp, etc)
   {
@@ -155,7 +157,9 @@ require('lazy').setup({
         -- NOTE: If you are having trouble with this installation,
         --       refer to the README for telescope-fzf-native for more instructions.
         build = 'make',
-        cond = function() return vim.fn.executable 'make' == 1 end,
+        cond = function()
+          return vim.fn.executable 'make' == 1
+        end,
       },
     },
   },
@@ -244,7 +248,9 @@ vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = tr
 -- See `:help vim.highlight.on_yank()`
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
 vim.api.nvim_create_autocmd('TextYankPost', {
-  callback = function() vim.highlight.on_yank() end,
+  callback = function()
+    vim.highlight.on_yank()
+  end,
   group = highlight_group,
   pattern = '*',
 })
@@ -326,13 +332,16 @@ vim.keymap.set('n', '<leader>fY', ":let @+=expand('%:t')<cr>", { desc = 'Filenam
 
 vim.keymap.set('n', '<leader>dt', telescope_builtin.treesitter, { desc = '[d]ocument treesitter symbols (functions, vars)' })
 
-vim.keymap.set('n', '<leader>sb', function() require('telescope.builtin').live_grep { grep_open_files = true } end,
-  { desc = '[S]earch [b]uffers' })
+vim.keymap.set('n', '<leader>sb', function()
+  require('telescope.builtin').live_grep { grep_open_files = true }
+end, { desc = '[S]earch [b]uffers' })
 vim.keymap.set('n', '<leader>sc', '<cmd>Telescope command_history<cr>', { desc = '[S]earch [C]ommand history' })
 vim.keymap.set('n', '<leader>sh', telescope_builtin.help_tags, { desc = '[S]earch [H]elp' })
 vim.keymap.set('n', '<leader>sw', telescope_builtin.grep_string, { desc = '[S]earch current [W]ord' })
 vim.keymap.set('n', '<leader>sW', from_git_root_do 'grep_string', { desc = '[S]earch current [W]ord (git root)' })
-vim.keymap.set('n', '<leader>sg', function() telescope_builtin.live_grep(grep_opts) end, { desc = '[S]earch by [G]rep' })
+vim.keymap.set('n', '<leader>sg', function()
+  telescope_builtin.live_grep(grep_opts)
+end, { desc = '[S]earch by [G]rep' })
 vim.keymap.set('n', '<leader>sG', from_git_root_do 'live_grep', { desc = '[S]earch by [G]rep (git root)' })
 vim.keymap.set('n', '<leader>sk', '<cmd>Telescope keymaps<cr>', { desc = '[S]earch [K]eymaps' })
 vim.keymap.set('n', '<leader>sr', '<cmd>Telescope resume<cr>', { desc = '[S]earch [R]esume' })
@@ -430,14 +439,18 @@ require('nvim-treesitter.configs').setup {
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
-vim.keymap.set('n', '[w', function() vim.diagnostic.goto_prev { severity = 'WARN' } end,
-  { desc = 'Go to previous warning message' })
-vim.keymap.set('n', ']w', function() vim.diagnostic.goto_next { severity = 'WARN' } end,
-  { desc = 'Go to next warning message' })
-vim.keymap.set('n', '[e', function() vim.diagnostic.goto_prev { severity = 'ERROR' } end,
-  { desc = 'Go to previous error message' })
-vim.keymap.set('n', ']e', function() vim.diagnostic.goto_next { severity = 'ERROR' } end,
-  { desc = 'Go to next error message' })
+vim.keymap.set('n', '[w', function()
+  vim.diagnostic.goto_prev { severity = 'WARN' }
+end, { desc = 'Go to previous warning message' })
+vim.keymap.set('n', ']w', function()
+  vim.diagnostic.goto_next { severity = 'WARN' }
+end, { desc = 'Go to next warning message' })
+vim.keymap.set('n', '[e', function()
+  vim.diagnostic.goto_prev { severity = 'ERROR' }
+end, { desc = 'Go to previous error message' })
+vim.keymap.set('n', ']e', function()
+  vim.diagnostic.goto_next { severity = 'ERROR' }
+end, { desc = 'Go to next error message' })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 vim.keymap.set('n', '<leader>E', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
@@ -477,12 +490,14 @@ local on_attach = function(_, bufnr)
   nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
   nmap('<leader>wa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [A]dd Folder')
   nmap('<leader>wr', vim.lsp.buf.remove_workspace_folder, '[W]orkspace [R]emove Folder')
-  nmap('<leader>wl', function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end,
-    '[W]orkspace [L]ist Folders')
+  nmap('<leader>wl', function()
+    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+  end, '[W]orkspace [L]ist Folders')
 
   -- Create a command `:Format` local to the LSP buffer
-  vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_) vim.lsp.buf.format() end,
-    { desc = 'Format current buffer with LSP' })
+  vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
+    vim.lsp.buf.format()
+  end, { desc = 'Format current buffer with LSP' })
 end
 
 -- Enable the following language servers
@@ -579,7 +594,9 @@ luasnip.config.setup {}
 ---@diagnostic disable-next-line: missing-fields
 cmp.setup {
   snippet = {
-    expand = function(args) luasnip.lsp_expand(args.body) end,
+    expand = function(args)
+      luasnip.lsp_expand(args.body)
+    end,
   },
   mapping = cmp.mapping.preset.insert {
     ['<C-n>'] = cmp.mapping.select_next_item(),
