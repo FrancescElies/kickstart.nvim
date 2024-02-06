@@ -54,6 +54,7 @@ vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
 vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
 vim.keymap.set('v', '<leader>/', ':s/\\\\/\\//g<cr>', { desc = '[R]eplace \\ -> [/]' })
 vim.keymap.set('v', '<leader>\\', ':s/\\//\\\\/g<cr>', { desc = '[R]eplace / -> [\\]' })
+vim.keymap.set('v', '<leader>l', ':luafile %<cr>', { desc = '[L]oad luafile' })
 
 -- Reload configuration
 vim.keymap.set('n', '<leader>vf', ':FormatToggle<CR>', { desc = '[V]im toggle [F]ormat' })

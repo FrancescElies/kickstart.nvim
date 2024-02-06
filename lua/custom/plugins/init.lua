@@ -8,7 +8,11 @@ vim.opt.splitright = true
 vim.opt.splitbelow = true
 
 vim.keymap.set('n', '<leader>m', require('telescope.builtin').marks, { desc = '[m]arks' })
-vim.keymap.set('n', '<C-m>', require('telescope.builtin').marks)
+
+-- Commodity function to print stuff
+function p(v)
+  print(vim.inspect(v))
+end
 
 return {
   -- use your text editor in the browser
@@ -59,12 +63,12 @@ return {
       local plugin = require('lazy.core.config').spec.plugins['mini.surround']
       local opts = require('lazy.core.plugin').values(plugin, 'opts', false)
       local mappings = {
-        { opts.mappings.add, desc = 'Add surrounding', mode = { 'n', 'v' } },
-        { opts.mappings.delete, desc = 'Delete surrounding' },
-        { opts.mappings.find, desc = 'Find right surrounding' },
-        { opts.mappings.find_left, desc = 'Find left surrounding' },
-        { opts.mappings.highlight, desc = 'Highlight surrounding' },
-        { opts.mappings.replace, desc = 'Replace surrounding' },
+        { opts.mappings.add,            desc = 'Add surrounding',                     mode = { 'n', 'v' } },
+        { opts.mappings.delete,         desc = 'Delete surrounding' },
+        { opts.mappings.find,           desc = 'Find right surrounding' },
+        { opts.mappings.find_left,      desc = 'Find left surrounding' },
+        { opts.mappings.highlight,      desc = 'Highlight surrounding' },
+        { opts.mappings.replace,        desc = 'Replace surrounding' },
         { opts.mappings.update_n_lines, desc = 'Update `MiniSurround.config.n_lines`' },
       }
       mappings = vim.tbl_filter(function(m)
@@ -74,12 +78,12 @@ return {
     end,
     opts = {
       mappings = {
-        add = 'gza', -- Add surrounding in Normal and Visual modes
-        delete = 'gzd', -- Delete surrounding
-        find = 'gzf', -- Find surrounding (to the right)
-        find_left = 'gzF', -- Find surrounding (to the left)
-        highlight = 'gzh', -- Highlight surrounding
-        replace = 'gzr', -- Replace surrounding
+        add = 'gza',            -- Add surrounding in Normal and Visual modes
+        delete = 'gzd',         -- Delete surrounding
+        find = 'gzf',           -- Find surrounding (to the right)
+        find_left = 'gzF',      -- Find surrounding (to the left)
+        highlight = 'gzh',      -- Highlight surrounding
+        replace = 'gzr',        -- Replace surrounding
         update_n_lines = 'gzn', -- Update `n_lines`
       },
     },
