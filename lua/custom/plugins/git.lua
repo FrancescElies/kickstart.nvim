@@ -1,17 +1,11 @@
 -- https://ofirgall.github.io/learn-nvim/chapters/12-git.html
-vim.keymap.set('n', '<leader>gs', vim.cmd.Git, { desc = '[G]it [s]tatus' })
 
-vim.keymap.set('n', '<leader>gz', require('telescope.builtin').git_stash, { desc = '[G]it [z]stash' })
-vim.keymap.set('n', '<leader>g-', ':Git stash <cr>')
-vim.keymap.set('n', '<leader>g=', ':Git stash pop <cr>')
+vim.keymap.set('n', '<leader>gz', require('telescope.builtin').git_stash, { desc = 'Git zstash' })
 
-vim.keymap.set('n', '<leader>gb', require('telescope.builtin').git_branches, { desc = '[G]it [b]ranches' })
--- vim.keymap.set('n', '<leader>gB', ':Git blame <cr>')
+vim.keymap.set('n', '<leader>gb', require('telescope.builtin').git_branches, { desc = 'Git branches' })
 vim.keymap.set('n', '<leader>gd', ':Gdiffsplit <cr>')
-vim.keymap.set('n', '<leader>gl', require('telescope.builtin').git_bcommits, { desc = '[G]it [l]ist commits current buffer' })
-vim.keymap.set('n', '<leader>gll', require('telescope.builtin').git_commits, { desc = '[G]it [l]ist commits' })
-vim.keymap.set('n', '<leader>glL', ':G log <cr>')
-vim.keymap.set('n', '<leader>go', ':Git checkout ')
+vim.keymap.set('n', '<leader>gl', require('telescope.builtin').git_bcommits, { desc = 'Git List commits current buffer' })
+vim.keymap.set('n', '<leader>gL', require('telescope.builtin').git_commits, { desc = 'Git List commits' })
 
 vim.keymap.set('n', '<leader>gp', ':Git push --force-with-lease <cr>')
 vim.keymap.set('n', '<leader>gu', ':Git push -u origin<cr>')
@@ -63,7 +57,7 @@ vim.api.nvim_create_user_command('InsertStory', insert_story, {})
 return {
   {
     'tpope/vim-fugitive',
-    keys = { { '<leader>gs', vim.cmd.Git, desc = '[g]it [s]tatus' } },
+    keys = { { '<leader>gs', vim.cmd.Git, desc = 'git status' } },
   },
   {
     -- Adds git releated signs to the gutter, as well as utilities for managing changes
@@ -108,29 +102,29 @@ return {
         end, { expr = true, desc = 'Previous Hunk' })
 
         -- Actions
-        map('n', '<leader>gr', gs.reset_hunk, { desc = '[g]it [r]eset hunk' })
+        map('n', '<leader>gr', gs.reset_hunk, { desc = 'git reset hunk' })
         map('v', '<leader>gr', function()
           gs.reset_hunk { vim.fn.line '.', vim.fn.line 'v' }
-        end, { desc = '[g]it hunk [r]eset selection' })
-        map('n', '<leader>gR', gs.reset_buffer, { desc = '[g]it [R]eset Buffer' })
+        end, { desc = 'git hunk reset selection' })
+        map('n', '<leader>gR', gs.reset_buffer, { desc = 'git Reset Buffer' })
 
-        map('n', '<leader>ga', gs.stage_hunk, { desc = '[g]it st[a]ge hunk' })
+        map('n', '<leader>ga', gs.stage_hunk, { desc = 'git stage hunk' })
         map('v', '<leader>gt', function()
           gs.stage_hunk { vim.fn.line '.', vim.fn.line 'v' }
-        end, { desc = '[g]it s[t]age selection' })
-        map('n', '<leader>gT', gs.stage_buffer, { desc = '[g]it hunk s[t]age buffer' })
+        end, { desc = 'git stage selection' })
+        map('n', '<leader>gT', gs.stage_buffer, { desc = 'git hunk stage buffer' })
 
-        map('n', '<leader>gp', gs.preview_hunk, { desc = '[g]it [p]review hunk' })
+        map('n', '<leader>gp', gs.preview_hunk, { desc = 'git preview hunk' })
 
         map('n', '<leader>gB', function()
           gs.blame_line { full = true }
-        end, { desc = '[g]it [b]lame line' })
+        end, { desc = 'git blame line' })
 
-        -- map('n', '<leader>gd', gs.diffthis, { desc = '[g]it [d]iff this' })
+        -- map('n', '<leader>gd', gs.diffthis, { desc = 'git diff this' })
 
         -- Controlling Vim Git global behaviour
-        map('n', '<leader>vb', gs.toggle_current_line_blame, { desc = '[G]it toggle git [B]lame line' })
-        map('n', '<leader>vd', gs.toggle_deleted, { desc = '[G]it  toggle git [D]eleted' })
+        map('n', '<leader>vb', gs.toggle_current_line_blame, { desc = 'Git toggle git Blame line' })
+        map('n', '<leader>vd', gs.toggle_deleted, { desc = 'Git  toggle git Deleted' })
 
         -- Text object
         map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
@@ -139,7 +133,7 @@ return {
   },
   {
     'rhysd/git-messenger.vim',
-    keys = { { '<leader>gm', ':GitMessenger<CR>', desc = '[g]it [m]essenger' } },
+    keys = { { '<leader>gm', ':GitMessenger<CR>', desc = 'git messenger' } },
   },
   { 'sindrets/diffview.nvim' },
 }
