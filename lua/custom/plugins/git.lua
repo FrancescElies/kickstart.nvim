@@ -17,7 +17,7 @@ vim.keymap.set('n', '<leader>gp', ':Git push --force-with-lease <cr>')
 vim.keymap.set('n', '<leader>gu', ':Git push -u origin<cr>')
 vim.keymap.set('n', '<leader>gP', ':Git pull --rebase <cr>')
 
-vim.api.nvim_create_augroup('my_commands', { clear = true })
+vim.api.nvim_create_augroup('my_git_commands', { clear = true })
 --
 -- start git messages in insert mode
 -- vim.api.nvim_create_autocmd('FileType', {
@@ -49,7 +49,7 @@ local function insert_story()
 end
 
 vim.api.nvim_create_autocmd('BufWinEnter', {
-  group = 'my_commands',
+  group = 'my_git_commands',
   pattern = 'COMMIT_EDITMSG',
   callback = function()
     local bufnr = vim.api.nvim_get_current_buf()
