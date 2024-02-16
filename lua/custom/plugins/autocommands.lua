@@ -1,5 +1,17 @@
 vim.api.nvim_create_augroup('bufcheck', { clear = true })
 
+-- auto create intermediate directories on save
+vim.api.nvim_create_autocmd({ 'FileWritePre', 'BufWritePre' }, {
+  group = 'bufcheck',
+  pattern = '*',
+  callback = function()
+    vim.fn.mkdir(
+      vim.fn.expand '%:p:h', -- current-buffer:path:head(directory)
+      'p'                    -- create intermediate directories
+    )
+  end,
+})
+
 -- reload config file on change
 vim.api.nvim_create_autocmd('BufWritePost', {
   group = 'bufcheck',
