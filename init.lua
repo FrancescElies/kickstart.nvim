@@ -265,6 +265,7 @@ vim.keymap.set('n', 'N', 'Nzzzv')
 -- See `:help telescope` and `:help telescope.setup()`
 require('telescope').setup {
   defaults = {
+    path_display = { shorten = 3 },
     mappings = {
       i = {
         ['<C-u>'] = false,
