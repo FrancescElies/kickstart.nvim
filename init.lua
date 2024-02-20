@@ -386,7 +386,6 @@ vim.defer_fn(function()
       'lua',
       'markdown',
       'mermaid',
-      'nu',
       'python',
       'rust',
       'tsx',
@@ -567,14 +566,14 @@ local offsetEncoding = 'utf-16'
 local clangd_capabilities = vim.lsp.protocol.make_client_capabilities()
 clangd_capabilities.offsetEncoding = offsetEncoding
 
--- nushell not recognized by mason
+-- nushell not recognized by mason, thus here
 local lspconfig = require 'lspconfig'
 lspconfig.swift_mesonls.setup {}
 lspconfig.nushell.setup {}
 
-vim.cmd [[ autocmd BufRead,BufNewFile *.slint set filetype=slint ]]
-local slint_capabilities = vim.lsp.protocol.make_client_capabilities()
-slint_capabilities.offsetEncoding = offsetEncoding
+-- vim.cmd [[ autocmd BufRead,BufNewFile *.slint set filetype=slint ]]
+-- local slint_capabilities = vim.lsp.protocol.make_client_capabilities()
+-- slint_capabilities.offsetEncoding = offsetEncoding
 
 local servers = {
   clangd = { filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda' }, capabilities = clangd_capabilities },
@@ -587,7 +586,7 @@ local servers = {
     capabilities = jsonls_capabilities,
   },
   ruff_lsp = {},
-  slint_lsp = { filetypes = { 'slint' }, capabilities = slint_capabilities },
+  -- slint_lsp = { filetypes = { 'slint' }, capabilities = slint_capabilities },
   rust_analyzer = {
     ['rust-analyzer'] = { diagnostics = { enable = true }, check = { command = 'clippy' } },
   },
