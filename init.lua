@@ -577,13 +577,12 @@ lspconfig.nushell.setup {}
 -- local slint_capabilities = vim.lsp.protocol.make_client_capabilities()
 -- slint_capabilities.offsetEncoding = offsetEncoding
 
+-- https://vinnymeller.com/posts/neovim_nightly_inlay_hints/
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("UserLspConfig", {}),
   callback = function(args)
     local client = vim.lsp.get_client_by_id(args.data.client_id)
-    print('client', client, 'client.server_capabilities.inlayHintProvider', client.server_capabilities.inlayHintProvider)
     if client.server_capabilities.inlayHintProvider then
-      print('buf', args.buf)
       vim.lsp.inlay_hint.enable(args.buf, true)
     end
     -- whatever other lsp config you want
@@ -603,7 +602,12 @@ local servers = {
   ruff_lsp = {},
   -- slint_lsp = { filetypes = { 'slint' }, capabilities = slint_capabilities },
   rust_analyzer = {
-    ['rust-analyzer'] = { diagnostics = { enable = true }, check = { command = 'clippy' } } },
+    ['rust-analyzer'] = {
+      diagnostics = { enable = true },
+      check = { command = 'clippy' },
+      inlayHints = { enabled = true, }
+    },
+  },
   tsserver = {
     init_options = {
       provideFormatter = false,

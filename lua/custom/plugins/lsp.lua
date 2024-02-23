@@ -11,6 +11,23 @@ vim.api.nvim_create_user_command('FormatDiagnostic', function()
   end
 end, {})
 
+
+--https://github.com/LazyVim/LazyVim/blob/91126b9896bebcea9a21bce43be4e613e7607164/lua/lazyvim/util/toggle.lua#L64
+local function inlay_hints(buf, value)
+  local ih = vim.lsp.buf.inlay_hint or vim.lsp.inlay_hint
+  if type(ih) == "function" then
+    ih(buf, value)
+  elseif type(ih) == "table" and ih.enable then
+    if value == nil then
+      value = not ih.is_enabled(buf)
+    end
+    ih.enable(buf, value)
+  end
+end
+local function refresh_inlay_hints() inlay_hints(0, true) end
+vim.keymap.set('n', '<leader>vi', inlay_hints, { desc = 'Vim toggle Inlay hints' })
+vim.keymap.set('n', '<leader>vI', refresh_inlay_hints, { desc = 'Vim refresh Inlay hints' })
+
 return {
   'nvimtools/none-ls.nvim',
   event = { 'BufReadPre', 'BufNewFile' },
@@ -31,7 +48,7 @@ return {
         -- rust
         nls.builtins.formatting.rustfmt,
         -- other
-        nls.builtins.formatting.buf, -- https://github.com/bufbuild/buf
+        nls.builtins.formatting.buf,    -- https://github.com/bufbuild/buf
         nls.builtins.diagnostics.typos, -- https://github.com/crate-ci/typos#install
       },
     }
