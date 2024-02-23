@@ -571,9 +571,24 @@ local lspconfig = require 'lspconfig'
 lspconfig.swift_mesonls.setup {}
 lspconfig.nushell.setup {}
 
+-- vim.lsp.set_log_level 'TRACE'
+
 -- vim.cmd [[ autocmd BufRead,BufNewFile *.slint set filetype=slint ]]
 -- local slint_capabilities = vim.lsp.protocol.make_client_capabilities()
 -- slint_capabilities.offsetEncoding = offsetEncoding
+
+vim.api.nvim_create_autocmd("LspAttach", {
+  group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    print('client', client, 'client.server_capabilities.inlayHintProvider', client.server_capabilities.inlayHintProvider)
+    if client.server_capabilities.inlayHintProvider then
+      print('buf', args.buf)
+      vim.lsp.inlay_hint.enable(args.buf, true)
+    end
+    -- whatever other lsp config you want
+  end
+})
 
 local servers = {
   clangd = { filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda' }, capabilities = clangd_capabilities },
@@ -588,9 +603,37 @@ local servers = {
   ruff_lsp = {},
   -- slint_lsp = { filetypes = { 'slint' }, capabilities = slint_capabilities },
   rust_analyzer = {
-    ['rust-analyzer'] = { diagnostics = { enable = true }, check = { command = 'clippy' } },
+    ['rust-analyzer'] = { diagnostics = { enable = true }, check = { command = 'clippy' } } },
+  tsserver = {
+    init_options = {
+      provideFormatter = false,
+    },
+    typescript = {
+      inlayHints = {
+        includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all'
+        includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+        includeInlayVariableTypeHints = true,
+        includeInlayFunctionParameterTypeHints = true,
+        includeInlayVariableTypeHintsWhenTypeMatchesName = true,
+        includeInlayPropertyDeclarationTypeHints = true,
+        includeInlayFunctionLikeReturnTypeHints = true,
+        includeInlayEnumMemberValueHints = true,
+      },
+    },
+    javascript = {
+      inlayHints = {
+        includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all'
+        includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+        includeInlayVariableTypeHints = true,
+
+        includeInlayFunctionParameterTypeHints = true,
+        includeInlayVariableTypeHintsWhenTypeMatchesName = true,
+        includeInlayPropertyDeclarationTypeHints = true,
+        includeInlayFunctionLikeReturnTypeHints = true,
+        includeInlayEnumMemberValueHints = true,
+      },
+    },
   },
-  tsserver = { init_options = { provideFormatter = false } },
   html = { filetypes = { 'html', 'twig', 'hbs' } },
   omnisharp = {
     cmd = { 'dotnet', '~/bin/omnisharp/Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.dll' },
