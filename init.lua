@@ -85,7 +85,7 @@ require('lazy').setup({
 
       -- Useful status updates for LSP
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-      { 'j-hui/fidget.nvim',       tag = 'legacy', opts = {} },
+      { 'j-hui/fidget.nvim', tag = 'legacy', opts = {} },
 
       -- Additional lua configuration, makes nvim stuff amazing!
       'folke/neodev.nvim',
@@ -109,7 +109,7 @@ require('lazy').setup({
   },
 
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim',   opts = {} },
+  { 'folke/which-key.nvim', opts = {} },
   {
     -- Theme inspired by Atom
     'navarasu/onedark.nvim',
@@ -141,7 +141,7 @@ require('lazy').setup({
   },
 
   -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim',  opts = {} },
+  { 'numToStr/Comment.nvim', opts = {} },
 
   -- Fuzzy Finder (files, lsp, etc)
   {
@@ -349,8 +349,7 @@ vim.keymap.set('n', '<leader>ff', telescope_builtin.find_files, { desc = '[F]ind
 vim.keymap.set('n', '<leader>fy', ":let @+ = expand('%:p')<cr>", { desc = 'File Yank (copy absolute path)' })
 vim.keymap.set('n', '<leader>fY', ":let @+=expand('%:t')<cr>", { desc = 'Filename Yank (copy filename)' })
 
-vim.keymap.set('n', '<leader>dt', telescope_builtin.treesitter,
-  { desc = '[d]ocument treesitter symbols (functions, vars)' })
+vim.keymap.set('n', '<leader>dt', telescope_builtin.treesitter, { desc = '[d]ocument treesitter symbols (functions, vars)' })
 
 vim.keymap.set('n', '<leader>sb', function()
   require('telescope.builtin').live_grep { grep_open_files = true }
@@ -577,18 +576,6 @@ lspconfig.nushell.setup {}
 -- local slint_capabilities = vim.lsp.protocol.make_client_capabilities()
 -- slint_capabilities.offsetEncoding = offsetEncoding
 
--- https://vinnymeller.com/posts/neovim_nightly_inlay_hints/
-vim.api.nvim_create_autocmd("LspAttach", {
-  group = vim.api.nvim_create_augroup("UserLspConfig", {}),
-  callback = function(args)
-    local client = vim.lsp.get_client_by_id(args.data.client_id)
-    if client.server_capabilities.inlayHintProvider then
-      vim.lsp.inlay_hint.enable(args.buf, true)
-    end
-    -- whatever other lsp config you want
-  end
-})
-
 local servers = {
   clangd = { filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda' }, capabilities = clangd_capabilities },
   biome = { filetypes = { 'typescript', 'json' }, init_options = { provideFormatter = true } },
@@ -604,8 +591,60 @@ local servers = {
   rust_analyzer = {
     ['rust-analyzer'] = {
       diagnostics = { enable = true },
-      check = { command = 'clippy' },
-      inlayHints = { enabled = true, }
+      check = { command = 'check' }, -- can be clippy too
+      cargo = { features = 'all' },
+      checkOnSave = {
+        assist = {
+          importGranularity = 'module',
+          importPrefix = 'by_self',
+        },
+        cargo = { loadOutDirsFromCheck = true },
+        procMacro = { enable = true },
+        command = 'clippy',
+        inlayHints = true,
+      },
+      inlayHints = {
+        enabled = true,
+        chainingHints = { enable = false }, -- do not enable
+        closingBraceHints = { enable = false },
+        bindingModeHints = { enable = true },
+        closureCaptureHints = { enable = true },
+        closureReturnTypeHints = { enable = 'always' },
+        expressionAdjustmentHints = { enable = 'always' },
+        lifetimeElisionHints = { enable = 'always', useParameterNames = true },
+        reborrowHints = { enable = 'always' },
+        typeHints = { hideClosureInitialization = true, hideNamedConstructor = true },
+        locationLinks = false,
+      },
+      completion = {
+        completionItem = {
+          commitCharactersSupport = true,
+          deprecatedSupport = true,
+          documentationFormat = { 'markdown', 'plaintext' },
+          preselectSupport = true,
+          snippetSupport = true,
+        },
+      },
+      signatureHelp = {
+        dynamicRegistration = true,
+        signatureInformation = {
+          activeParameterSupport = true,
+          documentationFormat = { 'markdown', 'plaintext' },
+          parameterInformation = {
+            labelOffsetSupport = true,
+          },
+        },
+      },
+      procMacro = {
+        enable = true,
+        methodReference = true,
+      },
+      lens = {
+        enable = true,
+        methodReferences = true,
+        references = true,
+        implementations = false,
+      },
     },
   },
   tsserver = {
@@ -614,7 +653,7 @@ local servers = {
     },
     typescript = {
       inlayHints = {
-        includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all'
+        includeInlayParameterNameHints = 'all', -- 'none' | 'literals' | 'all'
         includeInlayParameterNameHintsWhenArgumentMatchesName = true,
         includeInlayVariableTypeHints = true,
         includeInlayFunctionParameterTypeHints = true,
@@ -626,7 +665,7 @@ local servers = {
     },
     javascript = {
       inlayHints = {
-        includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all'
+        includeInlayParameterNameHints = 'all', -- 'none' | 'literals' | 'all'
         includeInlayParameterNameHintsWhenArgumentMatchesName = true,
         includeInlayVariableTypeHints = true,
 
