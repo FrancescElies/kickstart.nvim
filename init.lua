@@ -343,7 +343,7 @@ end, { desc = '[/] Fuzzily search in current buffer' })
 
 local grep_opts = { additional_args = { '--hidden' } }
 local telescope_builtin = require 'telescope.builtin'
--- vim.keymap.set('n', '<C-p>', telescope_builtin.git_files, { desc = '[F]ind [F]iles (git root)' })
+vim.keymap.set('n', '<C-p>', telescope_builtin.git_files, { desc = '[F]ind [F]iles (git root)' })
 vim.keymap.set('n', '<leader>fF', telescope_builtin.git_files, { desc = '[F]ind [F]iles (git root)' })
 vim.keymap.set('n', '<leader>ff', telescope_builtin.find_files, { desc = '[F]ind [F]iles' })
 vim.keymap.set('n', '<leader>fy', ":let @+ = expand('%:p')<cr>", { desc = 'File Yank (copy absolute path)' })
