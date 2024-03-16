@@ -6,6 +6,7 @@
 vim.opt.grepprg = 'rg --vimgrep --smart-case --follow'
 vim.opt.splitright = true
 vim.opt.splitbelow = true
+vim.opt.relativenumber = true
 
 vim.keymap.set('n', '<leader>m', require('telescope.builtin').marks, { desc = '[m]arks' })
 
