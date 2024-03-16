@@ -29,62 +29,16 @@ return {
       {
         '<leader>fm',
         function()
+          require('mini.files').open(vim.fn.expand '%p:h')
+        end,
+        desc = '[m]ini files (buffer directory) ',
+      },
+      {
+        '<leader>fM',
+        function()
           require('mini.files').open()
         end,
-        desc = '[M]ini [Files]',
-      },
-    },
-  },
-
-  -- tree like view for document symbols
-  -- {
-  --   'simrat39/symbols-outline.nvim',
-  --   cmd = 'SymbolsOutline',
-  --   keys = { { '<leader>do', '<cmd>SymbolsOutline<cr>', desc = '[D]ocument symbols [O]utline' } },
-  --   opts = {
-  --     -- add your options that should be passed to the setup() function here
-  --     position = 'right',
-  --   },
-  -- },
-  -- buffer remove which saves window layout
-  {
-    'echasnovski/mini.bufremove',
-    -- stylua: ignore
-    keys = {
-      { "<leader>bd", function() require("mini.bufremove").delete(0, false) end, desc = "Delete Buffer" },
-      { "<leader>bD", function() require("mini.bufremove").delete(0, true) end,  desc = "Delete Buffer (Force)" },
-    },
-  },
-  -- surround actions
-  {
-    'echasnovski/mini.surround',
-    keys = function(_, keys)
-      -- Populate the keys based on the user's options
-      local plugin = require('lazy.core.config').spec.plugins['mini.surround']
-      local opts = require('lazy.core.plugin').values(plugin, 'opts', false)
-      local mappings = {
-        { opts.mappings.add, desc = 'Add surrounding', mode = { 'n', 'v' } },
-        { opts.mappings.delete, desc = 'Delete surrounding' },
-        { opts.mappings.find, desc = 'Find right surrounding' },
-        { opts.mappings.find_left, desc = 'Find left surrounding' },
-        { opts.mappings.highlight, desc = 'Highlight surrounding' },
-        { opts.mappings.replace, desc = 'Replace surrounding' },
-        { opts.mappings.update_n_lines, desc = 'Update `MiniSurround.config.n_lines`' },
-      }
-      mappings = vim.tbl_filter(function(m)
-        return m[1] and #m[1] > 0
-      end, mappings)
-      return vim.list_extend(mappings, keys)
-    end,
-    opts = {
-      mappings = {
-        add = 'gza', -- Add surrounding in Normal and Visual modes
-        delete = 'gzd', -- Delete surrounding
-        find = 'gzf', -- Find surrounding (to the right)
-        find_left = 'gzF', -- Find surrounding (to the left)
-        highlight = 'gzh', -- Highlight surrounding
-        replace = 'gzr', -- Replace surrounding
-        update_n_lines = 'gzn', -- Update `n_lines`
+        desc = '[M]ini files (cwd)]',
       },
     },
   },
