@@ -69,7 +69,6 @@ vim.keymap.set('v', '<leader>\\', ':s/\\//\\\\/g<cr>', { desc = 'Replace / -> [\
 -- Reload configuration
 vim.keymap.set('n', '<leader>vl', ':luafile %<cr>', { desc = 'Vim load Luafile' })
 vim.keymap.set('n', '<leader>ve', ':edit $MYVIMRC<cr>', { desc = 'Vim edit config' })
-vim.keymap.set('n', '<leader>vr', ':source $MYVIMRC<cr>', { desc = 'Vim reload config' })
 vim.keymap.set('n', '<leader>vf', ':FormatToggle<CR>', { desc = 'Vim toggle Format' })
 vim.keymap.set('n', '<leader>vn', toggle_number, { desc = 'Vim toggle line Number' })
 vim.keymap.set('n', '<leader>vs', ':set invspell<cr>', { desc = 'Vim toggle Spell' })
