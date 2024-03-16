@@ -43,28 +43,28 @@ vim.keymap.set('n', '<leader>vi', inlay_hints, { desc = 'Vim toggle Inlay hints'
 vim.keymap.set('n', '<leader>vI', refresh_inlay_hints, { desc = 'Vim refresh Inlay hints' })
 
 return {
-  'nvimtools/none-ls.nvim',
-  event = { 'BufReadPre', 'BufNewFile' },
-  dependencies = { 'mason.nvim' },
-  opts = function()
-    local nls = require 'null-ls'
-    return {
-      root_dir = require('null-ls.utils').root_pattern('.null-ls-root', '.neoconf.json', 'Makefile', '.git'),
-      sources = {
-        -- lua
-        nls.builtins.formatting.stylua,
-        -- javascript, typescript
-        nls.builtins.formatting.biome,
-        -- python
-        nls.builtins.formatting.black,
-        nls.builtins.formatting.ruff,
-        nls.builtins.diagnostics.ruff,
-        -- rust
-        nls.builtins.formatting.rustfmt,
-        -- other
-        nls.builtins.formatting.buf,    -- https://github.com/bufbuild/buf
-        nls.builtins.diagnostics.typos, -- https://github.com/crate-ci/typos#install
-      },
-    }
-  end,
+  -- 'nvimtools/none-ls.nvim',
+  -- event = { 'BufReadPre', 'BufNewFile' },
+  -- dependencies = { 'mason.nvim' },
+  -- opts = function()
+  --   local nls = require 'null-ls'
+  --   return {
+  --     root_dir = require('null-ls.utils').root_pattern('.null-ls-root', '.neoconf.json', 'Makefile', '.git'),
+  --     sources = {
+  --       -- lua
+  --       nls.builtins.formatting.stylua,
+  --       -- javascript, typescript
+  --       nls.builtins.formatting.biome,
+  --       -- python
+  --       nls.builtins.formatting.black,
+  --       nls.builtins.formatting.ruff,
+  --       nls.builtins.diagnostics.ruff,
+  --       -- rust
+  --       nls.builtins.formatting.rustfmt,
+  --       -- other
+  --       nls.builtins.formatting.buf,    -- https://github.com/bufbuild/buf
+  --       nls.builtins.diagnostics.typos, -- https://github.com/crate-ci/typos#install
+  --     },
+  --   }
+  -- end,
 }
