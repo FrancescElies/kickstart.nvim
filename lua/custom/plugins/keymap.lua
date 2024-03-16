@@ -1,3 +1,14 @@
+-- Commodity function to print stuff
+function p(v)
+  print(vim.inspect(v))
+end
+
+vim.opt.grepprg = 'rg --vimgrep --smart-case --follow'
+vim.opt.splitright = true
+vim.opt.splitbelow = true
+
+vim.keymap.set('n', '<leader>m', require('telescope.builtin').marks, { desc = '[m]arks' })
+
 local line_with = { number = true, relativenumber = true }
 
 local function toggle_number()
