@@ -24,6 +24,15 @@ M.servers = {
   -- But for many setups, the LSP (`tsserver`) will work just fine
   -- tsserver = {},
   --
+  powershell_es = {
+    settings = {
+      powershell = {
+        -- https://github.com/PowerShell/PowerShellEditorServices/blob/main/docs/guide/getting_started.md
+        -- https://github.com/PowerShell/PowerShellEditorServices/blob/main/src/PowerShellEditorServices/Services/Workspace/LanguageServerSettings.cs
+        codeFormatting = { Preset = 'OTBS' },
+      },
+    },
+  },
   lua_ls = {
     -- cmd = {...},
     -- filetypes { ...},
