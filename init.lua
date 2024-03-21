@@ -778,6 +778,7 @@ require('lazy').setup({
         'mermaid',
         'python',
         'rust',
+        'nu',
         'typescript',
         'vimdoc',
         'vim',
