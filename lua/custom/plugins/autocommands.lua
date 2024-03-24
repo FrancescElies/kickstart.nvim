@@ -7,7 +7,7 @@ vim.api.nvim_create_autocmd({ 'FileWritePre', 'BufWritePre' }, {
   callback = function()
     vim.fn.mkdir(
       vim.fn.expand '%:p:h', -- current-buffer:path:head(directory)
-      'p'                    -- create intermediate directories
+      'p' -- create intermediate directories
     )
   end,
 })
@@ -41,7 +41,7 @@ vim.api.nvim_create_autocmd('BufReadPost', {
 
 local function find_typescript_for_javascript_file()
   local buffnr = vim.api.nvim_get_current_buf()
-  local bufname = vim.fn.bufname(buffnr)
+  -- local bufname = vim.fn.bufname(buffnr)
   local lines = vim.api.nvim_buf_get_lines(buffnr, 0, -1, false)
   for _, line in pairs(lines) do
     local map_file = string.match(line, '//# sourceMappingURL=(.+)')
