@@ -32,7 +32,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('UserLspConfig', {}),
   callback = function(args)
     local client = vim.lsp.get_client_by_id(args.data.client_id)
-    if client.server_capabilities.inlayHintProvider then
+    if client and client.server_capabilities.inlayHintProvider then
       inlay_hints(args.buf, true)
     end
     -- whatever other lsp config you want
@@ -42,29 +42,4 @@ vim.api.nvim_create_autocmd('LspAttach', {
 vim.keymap.set('n', '<leader>vi', inlay_hints, { desc = 'Vim toggle Inlay hints' })
 vim.keymap.set('n', '<leader>vI', refresh_inlay_hints, { desc = 'Vim refresh Inlay hints' })
 
-return {
-  -- 'nvimtools/none-ls.nvim',
-  -- event = { 'BufReadPre', 'BufNewFile' },
-  -- dependencies = { 'mason.nvim' },
-  -- opts = function()
-  --   local nls = require 'null-ls'
-  --   return {
-  --     root_dir = require('null-ls.utils').root_pattern('.null-ls-root', '.neoconf.json', 'Makefile', '.git'),
-  --     sources = {
-  --       -- lua
-  --       nls.builtins.formatting.stylua,
-  --       -- javascript, typescript
-  --       nls.builtins.formatting.biome,
-  --       -- python
-  --       nls.builtins.formatting.black,
-  --       nls.builtins.formatting.ruff,
-  --       nls.builtins.diagnostics.ruff,
-  --       -- rust
-  --       nls.builtins.formatting.rustfmt,
-  --       -- other
-  --       nls.builtins.formatting.buf,    -- https://github.com/bufbuild/buf
-  --       nls.builtins.diagnostics.typos, -- https://github.com/crate-ci/typos#install
-  --     },
-  --   }
-  -- end,
-}
+return {}
