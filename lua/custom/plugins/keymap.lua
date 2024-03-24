@@ -4,6 +4,7 @@ function p(v)
 end
 
 vim.opt.grepprg = 'rg --vimgrep --smart-case --follow'
+vim.opt.tabstop = 4
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 
