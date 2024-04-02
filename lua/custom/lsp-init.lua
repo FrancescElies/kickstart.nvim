@@ -52,7 +52,8 @@ M.servers = {
   clangd = { filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda' }, capabilities = M.clangd_capabilities },
   biome = { filetypes = { 'typescript', 'json' }, init_options = { provideFormatter = true } },
   -- gopls = {},
-  pyright = {},
+  basedpyright = {}, -- pyright fork with inlay hints
+  -- pyright = {},
   -- jsonls = {
   --   filetypes = { 'maxpat', 'json' },
   --   init_options = { provideFormatter = false },
