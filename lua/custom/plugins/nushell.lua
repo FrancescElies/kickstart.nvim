@@ -1,13 +1,26 @@
 return {
-  'francescelies/nvim-nu',
-  config = true,
-  -- 'nvim-treesitter/nvim-treesitter',
-  -- config = function()
-  --     -- setup treesitter with config
-  -- end,
-  -- dependencies = {
-  --     -- NOTE: additional parser
-  --     { 'nushell/tree-sitter-nu' },
-  -- },
-  -- build = ':TSUpdate',
+  {
+    -- 'francescelies/nvim-nu',
+    -- config = true,
+    -- 'nvim-treesitter/nvim-treesitter',
+    -- config = function()
+    --     -- setup treesitter with config
+    -- end,
+    -- dependencies = {
+    --     -- NOTE: additional parser
+    --     { 'nushell/tree-sitter-nu' },
+    -- },
+    -- build = ':TSUpdate',
+  },
+  {
+    'nvim-treesitter/nvim-treesitter',
+    config = function()
+      -- setup treesitter with config
+    end,
+    dependencies = {
+      -- NOTE: additional parser
+      { 'nushell/tree-sitter-nu' },
+    },
+    build = ':TSUpdate',
+  },
 }
