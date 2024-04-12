@@ -24,6 +24,19 @@ return {
 
   -- Navigate and manipulate file system
   {
+    'echasnovski/mini.trailspace',
+    version = false,
+    keys = {
+      {
+        '<leader>bt',
+        function()
+          require('mini.trailspace').trim()
+        end,
+        desc = '[m]ini files (buffer directory) ',
+      },
+    },
+  },
+  {
     'echasnovski/mini.files',
     version = false,
     keys = {
