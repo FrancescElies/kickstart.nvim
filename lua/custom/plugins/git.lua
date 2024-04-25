@@ -4,8 +4,8 @@ vim.keymap.set('n', '<leader>gz', require('telescope.builtin').git_stash, { desc
 
 vim.keymap.set('n', '<leader>gb', require('telescope.builtin').git_branches, { desc = 'Git branches' })
 vim.keymap.set('n', '<leader>gd', ':Gdiffsplit <cr>')
-vim.keymap.set('n', '<leader>gl', require('telescope.builtin').git_bcommits, { desc = 'Git List commits current buffer' })
-vim.keymap.set('n', '<leader>gL', require('telescope.builtin').git_commits, { desc = 'Git List commits' })
+vim.keymap.set('n', '<leader>gL', require('telescope.builtin').git_bcommits, { desc = 'Git List commits current buffer' })
+vim.keymap.set('n', '<leader>gl', require('telescope.builtin').git_commits, { desc = 'Git List commits' })
 
 vim.keymap.set('n', '<leader>gp', ':Git push --force-with-lease <cr>')
 vim.keymap.set('n', '<leader>gu', ':Git push -u origin<cr>')
