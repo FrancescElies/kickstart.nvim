@@ -51,7 +51,7 @@ M.servers = {
   },
   clangd = { filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda' }, capabilities = M.clangd_capabilities },
   biome = { filetypes = { 'typescript', 'json' }, init_options = { provideFormatter = true } },
-  sqls = {},
+  -- sqls = {},
   -- gopls = {},
   basedpyright = {}, -- pyright fork with inlay hints
   -- pyright = {},
@@ -62,65 +62,65 @@ M.servers = {
   -- },
   ruff_lsp = {},
   -- slint_lsp = { filetypes = { 'slint' }, capabilities = slint_capabilities },
-  rust_analyzer = {
-    ['rust-analyzer'] = {
-      diagnostics = { enable = true },
-      check = { command = 'check' }, -- can be clippy too
-      cargo = { features = 'all' },
-      checkOnSave = {
-        assist = {
-          importGranularity = 'module',
-          importPrefix = 'by_self',
-        },
-        cargo = { loadOutDirsFromCheck = true },
-        procMacro = { enable = true },
-        command = 'clippy',
-        inlayHints = true,
-      },
-      inlayHints = {
-        enabled = true,
-        chainingHints = { enable = false }, -- do not enable
-        closingBraceHints = { enable = false },
-        bindingModeHints = { enable = true },
-        closureCaptureHints = { enable = true },
-        closureReturnTypeHints = { enable = 'always' },
-        expressionAdjustmentHints = { enable = 'always' },
-        lifetimeElisionHints = { enable = 'always', useParameterNames = true },
-        reborrowHints = { enable = 'always' },
-        typeHints = { hideClosureInitialization = true, hideNamedConstructor = true },
-        locationLinks = false,
-      },
-      completion = {
-        completionItem = {
-          commitCharactersSupport = true,
-          deprecatedSupport = true,
-          documentationFormat = { 'markdown', 'plaintext' },
-          preselectSupport = true,
-          snippetSupport = true,
-        },
-      },
-      signatureHelp = {
-        dynamicRegistration = true,
-        signatureInformation = {
-          activeParameterSupport = true,
-          documentationFormat = { 'markdown', 'plaintext' },
-          parameterInformation = {
-            labelOffsetSupport = true,
-          },
-        },
-      },
-      procMacro = {
-        enable = true,
-        methodReference = true,
-      },
-      lens = {
-        enable = true,
-        methodReferences = true,
-        references = true,
-        implementations = false,
-      },
-    },
-  },
+  -- rust_analyzer = {
+  --   ['rust-analyzer'] = {
+  --     diagnostics = { enable = true },
+  --     check = { command = 'check' }, -- can be clippy too
+  --     cargo = { features = 'all' },
+  --     checkOnSave = {
+  --       assist = {
+  --         importGranularity = 'module',
+  --         importPrefix = 'by_self',
+  --       },
+  --       cargo = { loadOutDirsFromCheck = true },
+  --       procMacro = { enable = true },
+  --       command = 'clippy',
+  --       inlayHints = true,
+  --     },
+  --     inlayHints = {
+  --       enabled = true,
+  --       chainingHints = { enable = false }, -- do not enable
+  --       closingBraceHints = { enable = false },
+  --       bindingModeHints = { enable = true },
+  --       closureCaptureHints = { enable = true },
+  --       closureReturnTypeHints = { enable = 'always' },
+  --       expressionAdjustmentHints = { enable = 'always' },
+  --       lifetimeElisionHints = { enable = 'always', useParameterNames = true },
+  --       reborrowHints = { enable = 'always' },
+  --       typeHints = { hideClosureInitialization = true, hideNamedConstructor = true },
+  --       locationLinks = false,
+  --     },
+  --     completion = {
+  --       completionItem = {
+  --         commitCharactersSupport = true,
+  --         deprecatedSupport = true,
+  --         documentationFormat = { 'markdown', 'plaintext' },
+  --         preselectSupport = true,
+  --         snippetSupport = true,
+  --       },
+  --     },
+  --     signatureHelp = {
+  --       dynamicRegistration = true,
+  --       signatureInformation = {
+  --         activeParameterSupport = true,
+  --         documentationFormat = { 'markdown', 'plaintext' },
+  --         parameterInformation = {
+  --           labelOffsetSupport = true,
+  --         },
+  --       },
+  --     },
+  --     procMacro = {
+  --       enable = true,
+  --       methodReference = true,
+  --     },
+  --     lens = {
+  --       enable = true,
+  --       methodReferences = true,
+  --       references = true,
+  --       implementations = false,
+  --     },
+  --   },
+  -- },
   tsserver = {
     init_options = {
       provideFormatter = false,
