@@ -1,5 +1,53 @@
 " Something simple for emergencies or to easily copy on servers.
 "
+" https://github.com/changemewtf/no_plugins
+"
+"    Fuzzy search:
+"    When moving to another buffer with :b, hit tab to autocomplete, or simply hit Enter to go to the first buffer with a unique match to what you have already typed.
+"
+"    By adding set path+=** and set wildmenu to the vimrc, we are now able to hit Tab when running a :find command to expand partial matches.
+" 
+"    Another asterisk (*) can be placed in the query to return fuzzy/partial matches.
+"    ^x^n to search within the file
+"    ^x^f to complete filenames (works with path+=**!)
+"    ^x^] to complete only tags
+"
+"    Snippets:
+"    nnoremap ,html :-1read $HOME/.vim/.skeleton.html<CR>
+
+" FINDING FILES:
+
+" Search down into subfolders
+" Provides tab-completion for all file-related tasks
+set path+=**
+
+" Display all matching files when we tab complete
+set wildmenu
+
+" NOW WE CAN:
+" - Hit tab to :find by partial match
+" - Use * to make it fuzzy
+
+" THINGS TO CONSIDER:
+" - :b lets you autocomplete any open buffer
+
+" AUTOCOMPLETE:
+
+" The good stuff is documented in |ins-completion|
+
+" HIGHLIGHTS:
+" - ^x^n for JUST this file
+" - ^x^f for filenames (works with our path trick!)
+" - ^x^] for tags only
+" - ^n for anything specified by the 'complete' option
+
+" NOW WE CAN:
+" - Use ^n and ^p to go back and forth in the suggestion list
+"
+
+"---------------------------------------------------------------------------
+
+"
 " https://github.com/mhinz/vim-galore?tab=readme-ov-file#minimal-vimrc
 "
 " https://github.com/mhinz/vim-galore/blob/master/static/minimal-vimrc.vim
