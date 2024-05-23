@@ -152,7 +152,7 @@ return {
 
       require('telescope').load_extension 'advanced_git_search'
     end,
-    keys = { { '<leader>gS', ':AdvancedGitSearch<CR>', desc = 'git messenger' } },
+    keys = { { '<leader>gS', ':AdvancedGitSearch<CR>', desc = 'git search' } },
     dependencies = {
       'nvim-telescope/telescope.nvim',
       'sindrets/diffview.nvim',

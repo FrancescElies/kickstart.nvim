@@ -31,8 +31,14 @@ vim.keymap.set('n', '<C-j>', '<cmd>cprev<CR>zz')
 vim.keymap.set('n', '<C-S-k>', '<cmd>lnext<CR>zz')
 vim.keymap.set('n', '<C-S-j>', '<cmd>lprev<CR>zz')
 
+-- File
+vim.keymap.set('n', '<leader>fy', ":call setreg('+', expand('%:.') .. ':' .. line('.'))<CR>", { desc = 'Filepath Yank/copy' })
+-- vim.keymap.set('n', '<Leader>fo', ':e <C-r>+<CR>', { desc = 'Filepath Open from clipboard' })
+
+-- quick scape
 vim.keymap.set('i', 'jk', '<Esc>')
 
+-- quick spellfix
 vim.keymap.set('n', 'za', '1z=') -- fix word under cursor https://nanotipsforvim.prose.sh/autofix-misspellings
 
 -- buffer
