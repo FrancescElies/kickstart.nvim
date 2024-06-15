@@ -805,15 +805,6 @@ require('lazy').setup({
       -- ... and there is more!
       --  Check out: https://github.com/echasnovski/mini.nvim
 
-      local mini_files = require 'mini.files'
-      mini_files.setup()
-      vim.keymap.set('n', '<leader>fm', function()
-        require('mini.files').open(vim.fn.expand '%p:h')
-      end, { desc = "[f]iles [m]ini buffer's directory" })
-      vim.keymap.set('n', '<leader>fM', function()
-        require('mini.files').open()
-      end, { desc = '[f]iles [M]ini cwd' })
-
       local mini_trailspace = require 'mini.trailspace'
       mini_trailspace.setup()
       vim.keymap.set('n', '<leader>bt', function()
