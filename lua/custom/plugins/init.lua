@@ -16,48 +16,9 @@ function p(v)
 end
 
 return {
-  -- use your text editor in the browser
-  -- { 'subnut/nvim-ghost.nvim' },
-
   -- automatically follow symlinks
   { 'aymericbeaumet/vim-symlink', dependencies = { 'moll/vim-bbye' } },
 
-  -- Navigate and manipulate file system
-  {
-    'echasnovski/mini.trailspace',
-    version = false,
-    keys = {
-      {
-        '<leader>bt',
-        function()
-          require('mini.trailspace').trim()
-        end,
-        desc = '[m]ini files (buffer directory) ',
-      },
-    },
-  },
-  {
-    'echasnovski/mini.files',
-    version = false,
-    keys = {
-      {
-        '<leader>fm',
-        function()
-          require('mini.files').open(vim.fn.expand '%p:h')
-        end,
-        desc = '[m]ini files (buffer directory) ',
-      },
-      {
-        '<leader>fM',
-        function()
-          require('mini.files').open()
-        end,
-        desc = '[M]ini files (cwd)]',
-      },
-    },
-  },
-
-  -- autopoirs
   {
     'windwp/nvim-autopairs',
     -- Optional dependency

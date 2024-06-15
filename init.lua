@@ -761,6 +761,21 @@ require('lazy').setup({
 
       -- ... and there is more!
       --  Check out: https://github.com/echasnovski/mini.nvim
+
+      local mini_files = require 'mini.files'
+      mini_files.setup()
+      vim.keymap.set('n', '<leader>ff', function()
+        require('mini.files').open(vim.fn.expand '%p:h')
+      end, { desc = "[f]iles in buffer's directory" })
+      vim.keymap.set('n', '<leader>fF', function()
+        require('mini.files').open()
+      end, { desc = '[F]iles in cwd' })
+
+      local mini_trailspace = require 'mini.trailspace'
+      mini_trailspace.setup()
+      vim.keymap.set('n', '<leader>bt', function()
+        mini_trailspace.trim()
+      end, { desc = 'Show diagnostic [E]rror messages' })
     end,
   },
 
