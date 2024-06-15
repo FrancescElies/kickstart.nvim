@@ -4,7 +4,7 @@ return {
     dependencies = { 'nvim-lua/plenary.nvim' },
     config = true,
     keys = {
-      { '<leader>xT', ':Trouble todo', desc = 'Project todos' },
+      { '<leader>xt', '<cmd>Trouble todo<cr>', desc = 'Project todos' },
       {
         ']t',
         function()
