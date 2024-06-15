@@ -4,7 +4,22 @@ return {
     dependencies = { 'nvim-lua/plenary.nvim' },
     config = true,
     keys = {
-      { '<leader>xt', ':TodoQuickFix', desc = 'quickfi[x] [t]odo' },
+      { '<leader>xT', ':Trouble todo', desc = 'Project todos' },
+      {
+        ']t',
+        function()
+          require('todo-comments').jump_next()
+          -- require("todo-comments").jump_next({keywords = { "ERROR", "WARNING" }})
+        end,
+        desc = 'Next todo commnent',
+      },
+      {
+        '[t',
+        function()
+          require('todo-comments').jump_prev()
+        end,
+        desc = 'Previous todo commnent',
+      },
     },
   },
   {
@@ -25,12 +40,12 @@ return {
       {
         '<leader>cs',
         '<cmd>Trouble symbols toggle focus=false<cr>',
-        desc = 'Symbols (Trouble)',
+        desc = 'Code Symbols (Trouble)',
       },
       {
         '<leader>cl',
         '<cmd>Trouble lsp toggle focus=false win.position=right<cr>',
-        desc = 'LSP Definitions / references / ... (Trouble)',
+        desc = 'Code LSP Definitions / references / ... (Trouble)',
       },
       {
         '<leader>xL',

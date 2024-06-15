@@ -81,10 +81,6 @@ vim.keymap.set('n', '<leader>vn', toggle_number, { desc = 'Vim toggle line Numbe
 vim.keymap.set('n', '<leader>vs', ':set invspell<cr>', { desc = 'Vim toggle Spell' })
 vim.keymap.set('n', '<leader>vh', ':set invhlsearch<cr>', { desc = 'Highlight search' })
 
--- tabs
-vim.keymap.set('n', ']t', '<cmd>tabnext<cr>', { desc = 'Next Tab' })
-vim.keymap.set('n', '[t', '<cmd>tabprevious<cr>', { desc = 'Previous Tab' })
-
 -- Terminal Mappings
 vim.keymap.set('t', '<esc><esc>', '<c-\\><c-n>', { desc = 'Enter Normal Mode' })
 vim.keymap.set('t', '<C-h>', '<cmd>wincmd h<cr>', { desc = 'Go to left window' })
