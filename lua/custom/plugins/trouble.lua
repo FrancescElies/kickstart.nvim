@@ -14,73 +14,33 @@ return {
     keys = {
       {
         '<leader>xx',
-        function()
-          require('trouble').open()
-        end,
-        desc = 'quickfi[x] trouble all',
+        '<cmd>Trouble diagnostics toggle<cr>',
+        desc = 'Diagnostics (Trouble)',
       },
       {
-        '<leader>xw',
-        function()
-          require('trouble').open 'workspace_diagnostics'
-        end,
-        desc = 'quickfi[x] [w]orkspace diagnostics',
+        '<leader>xX',
+        '<cmd>Trouble diagnostics toggle filter.buf=0<cr>',
+        desc = 'Buffer Diagnostics (Trouble)',
       },
       {
-        '<leader>dx',
-        function()
-          require('trouble').open 'document_diagnostics'
-        end,
-        desc = '[d]ocument diagnostics quickfi[x] ',
+        '<leader>cs',
+        '<cmd>Trouble symbols toggle focus=false<cr>',
+        desc = 'Symbols (Trouble)',
       },
       {
-        '<leader>xd',
-        function()
-          require('trouble').open 'document_diagnostics'
-        end,
-        desc = 'quickfi[x] [d]ocument diagnostics',
+        '<leader>cl',
+        '<cmd>Trouble lsp toggle focus=false win.position=right<cr>',
+        desc = 'LSP Definitions / references / ... (Trouble)',
       },
       {
-        '<leader>xq',
-        function()
-          require('trouble').open 'quickfix'
-        end,
-        desc = '[q]uickfi[x]',
+        '<leader>xL',
+        '<cmd>Trouble loclist toggle<cr>',
+        desc = 'Location List (Trouble)',
       },
       {
-        '<leader>xl',
-        function()
-          require('trouble').open 'loclist'
-        end,
-        desc = 'quickfi[x] loclist',
-      },
-      {
-        '[x',
-        function()
-          require('trouble').previous { skip_groups = true, jump = true }
-        end,
-        desc = '[x]trouble previous',
-      },
-      {
-        ']x',
-        function()
-          require('trouble').next { skip_groups = true, jump = true }
-        end,
-        desc = '[x]trouble next',
-      },
-      {
-        '[X',
-        function()
-          require('trouble').first { skip_groups = true, jump = true }
-        end,
-        desc = '[x]trouble firstprevious',
-      },
-      {
-        ']X',
-        function()
-          require('trouble').last { skip_groups = true, jump = true }
-        end,
-        desc = '[x]trouble last',
+        '<leader>xQ',
+        '<cmd>Trouble qflist toggle<cr>',
+        desc = 'Quickfix List (Trouble)',
       },
     },
   },

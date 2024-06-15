@@ -82,10 +82,6 @@ vim.keymap.set('n', '<leader>vs', ':set invspell<cr>', { desc = 'Vim toggle Spel
 vim.keymap.set('n', '<leader>vh', ':set invhlsearch<cr>', { desc = 'Highlight search' })
 
 -- tabs
-vim.keymap.set('n', '<leader>tl', '<cmd>tablast<cr>', { desc = 'Last Tab' })
-vim.keymap.set('n', '<leader>tf', '<cmd>tabfirst<cr>', { desc = 'First Tab' })
-vim.keymap.set('n', '<leader>tn', '<cmd>tabnew<cr>', { desc = 'New Tab' })
-vim.keymap.set('n', '<leader>td', '<cmd>tabclose<cr>', { desc = 'Delete/Close Tab' })
 vim.keymap.set('n', ']t', '<cmd>tabnext<cr>', { desc = 'Next Tab' })
 vim.keymap.set('n', '[t', '<cmd>tabprevious<cr>', { desc = 'Previous Tab' })
 
