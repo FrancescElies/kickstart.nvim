@@ -1,18 +1,15 @@
 -- https://github.com/nvimtools/none-ls.nvim/blob/main/doc/BUILTINS.md
 
 vim.api.nvim_create_user_command('FormatDiagnostic', function()
-  local buf = vim.api.nvim_get_current_buf()
-  if vim.diagnostic.is_disabled(buf) then
-    vim.diagnostic.enable(vim.api.nvim_get_current_buf())
-    print('Enabling diagnostic for buffer: ' .. vim.api.nvim_buf_get_name(buf))
-  else
-    vim.diagnostic.disable()
-    print('Disabling diagnostic for buffer: ' .. vim.api.nvim_buf_get_name(buf))
-  end
+  local filter = { bufnr = vim.api.nvim_get_current_buf() }
+  vim.diagnostic.enable(not vim.diagnostic.is_enabled(filter), filter)
 end, {})
 
+--NVIM v0.11.0-dev-259+gaa319da40
+--bob use
 --https://github.com/LazyVim/LazyVim/blob/91126b9896bebcea9a21bce43be4e613e7607164/lua/lazyvim/util/toggle.lua#L64
 local function inlay_hints(buf, value)
+  p { 'inlay_hints', buf, value }
   local ih = vim.lsp.buf.inlay_hint or vim.lsp.inlay_hint
   if type(ih) == 'function' then
     ih(buf, value)
@@ -20,7 +17,7 @@ local function inlay_hints(buf, value)
     if value == nil then
       value = not ih.is_enabled(buf)
     end
-    ih.enable(buf, value)
+    ih.enable(value, { bufnr = buf })
   end
 end
 local function refresh_inlay_hints()
