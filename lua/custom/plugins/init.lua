@@ -4,6 +4,8 @@
 -- See the kickstart.nvim README for more information
 -- local Util = require 'lazy.core.util'
 
+vim.lsp.inlay_hint.enable(true)
+
 -- Commodity function to print stuff
 function p(v)
   print(vim.inspect(v))

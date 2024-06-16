@@ -585,6 +585,9 @@ require('lazy').setup({
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
+      require('mason-lspconfig').setup_handlers {
+        ['rust_analyzer'] = function() end,
+      }
       require('mason-lspconfig').setup {
         handlers = {
           function(server_name)
@@ -833,7 +836,7 @@ require('lazy').setup({
         'markdown',
         'mermaid',
         'python',
-        'rust',
+        -- 'rust',
         'nu',
         'typescript',
         'vimdoc',
