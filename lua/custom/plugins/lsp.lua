@@ -5,11 +5,9 @@ vim.api.nvim_create_user_command('FormatDiagnostic', function()
   vim.diagnostic.enable(not vim.diagnostic.is_enabled(filter), filter)
 end, {})
 
---NVIM v0.11.0-dev-259+gaa319da40
 --bob use
 --https://github.com/LazyVim/LazyVim/blob/91126b9896bebcea9a21bce43be4e613e7607164/lua/lazyvim/util/toggle.lua#L64
 local function inlay_hints(buf, value)
-  p { 'inlay_hints', buf, value }
   local ih = vim.lsp.buf.inlay_hint or vim.lsp.inlay_hint
   if type(ih) == 'function' then
     ih(buf, value)
