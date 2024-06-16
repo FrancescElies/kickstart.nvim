@@ -810,6 +810,11 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>bt', function()
         mini_trailspace.trim()
       end, { desc = 'Show diagnostic [E]rror messages' })
+
+      -- - ga - [a]lign
+      -- - gA - [a]lign with preview
+      local mini_align = require 'mini.align'
+      mini_align.setup()
     end,
   },
   { -- Highlight, edit, and navigate code
