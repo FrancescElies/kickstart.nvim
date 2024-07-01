@@ -63,7 +63,7 @@ return {
     'rhysd/git-messenger.vim',
     keys = { { '<leader>gm', ':GitMessenger<CR>', desc = 'git messenger' } },
   },
-  { 'sindrets/diffview.nvim', keys = { { '<leader>gh', ':DiffviewFileHistory', desc = '[g]it log file [h]istory' } } },
+  { 'sindrets/diffview.nvim', keys = { { '<leader>gh', ':DiffviewFileHistory %<cr>', desc = '[g]it log file [h]istory' } } },
   {
     'aaronhallaert/advanced-git-search.nvim',
     diff_plugin = 'diffview',
