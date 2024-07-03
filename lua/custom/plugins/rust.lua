@@ -16,7 +16,7 @@ return {
         map('<leader>cE', ':RustLsp expandMacro<cr>', '[e]xpand macros')
         map('<leader>cP', ':RustLsp rebuildProcMacros<cr>', 'rebuild [p]roc macros')
         map('<leader>cR', ':RustLsp runnables', 'show [r]unnables')
-        map('<leader>ca', ':RustLsp codeAction ', 'code [a]ction')
+        map('<leader>ca', ':RustLsp codeAction<cr>', 'code [a]ction')
         map('<leader>cd', ':RustLsp renderDiagnostic', '[e]xplain error') --  Useful for solving bugs around borrowing and generics, as it consolidates the important bits (sometimes across files) together.
         map('<leader>ce', ':RustLsp explainError', '[e]xplain error')
         map('<leader>cf', ':RustLsp flyCheck ', '[f]ly check')
@@ -29,7 +29,7 @@ return {
         map('<leader>ct', ':RustLsp testables', 'tests[!]')
         map('<leader>cv', ':RustLsp view ', '[v]iew hir|mir')
         map('<leader>cw', ':RustLsp workspaceSymbol ', '[w]orkspace symbol')
-        map('J', ':RustLsp joinLines', 'join lines')
+        map('J', ':RustLsp joinLines<cr>', 'join lines')
         -- :RustLsp crateGraph {backend {output}}
         -- :RustLsp syntaxTree
         -- :Rustc unpretty {hir|mir|...}
