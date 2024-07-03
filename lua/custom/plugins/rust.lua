@@ -21,6 +21,7 @@ return {
         map('<leader>ce', ':RustLsp explainError', '[e]xplain error')
         map('<leader>cf', ':RustLsp flyCheck ', '[f]ly check')
         map('<leader>ch', ':RustLsp hover ', '[h]over actions|range')
+        map('<leader>cj', ':RustLsp joinLines<cr>', 'join lines')
         map('<leader>cm', ':RustLsp moveItem ', '[m]ove up|down')
         map('<leader>co', ':RustLsp openCargo<cr>', '[o]pen cargo')
         map('<leader>cp', ':RustLsp parentModule', '[p]arent module')
@@ -29,7 +30,6 @@ return {
         map('<leader>ct', ':RustLsp testables', 'tests[!]')
         map('<leader>cv', ':RustLsp view ', '[v]iew hir|mir')
         map('<leader>cw', ':RustLsp workspaceSymbol ', '[w]orkspace symbol')
-        map('J', ':RustLsp joinLines<cr>', 'join lines')
         -- :RustLsp crateGraph {backend {output}}
         -- :RustLsp syntaxTree
         -- :Rustc unpretty {hir|mir|...}
