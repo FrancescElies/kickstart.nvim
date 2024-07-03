@@ -23,6 +23,9 @@ return {
     dependencies = {
       'nvim-treesitter/nvim-treesitter',
     },
+    keys = {
+      { '<leader>vc', ':TSContextToggle<CR>', { desc = 'treesitter context toggle' } },
+    },
     config = function()
       ---@diagnostic disable-next-line: missing-fields
       require('nvim-treesitter.configs').setup {
