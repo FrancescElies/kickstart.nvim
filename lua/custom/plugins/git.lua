@@ -7,9 +7,8 @@ vim.keymap.set('n', '<leader>gd', ':Gdiffsplit <cr>')
 vim.keymap.set('n', '<leader>gL', require('telescope.builtin').git_bcommits, { desc = 'Git List commits current buffer' })
 vim.keymap.set('n', '<leader>gl', require('telescope.builtin').git_commits, { desc = 'Git List commits' })
 
-vim.keymap.set('n', '<leader>gp', ':Git push --force-with-lease <cr>')
-vim.keymap.set('n', '<leader>gu', ':Git push -u origin<cr>')
-vim.keymap.set('n', '<leader>gP', ':Git pull --rebase <cr>')
+vim.keymap.set('n', '<leader>gp', ':Git! push --force-with-lease -u origin <cr>')
+vim.keymap.set('n', '<leader>gP', ':Git! pull --rebase <cr>')
 
 vim.api.nvim_create_augroup('my_git_commands', { clear = true })
 --
