@@ -17,17 +17,18 @@ return {
     filesystem = {
       window = {
         mappings = {
+          -- diff
           ['D'] = {
             function(state)
               local node = state.tree:get_node()
               local log = require 'neo-tree.log'
               state.clipboard = state.clipboard or {}
-              if diff_Node and diff_Node ~= tostring(node.id) then
+              if DIFF_NODE and DIFF_NODE ~= tostring(node.id) then
                 local current_Diff = node.id
-                require('neo-tree.utils').open_file(state, diff_Node)
+                require('neo-tree.utils').open_file(state, DIFF_NODE)
                 vim.cmd('vert diffs ' .. current_Diff)
-                log.info('Diffing ' .. diff_Name .. ' against ' .. node.name)
-                diff_Node = nil
+                log.info('Diffing ' .. DIFF_NAME .. ' against ' .. node.name)
+                DIFF_NODE = nil
                 current_Diff = nil
                 state.clipboard = {}
                 require('neo-tree.ui.renderer').redraw(state)
@@ -35,13 +36,13 @@ return {
                 local existing = state.clipboard[node.id]
                 if existing and existing.action == 'diff' then
                   state.clipboard[node.id] = nil
-                  diff_Node = nil
+                  DIFF_NODE = nil
                   require('neo-tree.ui.renderer').redraw(state)
                 else
                   state.clipboard[node.id] = { action = 'diff', node = node }
-                  diff_Name = state.clipboard[node.id].node.name
-                  diff_Node = tostring(state.clipboard[node.id].node.id)
-                  log.info('Diff source file ' .. diff_Name)
+                  DIFF_NAME = state.clipboard[node.id].node.name
+                  DIFF_NODE = tostring(state.clipboard[node.id].node.id)
+                  log.info('Diff source file ' .. DIFF_NAME)
                   require('neo-tree.ui.renderer').redraw(state)
                   vim.cmd 'norm! j'
                 end
