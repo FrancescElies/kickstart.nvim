@@ -12,13 +12,6 @@ vim.api.nvim_create_autocmd({ 'FileWritePre', 'BufWritePre' }, {
   end,
 })
 
--- reload config file on change
-vim.api.nvim_create_autocmd('BufWritePost', {
-  group = 'bufcheck',
-  pattern = vim.env.MYVIMRC,
-  command = 'silent source %',
-})
-
 -- start terminal in insert mode
 vim.api.nvim_create_autocmd('TermOpen', {
   group = 'bufcheck',
@@ -75,7 +68,7 @@ vim.api.nvim_create_user_command('FindTSForCurrentJSfile', find_typescript_for_j
 --   callback = find_typescript_for_javascript_file,
 -- })
 
-function get_buffer_by_name_or_scratch(name, clean)
+local function get_buffer_by_name_or_scratch(name, clean)
   for _, buffer in ipairs(vim.api.nvim_list_bufs()) do
     local buf_name = vim.fn.bufname(buffer)
     if buf_name == name then
@@ -121,11 +114,12 @@ local function attach_to_buffer(pattern, command)
   })
 end
 
-attach_to_buffer('*.ts', { 'npm', 'run', 'build_dev' })
+-- attach_to_buffer('*.ts', { 'npm', 'run', 'build_dev' })
 
 vim.api.nvim_create_user_command('AutoRun', function()
+  local pattern = vim.split(vim.fn.input 'Pattern (*.ts):', ' ')
   local command = vim.split(vim.fn.input 'Command:', ' ')
-  attach_to_buffer(command)
+  attach_to_buffer(pattern, command)
 end, {})
 
 return {}
