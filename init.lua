@@ -351,11 +351,14 @@ require('lazy').setup({
         -- You can put your default mappings / updates / etc. in here
         --  All the info you're looking for is in `:help telescope.setup()`
         --
-        -- defaults = {
-        --   mappings = {
-        --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
-        --   },
-        -- },
+        defaults = {
+          path_display = {
+            shorten = { len = 2, exclude = { -3, -2, -1 } },
+          },
+          --   mappings = {
+          --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
+          --   },
+        },
         -- pickers = {}
         extensions = {
           ['ui-select'] = {
@@ -824,24 +827,24 @@ require('lazy').setup({
     build = ':TSUpdate',
     opts = {
       ensure_installed = {
-        'bash',
+        -- 'bash',
         'c',
-        'c_sharp',
-        'cpp',
+        -- 'c_sharp',
+        -- 'cpp',
         'diff',
         'go',
         'html',
         'lua',
         'markdown',
-        'mermaid',
+        -- 'mermaid',
         'python',
         -- 'rust',
         'nu',
         'typescript',
         'vimdoc',
-        'vim',
+        -- 'vim',
         'yaml',
-        'sql',
+        -- 'sql',
         'zig',
       },
       -- Autoinstall languages that are not installed
