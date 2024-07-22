@@ -1,11 +1,34 @@
 return {
-  'FrancescElies/wezterm-mux.nvim',
-  config = function()
-    local mux = require 'wezterm-mux'
-    vim.keymap.set('n', '<A-h>', mux.wezterm_move_left)
-    vim.keymap.set('n', '<A-l>', mux.wezterm_move_right)
-    vim.keymap.set('n', '<A-j>', mux.wezterm_move_down)
-    vim.keymap.set('n', '<A-k>', mux.wezterm_move_up)
-    vim.keymap.set('n', '<A-x>', '<C-w>q')
-  end,
+  'mrjones2014/smart-splits.nvim',
+  keys = {
+    {
+      '<A-h>',
+      function()
+        require('smart-splits').move_cursor_left()
+      end,
+      desc = '[n]otes',
+    },
+    {
+      '<A-l>',
+      function()
+        require('smart-splits').move_cursor_right()
+      end,
+      desc = '[n]otes',
+    },
+    {
+      '<A-j>',
+      function()
+        require('smart-splits').move_cursor_down()
+      end,
+      desc = '[n]otes',
+    },
+    {
+      '<A-k>',
+      function()
+        require('smart-splits').move_cursor_up()
+      end,
+      desc = '[n]otes',
+    },
+    { '<A-x>', '<C-w>q', desc = '[n]otes' },
+  },
 }
