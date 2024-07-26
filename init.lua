@@ -811,7 +811,7 @@ require('lazy').setup({
       mini_trailspace.setup()
       vim.keymap.set('n', '<leader>bt', function()
         mini_trailspace.trim()
-      end, { desc = 'Show diagnostic [E]rror messages' })
+      end, { desc = '[b]uffer trailspace' })
 
       -- - ga - [a]lign
       -- - gA - [a]lign with preview
