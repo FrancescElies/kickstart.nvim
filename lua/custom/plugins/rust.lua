@@ -5,6 +5,23 @@ return {
   lazy = false, -- This plugin is already lazy
 
   config = function()
+    -- You only need to specify the keys that you want to be changed, because defaults are applied for keys that are not provided.
+    vim.g.rustaceanvim = {
+      -- Plugin configuration
+      -- tools = {},
+      -- LSP configuration
+      server = {
+        -- on_attach = function(client, bufnr)
+        --   -- you can also put keymaps in here
+        -- end,
+        default_settings = {
+          ['rust-analyzer'] = { checkOnSave = false },
+        },
+      },
+      -- DAP configuration
+      -- dap = {},
+    }
+
     vim.api.nvim_create_autocmd('LspAttach', {
       group = vim.api.nvim_create_augroup('my-rustaceanvim-lsp-attach', { clear = true }),
       callback = function(event)
