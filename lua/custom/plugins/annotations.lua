@@ -1,7 +1,7 @@
 local opts = { noremap = true, silent = true }
 
 require('which-key').add {
-  ['<leader>a'] = { name = '[a]nnotate', _ = 'which_key_ignore' },
+  { '<leader>a', group = '[a]annotate' },
 }
 
 return {
