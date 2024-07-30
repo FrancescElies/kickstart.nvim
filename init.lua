@@ -583,7 +583,8 @@ require('lazy').setup({
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format lua code
         'sqlfluff',
-        'black',
+        'codespell',
+        -- 'black',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
@@ -608,16 +609,17 @@ require('lazy').setup({
     cmd = { 'ConformInfo' },
     keys = {
       {
-        '<leader>f',
+        '<leader>bf',
         function()
           require('conform').format { async = true, lsp_fallback = true }
         end,
         mode = '',
-        desc = '[F]ormat buffer',
+        desc = '[b]uffer [f]ormat ',
       },
     },
     opts = {
       notify_on_error = false,
+      -- log_level = vim.log.levels.DEBUG,
       format_on_save = function(bufnr)
         -- Disable "format_on_save lsp_fallback" for languages that don't
         -- have a well standardized coding style. You can add additional
@@ -631,11 +633,26 @@ require('lazy').setup({
       formatters_by_ft = {
         lua = { 'stylua' },
         -- Conform can also run multiple formatters sequentially
-        -- python = { "isort", "black" },
+        go = { 'goimports', 'gofmt' },
+        -- You can also customize some of the format options for the filetype
+        rust = { 'rustfmt', lsp_format = 'fallback' },
+        -- You can use a function here to determine the formatters dynamically
+        python = function(bufnr)
+          if require('conform').get_formatter_info('ruff_format', bufnr).available then
+            return { 'ruff_format' }
+          else
+            return { 'isort', 'black' }
+          end
+        end,
         --
         -- You can use a sub-list to tell conform to run *until* a formatter
         -- is found.
         -- javascript = { { "prettierd", "prettier" } },
+        -- Use the "*" filetype to run formatters on all filetypes.
+        ['*'] = { 'codespell' },
+        -- Use the "_" filetype to run formatters on filetypes that don't
+        -- have other formatters configured.
+        ['_'] = { 'trim_whitespace' },
       },
     },
   },
