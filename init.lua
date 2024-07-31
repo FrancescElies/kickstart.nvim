@@ -614,7 +614,7 @@ require('lazy').setup({
           require('conform').format { async = true, lsp_fallback = true }
         end,
         mode = '',
-        desc = '[b]uffer [f]ormat ',
+        desc = '[b]buffer [f]ormat ',
       },
     },
     opts = {
@@ -649,7 +649,7 @@ require('lazy').setup({
         -- is found.
         -- javascript = { { "prettierd", "prettier" } },
         -- Use the "*" filetype to run formatters on all filetypes.
-        ['*'] = { 'codespell' },
+        -- ['*'] = { 'codespell' },
         -- Use the "_" filetype to run formatters on filetypes that don't
         -- have other formatters configured.
         ['_'] = { 'trim_whitespace' },
@@ -834,7 +834,7 @@ require('lazy').setup({
       mini_trailspace.setup()
       vim.keymap.set('n', '<leader>bt', function()
         mini_trailspace.trim()
-      end, { desc = '[b]uffer trailspace' })
+      end, { desc = '[b]buffer trailspace' })
 
       -- - ga - [a]lign
       -- - gA - [a]lign with preview
