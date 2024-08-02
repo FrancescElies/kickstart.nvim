@@ -62,7 +62,18 @@ return {
     'rhysd/git-messenger.vim',
     keys = { { '<leader>gm', ':GitMessenger<CR>', desc = 'git messenger' } },
   },
-  { 'sindrets/diffview.nvim', keys = { { '<leader>gh', ':DiffviewFileHistory %<cr>', desc = '[g]it log file [h]istory' } } },
+  {
+    'sindrets/diffview.nvim',
+    keys = {
+      { '<leader>df', ':DiffviewFileHistory %<cr>', desc = '[d]iff [f]ile history' },
+      { '<leader>db', ':DiffviewFileHistory <cr>', desc = '[d]iff current [b]ranch' },
+      { '<leader>do', ':DiffviewOpen origin/main...HEAD -- ./ <cr>', desc = '[d]iff current [b]ranch' },
+      -- :DiffviewClose: Close the current diffview. You can also use :tabclose.
+      -- :DiffviewToggleFiles: Toggle the file panel.
+      -- :DiffviewFocusFiles: Bring focus to the file panel.
+      -- :DiffviewRefresh: Update stats and entries in the file list of the current Diffview.
+    },
+  },
   {
     'aaronhallaert/advanced-git-search.nvim',
     diff_plugin = 'diffview',
