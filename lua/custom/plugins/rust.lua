@@ -37,7 +37,7 @@ return {
           rust_keymap('<leader>cP', ':RustLsp rebuildProcMacros<cr>', 'rebuild [p]roc macros')
           rust_keymap('<leader>cR', ':RustLsp runnables', 'show [r]unnables')
           rust_keymap('<leader>ca', ':RustLsp codeAction<cr>', 'code [a]ction')
-          rust_keymap('<leader>cd', ':RustLsp renderDiagnostic', '[e]xplain error') --  Useful for solving bugs around borrowing and generics, as it consolidates the important bits (sometimes across files) together.
+          rust_keymap('<leader>cd', ':RustLsp renderDiagnostic', 'render [d]iagnostic') --  Useful for solving bugs around borrowing and generics, as it consolidates the important bits (sometimes across files) together.
           rust_keymap('<leader>ce', ':RustLsp explainError', '[e]xplain error')
           rust_keymap('<leader>cf', ':RustLsp flyCheck ', '[f]ly check')
           rust_keymap('<leader>ch', ':RustLsp hover ', '[h]over actions|range')
