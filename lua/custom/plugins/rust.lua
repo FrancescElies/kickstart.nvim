@@ -15,7 +15,9 @@ return {
         --   -- you can also put keymaps in here
         -- end,
         default_settings = {
-          ['rust-analyzer'] = { checkOnSave = false },
+          ['rust-analyzer'] = {
+            -- see lsp-init.lua
+          },
         },
       },
       -- DAP configuration
