@@ -1,10 +1,11 @@
 return {
   'Canop/nvim-bacon',
   config = function()
-    vim.api.nvim_create_autocmd({ 'LspAttach' }, {
-      pattern = { '*.rs' },
+    vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufRead' }, {
+      pattern = { '*.rs', '*.toml' },
       group = vim.api.nvim_create_augroup('my-rust-bacon', { clear = true }),
       callback = function(event)
+        print 'adding Bacon bindings: `!`->next issue `,`->bacon-list'
         local nkeymap = function(keys, func, desc)
           vim.keymap.set('n', keys, func, { buffer = event.buf, desc = 'bacon: ' .. desc })
         end
