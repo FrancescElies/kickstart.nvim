@@ -15,8 +15,11 @@ return {
         --   -- you can also put keymaps in here
         -- end,
         default_settings = {
+          -- https://rust-analyzer.github.io/manual.html
+          -- see `lsp-init.lua` too
           ['rust-analyzer'] = {
-            -- see lsp-init.lua
+            diagnostics = { experimental = { enable = true } },
+            -- checkOnSave = { command = 'clippy', enable = true },
           },
         },
       },
