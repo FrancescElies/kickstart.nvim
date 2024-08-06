@@ -19,6 +19,7 @@ return {
           -- see `lsp-init.lua` too
           ['rust-analyzer'] = {
             diagnostics = { experimental = { enable = true } },
+            checkOnSave = false, -- disables running clippy on save
             -- checkOnSave = { command = 'clippy', enable = true },
           },
         },
