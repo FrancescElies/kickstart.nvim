@@ -4,6 +4,7 @@
 -- See the kickstart.nvim README for more information
 -- local Util = require 'lazy.core.util'
 
+local Job = require 'plenary.job'
 vim.lsp.inlay_hint.enable(true)
 
 -- Commodity function to print stuff
@@ -22,17 +23,25 @@ vim.api.nvim_create_user_command('Redir', function(ctx)
   vim.opt_local.modified = false
 end, { nargs = '+', complete = 'command' })
 
-local function get_git_root()
-  local dot_git_path = vim.fn.finddir('.git', '.;')
-  return vim.fn.fnamemodify(dot_git_path, ':h')
-end
-
 vim.api.nvim_create_user_command('CdCurrentBufferDir', function()
-  vim.api.nvim_set_current_dir(vim.fn.expand '%:p:h')
+  local path = vim.fn.expand '%:p:h'
+  print('cd ' .. path)
+  vim.api.nvim_set_current_dir(path)
 end, {})
 
 vim.api.nvim_create_user_command('CdGitRoot', function()
-  vim.api.nvim_set_current_dir(get_git_root())
+  Job:new({
+    command = 'git',
+    args = { 'rev-parse', '--show-toplevel' },
+    cwd = '.',
+    on_exit = function(j, return_val)
+      local path = j:result()[1]
+      vim.schedule(function()
+        print('cd ' .. path)
+        vim.api.nvim_set_current_dir(path)
+      end)
+    end,
+  }):start()
 end, {})
 
 return {
