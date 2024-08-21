@@ -28,6 +28,7 @@ vim.cmd [[ let g:neo_tree_remove_legacy_commands = 1 ]]
 
 -- File
 vim.keymap.set('n', '<leader>fy', ":call setreg('+', expand('%:.') .. ':' .. line('.'))<CR>", { desc = 'Filepath Yank/copy' })
+vim.keymap.set('n', '<leader>fY', ":call setreg('+', expand('%:p'))<CR>", { desc = 'Filepath Yank/copy (absolute)' })
 -- vim.keymap.set('n', '<Leader>fo', ':e <C-r>+<CR>', { desc = 'Filepath Open from clipboard' })
 
 -- quick scape

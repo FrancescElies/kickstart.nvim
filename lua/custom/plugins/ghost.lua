@@ -1,3 +1,3 @@
 return {
-  'subnut/nvim-ghost.nvim',
+  -- 'subnut/nvim-ghost.nvim',
 }
