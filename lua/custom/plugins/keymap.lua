@@ -74,6 +74,7 @@ vim.keymap.set('n', '<leader>vf', ':FormatToggle<CR>', { desc = 'Vim toggle Form
 vim.keymap.set('n', '<leader>vm', ":new | put=execute('messages')<cr>", { desc = 'Vim messages' })
 vim.keymap.set('n', '<leader>vn', toggle_number, { desc = 'Vim toggle line Number' })
 vim.keymap.set('n', '<leader>vs', ':set invspell<cr>', { desc = 'Vim toggle Spell' })
+vim.keymap.set('n', '<leader>vD', vim.diagnostic.hide, { desc = 'Vim Diagnostic Hide' })
 vim.keymap.set('n', '<leader>vh', ':set invhlsearch<cr>', { desc = 'Highlight search' })
 
 -- Terminal Mappings
