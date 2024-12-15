@@ -33,6 +33,7 @@ vim.keymap.set('n', '<Leader>fo', ':e <C-r>+<CR>', { desc = '[f]ilepath: [o]pen 
 
 -- quick scape
 vim.keymap.set('i', 'jk', '<Esc>')
+vim.keymap.set('n', 'ı', 'i')
 
 -- quick spellfix
 vim.keymap.set('n', 'za', '1z=') -- fix word under cursor https://nanotipsforvim.prose.sh/autofix-misspellings
