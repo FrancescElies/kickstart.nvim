@@ -51,6 +51,8 @@ vim.keymap.set('n', '[b', '<cmd>bprevious<cr>', { desc = 'Prev buffer' })
 vim.keymap.set('n', ']b', '<cmd>bnext<cr>', { desc = 'Next buffer' })
 
 -- quickfix
+vim.keymap.set('n', '<M-p>', '<cmd>cprevious<cr>zz', { desc = 'Quickfix previous' })
+vim.keymap.set('n', '<M-n>', '<cmd>cnext<cr>zz', { desc = 'Quickfix next' })
 vim.keymap.set('n', '[q', '<cmd>cprevious<cr>zz', { desc = 'Quickfix previous' })
 vim.keymap.set('n', ']q', '<cmd>cnext<cr>zz', { desc = 'Quickfix next' })
 vim.keymap.set('n', '[Q', '<cmd>cfirst<cr>zz', { desc = 'Quickfix First' })
