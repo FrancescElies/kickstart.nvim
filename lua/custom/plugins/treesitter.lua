@@ -47,6 +47,19 @@ return {
 
             keymaps = {
               -- You can use the capture groups defined in textobjects.scm
+              -- For example:
+              -- Nushell only
+              ['aP'] = '@pipeline.outer',
+              ['iP'] = '@pipeline.inner',
+
+              -- supported in other languages as well
+              ['al'] = '@loop.outer',
+              ['il'] = '@loop.inner',
+              ['aC'] = '@conditional.outer',
+              ['iC'] = '@conditional.inner',
+              ['iS'] = '@statement.inner',
+              ['aS'] = '@statement.outer',
+              -- You can use the capture groups defined in textobjects.scm
               ['af'] = '@function.outer',
               ['if'] = '@function.inner',
               ['ac'] = '@class.outer',
