@@ -36,7 +36,7 @@ vim.keymap.set('i', 'jk', '<Esc>')
 vim.keymap.set('n', 'ı', 'i')
 
 -- quick spellfix
-vim.keymap.set('n', 'za', '1z=') -- fix word under cursor https://nanotipsforvim.prose.sh/autofix-misspellings
+vim.keymap.set('n', 'za', '1z=', { desc = 'fix word under cursor' }) --  https://nanotipsforvim.prose.sh/autofix-misspellings
 
 -- buffer
 vim.keymap.set('n', '<leader>bb', '<cmd>e #<cr>', { desc = 'Switch to Other Buffer' })
@@ -51,8 +51,8 @@ vim.keymap.set('n', '[b', '<cmd>bprevious<cr>', { desc = 'Prev buffer' })
 vim.keymap.set('n', ']b', '<cmd>bnext<cr>', { desc = 'Next buffer' })
 
 -- quickfix
-vim.keymap.set('n', '<M-p>', '<cmd>cprevious<cr>zz', { desc = 'Quickfix previous' })
-vim.keymap.set('n', '<M-n>', '<cmd>cnext<cr>zz', { desc = 'Quickfix next' })
+vim.keymap.set('n', '<M-X>', '<cmd>cprevious<cr>zz', { desc = 'QuickfiX previous' })
+vim.keymap.set('n', '<M-x>', '<cmd>cnext<cr>zz', { desc = 'QuickfiX next' })
 vim.keymap.set('n', '[q', '<cmd>cprevious<cr>zz', { desc = 'Quickfix previous' })
 vim.keymap.set('n', ']q', '<cmd>cnext<cr>zz', { desc = 'Quickfix next' })
 vim.keymap.set('n', '[Q', '<cmd>cfirst<cr>zz', { desc = 'Quickfix First' })
