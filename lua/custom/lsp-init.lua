@@ -60,7 +60,7 @@ M.servers = {
   --   init_options = { provideFormatter = false },
   --   capabilities = M.jsonls_capabilities,
   -- },
-  ruff_lsp = {},
+  ruff = {},
 
   -- slint_lsp = { filetypes = { 'slint' }, capabilities = slint_capabilities },
 
@@ -125,7 +125,7 @@ M.servers = {
   --   },
   -- },
 
-  tsserver = {
+  ts_ls = {
     init_options = {
       provideFormatter = false,
     },

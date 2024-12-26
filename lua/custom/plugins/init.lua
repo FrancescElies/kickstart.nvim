@@ -12,6 +12,8 @@ function p(v)
   print(vim.inspect(v))
 end
 
+vim.o.wrap = false
+
 -- https://www.reddit.com/r/neovim/comments/zhweuc/whats_a_fast_way_to_load_the_output_of_a_command/
 -- Example:
 -- :Redir =vim.lsp.get_active_clients()

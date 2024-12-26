@@ -635,10 +635,11 @@ require('lazy').setup({
         'marksman',
         'omnisharp',
         'powershell_es',
-        'ruff_lsp', -- python linter and formatter
+        'ruff', -- python linter and formatter
+        'ruff-lsp', -- python linter and formatter
         'sqlfluff',
         'stylua', -- Used to format lua code
-        'tsserver',
+        'typescript-language-server',
         -- 'black',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
