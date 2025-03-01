@@ -71,14 +71,13 @@ vim.keymap.set('v', '<leader>/', ':s/\\\\/\\//g<cr>', { desc = 'Replace \\ -> /'
 vim.keymap.set('v', '<leader>\\', ':s/\\//\\\\/g<cr>', { desc = 'Replace / -> [\\]' })
 
 -- Reload configuration
-vim.keymap.set('n', '<leader>vl', ':luafile %<cr>', { desc = 'Vim load Luafile' })
-vim.keymap.set('n', '<leader>ve', ':edit $MYVIMRC<cr>', { desc = 'Vim edit config' })
-vim.keymap.set('n', '<leader>vf', ':FormatToggle<CR>', { desc = 'Vim toggle Format' })
+vim.keymap.set('n', '<leader>l', ':luafile %<cr>', { desc = 'load Luafile' })
+vim.keymap.set('n', '<leader>tf', ':FormatToggle<CR>', { desc = 'toggle Format' })
 vim.keymap.set('n', '<leader>vm', ":new | put=execute('messages')<cr>", { desc = 'Vim messages' })
-vim.keymap.set('n', '<leader>vn', toggle_number, { desc = 'Vim toggle line Number' })
-vim.keymap.set('n', '<leader>vs', ':set invspell<cr>', { desc = 'Vim toggle Spell' })
-vim.keymap.set('n', '<leader>vD', vim.diagnostic.hide, { desc = 'Vim Diagnostic Hide' })
-vim.keymap.set('n', '<leader>vh', ':set invhlsearch<cr>', { desc = 'Highlight search' })
+vim.keymap.set('n', '<leader>tn', toggle_number, { desc = 'toggle line Number' })
+vim.keymap.set('n', '<leader>ts', ':set invspell<cr>', { desc = 'toggle Spell' })
+vim.keymap.set('n', '<leader>tD', vim.diagnostic.hide, { desc = 'toggle inline Diagnostic' })
+vim.keymap.set('n', '<leader>th', ':set invhlsearch<cr>', { desc = 'toggle Highlight search' })
 
 -- Terminal Mappings
 -- vim.keymap.set('t', '<esc><esc>', '<c-\\><c-n>', { desc = 'Enter Normal Mode' })
