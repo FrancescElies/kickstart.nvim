@@ -12,6 +12,10 @@ vim.keymap.set('n', '<leader>m', require('telescope.builtin').marks, { desc = '[
 
 local line_with = { number = true, relativenumber = true }
 
+local function toggle_inline_diagnostic()
+  vim.diagnostic.enable(not vim.diagnostic.is_enabled())
+end
+
 local function toggle_number()
   if vim.opt_local.number:get() or vim.opt_local.relativenumber:get() then
     line_with = { number = vim.opt_local.number:get(), relativenumber = vim.opt_local.relativenumber:get() }
@@ -76,7 +80,7 @@ vim.keymap.set('n', '<leader>tf', ':FormatToggle<CR>', { desc = 'toggle Format' 
 vim.keymap.set('n', '<leader>vm', ":new | put=execute('messages')<cr>", { desc = 'Vim messages' })
 vim.keymap.set('n', '<leader>tn', toggle_number, { desc = 'toggle line Number' })
 vim.keymap.set('n', '<leader>ts', ':set invspell<cr>', { desc = 'toggle Spell' })
-vim.keymap.set('n', '<leader>ti', vim.diagnostic.hide, { desc = 'toggle inline Diagnostic' })
+vim.keymap.set('n', '<leader>ti', toggle_inline_diagnostic, { desc = 'toggle inline Diagnostic' })
 vim.keymap.set('n', '<leader>th', ':set invhlsearch<cr>', { desc = 'toggle Highlight search' })
 
 -- Terminal Mappings
