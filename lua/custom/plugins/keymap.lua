@@ -79,9 +79,9 @@ vim.keymap.set('n', '<leader>l', ':luafile %<cr>', { desc = 'load Luafile' })
 vim.keymap.set('n', '<leader>tf', ':FormatToggle<CR>', { desc = 'toggle Format' })
 vim.keymap.set('n', '<leader>vm', ":new | put=execute('messages')<cr>", { desc = 'Vim messages' })
 vim.keymap.set('n', '<leader>tn', toggle_number, { desc = 'toggle line Number' })
-vim.keymap.set('n', '<leader>ts', ':set invspell<cr>', { desc = 'toggle Spell' })
 vim.keymap.set('n', '<leader>ti', toggle_inline_diagnostic, { desc = 'toggle inline Diagnostic' })
-vim.keymap.set('n', '<leader>th', ':set invhlsearch<cr>', { desc = 'toggle Highlight search' })
+vim.keymap.set('n', '<leader>ts', ':set invhlsearch<cr>', { desc = 'toggle Highlight search' })
+vim.keymap.set('n', '<leader>tS', ':set invspell<cr>', { desc = 'toggle Spell' })
 
 -- Terminal Mappings
 -- vim.keymap.set('t', '<esc><esc>', '<c-\\><c-n>', { desc = 'Enter Normal Mode' })
