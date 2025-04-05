@@ -32,6 +32,14 @@ vim.api.nvim_create_autocmd('BufReadPost', {
   end,
 })
 
+vim.api.nvim_create_autocmd('BufReadPost', {
+  group = 'bufcheck',
+  pattern = '*.md',
+  callback = function()
+    vim.diagnostic.enable(false)
+  end,
+})
+
 local function find_typescript_for_javascript_file()
   local buffnr = vim.api.nvim_get_current_buf()
   -- local bufname = vim.fn.bufname(buffnr)
