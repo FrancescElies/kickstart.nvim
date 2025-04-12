@@ -24,15 +24,15 @@ M.servers = {
   -- But for many setups, the LSP (`tsserver`) will work just fine
   -- tsserver = {},
   --
-  powershell_es = {
-    settings = {
-      powershell = {
-        -- https://github.com/PowerShell/PowerShellEditorServices/blob/main/docs/guide/getting_started.md
-        -- https://github.com/PowerShell/PowerShellEditorServices/blob/main/src/PowerShellEditorServices/Services/Workspace/LanguageServerSettings.cs
-        codeFormatting = { Preset = 'OTBS' },
-      },
-    },
-  },
+  -- powershell_es = {
+  --   settings = {
+  --     powershell = {
+  --       -- https://github.com/PowerShell/PowerShellEditorServices/blob/main/docs/guide/getting_started.md
+  --       -- https://github.com/PowerShell/PowerShellEditorServices/blob/main/src/PowerShellEditorServices/Services/Workspace/LanguageServerSettings.cs
+  --       codeFormatting = { Preset = 'OTBS' },
+  --     },
+  --   },
+  -- },
   lua_ls = {
     -- cmd = {...},
     -- filetypes { ...},
@@ -125,47 +125,47 @@ M.servers = {
   --   },
   -- },
 
-  ts_ls = {
-    init_options = {
-      provideFormatter = false,
-    },
-    typescript = {
-      inlayHints = {
-        includeInlayParameterNameHints = 'all', -- 'none' | 'literals' | 'all'
-        includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-        includeInlayVariableTypeHints = true,
-        includeInlayFunctionParameterTypeHints = true,
-        includeInlayVariableTypeHintsWhenTypeMatchesName = true,
-        includeInlayPropertyDeclarationTypeHints = true,
-        includeInlayFunctionLikeReturnTypeHints = true,
-        includeInlayEnumMemberValueHints = true,
-      },
-    },
-    javascript = {
-      inlayHints = {
-        includeInlayParameterNameHints = 'all', -- 'none' | 'literals' | 'all'
-        includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-        includeInlayVariableTypeHints = true,
-
-        includeInlayFunctionParameterTypeHints = true,
-        includeInlayVariableTypeHintsWhenTypeMatchesName = true,
-        includeInlayPropertyDeclarationTypeHints = true,
-        includeInlayFunctionLikeReturnTypeHints = true,
-        includeInlayEnumMemberValueHints = true,
-      },
-    },
-  },
+  -- ts_ls = {
+  --   init_options = {
+  --     provideFormatter = false,
+  --   },
+  --   typescript = {
+  --     inlayHints = {
+  --       includeInlayParameterNameHints = 'all', -- 'none' | 'literals' | 'all'
+  --       includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+  --       includeInlayVariableTypeHints = true,
+  --       includeInlayFunctionParameterTypeHints = true,
+  --       includeInlayVariableTypeHintsWhenTypeMatchesName = true,
+  --       includeInlayPropertyDeclarationTypeHints = true,
+  --       includeInlayFunctionLikeReturnTypeHints = true,
+  --       includeInlayEnumMemberValueHints = true,
+  --     },
+  --   },
+  --   javascript = {
+  --     inlayHints = {
+  --       includeInlayParameterNameHints = 'all', -- 'none' | 'literals' | 'all'
+  --       includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+  --       includeInlayVariableTypeHints = true,
+  --
+  --       includeInlayFunctionParameterTypeHints = true,
+  --       includeInlayVariableTypeHintsWhenTypeMatchesName = true,
+  --       includeInlayPropertyDeclarationTypeHints = true,
+  --       includeInlayFunctionLikeReturnTypeHints = true,
+  --       includeInlayEnumMemberValueHints = true,
+  --     },
+  --   },
+  -- },
   html = { filetypes = { 'html', 'twig', 'hbs' } },
-  omnisharp = {
-    -- cmd = { 'dotnet', '~/bin/omnisharp/Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.dll' },
-    enable_editorconfig_support = true,
-    enable_ms_build_load_projects_on_demand = false,
-    enable_roslyn_analyzers = true,
-    organize_imports_on_format = true,
-    enable_import_completion = false,
-    sdk_include_prereleases = true,
-    analyze_open_documents_only = false,
-  },
+  -- omnisharp = {
+  --   -- cmd = { 'dotnet', '~/bin/omnisharp/Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.dll' },
+  --   enable_editorconfig_support = true,
+  --   enable_ms_build_load_projects_on_demand = false,
+  --   enable_roslyn_analyzers = true,
+  --   organize_imports_on_format = true,
+  --   enable_import_completion = false,
+  --   sdk_include_prereleases = true,
+  --   analyze_open_documents_only = false,
+  -- },
 }
 
 return M

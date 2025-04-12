@@ -689,8 +689,8 @@ require('lazy').setup({
         'lua_ls',
         'markdown_oxide',
         'marksman',
-        'omnisharp',
-        'powershell_es',
+        -- 'omnisharp',
+        -- 'powershell_es',
         'ruff', -- python linter and formatter
         'ruff-lsp', -- python linter and formatter
         'sqlfluff',
