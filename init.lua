@@ -684,7 +684,7 @@ require('lazy').setup({
         -- 'clangd',
         'codespell',
         -- 'harper_ls',
-        'markdownlint',
+        -- 'markdownlint',
         'typos',
         'lua_ls',
         'markdown_oxide',
