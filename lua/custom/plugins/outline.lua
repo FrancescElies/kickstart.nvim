@@ -1,11 +1,24 @@
+-- return {
+--   'hedyhli/outline.nvim',
+--   lazy = true,
+--   cmd = { 'Outline', 'OutlineOpen' },
+--   keys = { -- Example mapping to toggle outline
+--     { '<leader>o', '<cmd>Outline<CR>', desc = 'Toggle outline' },
+--   },
+--   opts = {
+--     -- Your setup opts here
+--   },
+-- }
+
 return {
-  'hedyhli/outline.nvim',
-  lazy = true,
-  cmd = { 'Outline', 'OutlineOpen' },
-  keys = { -- Example mapping to toggle outline
-    { '<leader>o', '<cmd>Outline<CR>', desc = 'Toggle outline' },
+  'stevearc/aerial.nvim',
+  opts = {},
+  -- Optional dependencies
+  keys = {
+    { '<leader>o', '<cmd>AerialToggle!<CR>', desc = 'Toggle outline' },
   },
-  opts = {
-    -- Your setup opts here
+  dependencies = {
+    'nvim-treesitter/nvim-treesitter',
+    'nvim-tree/nvim-web-devicons',
   },
 }
