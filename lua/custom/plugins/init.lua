@@ -5,7 +5,7 @@
 -- local Util = require 'lazy.core.util'
 
 local Job = require 'plenary.job'
-vim.lsp.inlay_hint.enable(true)
+-- vim.lsp.inlay_hint.enable(true)
 
 -- Commodity function to print stuff
 function p(v)
