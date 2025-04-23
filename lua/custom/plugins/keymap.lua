@@ -74,6 +74,24 @@ vim.keymap.set('n', 'N', 'Nzzzv')
 vim.keymap.set('v', '<leader>/', ':s/\\\\/\\//g<cr>', { desc = 'Replace \\ -> /' })
 vim.keymap.set('v', '<leader>\\', ':s/\\//\\\\/g<cr>', { desc = 'Replace / -> [\\]' })
 
+-- https://github.com/nvim-telescope/telescope.nvim/issues/1923
+function vim.getVisualSelection()
+  local current_clipboard_content = vim.fn.getreg '"'
+
+  vim.cmd 'noau normal! "vy"'
+  local text = vim.fn.getreg 'v'
+  vim.fn.setreg('v', {})
+
+  vim.fn.setreg('"', current_clipboard_content)
+
+  text = string.gsub(text, '\n', '')
+  if #text > 0 then
+    return text
+  else
+    return ''
+  end
+end
+
 -- Reload configuration
 vim.keymap.set('n', '<leader>l', ':luafile %<cr>', { desc = 'load Luafile' })
 vim.keymap.set('n', '<leader>tf', ':FormatToggle<CR>', { desc = 'toggle Format' })
