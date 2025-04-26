@@ -36,6 +36,7 @@ vim.keymap.set('n', '<leader>fY', ":call setreg('+', expand('%:p'))<CR>", { desc
 vim.keymap.set('n', '<Leader>fo', ':e <C-r>+<CR>', { desc = '[f]ilepath: [o]pen from clipboard' })
 
 -- quick scape
+vim.keymap.set('i', 'kj', '<Esc>')
 vim.keymap.set('i', 'jk', '<Esc>')
 vim.keymap.set('n', 'ı', 'i')
 
