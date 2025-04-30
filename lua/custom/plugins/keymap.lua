@@ -72,8 +72,8 @@ vim.keymap.set('n', 'N', 'Nzzzv')
 -- Move lines in visual mode
 -- vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
 -- vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
-vim.keymap.set('v', '<leader>/', ':s/\\\\/\\//g<cr>', { desc = 'Replace \\ -> /' })
-vim.keymap.set('v', '<leader>\\', ':s/\\//\\\\/g<cr>', { desc = 'Replace / -> [\\]' })
+vim.keymap.set('v', '<leader>r/', ':s/\\\\/\\//g<cr>', { desc = 'Replace \\ -> /' })
+vim.keymap.set('v', '<leader>r\\', ':s/\\//\\\\/g<cr>', { desc = 'Replace / -> [\\]' })
 
 -- https://github.com/nvim-telescope/telescope.nvim/issues/1923
 function vim.getVisualSelection()
