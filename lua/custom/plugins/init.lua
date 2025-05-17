@@ -48,5 +48,5 @@ end, {})
 
 return {
   -- automatically follow symlinks
-  { 'aymericbeaumet/vim-symlink', dependencies = { 'moll/vim-bbye' } },
+  -- { 'aymericbeaumet/vim-symlink', dependencies = { 'moll/vim-bbye' } },
 }
