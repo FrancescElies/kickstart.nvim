@@ -59,8 +59,8 @@ return {
   {
     'sindrets/diffview.nvim',
     keys = {
-      { '<leader>df', ':DiffviewFileHistory %<cr>', desc = '[D]iffhistory [F]ile' },
-      { '<leader>db', ':DiffviewFileHistory <cr>', desc = '[D]iffhistory  [B]ranch' },
+      { '<leader>df', ':DiffviewFileHistory %<cr>', desc = '[D]iff [F]ile history' },
+      { '<leader>dd', ':DiffviewFileHistory', desc = '[D]iff history' },
       { '<leader>do', ':DiffviewOpen origin/main...HEAD', desc = '[D]iff merge base' },
       { '<leader>dt', ":'<,'>DiffviewOpen origin/main...HEAD", desc = '[D]iff [T]race line evolution' },
       -- :DiffviewClose: Close the current diffview. You can also use :tabclose.
