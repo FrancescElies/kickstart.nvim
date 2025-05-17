@@ -59,10 +59,10 @@ return {
   {
     'sindrets/diffview.nvim',
     keys = {
-      { '<leader>gdf', ':DiffviewFileHistory %<cr>', desc = '[G]it [D]iffhistory [F]ile' },
-      { '<leader>gdb', ':DiffviewFileHistory <cr>', desc = '[G]it [D]iffhistory  [B]ranch' },
-      { '<leader>gdo', ':DiffviewOpen origin/main...HEAD', desc = '[G]it [D]iff merge base' },
-      { '<leader>gdt', ":'<,'>DiffviewOpen origin/main...HEAD", desc = '[G]it [D]iff [T]race line evolution' },
+      { '<leader>df', ':DiffviewFileHistory %<cr>', desc = '[D]iffhistory [F]ile' },
+      { '<leader>db', ':DiffviewFileHistory <cr>', desc = '[D]iffhistory  [B]ranch' },
+      { '<leader>do', ':DiffviewOpen origin/main...HEAD', desc = '[D]iff merge base' },
+      { '<leader>dt', ":'<,'>DiffviewOpen origin/main...HEAD", desc = '[D]iff [T]race line evolution' },
       -- :DiffviewClose: Close the current diffview. You can also use :tabclose.
       -- :DiffviewToggleFiles: Toggle the file panel.
       -- :DiffviewFocusFiles: Bring focus to the file panel.
