@@ -7,6 +7,6 @@ return {
   -- Uncomment next line if you want to follow only stable versions
   version = '*',
   keys = {
-    { '<leader>xa', ':Neogen func', desc = '[a]nnotate class, func, file, type', opts },
+    { '<leader>a', ':Neogen func', desc = '[a]nnotate class, func, file, type', opts },
   },
 }
