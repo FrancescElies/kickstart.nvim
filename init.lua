@@ -794,7 +794,7 @@ require('lazy').setup({
         end,
         typescript = { 'biome' },
         -- You can use 'stop_after_first' to run the first available formatter from the list
-        -- javascript = { "prettierd", "prettier", stop_after_first = true },
+        javascript = { 'biome', 'prettierd', 'prettier', stop_after_first = true },
         --
         -- Use the "*" filetype to run formatters on all filetypes.
         ['*'] = { 'typos' },
