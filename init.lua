@@ -709,16 +709,14 @@ require('lazy').setup({
         -- 'markdownlint',
         'typos',
         'lua_ls',
-        'markdown_oxide',
-        'marksman',
+        -- 'markdown_oxide',
+        -- 'marksman',
         -- 'omnisharp',
         -- 'powershell_es',
         -- 'ruff', -- python linter and formatter
         -- 'ruff-lsp', -- python linter and formatter
         'sqlfluff',
         'stylua', -- Used to format lua code
-        -- 'typescript-language-server',
-        -- 'black',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
@@ -778,17 +776,28 @@ require('lazy').setup({
         rust = { 'rustfmt', lsp_format = 'fallback' },
         -- You can use a function here to determine the formatters dynamically
         python = function(bufnr)
-          if require('conform').get_formatter_info('ruff_format', bufnr).available then
-            return { 'ruff_format' }
+          vim.api.nvim_get_current_buf()
+
+          ---@param formatter string The name of the formatter
+          ---@param bufnr? integer
+          local finfo = function(formatter, bufnr)
+            return require('conform').get_formatter_info(formatter, bufnr).available and formatter or nil
+          end
+          local ruff_format = finfo('ruff_format', bufnr)
+          local ruff_fix = finfo('ruff_fix', bufnr)
+          local ruff_organize_imports = finfo('ruff_organize_imports', bufnr)
+          if ruff_fix and ruff_format and ruff_organize_imports then
+            return { ruff_fix, ruff_organize_imports, ruff_format }
           else
             return { 'isort', 'black' }
           end
         end,
+        typescript = { 'biome' },
         -- You can use 'stop_after_first' to run the first available formatter from the list
         -- javascript = { "prettierd", "prettier", stop_after_first = true },
         --
         -- Use the "*" filetype to run formatters on all filetypes.
-        -- ['*'] = { 'codespell' },
+        ['*'] = { 'codespell' },
         -- Use the "_" filetype to run formatters on filetypes that don't
         -- have other formatters configured.
         ['_'] = { 'trim_whitespace' },
