@@ -73,16 +73,7 @@ return {
     'aaronhallaert/advanced-git-search.nvim',
     diff_plugin = 'diffview',
     config = function()
-      -- optional: setup telescope before loading the extension
-      require('telescope').setup {
-        -- move this to the place where you call the telescope setup function
-        extensions = {
-          advanced_git_search = {
-            -- See Config
-          },
-        },
-      }
-
+      -- NOTE: optionally setup telescope before loading the extension, don't do here see docs
       require('telescope').load_extension 'advanced_git_search'
     end,
     keys = {
