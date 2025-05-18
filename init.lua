@@ -797,7 +797,7 @@ require('lazy').setup({
         javascript = { 'biome', 'prettierd', 'prettier', stop_after_first = true },
         --
         -- Use the "*" filetype to run formatters on all filetypes.
-        ['*'] = { 'typos' },
+        -- ['*'] = { 'typos' },
         -- Use the "_" filetype to run formatters on filetypes that don't
         -- have other formatters configured.
         ['_'] = { 'trim_whitespace' },
