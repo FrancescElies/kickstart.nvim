@@ -59,10 +59,10 @@ return {
   {
     'sindrets/diffview.nvim',
     keys = {
-      { '<leader>df', ':DiffviewFileHistory %<cr>', desc = '[D]iff [F]ile history' },
-      { '<leader>dd', ':DiffviewFileHistory', desc = '[D]iff history' },
-      { '<leader>do', ':DiffviewOpen origin/main...HEAD', desc = '[D]iff merge base' },
-      { '<leader>dt', ":'<,'>DiffviewOpen origin/main...HEAD", desc = '[D]iff [T]race line evolution' },
+      { '<leader>gdf', ':DiffviewFileHistory %<cr>', desc = '[G]it [D]iff [F]ile history' },
+      { '<leader>gdd', ':DiffviewFileHistory', desc = '[G]it [D]iff history' },
+      { '<leader>gdo', ':DiffviewOpen origin/main...HEAD', desc = '[G]it [D]iff merge base' },
+      { '<leader>gdt', ":'<,'>DiffviewOpen origin/main...HEAD", desc = '[G]it [D]iff [T]race line evolution' },
       -- :DiffviewClose: Close the current diffview. You can also use :tabclose.
       -- :DiffviewToggleFiles: Toggle the file panel.
       -- :DiffviewFocusFiles: Bring focus to the file panel.
@@ -87,7 +87,7 @@ return {
     end,
     keys = {
       { '<leader>g/', ':AdvancedGitSearch<CR>', desc = '[G]it [S]earch' },
-      { '<leader>gdl', ':AdvancedGitSearch diff_commit_line<cr>', desc = '[G]it [D]iff [L]ine' },
+      { '<leader>gdl', ':AdvancedGitSearch diff_commit_line<cr>', mode = { 'n', 'v' }, desc = '[G]it [D]iff [L]ine' },
       { '<leader>gr', ':AdvancedGitSearch checkout_reflog<cr>', desc = '[G]it [R]eflog' },
     },
     dependencies = {
