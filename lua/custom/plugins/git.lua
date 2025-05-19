@@ -58,10 +58,12 @@ return {
   -- },
   {
     'sindrets/diffview.nvim',
+    opts = {},
     keys = {
       { '<leader>gdf', ':DiffviewFileHistory %<cr>', desc = '[G]it [D]iff [F]ile history' },
       { '<leader>gdd', ':DiffviewFileHistory', desc = '[G]it [D]iff history' },
-      { '<leader>gdo', ':DiffviewOpen origin/main...HEAD', desc = '[G]it [D]iff merge base' },
+      { '<leader>gdb', ':DiffviewOpen', desc = '[G]it [D]iff [O]pen (merge conflicts)' },
+      { '<leader>gdb', ':DiffviewOpen origin/main...HEAD', desc = '[G]it [D]iff merge [B]ase' },
       { '<leader>gdt', ":'<,'>DiffviewOpen origin/main...HEAD", desc = '[G]it [D]iff [T]race line evolution' },
       -- :DiffviewClose: Close the current diffview. You can also use :tabclose.
       -- :DiffviewToggleFiles: Toggle the file panel.
