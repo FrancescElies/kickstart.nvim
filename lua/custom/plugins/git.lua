@@ -27,6 +27,7 @@ return {
   -- },
   {
     'tpope/vim-fugitive',
+    opts = {},
     keys = {
       { '<leader>gS', vim.cmd.Git, desc = 'git status' },
       { '<leader>gP', ':Git! push --force-with-lease -u origin <cr>', desc = '[G]it [P]ush force with lease' },
@@ -52,10 +53,10 @@ return {
       })
     end,
   },
-  -- {
-  --   'rhysd/git-messenger.vim',
-  --   keys = { { '<leader>gm', ':GitMessenger<CR>', desc = '[G]it [Mqq shessenger' } },
-  -- },
+  {
+    'rhysd/git-messenger.vim',
+    keys = { { '<leader>gm', ':GitMessenger<CR>', desc = '[G]it [M]essenger' } },
+  },
   {
     'sindrets/diffview.nvim',
     opts = {},
