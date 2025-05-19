@@ -33,25 +33,6 @@ return {
       { '<leader>gP', ':Git! push --force-with-lease -u origin <cr>', desc = '[G]it [P]ush force with lease' },
       { '<leader>gp', ':Git! pull --rebase <cr>', desc = '[G]it [P]ull rebase' },
     },
-    config = function()
-      local MyFugitive = vim.api.nvim_create_augroup('MyFugitive', {})
-
-      local autocmd = vim.api.nvim_create_autocmd
-      autocmd('BufWinEnter', {
-        group = MyFugitive,
-        pattern = '*',
-        callback = function()
-          if vim.bo.ft ~= 'fugitive' then
-            return
-          end
-
-          local opts = { buffer = vim.api.nvim_get_current_buf(), remap = false }
-
-          vim.keymap.set('n', '<leader>P', ':Git! push --force-with-lease -u origin <cr>', opts)
-          vim.keymap.set('n', '<leader>p', ':Git! pull --rebase <cr>', opts)
-        end,
-      })
-    end,
   },
   {
     'rhysd/git-messenger.vim',
