@@ -51,8 +51,8 @@ vim.keymap.set('n', '[b', '<cmd>bprevious<cr>', { desc = 'Prev buffer' })
 vim.keymap.set('n', ']b', '<cmd>bnext<cr>', { desc = 'Next buffer' })
 
 -- quickfix
-vim.keymap.set('n', '<M-q>', '<cmd>cprevious<cr>zz', { desc = 'QuickfiX previous' })
-vim.keymap.set('n', '<M-q>', '<cmd>cnext<cr>zz', { desc = 'QuickfiX next' })
+vim.keymap.set('n', '<C-p>', '<cmd>cprevious<cr>zz', { desc = 'QuickfiX previous' })
+vim.keymap.set('n', '<C-n>', '<cmd>cnext<cr>zz', { desc = 'QuickfiX next' })
 vim.keymap.set('n', '[q', '<cmd>cprevious<cr>zz', { desc = 'Quickfix previous' })
 vim.keymap.set('n', ']q', '<cmd>cnext<cr>zz', { desc = 'Quickfix next' })
 vim.keymap.set('n', '[Q', '<cmd>cfirst<cr>zz', { desc = 'Quickfix First' })
@@ -89,7 +89,9 @@ function vim.getVisualSelection()
 end
 
 -- Reload configuration
-vim.keymap.set('n', '<leader>l', ':luafile %<cr>', { desc = 'load Luafile' })
+vim.keymap.set('n', '<leader>lf', ':luafile %<cr>', { desc = 'load Luafile' })
+vim.keymap.set('n', '<leader>ll', ':.lua<cr>', { desc = 'load Luafile' })
+vim.keymap.set('v', '<leader>l', ':lua<cr>', { desc = 'load Luaregion' })
 vim.keymap.set('n', '<leader>tf', ':FormatToggle<CR>', { desc = 'toggle Format' })
 vim.keymap.set('n', '<leader>vm', ":new | put=execute('messages')<cr>", { desc = 'Vim messages' })
 vim.keymap.set('n', '<leader>tn', toggle_number, { desc = 'toggle line Number' })
@@ -97,12 +99,4 @@ vim.keymap.set('n', '<leader>ti', toggle_inline_diagnostic, { desc = 'toggle inl
 vim.keymap.set('n', '<leader>ts', ':set invhlsearch<cr>', { desc = 'toggle Highlight search' })
 vim.keymap.set('n', '<leader>tS', ':set invspell<cr>', { desc = 'toggle Spell' })
 
--- Terminal Mappings
--- vim.keymap.set('t', '<esc><esc>', '<c-\\><c-n>', { desc = 'Enter Normal Mode' })
--- vim.keymap.set('t', '<C-h>', '<cmd>wincmd h<cr>', { desc = 'Go to left window' })
--- vim.keymap.set('t', '<C-j>', '<cmd>wincmd j<cr>', { desc = 'Go to lower window' })
--- vim.keymap.set('t', '<C-k>', '<cmd>wincmd k<cr>', { desc = 'Go to upper window' })
--- vim.keymap.set('t', '<C-l>', '<cmd>wincmd l<cr>', { desc = 'Go to right window' })
--- vim.keymap.set('t', '<C-/>', '<cmd>close<cr>', { desc = 'Hide Terminal' })
--- vim.keymap.set('t', '<c-_>', '<cmd>close<cr>', { desc = 'which_key_ignore' })
 return {}
