@@ -31,6 +31,11 @@ vim.api.nvim_create_user_command('CdCurrentBufferDir', function()
   vim.api.nvim_set_current_dir(path)
 end, {})
 
+vim.api.nvim_create_user_command('CdCurrentBufferGitRoot', function()
+  vim.cmd.CdCurrentBufferDir()
+  vim.cmd.CdGitRoot()
+end, {})
+
 vim.api.nvim_create_user_command('CdGitRoot', function()
   Job:new({
     command = 'git',
