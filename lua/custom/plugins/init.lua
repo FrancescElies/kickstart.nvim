@@ -4,7 +4,6 @@
 -- See the kickstart.nvim README for more information
 -- local Util = require 'lazy.core.util'
 
-local Job = require 'plenary.job'
 -- vim.lsp.inlay_hint.enable(true)
 
 -- Commodity function to print stuff
@@ -24,34 +23,6 @@ vim.api.nvim_create_user_command('MyRedir', function(ctx)
   vim.api.nvim_buf_set_lines(0, 0, -1, false, lines)
   vim.opt_local.modified = false
 end, { nargs = '+', complete = 'command' })
-
-vim.api.nvim_create_user_command('CdBufParentDir', function()
-  local path = vim.fn.expand '%:p:h'
-  print('cd ' .. path)
-  vim.api.nvim_set_current_dir(path)
-end, {})
-vim.keymap.set('n', '<leader>bcp', '<cmd>CdBufParentDir<cr>', { desc = '[b]uffer [c]d parent [d]ir' })
-
-vim.api.nvim_create_user_command('CdBufGitRoot', function()
-  vim.cmd.CdBufParentDir()
-  vim.cmd.CdGitRoot()
-end, {})
-vim.keymap.set('n', '<leader>bcg', '<cmd>CdBufGitRoot<cr>', { desc = '[b]uffer [c]d [g]it root' })
-
-vim.api.nvim_create_user_command('CdGitRoot', function()
-  Job:new({
-    command = 'git',
-    args = { 'rev-parse', '--show-toplevel' },
-    cwd = '.',
-    on_exit = function(j, return_val)
-      local path = j:result()[1]
-      vim.schedule(function()
-        print('cd ' .. path)
-        vim.api.nvim_set_current_dir(path)
-      end)
-    end,
-  }):start()
-end, {})
 
 -- https://github.com/neovim/neovim/pull/13896
 -- Usage:
