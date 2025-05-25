@@ -22,29 +22,29 @@ vim.api.nvim_create_autocmd('TermOpen', {
   end,
 })
 
--- make sure we are on insert mode when entering the terminal
-vim.api.nvim_create_autocmd({ 'TermOpen', 'BufEnter' }, {
-  pattern = { '*' },
-  group = group,
-  callback = function()
-    if vim.opt.buftype:get() == 'terminal' then
-      vim.cmd ':startinsert'
-    end
-  end,
-})
+-- -- make sure we are on insert mode when entering the terminal
+-- vim.api.nvim_create_autocmd({ 'TermOpen', 'BufEnter' }, {
+--   pattern = { '*' },
+--   group = group,
+--   callback = function()
+--     if vim.opt.buftype:get() == 'terminal' then
+--       vim.cmd ':startinsert'
+--     end
+--   end,
+-- })
 
 -- Open a terminal at the bottom of the screen with a fixed height.
-vim.keymap.set('n', ',st', function()
+vim.keymap.set('n', '<leader>vt', function()
   vim.cmd.new()
   vim.cmd.wincmd 'J'
   vim.api.nvim_win_set_height(0, 12)
   vim.wo.winfixheight = true
   vim.cmd.term()
   TERM_CHANNELNR = vim.bo.channel
-end, { desc = 'small terminal' })
+end, { desc = '[v]im [t]erminal' })
 
-vim.keymap.set('n', ',sc', function()
+vim.keymap.set('n', '<leader>vtl', function()
   vim.fn.chansend(TERM_CHANNELNR, { vim.api.nvim_get_current_line() .. '\r\n' })
-end, { desc = 'send command to term' })
+end, { desc = '[v]im [t]erminal send line ' })
 
 return {}
