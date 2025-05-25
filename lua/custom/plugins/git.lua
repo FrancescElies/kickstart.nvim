@@ -10,8 +10,8 @@ vim.keymap.set('n', '<leader>gb', telebin.git_branches, { desc = '[G]it [B]ranch
 vim.keymap.set('n', '<leader>gL', telebin.git_bcommits, { desc = '[G]it [L]og this [B]uffer' })
 vim.keymap.set('n', '<leader>gl', telebin.git_commits, { desc = '[G]it [L]og' })
 vim.keymap.set('n', '<leader>gf', telebin.git_files, { desc = '[G]it [F]iles' })
-vim.keymap.set('n', '<leader>gs', telebin.git_status, { desc = '[G]it [S]tatus' })
-vim.keymap.set('n', '<leader>gc', ':Git commit', { desc = '[G]it [S]tatus' })
+vim.keymap.set('n', '<M-s>', telebin.git_status, { desc = '[G]it [S]tatus' })
+vim.keymap.set('n', '<leader>gc', ':Git commit<cr>', { desc = '[G]it [c]ommit' })
 vim.keymap.set('n', '<leader>gz', telebin.git_stash, { desc = '[G]it zstash' })
 
 vim.api.nvim_create_augroup('my_git_commands', { clear = true })
@@ -30,7 +30,7 @@ return {
     'tpope/vim-fugitive',
     opts = {},
     keys = {
-      { '<leader>gS', vim.cmd.Git, desc = 'git status' },
+      { '<leader>gs', vim.cmd.Git, desc = 'git status' },
       { '<leader>gP', ':Git! push --force-with-lease -u origin <cr>', desc = '[G]it [P]ush force with lease' },
       { '<leader>gp', ':Git! pull --rebase <cr>', desc = '[G]it [P]ull rebase' },
     },
