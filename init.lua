@@ -423,6 +423,12 @@ require('lazy').setup({
           ['ui-select'] = {
             require('telescope.themes').get_dropdown(),
           },
+          repo = {
+            list = {
+              fd_opts = { '--no-ignore-vcs' },
+              search_dirs = { '~/src' },
+            },
+          },
         },
       }
 
