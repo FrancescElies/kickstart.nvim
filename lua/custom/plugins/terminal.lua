@@ -9,15 +9,27 @@ vim.keymap.set('t', '<c-_>', '<cmd>close<cr>', { desc = 'which_key_ignore' })
 
 local set = vim.opt_local
 
+local group = vim.api.nvim_create_augroup('custom-term-open', {})
 -- Set local settings for terminal buffers
 vim.api.nvim_create_autocmd('TermOpen', {
-  group = vim.api.nvim_create_augroup('custom-term-open', {}),
+  group = group,
   callback = function()
     set.number = false
     set.relativenumber = false
     set.scrolloff = 0
 
     vim.bo.filetype = 'terminal'
+  end,
+})
+
+-- make sure we are on insert mode when entering the terminal
+vim.api.nvim_create_autocmd({ 'TermOpen', 'BufEnter' }, {
+  pattern = { '*' },
+  group = group,
+  callback = function()
+    if vim.opt.buftype:get() == 'terminal' then
+      vim.cmd ':startinsert'
+    end
   end,
 })
 
@@ -28,6 +40,11 @@ vim.keymap.set('n', ',st', function()
   vim.api.nvim_win_set_height(0, 12)
   vim.wo.winfixheight = true
   vim.cmd.term()
-end)
+  TERM_CHANNELNR = vim.bo.channel
+end, { desc = 'small terminal' })
+
+vim.keymap.set('n', ',sc', function()
+  vim.fn.chansend(TERM_CHANNELNR, { vim.api.nvim_get_current_line() .. '\r\n' })
+end, { desc = 'send command to term' })
 
 return {}
