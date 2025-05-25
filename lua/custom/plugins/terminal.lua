@@ -33,11 +33,14 @@ vim.api.nvim_create_autocmd('TermOpen', {
 --   end,
 -- })
 
+local function reset_window_bottom_small()
+  vim.cmd.wincmd 'J'
+  vim.api.nvim_win_set_height(0, 15)
+end
 -- Open a terminal at the bottom of the screen with a fixed height.
 vim.keymap.set('n', '<leader>vte', function()
   vim.cmd.new()
-  vim.cmd.wincmd 'J'
-  vim.api.nvim_win_set_height(0, 12)
+  reset_window_bottom_small()
   vim.wo.winfixheight = true
   vim.cmd.term()
   TERM_CHANNELNR = vim.bo.channel
@@ -46,5 +49,9 @@ end, { desc = '[v]im [t][e]rminal' })
 vim.keymap.set('n', '<leader>vtl', function()
   vim.fn.chansend(TERM_CHANNELNR, { vim.api.nvim_get_current_line() .. '\r\n' })
 end, { desc = '[v]im [t]erminal send [l]ine ' })
+
+vim.keymap.set('n', '<leader>vtr', function()
+  reset_window_bottom_small()
+end, { desc = '[v]im [t]erminal [r]eset size' })
 
 return {}
