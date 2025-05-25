@@ -89,11 +89,12 @@ function vim.getVisualSelection()
 end
 
 -- Reload configuration
-vim.keymap.set('n', '<leader>lf', ':luafile %<cr>', { desc = 'load Luafile' })
-vim.keymap.set('n', '<leader>ll', ':.lua<cr>', { desc = 'load Luafile' })
-vim.keymap.set('v', '<leader>l', ':lua<cr>', { desc = 'load Luaregion' })
-vim.keymap.set('n', '<leader>tf', ':FormatToggle<CR>', { desc = 'toggle Format' })
+vim.keymap.set('n', '<leader>lf', ':luafile %<cr>', { desc = 'load Lua file' })
+vim.keymap.set('n', '<leader>l', ':.lua<cr>', { desc = 'load Lua line' })
+vim.keymap.set('v', '<leader>l', ':lua<cr>', { desc = 'load Lua region' })
+
 vim.keymap.set('n', '<leader>vm', ":new | put=execute('messages')<cr>", { desc = 'Vim messages' })
+vim.keymap.set('n', '<leader>tf', ':FormatToggle<CR>', { desc = 'toggle Format' })
 vim.keymap.set('n', '<leader>tn', toggle_number, { desc = 'toggle line Number' })
 vim.keymap.set('n', '<leader>ti', toggle_inline_diagnostic, { desc = 'toggle inline Diagnostic' })
 vim.keymap.set('n', '<leader>ts', ':set invhlsearch<cr>', { desc = 'toggle Highlight search' })
