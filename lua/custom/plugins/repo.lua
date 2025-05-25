@@ -9,6 +9,7 @@ return {
     require('telescope').load_extension 'repo'
   end,
   dependencies = {
+    -- cargo install lolcate-rs
     'nvim-telescope/telescope.nvim',
   },
 }
