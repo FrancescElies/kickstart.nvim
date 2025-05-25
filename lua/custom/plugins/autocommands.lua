@@ -56,7 +56,7 @@ local function find_typescript_for_javascript_file()
   end
 end
 
-vim.api.nvim_create_user_command('FindTSForCurrentJSfile', find_typescript_for_javascript_file, {})
+vim.api.nvim_create_user_command('MyFindTSForCurrentJSfile', find_typescript_for_javascript_file, {})
 
 -- When opening a javascript file opens it's associated
 -- typescript file if a mapping is found
@@ -69,14 +69,14 @@ vim.api.nvim_create_user_command('FindTSForCurrentJSfile', find_typescript_for_j
 -- })
 
 local function get_buffer_by_name_or_scratch(name, clean)
-  for _, buffer in ipairs(vim.api.nvim_list_bufs()) do
-    local buf_name = vim.fn.bufname(buffer)
+  for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
+    local buf_name = vim.fn.bufname(bufnr)
     if buf_name == name then
       if clean then
-        vim.api.nvim_buf_set_lines(buffer, -0, -1, false, {})
+        vim.api.nvim_buf_set_lines(bufnr, -0, -1, false, {})
       end
       -- buffer found
-      return buffer
+      return bufnr
     end
   end
 
@@ -86,23 +86,19 @@ local function get_buffer_by_name_or_scratch(name, clean)
   return buffer
 end
 
-local function attach_to_buffer(pattern, command)
+local function attach_to_buffer(bufnr, pattern, command)
   vim.api.nvim_create_autocmd('BufWritePost', {
 
-    group = vim.api.nvim_create_augroup('AutoRun', { clear = true }),
+    group = vim.api.nvim_create_augroup('MyAutoRun', { clear = true }),
     pattern = pattern,
     callback = function()
-      local src_buf_name = vim.api.nvim_buf_get_name(vim.api.nvim_get_current_buf())
-      local buffer = get_buffer_by_name_or_scratch(src_buf_name .. ':autorun')
       local window = vim.api.nvim_get_current_win()
       -- clear contents
-      vim.api.nvim_buf_set_lines(buffer, 0, -1, false, {})
+      vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, {})
       local function append(_, data)
         if data then
-          vim.api.nvim_buf_set_lines(buffer, -1, -1, false, data)
+          vim.api.nvim_buf_set_lines(bufnr, -1, -1, false, data)
         end
-        -- vim.api.nvim_win_set_buf(window, buffer) -- make buffer visible
-        print 'autorun done'
       end
 
       vim.fn.jobstart(command, {
@@ -116,10 +112,19 @@ end
 
 -- attach_to_buffer('*.ts', { 'npm', 'run', 'build_dev' })
 
-vim.api.nvim_create_user_command('AutoRun', function()
-  local pattern = vim.split(vim.fn.input 'Pattern (*.ts):', ' ')
-  local command = vim.split(vim.fn.input 'Command:', ' ')
-  attach_to_buffer(pattern, command)
+vim.api.nvim_create_user_command('MyAutoRun', function()
+  local pattern = vim.fn.input 'Pattern (*.ts):'
+  local command = vim.fn.input 'Command:'
+
+  -- create new split
+  vim.cmd.new()
+  vim.cmd.wincmd 'J'
+  vim.api.nvim_win_set_height(0, 12)
+  vim.wo.winfixheight = true
+  local bufnr = get_buffer_by_name_or_scratch('autorun for ' .. pattern .. ': ' .. command)
+  vim.api.nvim_win_set_buf(vim.api.nvim_get_current_win(), bufnr)
+
+  attach_to_buffer(bufnr, vim.split(pattern, ' '), vim.split(command, ' '))
 end, {})
 
 return {}

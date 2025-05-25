@@ -16,8 +16,8 @@ vim.o.wrap = true
 
 -- https://www.reddit.com/r/neovim/comments/zhweuc/whats_a_fast_way_to_load_the_output_of_a_command/
 -- Example:
--- :Redir =vim.lsp.get_active_clients()
-vim.api.nvim_create_user_command('Redir', function(ctx)
+-- :MyRedir =vim.lsp.get_active_clients()
+vim.api.nvim_create_user_command('MyRedir', function(ctx)
   local result = vim.api.nvim_exec2(ctx.args, { output = true })
   local lines = vim.split(result.output, '\n', { plain = true })
   vim.cmd 'new'
@@ -25,16 +25,18 @@ vim.api.nvim_create_user_command('Redir', function(ctx)
   vim.opt_local.modified = false
 end, { nargs = '+', complete = 'command' })
 
-vim.api.nvim_create_user_command('CdCurrentBufferDir', function()
+vim.api.nvim_create_user_command('CdBufParentDir', function()
   local path = vim.fn.expand '%:p:h'
   print('cd ' .. path)
   vim.api.nvim_set_current_dir(path)
 end, {})
+vim.keymap.set('n', '<leader>bcp', '<cmd>CdBufParentDir<cr>', { desc = '[b]uffer [c]d parent [d]ir' })
 
-vim.api.nvim_create_user_command('CdCurrentBufferGitRoot', function()
-  vim.cmd.CdCurrentBufferDir()
+vim.api.nvim_create_user_command('CdBufGitRoot', function()
+  vim.cmd.CdBufParentDir()
   vim.cmd.CdGitRoot()
 end, {})
+vim.keymap.set('n', '<leader>bcg', '<cmd>CdBufGitRoot<cr>', { desc = '[b]uffer [c]d [g]it root' })
 
 vim.api.nvim_create_user_command('CdGitRoot', function()
   Job:new({
