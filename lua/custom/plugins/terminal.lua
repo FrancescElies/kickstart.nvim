@@ -34,17 +34,17 @@ vim.api.nvim_create_autocmd('TermOpen', {
 -- })
 
 -- Open a terminal at the bottom of the screen with a fixed height.
-vim.keymap.set('n', '<leader>vt', function()
+vim.keymap.set('n', '<leader>vte', function()
   vim.cmd.new()
   vim.cmd.wincmd 'J'
   vim.api.nvim_win_set_height(0, 12)
   vim.wo.winfixheight = true
   vim.cmd.term()
   TERM_CHANNELNR = vim.bo.channel
-end, { desc = '[v]im [t]erminal' })
+end, { desc = '[v]im [t][e]rminal' })
 
 vim.keymap.set('n', '<leader>vtl', function()
   vim.fn.chansend(TERM_CHANNELNR, { vim.api.nvim_get_current_line() .. '\r\n' })
-end, { desc = '[v]im [t]erminal send line ' })
+end, { desc = '[v]im [t]erminal send [l]ine ' })
 
 return {}
