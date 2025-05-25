@@ -43,20 +43,17 @@ vim.keymap.set('n', 'ı', 'i')
 vim.keymap.set('n', 'za', '1z=', { desc = 'fix word under cursor' }) --  https://nanotipsforvim.prose.sh/autofix-misspellings
 
 -- buffer
-vim.keymap.set('n', '<leader>bb', '<cmd>e #<cr>', { desc = 'Switch to Other Buffer' })
 vim.keymap.set('n', '<leader>`', '<cmd>e #<cr>', { desc = 'Switch to Other Buffer' })
 
 -- Move to next and previous buffer with ease
-vim.keymap.set('n', '[b', '<cmd>bprevious<cr>', { desc = 'Prev buffer' })
-vim.keymap.set('n', ']b', '<cmd>bnext<cr>', { desc = 'Next buffer' })
+vim.keymap.set('n', '<M-h>', '<cmd>bprevious<cr>', { desc = 'Prev buffer' })
+vim.keymap.set('n', '<M-l>', '<cmd>bnext<cr>', { desc = 'Next buffer' })
 
 -- quickfix
-vim.keymap.set('n', '<C-p>', '<cmd>cprevious<cr>zz', { desc = 'QuickfiX previous' })
-vim.keymap.set('n', '<C-n>', '<cmd>cnext<cr>zz', { desc = 'QuickfiX next' })
-vim.keymap.set('n', '[q', '<cmd>cprevious<cr>zz', { desc = 'Quickfix previous' })
-vim.keymap.set('n', ']q', '<cmd>cnext<cr>zz', { desc = 'Quickfix next' })
-vim.keymap.set('n', '[Q', '<cmd>cfirst<cr>zz', { desc = 'Quickfix First' })
-vim.keymap.set('n', ']Q', '<cmd>clast<cr>zz', { desc = 'Quickfix Last' })
+vim.keymap.set('n', '<M-k>', '<cmd>cprevious<cr>zz', { desc = 'QuickfiX previous' })
+vim.keymap.set('n', '<M-j>', '<cmd>cnext<cr>zz', { desc = 'QuickfiX next' })
+vim.keymap.set('n', '<M-K>', '<cmd>lprevious<cr>zz', { desc = 'LocList previous' })
+vim.keymap.set('n', '<M-J>', '<cmd>lnext<cr>zz', { desc = 'LocList next' })
 
 -- Keep things vertically centered during searches
 -- vim.keymap.set('n', '<C-d>', '<C-d>zz')
