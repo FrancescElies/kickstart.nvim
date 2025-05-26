@@ -46,11 +46,13 @@ vim.keymap.set('n', 'za', '1z=', { desc = 'fix word under cursor' }) --  https:/
 vim.keymap.set('n', '<leader>`', '<cmd>e #<cr>', { desc = 'Switch to Other Buffer' })
 
 -- Move to next and previous buffer with ease
-vim.keymap.set('n', '<M-h>', '<cmd>bprevious<cr>', { desc = 'Prev buffer' })
-vim.keymap.set('n', '<M-l>', '<cmd>bnext<cr>', { desc = 'Next buffer' })
+vim.keymap.set('n', '<M-B>', '<cmd>bprevious<cr>', { desc = 'Prev buffer' })
+vim.keymap.set('n', '<M-b>', '<cmd>bnext<cr>', { desc = 'Next buffer' })
+vim.keymap.set('n', '[b', '<cmd>bprevious<cr>', { desc = 'Prev buffer' })
+vim.keymap.set('n', ']b', '<cmd>bnext<cr>', { desc = 'Next buffer' })
 
 -- quickfix
-vim.keymap.set('n', '<C-Q>', '<cmd>cprevious<cr>zz', { desc = 'QuickfiX previous' })
+vim.keymap.set('n', '<M-Q>', '<cmd>cprevious<cr>zz', { desc = 'QuickfiX previous' })
 vim.keymap.set('n', '<M-q>', '<cmd>cnext<cr>zz', { desc = 'QuickfiX next' })
 vim.keymap.set('n', '[q', '<cmd>cprevious<cr>zz', { desc = 'QuickfiX previous' })
 vim.keymap.set('n', ']q>', '<cmd>cnext<cr>zz', { desc = 'QuickfiX next' })
