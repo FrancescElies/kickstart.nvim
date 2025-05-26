@@ -50,10 +50,12 @@ vim.keymap.set('n', '<M-h>', '<cmd>bprevious<cr>', { desc = 'Prev buffer' })
 vim.keymap.set('n', '<M-l>', '<cmd>bnext<cr>', { desc = 'Next buffer' })
 
 -- quickfix
-vim.keymap.set('n', '<M-k>', '<cmd>cprevious<cr>zz', { desc = 'QuickfiX previous' })
-vim.keymap.set('n', '<M-j>', '<cmd>cnext<cr>zz', { desc = 'QuickfiX next' })
-vim.keymap.set('n', '<M-K>', '<cmd>lprevious<cr>zz', { desc = 'LocList previous' })
-vim.keymap.set('n', '<M-J>', '<cmd>lnext<cr>zz', { desc = 'LocList next' })
+vim.keymap.set('n', '<C-Q>', '<cmd>cprevious<cr>zz', { desc = 'QuickfiX previous' })
+vim.keymap.set('n', '<M-q>', '<cmd>cnext<cr>zz', { desc = 'QuickfiX next' })
+vim.keymap.set('n', '[q', '<cmd>cprevious<cr>zz', { desc = 'QuickfiX previous' })
+vim.keymap.set('n', ']q>', '<cmd>cnext<cr>zz', { desc = 'QuickfiX next' })
+vim.keymap.set('n', '[l', '<cmd>lprevious<cr>zz', { desc = 'LocList previous' })
+vim.keymap.set('n', ']l', '<cmd>lnext<cr>zz', { desc = 'LocList next' })
 
 -- Keep things vertically centered during searches
 -- vim.keymap.set('n', '<C-d>', '<C-d>zz')
