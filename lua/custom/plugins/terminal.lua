@@ -38,20 +38,20 @@ local function reset_window_bottom_small()
   vim.api.nvim_win_set_height(0, 15)
 end
 -- Open a terminal at the bottom of the screen with a fixed height.
-vim.keymap.set('n', '<localleader>tt', function()
+vim.keymap.set('n', '<localleader>st', function()
   vim.cmd.new()
   reset_window_bottom_small()
   vim.wo.winfixheight = true
   vim.cmd.term()
   TERM_CHANNELNR = vim.bo.channel
-end, { desc = '[t]erminal' })
+end, { desc = '[s]mall [t]erminal' })
 
-vim.keymap.set('n', '<localleader>tl', function()
+vim.keymap.set('n', '<localleader>sl', function()
   vim.fn.chansend(TERM_CHANNELNR, { vim.api.nvim_get_current_line() .. '\r\n' })
-end, { desc = '[t]erminal send [l]ine ' })
+end, { desc = '[s]end [l]ine to terminal' })
 
-vim.keymap.set('n', '<localleader>tr', function()
+vim.keymap.set('n', '<localleader>sr', function()
   reset_window_bottom_small()
-end, { desc = '[t]erminal [r]eset size' })
+end, { desc = '[s]mall[t]erminal [r]eset size' })
 
 return {}
