@@ -50,6 +50,8 @@ vim.keymap.set('n', '<M-B>', '<cmd>bprevious<cr>', { desc = 'Prev buffer' })
 vim.keymap.set('n', '<M-b>', '<cmd>bnext<cr>', { desc = 'Next buffer' })
 vim.keymap.set('n', '[b', '<cmd>bprevious<cr>', { desc = 'Prev buffer' })
 vim.keymap.set('n', ']b', '<cmd>bnext<cr>', { desc = 'Next buffer' })
+vim.keymap.set('n', '[t', '<cmd>tabprevious<cr>', { desc = 'Prev tab' })
+vim.keymap.set('n', ']t', '<cmd>tabnext<cr>', { desc = 'Next tab' })
 
 -- quickfix
 vim.keymap.set('n', '<M-Q>', '<cmd>cprevious<cr>zz', { desc = 'QuickfiX previous' })
