@@ -57,7 +57,7 @@ vim.keymap.set('n', ']t', '<cmd>tabnext<cr>', { desc = 'Next tab' })
 vim.keymap.set('n', '<M-Q>', '<cmd>cprevious<cr>zz', { desc = 'QuickfiX previous' })
 vim.keymap.set('n', '<M-q>', '<cmd>cnext<cr>zz', { desc = 'QuickfiX next' })
 vim.keymap.set('n', '[q', '<cmd>cprevious<cr>zz', { desc = 'QuickfiX previous' })
-vim.keymap.set('n', ']q>', '<cmd>cnext<cr>zz', { desc = 'QuickfiX next' })
+vim.keymap.set('n', ']q', '<cmd>cnext<cr>zz', { desc = 'QuickfiX next' })
 vim.keymap.set('n', '[l', '<cmd>lprevious<cr>zz', { desc = 'LocList previous' })
 vim.keymap.set('n', ']l', '<cmd>lnext<cr>zz', { desc = 'LocList next' })
 
@@ -92,7 +92,6 @@ function vim.getVisualSelection()
 end
 
 -- Reload configuration
-vim.keymap.set('n', '<leader>lf', ':luafile %<cr>', { desc = 'load Lua file' })
 vim.keymap.set('n', '<leader>l', ':.lua<cr>', { desc = 'load Lua line' })
 vim.keymap.set('v', '<leader>l', ':lua<cr>', { desc = 'load Lua region' })
 

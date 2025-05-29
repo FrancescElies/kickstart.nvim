@@ -1,4 +1,5 @@
 vim.api.nvim_create_augroup('bufcheck', { clear = true })
+vim.api.nvim_create_augroup('markdown', { clear = true })
 
 -- auto create intermediate directories on save
 vim.api.nvim_create_autocmd({ 'FileWritePre', 'BufWritePre' }, {
@@ -29,6 +30,16 @@ vim.api.nvim_create_autocmd('BufReadPost', {
       -- vim.cmd('normal zz') -- how do I center the buffer in a sane way??
       vim.cmd 'silent! foldopen'
     end
+  end,
+})
+
+vim.api.nvim_create_autocmd('BufReadPost', {
+  group = 'markdown',
+  pattern = '*.md',
+  -- command = 'setlocal wrap | setlocal spell',
+  callback = function(_)
+    vim.wo.wrap = true
+    vim.wo.spell = true
   end,
 })
 

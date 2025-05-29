@@ -88,7 +88,7 @@ P.S. You can delete this when you're done too. It's your config now! :)
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
 vim.g.mapleader = ' '
-vim.g.maplocalleader = ','
+vim.g.maplocalleader = ' '
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
@@ -351,6 +351,12 @@ require('lazy').setup({
         { '<leader>g', group = '[G]it', mode = { 'n', 'v' } },
         { '<leader>gd', group = '[G]it [D]iff', mode = { 'n', 'v' } },
         { '<leader>r', group = '[R]eplace', mode = { 'v' } },
+        { '<leader>T', group = '[T]erminal' },
+        { '<leader>n', group = '[n]otes' },
+        { '<leader>p', group = '[p]roject' },
+        { '<leader>c', group = '[c]ode' },
+        { '<leader>v', group = '[v]im' },
+        { '<leader>b', group = '[b]uffer' },
       },
     },
   },
