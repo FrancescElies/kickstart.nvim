@@ -95,8 +95,9 @@ function vim.getVisualSelection()
 end
 
 -- Reload configuration
-vim.keymap.set('n', '<leader>l', ':.lua<cr>', { desc = 'load Lua line' })
-vim.keymap.set('v', '<leader>l', ':lua<cr>', { desc = 'load Lua region' })
+vim.keymap.set('n', '<leader><leader>l', ':source %<cr>', { desc = 'load [L]ua file' })
+vim.keymap.set('n', '<leader>l', ':.lua<cr>', { desc = 'load [L]ua line' })
+vim.keymap.set('v', '<leader>l', ':lua<cr>', { desc = 'load [L]ua region' })
 
 vim.keymap.set('n', '<leader>vm', ":new | put=execute('messages')<cr>", { desc = 'Vim messages' })
 vim.keymap.set('n', '<leader>tf', ':FormatToggle<CR>', { desc = 'toggle Format' })
