@@ -44,14 +44,27 @@ return {
     opts = {},
     keys = {
       { '<leader>gdf', ':DiffviewFileHistory %<cr>', desc = '[G]it [D]iff [F]ile history' },
-      { '<leader>gdd', ':DiffviewFileHistory', desc = '[G]it [D]iff history' },
-      { '<leader>gdb', ':DiffviewOpen', desc = '[G]it [D]iff [O]pen (merge conflicts)' },
+      { '<leader>gdh', ':DiffviewFileHistory', desc = '[G]it [D]iff [H]istory' },
+      { '<leader>gdo', ':DiffviewOpen ', desc = '[G]it [D]iff [O]pen (merge conflicts)' },
       { '<leader>gdb', ':DiffviewOpen origin/main...HEAD', desc = '[G]it [D]iff merge [B]ase' },
+      { '<leader>gdc', ':DiffviewClose<cr>', desc = '[G]it [D]iff [C]lose' },
+      -- { '<leader>gdl', ':AdvancedGitSearch diff_commit_line<cr>', mode = { 'n', 'v' }, desc = '[G]it [D]iff [L]ine' },
       { '<leader>gdt', ":'<,'>DiffviewOpen origin/main...HEAD", desc = '[G]it [D]iff [T]race line evolution' },
+      -- Examples
+      -- :DiffviewOpen
+      -- :DiffviewOpen HEAD~2
+      -- :DiffviewOpen HEAD~4..HEAD~2
+      -- :DiffviewOpen d4a7b0d
+      -- :DiffviewOpen d4a7b0d^!
+      -- :DiffviewOpen d4a7b0d..519b30e
+      -- :DiffviewOpen origin/main...HEAD
+      --
+      -- Additional commands for convenience
       -- :DiffviewClose: Close the current diffview. You can also use :tabclose.
       -- :DiffviewToggleFiles: Toggle the file panel.
       -- :DiffviewFocusFiles: Bring focus to the file panel.
       -- :DiffviewRefresh: Update stats and entries in the file list of the current Diffview.
+      --
     },
   },
   {
