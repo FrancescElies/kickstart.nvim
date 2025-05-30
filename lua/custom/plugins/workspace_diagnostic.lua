@@ -1,11 +1,16 @@
 -- good for getting lsp diagnostics accross the whole project
-vim.api.nvim_create_user_command('MyOpenSimilarFiles', function()
+function open_similar_files()
   local root = vim.fs.root(0, '.git')
-  local files = vim.fn.split(vim.fn.system('git ls-files ' .. root), '\n')
+
+  local files = vim.fn.split(vim.system({ 'git', 'ls-files' }, { text = true, cwd = root }):wait().stdout, '\n')
+  for i, file in ipairs(files) do
+    files[i] = vim.fs.joinpath(root, file)
+  end
+
   local buf = vim.api.nvim_get_current_buf()
   local buffers = {}
-  for i, buffer in pairs(vim.api.nvim_list_bufs()) do
-    buffers[vim.api.nvim_buf_get_name(buffer)] = true
+  for _, buffer in pairs(vim.api.nvim_list_bufs()) do
+    buffers[vim.fs.normalize(vim.api.nvim_buf_get_name(buffer))] = true
   end
   local filetype = vim.api.nvim_get_option_value('filetype', { buf = buf })
 
@@ -17,7 +22,7 @@ vim.api.nvim_create_user_command('MyOpenSimilarFiles', function()
     return vim.fn.fnamemodify(path, ':p')
   end, files)
 
-  for _, path in ipairs(files) do
+  for _, path in pairs(files) do
     if vim.fn.fnamemodify(path, ':e') == filetype then
       if not buffers[path] then
         local buffer = vim.api.nvim_create_buf(true, false)
@@ -26,7 +31,11 @@ vim.api.nvim_create_user_command('MyOpenSimilarFiles', function()
       end
     end
   end
-end, {})
+end
+
+vim.api.nvim_create_user_command('MyOpenSimilarFiles', open_similar_files, {})
+
+vim.keymap.set('n', '<leader>fs', '<cmd>MyOpenSimilarFiles<cr>', { desc = '[f]ile open [s]imilar]' })
 
 -- vim.api.nvim_set_keymap('n', '<leader>x', '', {
 --   noremap = true,
