@@ -346,12 +346,11 @@ require('lazy').setup({
       -- Document existing key chains
       spec = {
         { '<leader>s', group = '[S]earch' },
-        { '<leader>t', group = '[T]oggle' },
         { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
         { '<leader>g', group = '[G]it', mode = { 'n', 'v' } },
         { '<leader>gd', group = '[G]it [D]iff', mode = { 'n', 'v' } },
         { '<leader>r', group = '[R]eplace', mode = { 'v' } },
-        { '<leader>T', group = '[T]erminal' },
+        { '<leader>t', group = '[T]erminal' },
         { '<leader>n', group = '[n]otes' },
         { '<leader>p', group = '[p]roject' },
         { '<leader>c', group = '[c]ode' },
@@ -645,7 +644,7 @@ require('lazy').setup({
           --
           -- This may be unwanted, since they displace some of your code
           if client and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_inlayHint, event.buf) then
-            map('<leader>th', function()
+            map('<leader>vth', function()
               vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
             end, '[T]oggle inlay h[i]nts')
           end

@@ -24,7 +24,7 @@ return {
       'nvim-treesitter/nvim-treesitter',
     },
     keys = {
-      { '<leader>tc', ':TSContextToggle<CR>', desc = 'treesitter context toggle' },
+      { '<leader>vtc', ':TSContextToggle<CR>', desc = 'treesitter context toggle' },
     },
     config = function()
       ---@diagnostic disable-next-line: missing-fields

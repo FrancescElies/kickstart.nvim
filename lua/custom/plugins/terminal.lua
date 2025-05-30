@@ -32,26 +32,84 @@ vim.api.nvim_create_autocmd('TermOpen', {
 --     end
 --   end,
 -- })
-
 local function reset_window_bottom_small()
   vim.cmd.wincmd 'J'
   vim.api.nvim_win_set_height(0, 15)
 end
 -- Open a terminal at the bottom of the screen with a fixed height.
-vim.keymap.set('n', '<leader>To', function()
+vim.keymap.set('n', '<leader>ts', function()
   vim.cmd.new()
   reset_window_bottom_small()
   vim.wo.winfixheight = true
   vim.cmd.term()
   TERM_CHANNELNR = vim.bo.channel
-end, { desc = '[t]erminal [o]pen' })
+end, { desc = '[t]erminal [s]mall' })
 
-vim.keymap.set('n', '<leader>Tl', function()
+vim.keymap.set('n', '<leader>tl', function()
   vim.fn.chansend(TERM_CHANNELNR, { vim.api.nvim_get_current_line() .. '\r\n' })
-end, { desc = '[t]erminal send [l]ine' })
+end, { desc = '[t]erminal small send [l]ine' })
 
-vim.keymap.set('n', '<leader>Tr', function()
+vim.keymap.set('n', '<leader>tr', function()
   reset_window_bottom_small()
-end, { desc = '[t]erminal [r]eset size' })
+end, { desc = '[t]erminal small [r]esize' })
 
+--
+-- https://github.com/tjdevries/advent-of-nvim/blob/master/nvim/plugin/floaterminal.lua
+local state = {
+  floating = {
+    buf = -1,
+    win = -1,
+  },
+}
+
+local function create_floating_window(opts)
+  opts = opts or {}
+  local width = opts.width or math.floor(vim.o.columns * 0.8)
+  local height = opts.height or math.floor(vim.o.lines * 0.8)
+
+  -- Calculate the position to center the window
+  local col = math.floor((vim.o.columns - width) / 2)
+  local row = math.floor((vim.o.lines - height) / 2)
+
+  -- Create a buffer
+  local buf = nil
+  if vim.api.nvim_buf_is_valid(opts.buf) then
+    buf = opts.buf
+  else
+    buf = vim.api.nvim_create_buf(false, true) -- No file, scratch buffer
+  end
+
+  -- Define window configuration
+  local win_config = {
+    relative = 'editor',
+    width = width,
+    height = height,
+    col = col,
+    row = row,
+    style = 'minimal', -- No borders or extra UI elements
+    border = 'rounded',
+  }
+
+  -- Create the floating window
+  local win = vim.api.nvim_open_win(buf, true, win_config)
+
+  return { buf = buf, win = win }
+end
+
+local toggle_terminal = function()
+  if not vim.api.nvim_win_is_valid(state.floating.win) then
+    state.floating = create_floating_window { buf = state.floating.buf }
+    if vim.bo[state.floating.buf].buftype ~= 'terminal' then
+      vim.cmd.terminal()
+    end
+  else
+    vim.api.nvim_win_hide(state.floating.win)
+  end
+end
+
+-- Example usage:
+-- Create a floating window with default dimensions
+vim.api.nvim_create_user_command('Floaterminal', toggle_terminal, {})
+vim.keymap.set('n', '<leader>tt', '<cmd>Floaterminal<cr>', { desc = 'floating terminal' })
+vim.keymap.set({ 'n', 't' }, '<C-,>', '<cmd>Floaterminal<cr>', { desc = 'floating terminal' })
 return {}

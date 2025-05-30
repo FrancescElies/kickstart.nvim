@@ -100,10 +100,10 @@ vim.keymap.set('n', '<leader>l', ':.lua<cr>', { desc = 'load [L]ua line' })
 vim.keymap.set('v', '<leader>l', ':lua<cr>', { desc = 'load [L]ua region' })
 
 vim.keymap.set('n', '<leader>vm', ":new | put=execute('messages')<cr>", { desc = 'Vim messages' })
-vim.keymap.set('n', '<leader>tf', ':FormatToggle<CR>', { desc = 'toggle Format' })
-vim.keymap.set('n', '<leader>tn', toggle_number, { desc = 'toggle line Number' })
-vim.keymap.set('n', '<leader>ti', toggle_inline_diagnostic, { desc = 'toggle inline Diagnostic' })
-vim.keymap.set('n', '<leader>ts', ':set invhlsearch<cr>', { desc = 'toggle Highlight search' })
-vim.keymap.set('n', '<leader>tS', ':set invspell<cr>', { desc = 'toggle Spell' })
+vim.keymap.set('n', '<leader>vtf', ':FormatToggle<CR>', { desc = '[v]im toggle Format' })
+vim.keymap.set('n', '<leader>vtn', toggle_number, { desc = '[v]im toggle line Number' })
+vim.keymap.set('n', '<leader>vti', toggle_inline_diagnostic, { desc = '[v]im toggle inline Diagnostic' })
+vim.keymap.set('n', '<leader>vts', ':set invhlsearch<cr>', { desc = '[v]im toggle Highlight search' })
+vim.keymap.set('n', '<leader>vtS', ':set invspell<cr>', { desc = '[v]im toggle Spell' })
 
 return {}
