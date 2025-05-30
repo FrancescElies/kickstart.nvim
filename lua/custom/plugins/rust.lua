@@ -42,7 +42,7 @@
 return {
   --   disable rust-analyzer in lsp-init.lua if this plugin enabled
   'mrcjkb/rustaceanvim',
-  version = '^4', -- Recommended
+  version = '^6', -- Recommended
   lazy = false, -- This plugin is already lazy
 
   config = function()
@@ -60,7 +60,7 @@ return {
           -- see `lsp-init.lua` too
           ['rust-analyzer'] = {
             diagnostics = { experimental = { enable = true } },
-            checkOnSave = false, -- disables running clippy on save
+            checkOnSave = true, -- disables running clippy on save
             -- checkOnSave = { command = 'clippy', enable = true },
           },
         },
