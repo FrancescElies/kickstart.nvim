@@ -19,6 +19,12 @@ return {
       winbar = '%!v:lua.get_oil_winbar()',
     },
     keymaps = {
+      ['<C-h>'] = false,
+      ['<C-l>'] = false,
+      ['<C-k>'] = false,
+      ['<C-j>'] = false,
+      ['<C-s>'] = { 'actions.select', opts = { vertical = true } },
+      ['<C-S-s>'] = { 'actions.select', opts = { horizontal = true } },
       ['gd'] = {
         desc = 'Toggle file detail view',
         callback = function()
@@ -34,7 +40,7 @@ return {
   },
   dependencies = { 'nvim-tree/nvim-web-devicons' },
   keys = {
-    { '-', ':Oil --float<cr>', desc = 'open parent dir' },
-    { '<leader>fd', ':Oil --float<cr>', desc = 'open parent [d]dir' },
+    { '-', '<cmd>Oil<cr>', desc = 'open parent dir' },
+    { '<leader>fd', ':Oil --float<cr>', desc = '[f]ile open parent [d]dir' },
   },
 }
