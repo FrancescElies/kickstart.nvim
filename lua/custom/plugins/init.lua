@@ -11,8 +11,6 @@ function p(v)
   print(vim.inspect(v))
 end
 
-vim.o.wrap = true
-
 -- https://www.reddit.com/r/neovim/comments/zhweuc/whats_a_fast_way_to_load_the_output_of_a_command/
 -- Example:
 -- :MyRedir =vim.lsp.get_active_clients()
@@ -39,7 +37,30 @@ function region_to_text(region)
   return text
 end
 
-return {
-  -- automatically follow symlinks
-  -- { 'aymericbeaumet/vim-symlink', dependencies = { 'moll/vim-bbye' } },
-}
+vim.o.wrap = true
+vim.o.shell = 'nu'
+vim.o.swapfile = false
+
+-- Don't have `o` add a comment
+vim.o.formatoptions = vim.o.formatoptions:gsub('o', '')
+
+if vim.env.SSH_CONNECTION then
+  local function vim_paste()
+    local content = vim.fn.getreg '"'
+    return vim.split(content, '\n')
+  end
+
+  vim.g.clipboard = {
+    name = 'OSC 52',
+    copy = {
+      ['+'] = require('vim.ui.clipboard.osc52').copy '+',
+      ['*'] = require('vim.ui.clipboard.osc52').copy '*',
+    },
+    paste = {
+      ['+'] = vim_paste,
+      ['*'] = vim_paste,
+    },
+  }
+end
+
+return {}
