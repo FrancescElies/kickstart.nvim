@@ -35,8 +35,26 @@ return {
     })
   end,
   keys = {
-    { '<leader>ss', require('resession').save, desc = '[s]ession [s]ave' },
-    { '<leader>sl', require('resession').load, desc = '[s]ession [l]oad' },
-    { '<leader>sd', require('resession').delete, desc = '[s]ession [d]elete' },
+    {
+      '<leader>ss',
+      function()
+        require('resession').save()
+      end,
+      desc = '[s]ession [s]ave',
+    },
+    {
+      '<leader>sl',
+      function()
+        require('resession').load()
+      end,
+      desc = '[s]ession [l]oad',
+    },
+    {
+      '<leader>sd',
+      function()
+        require('resession').delete()
+      end,
+      desc = '[s]ession [d]elete',
+    },
   },
 }
