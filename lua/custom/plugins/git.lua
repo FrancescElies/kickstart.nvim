@@ -10,7 +10,7 @@ vim.keymap.set('n', '<leader>gb', telebin.git_branches, { desc = '[G]it [B]ranch
 vim.keymap.set('n', '<leader>gL', telebin.git_bcommits, { desc = '[G]it [L]og this [B]uffer' })
 vim.keymap.set('n', '<leader>gl', telebin.git_commits, { desc = '[G]it [L]og' })
 vim.keymap.set('n', '<leader>gf', telebin.git_files, { desc = '[G]it [F]iles' })
-vim.keymap.set('n', '<M-s>', telebin.git_status, { desc = '[G]it [S]tatus' })
+vim.keymap.set('n', '<localleader>s', telebin.git_status, { desc = '[G]it [S]tatus' })
 vim.keymap.set('n', '<leader>gz', telebin.git_stash, { desc = '[G]it zstash' })
 
 vim.api.nvim_create_augroup('my_git_commands', { clear = true })

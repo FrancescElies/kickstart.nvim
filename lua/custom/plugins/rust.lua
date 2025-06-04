@@ -4,7 +4,7 @@
 --https://github.com/dsully/nvim/blob/ddcd5971bc061440d3b0e798ffa15edfd6a7f77b/after/ftplugin/rust.lua#L1
 -- if vim.fn.executable 'codesort' == 1 then
 --   --
---   keys.bmap('<leader>cs', function()
+--   keys.bmap('<localleader>cs', function()
 --     --
 --     local result = vim
 --       .system({
@@ -25,7 +25,7 @@
 --     end
 --   end, 'Sort code', bufnr)
 --
---   keys.xmap('<leader>cs', function()
+--   keys.xmap('<localleader>cs', function()
 --     local start_line = vim.api.nvim_buf_get_mark(0, '<')[1]
 --     local end_line = vim.api.nvim_buf_get_mark(0, '>')[1]
 --
@@ -77,24 +77,24 @@ return {
         end
 
         if vim.bo.filetype == 'rust' then
-          rust_keymap('<leader>cD', ':RustLsp openDocs<cr>', '[o]pen docs')
-          rust_keymap('<leader>cE', ':RustLsp expandMacro<cr>', '[e]xpand macros')
-          rust_keymap('<leader>cP', ':RustLsp rebuildProcMacros<cr>', 'rebuild [p]roc macros')
-          rust_keymap('<leader>cR', ':RustLsp runnables', 'show [r]unnables')
-          rust_keymap('<leader>ca', ':RustLsp codeAction<cr>', 'code [a]ction')
-          rust_keymap('<leader>cd', ':RustLsp renderDiagnostic', 'render [d]iagnostic') --  Useful for solving bugs around borrowing and generics, as it consolidates the important bits (sometimes across files) together.
-          rust_keymap('<leader>ce', ':RustLsp explainError', '[e]xplain error')
-          rust_keymap('<leader>cf', ':RustLsp flyCheck ', '[f]ly check')
-          rust_keymap('<leader>ch', ':RustLsp hover ', '[h]over actions|range')
-          rust_keymap('<leader>cj', ':RustLsp joinLines<cr>', 'join lines')
-          rust_keymap('<leader>cm', ':RustLsp moveItem ', '[m]ove up|down')
-          rust_keymap('<leader>co', ':RustLsp openCargo<cr>', '[o]pen cargo')
-          rust_keymap('<leader>cp', ':RustLsp parentModule', '[p]arent module')
-          rust_keymap('<leader>cr', ':RustLsp run', '[r]un target current position')
-          rust_keymap('<leader>cs', ':RustLsp ssr ', 'structural search and replace')
-          rust_keymap('<leader>ct', ':RustLsp testables', 'tests[!]')
-          rust_keymap('<leader>cv', ':RustLsp view ', '[v]iew hir|mir')
-          rust_keymap('<leader>cw', ':RustLsp workspaceSymbol ', '[w]orkspace symbol')
+          rust_keymap('<localleader>cD', ':RustLsp openDocs<cr>', '[o]pen docs')
+          rust_keymap('<localleader>cE', ':RustLsp expandMacro<cr>', '[e]xpand macros')
+          rust_keymap('<localleader>cP', ':RustLsp rebuildProcMacros<cr>', 'rebuild [p]roc macros')
+          rust_keymap('<localleader>cR', ':RustLsp runnables', 'show [r]unnables')
+          rust_keymap('<localleader>ca', ':RustLsp codeAction<cr>', 'code [a]ction')
+          rust_keymap('<localleader>cd', ':RustLsp renderDiagnostic', 'render [d]iagnostic') --  Useful for solving bugs around borrowing and generics, as it consolidates the important bits (sometimes across files) together.
+          rust_keymap('<localleader>ce', ':RustLsp explainError', '[e]xplain error')
+          rust_keymap('<localleader>cf', ':RustLsp flyCheck ', '[f]ly check')
+          rust_keymap('<localleader>ch', ':RustLsp hover ', '[h]over actions|range')
+          rust_keymap('<localleader>cj', ':RustLsp joinLines<cr>', 'join lines')
+          rust_keymap('<localleader>cm', ':RustLsp moveItem ', '[m]ove up|down')
+          rust_keymap('<localleader>co', ':RustLsp openCargo<cr>', '[o]pen cargo')
+          rust_keymap('<localleader>cp', ':RustLsp parentModule', '[p]arent module')
+          rust_keymap('<localleader>cr', ':RustLsp run', '[r]un target current position')
+          rust_keymap('<localleader>cs', ':RustLsp ssr ', 'structural search and replace')
+          rust_keymap('<localleader>ct', ':RustLsp testables', 'tests[!]')
+          rust_keymap('<localleader>cv', ':RustLsp view ', '[v]iew hir|mir')
+          rust_keymap('<localleader>cw', ':RustLsp workspaceSymbol ', '[w]orkspace symbol')
           -- :RustLsp crateGraph {backend {output}}
           -- :RustLsp syntaxTree
           -- :Rustc unpretty {hir|mir|...}
