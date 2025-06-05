@@ -6,6 +6,24 @@
 -- be extended to other languages as well. That's why it's called
 -- kickstart.nvim and not kitchen-sink.nvim ;)
 
+---@param config {type?:string, args?:string[]|fun():string[]?}
+local function get_args(config)
+  local args = type(config.args) == 'function' and (config.args() or {}) or config.args or {} --[[@as string[] | string ]]
+  local args_str = type(args) == 'table' and table.concat(args, ' ') or args --[[@as string]]
+
+  config = vim.deepcopy(config)
+  ---@cast args string[]
+  config.args = function()
+    local new_args = vim.fn.expand(vim.fn.input('Run with args: ', args_str)) --[[@as string]]
+    if config.type and config.type == 'java' then
+      ---@diagnostic disable-next-line: return-type-mismatch
+      return new_args
+    end
+    return require('dap.utils').splitstr(new_args)
+  end
+  return config
+end
+
 return {
   -- NOTE: Yes, you can install new plugins here!
   'mfussenegger/nvim-dap',
@@ -26,96 +44,36 @@ return {
     'mfussenegger/nvim-dap-python',
     'theHamsta/nvim-dap-virtual-text',
   },
+  -- stylua: ignore
   keys = {
     -- Basic debugging keymaps, feel free to change to your liking!
-    {
-      '<F5>',
-      function()
-        require('dap').continue()
-      end,
-      desc = 'Debug: Start/Continue',
-    },
-    {
-      '<F11>',
-      function()
-        require('dap').step_into()
-      end,
-      desc = 'Debug: Step Into',
-    },
-    {
-      '<F10>',
-      function()
-        require('dap').step_over()
-      end,
-      desc = 'Debug: Step Over',
-    },
-    {
-      '<F2>',
-      function()
-        require('dap').step_out()
-      end,
-      desc = 'Debug: Step Out',
-    },
-    {
-      '<leader>b',
-      function()
-        require('dap').toggle_breakpoint()
-      end,
-      desc = 'Debug: Toggle Breakpoint',
-    },
-    {
-      '<leader>B',
-      function()
-        require('dap').set_breakpoint(vim.fn.input 'Breakpoint condition: ')
-      end,
-      desc = 'Debug: Set Breakpoint',
-    },
+    { "<F5>", function()  require("dap").continue() end, desc = "Debug: Start/Continue" },
+    { "<F11>", function() require("dap").step_into() end, desc = "Debug: Step Into" },
+    { "<F10>", function() require("dap").step_over() end, desc = "Debug: Step Over" },
+    { "<F2>", function() require("dap").step_out() end, desc = "Debug: Step Out" },
+    { "<leader>b", function() require("dap").toggle_breakpoint() end, desc = "Debug: Toggle [B]reakpoint" },
+    { "<leader>B", function() require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: ")) end, desc = "Debug: Set [B]reakpoint cond" },
     -- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
-    {
-      '<leader>d.',
-      function()
-        require('dapui').toggle()
-      end,
-      desc = 'Debug: See last session result.',
-    },
-    {
-      '<leader>dr',
-      function()
-        require('dap').repl.open()
-      end,
-      desc = 'Debug: open repl',
-    },
-    {
-      '<leader>dl',
-      function()
-        require('dap').run_last()
-      end,
-      desc = 'Debug: run last',
-    },
-    {
-      '<leader>dPt',
-      function()
-        require('dap-python').test_method()
-      end,
-      desc = 'Debug Method',
-      ft = 'python',
-    },
-    {
-      '<leader>dPs',
-      function()
-        require('dap-python').debug_selection()
-      end,
-      desc = 'Debug Selection',
-      ft = 'python',
-    },
-    {
-      '<leader>dPc',
-      function()
-        require('dap-python').test_class()
-      end,
-      desc = 'Debug Class',
-      ft = 'python',
-    },
+    { "<leader>dB", function() require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: ")) end, desc = "Breakpoint Condition" },
+    { "<leader>dC", function() require("dap").run_to_cursor() end, desc = "Run to Cursor" },
+    { "<leader>dO", function() require("dap").step_over() end, desc = "Step Over" },
+    { "<leader>dP", function() require("dap").pause() end, desc = "Pause" },
+    { "<leader>dPc", function() require("dap-python").test_class() end, desc = "Debug Class", ft = "python" },
+    { "<leader>dPs", function() require("dap-python").debug_selection() end, desc = "Debug Selection", ft = "python" },
+    { "<leader>dPt", function() require("dap-python").test_method() end, desc = "Debug Method", ft = "python" },
+    { "<leader>da", function() require("dap").continue({ before = get_args }) end, desc = "Run with Args" },
+    { "<leader>db", function() require("dap").toggle_breakpoint() end, desc = "Toggle Breakpoint" },
+    { "<leader>dc", function() require("dap").continue() end, desc = "🐞Run/Continue" },
+    { "<leader>dg", function() require("dap").goto_() end, desc = "Go to Line (No Execute)" },
+    { "<leader>di", function() require("dap").step_into() end, desc = "Step Into" },
+    { "<leader>dj", function() require("dap").down() end, desc = "Down" },
+    { "<leader>dk", function() require("dap").up() end, desc = "Up" },
+    { "<leader>dl", function() require("dap").run_last() end, desc = "Run Last" },
+    { "<leader>do", function() require("dap").step_out() end, desc = "Step Out" },
+    { "<leader>dr", function() require("dap").repl.toggle() end, desc = "Toggle REPL" },
+    { "<leader>ds", function() require("dap").session() end, desc = "Session" },
+    { "<leader>dt", function() require("dap").terminate() end, desc = "Terminate" },
+    { "<leader>dw", function() require("dap.ui.widgets").hover() end, desc = "Widgets" },
   },
   config = function()
     local dap = require 'dap'
@@ -215,6 +173,22 @@ return {
         name = 'Launch file',
         program = '${file}',
         cwd = '${workspaceFolder}',
+      },
+    }
+    dap.configurations.typescript = {
+      {
+        type = 'pwa-node',
+        request = 'launch',
+        name = 'Launch file',
+        runtimeExecutable = 'deno',
+        runtimeArgs = {
+          'run',
+          '--inspect-wait',
+          '--allow-all',
+        },
+        program = '${file}',
+        cwd = '${workspaceFolder}',
+        attachSimplePort = 9229,
       },
     }
 
