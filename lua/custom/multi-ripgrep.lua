@@ -63,7 +63,7 @@ return function(opts)
   pickers
     .new(opts, {
       debounce = 100,
-      prompt_title = 'Live Grep (with shortcuts e.g. <space><space*md>)',
+      prompt_title = 'Live Grep (with shortcuts)',
       finder = custom_grep,
       previewer = conf.grep_previewer(opts),
       sorter = require('telescope.sorters').empty(),
