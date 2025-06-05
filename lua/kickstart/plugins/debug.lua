@@ -23,6 +23,8 @@ return {
 
     -- Add your own debuggers here
     'leoluz/nvim-dap-go',
+    'mfussenegger/nvim-dap-python',
+    'theHamsta/nvim-dap-virtual-text',
   },
   keys = {
     -- Basic debugging keymaps, feel free to change to your liking!
@@ -34,21 +36,21 @@ return {
       desc = 'Debug: Start/Continue',
     },
     {
-      '<F1>',
+      '<F11>',
       function()
         require('dap').step_into()
       end,
       desc = 'Debug: Step Into',
     },
     {
-      '<F2>',
+      '<F10>',
       function()
         require('dap').step_over()
       end,
       desc = 'Debug: Step Over',
     },
     {
-      '<F3>',
+      '<F2>',
       function()
         require('dap').step_out()
       end,
@@ -70,11 +72,49 @@ return {
     },
     -- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
     {
-      '<F7>',
+      '<leader>d.',
       function()
         require('dapui').toggle()
       end,
       desc = 'Debug: See last session result.',
+    },
+    {
+      '<leader>dr',
+      function()
+        require('dap').repl.open()
+      end,
+      desc = 'Debug: open repl',
+    },
+    {
+      '<leader>dl',
+      function()
+        require('dap').run_last()
+      end,
+      desc = 'Debug: run last',
+    },
+    {
+      '<leader>dPt',
+      function()
+        require('dap-python').test_method()
+      end,
+      desc = 'Debug Method',
+      ft = 'python',
+    },
+    {
+      '<leader>dPs',
+      function()
+        require('dap-python').debug_selection()
+      end,
+      desc = 'Debug Selection',
+      ft = 'python',
+    },
+    {
+      '<leader>dPc',
+      function()
+        require('dap-python').test_class()
+      end,
+      desc = 'Debug Class',
+      ft = 'python',
     },
   },
   config = function()
@@ -95,6 +135,9 @@ return {
       ensure_installed = {
         -- Update this to ensure that you have the debuggers for the langs you want
         'delve',
+        'js-debug-adapter',
+        'debugpy',
+        'codelldb',
       },
     }
 
@@ -142,6 +185,45 @@ return {
         -- On Windows delve must be run attached or it crashes.
         -- See https://github.com/leoluz/nvim-dap-go/blob/main/README.md#configuring
         detached = vim.fn.has 'win32' == 0,
+      },
+    }
+
+    -- Install python specific config
+    require('dap-python').setup 'uv'
+    require('dap-python').test_runner = 'pytest'
+
+    -- The python adapter is deprecated, see nvim-dap-python#129
+
+    -- Install javascript specific config
+    -- https://codeberg.org/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation#javascript
+    -- https://github.com/igorlfs/dotfiles/tree/main/nvim/.config/nvim/lua/plugins/dap
+    for _, adapter in pairs { 'pwa-node', 'pwa-chrome' } do
+      dap.adapters[adapter] = {
+        type = 'server',
+        host = 'localhost',
+        port = '${port}',
+        executable = {
+          command = 'js-debug-adapter',
+          args = { '${port}' },
+        },
+      }
+    end
+    dap.configurations.javascript = {
+      {
+        type = 'pwa-node',
+        request = 'launch',
+        name = 'Launch file',
+        program = '${file}',
+        cwd = '${workspaceFolder}',
+      },
+    }
+
+    dap.adapters.codelldb = {
+      type = 'server',
+      port = '${port}',
+      executable = {
+        command = 'codelldb',
+        args = { '--port', '${port}' },
       },
     }
   end,
