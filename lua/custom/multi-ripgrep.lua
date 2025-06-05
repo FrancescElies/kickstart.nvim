@@ -19,7 +19,12 @@ return function(opts)
       ['v'] = '*.vim',
       ['n'] = '*.{vim,lua}',
       ['c'] = '*.c',
-      ['r'] = '*.rs',
+      ['r'] = '*.{rs,toml}',
+      ['json'] = '*.json',
+      ['js'] = '*.{js,ts,tsx,svelte,json}',
+      ['max'] = '*.{maxpat,json}',
+      ['md'] = '*.md',
+      ['p'] = '*.python',
       ['g'] = '*.go',
     }
   opts.pattern = opts.pattern or '%s'
