@@ -37,20 +37,23 @@ return function(opts)
 
       local prompt_split = vim.split(prompt, '  ')
 
+      local filter_pattern = prompt_split[1]
+      local filter_shortcuts = prompt_split[2]
+
       local args = { 'rg' }
-      if prompt_split[1] then
+      if filter_pattern then
         table.insert(args, '-e')
-        table.insert(args, prompt_split[1])
+        table.insert(args, filter_pattern)
       end
 
-      if prompt_split[2] then
+      if filter_shortcuts then
         table.insert(args, '-g')
 
         local pattern
-        if opts.shortcuts[prompt_split[2]] then
-          pattern = opts.shortcuts[prompt_split[2]]
+        if opts.shortcuts[filter_shortcuts] then
+          pattern = opts.shortcuts[filter_shortcuts]
         else
-          pattern = prompt_split[2]
+          pattern = filter_shortcuts
         end
 
         table.insert(args, string.format(opts.pattern, pattern))
