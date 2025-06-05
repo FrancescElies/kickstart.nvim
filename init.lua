@@ -356,7 +356,7 @@ require('lazy').setup({
         { '<leader>c', group = '[c]ode' },
         { '<leader>C', group = '[C]hat' },
         { '<leader>v', group = '[v]im' },
-        { '<leader>b', group = '[b]uffer' },
+        { '<leader>f', group = '[f]ile/[f]ormat' },
       },
     },
   },
@@ -757,12 +757,12 @@ require('lazy').setup({
     cmd = { 'ConformInfo' },
     keys = {
       {
-        '<leader>bf',
+        '<leader>fb',
         function()
           require('conform').format { async = true, lsp_format = 'fallback' }
         end,
         mode = '',
-        desc = '[b]buffer [f]ormat ',
+        desc = '[f]ormat [b]buffer',
       },
     },
     opts = {
@@ -983,9 +983,9 @@ require('lazy').setup({
 
       local mini_trailspace = require 'mini.trailspace'
       mini_trailspace.setup()
-      vim.keymap.set('n', '<leader>bt', function()
+      vim.keymap.set('n', '<leader>ft', function()
         mini_trailspace.trim()
-      end, { desc = '[b]buffer trailspace' })
+      end, { desc = '[f]ormat [t]railspace only' })
 
       -- - ga - [a]lign
       -- - gA - [a]lign with preview
