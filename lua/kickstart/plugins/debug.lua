@@ -166,31 +166,32 @@ return {
         },
       }
     end
-    dap.configurations.javascript = {
-      {
-        type = 'pwa-node',
-        request = 'launch',
-        name = 'Launch file',
-        program = '${file}',
-        cwd = '${workspaceFolder}',
-      },
-    }
-    dap.configurations.typescript = {
-      {
-        type = 'pwa-node',
-        request = 'launch',
-        name = 'Launch file',
-        runtimeExecutable = 'deno',
-        runtimeArgs = {
-          'run',
-          '--inspect-wait',
-          '--allow-all',
-        },
-        program = '${file}',
-        cwd = '${workspaceFolder}',
-        attachSimplePort = 9229,
-      },
-    }
+    local js_filetypes = { 'typescript', 'javascript', 'typescriptreact', 'javascriptreact' }
+
+    local vscode = require 'dap.ext.vscode'
+    vscode.type_to_filetypes['node'] = js_filetypes
+    vscode.type_to_filetypes['pwa-node'] = js_filetypes
+
+    for _, language in ipairs(js_filetypes) do
+      if not dap.configurations[language] then
+        dap.configurations[language] = {
+          {
+            type = 'pwa-node',
+            request = 'launch',
+            name = 'Launch file',
+            program = '${file}',
+            cwd = '${workspaceFolder}',
+          },
+          {
+            type = 'pwa-node',
+            request = 'attach',
+            name = 'Attach',
+            processId = require('dap.utils').pick_process,
+            cwd = '${workspaceFolder}',
+          },
+        }
+      end
+    end
 
     dap.adapters.codelldb = {
       type = 'server',
