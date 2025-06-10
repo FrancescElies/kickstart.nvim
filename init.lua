@@ -352,6 +352,7 @@ require('lazy').setup({
         { '<leader>r', group = '[R]eplace', mode = { 'v' } },
         { '<leader>t', group = '[T]erminal' },
         { '<leader>n', group = '[n]otes' },
+        { '<leader>d', group = '[D]ebug' },
         { '<leader>p', group = '[p]roject' },
         { '<leader>c', group = '[c]ode' },
         { '<leader>C', group = '[C]hat' },
