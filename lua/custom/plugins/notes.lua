@@ -11,7 +11,7 @@ return {
   },
   config = function()
     require('telekasten').setup {
-      home = vim.fn.expand '~/src/zettelkasten',
+      home = vim.fn.expand '~/src/notes',
     }
   end,
   keys = {

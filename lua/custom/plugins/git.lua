@@ -30,8 +30,8 @@ return {
     opts = {},
     keys = {
       { '<leader>gs', vim.cmd.Git, desc = 'git status' },
-      { '<leader>gP', '<cmd>Git! push --force-with-lease -u origin <cr>', desc = '[G]it [P]ush force with lease' },
-      { '<leader>gp', '<cmd>Git! pull --rebase <cr>', desc = '[G]it [P]ull rebase' },
+      { '<leader>gp', '<cmd>Git! push --force-with-lease -u origin <cr>', desc = '[G]it [P]ush force with lease' },
+      { '<leader>gP', '<cmd>Git! pull --rebase <cr>', desc = '[G]it [P]ull rebase' },
       { '<leader>gc', '<cmd>Git commit<cr>', desc = '[G]it [c]ommit' },
     },
   },
