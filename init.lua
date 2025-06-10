@@ -422,11 +422,28 @@ require('lazy').setup({
           path_display = {
             shorten = { len = 2, exclude = { -3, -2, -1 } },
           },
-          --   mappings = {
-          --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
-          --   },
+          mappings = {
+            i = {
+              ['<c-enter>'] = 'to_fuzzy_refine',
+            },
+          },
         },
-        -- pickers = {}
+        pickers = {
+          -- NOTE: mine
+          find_files = {
+            attach_mappings = function(_, map)
+              local action_state = require 'telescope.actions.state'
+              map({ 'i', 'n' }, '<C-o>', function(_)
+                local entry = action_state.get_selected_entry()
+                vim.inspect('Name = ' .. entry.value)
+                local ut = require 'custom.utils'
+                ut.open_with_default_app(entry.value)
+              end, { desc = 'Open default OS App' })
+              -- needs to return true if you want to map default_mappings and false if not
+              return true
+            end,
+          },
+        },
         extensions = {
           ['ui-select'] = {
             require('telescope.themes').get_dropdown(),
