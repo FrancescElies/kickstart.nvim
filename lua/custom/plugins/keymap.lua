@@ -87,8 +87,8 @@ function vim.getVisualSelection()
 end
 
 -- Reload configuration
-vim.keymap.set('n', '<leader><leader>x', '<cmd>source %<cr>', { desc = 'load [L]ua file' })
-vim.keymap.set('n', '<leader>x', '<cmd>.lua<cr>', { desc = 'load [L]ua line' })
+vim.keymap.set('n', '<leader>xf', '<cmd>source %<cr>', { desc = 'load [L]ua [f]ile' })
+vim.keymap.set('n', '<leader>xl', '<cmd>.lua<cr>', { desc = 'load [L]ua [l]ine' })
 vim.keymap.set('v', '<leader>x', ':lua<cr>', { desc = 'load [L]ua region' })
 
 vim.keymap.set('n', '<leader>vm', ":new | put=execute('messages')<cr>", { desc = 'Vim messages' })
@@ -97,12 +97,13 @@ vim.keymap.set('n', '<leader>vti', toggle_inline_diagnostic, { desc = '[v]im tog
 vim.keymap.set('n', '<leader>vts', ':set invhlsearch<cr>', { desc = '[v]im toggle Highlight search' })
 vim.keymap.set('n', '<leader>vtS', ':set invspell<cr>', { desc = '[v]im toggle Spell' })
 
-vim.keymap.set('', '<leader>l', function()
+vim.keymap.set('', '<leader>vtt', function()
   local config = vim.diagnostic.config() or {}
   if config.virtual_text then
     vim.diagnostic.config { virtual_text = false, virtual_lines = true }
   else
     vim.diagnostic.config { virtual_text = true, virtual_lines = false }
   end
-end, { desc = 'Toggle lsp_lines' })
+end, { desc = 'Toggle lsp virtual text' })
+
 return {}

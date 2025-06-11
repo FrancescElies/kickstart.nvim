@@ -6,11 +6,10 @@ local make_entry = require 'telescope.make_entry'
 local pickers = require 'telescope.pickers'
 
 local flatten = vim.tbl_flatten
-local M = {}
 
 -- i would like to be able to do telescope
 -- and have telescope do some filtering on files and some grepping
-M.find = function(opts)
+return function(opts)
   opts = opts or {}
   opts.cwd = opts.cwd and vim.fn.expand(opts.cwd) or vim.loop.cwd()
   opts.shortcuts = opts.shortcuts
@@ -78,4 +77,3 @@ M.find = function(opts)
     })
     :find()
 end
-return M
