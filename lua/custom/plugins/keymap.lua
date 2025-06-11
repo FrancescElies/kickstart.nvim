@@ -8,23 +8,15 @@ vim.opt.tabstop = 4
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 
+vim.diagnostic.config { virtual_text = true, virtual_lines = false }
+
 vim.keymap.set('n', '<leader>m', require('telescope.builtin').marks, { desc = '[m]arks' })
 
 local line_with = { number = true, relativenumber = true }
 
 local function toggle_inline_diagnostic()
   vim.diagnostic.enable(not vim.diagnostic.is_enabled())
-end
-
-local function toggle_number()
-  if vim.opt_local.number:get() or vim.opt_local.relativenumber:get() then
-    line_with = { number = vim.opt_local.number:get(), relativenumber = vim.opt_local.relativenumber:get() }
-    vim.opt_local.number = false
-    vim.opt_local.relativenumber = false
-  else
-    vim.opt_local.number = line_with.number
-    vim.opt_local.relativenumber = line_with.relativenumber
-  end
+  -- vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = 0 }, { bufnr = 0 })
 end
 
 vim.o.spell = true
@@ -95,15 +87,22 @@ function vim.getVisualSelection()
 end
 
 -- Reload configuration
-vim.keymap.set('n', '<leader><leader>l', ':source %<cr>', { desc = 'load [L]ua file' })
-vim.keymap.set('n', '<leader>l', ':.lua<cr>', { desc = 'load [L]ua line' })
-vim.keymap.set('v', '<leader>l', ':lua<cr>', { desc = 'load [L]ua region' })
+vim.keymap.set('n', '<leader><leader>x', '<cmd>source %<cr>', { desc = 'load [L]ua file' })
+vim.keymap.set('n', '<leader>x', '<cmd>.lua<cr>', { desc = 'load [L]ua line' })
+vim.keymap.set('v', '<leader>x', '<cmd>lua<cr>', { desc = 'load [L]ua region' })
 
 vim.keymap.set('n', '<leader>vm', ":new | put=execute('messages')<cr>", { desc = 'Vim messages' })
 vim.keymap.set('n', '<leader>vtf', ':FormatToggle<CR>', { desc = '[v]im toggle Format' })
-vim.keymap.set('n', '<leader>vtn', toggle_number, { desc = '[v]im toggle line Number' })
 vim.keymap.set('n', '<leader>vti', toggle_inline_diagnostic, { desc = '[v]im toggle inline Diagnostic' })
 vim.keymap.set('n', '<leader>vts', ':set invhlsearch<cr>', { desc = '[v]im toggle Highlight search' })
 vim.keymap.set('n', '<leader>vtS', ':set invspell<cr>', { desc = '[v]im toggle Spell' })
 
+vim.keymap.set('', '<leader>l', function()
+  local config = vim.diagnostic.config() or {}
+  if config.virtual_text then
+    vim.diagnostic.config { virtual_text = false, virtual_lines = true }
+  else
+    vim.diagnostic.config { virtual_text = true, virtual_lines = false }
+  end
+end, { desc = 'Toggle lsp_lines' })
 return {}
