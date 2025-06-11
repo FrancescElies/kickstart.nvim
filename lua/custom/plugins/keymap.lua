@@ -89,7 +89,7 @@ end
 -- Reload configuration
 vim.keymap.set('n', '<leader><leader>x', '<cmd>source %<cr>', { desc = 'load [L]ua file' })
 vim.keymap.set('n', '<leader>x', '<cmd>.lua<cr>', { desc = 'load [L]ua line' })
-vim.keymap.set('v', '<leader>x', '<cmd>lua<cr>', { desc = 'load [L]ua region' })
+vim.keymap.set('v', '<leader>x', ':lua<cr>', { desc = 'load [L]ua region' })
 
 vim.keymap.set('n', '<leader>vm', ":new | put=execute('messages')<cr>", { desc = 'Vim messages' })
 vim.keymap.set('n', '<leader>vtf', ':FormatToggle<CR>', { desc = '[v]im toggle Format' })
