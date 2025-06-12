@@ -89,13 +89,13 @@ vim.keymap.set('n', '<leader>xf', '<cmd>source %<cr>', { desc = 'load [L]ua [f]i
 vim.keymap.set('n', '<leader>xl', '<cmd>.lua<cr>', { desc = 'load [L]ua [l]ine' })
 vim.keymap.set('v', '<leader>x', ':lua<cr>', { desc = 'load [L]ua region' })
 
-vim.keymap.set('n', '<leader>vm', ":new | put=execute('messages')<cr>", { desc = 'Vim messages' })
-vim.keymap.set('n', '<leader>vtf', ':FormatToggle<CR>', { desc = '[v]im toggle Format' })
-vim.keymap.set('n', '<leader>vti', toggle_inline_diagnostic, { desc = '[v]im toggle inline Diagnostic' })
-vim.keymap.set('n', '<leader>vts', ':set invhlsearch<cr>', { desc = '[v]im toggle Highlight search' })
-vim.keymap.set('n', '<leader>vtS', ':set invspell<cr>', { desc = '[v]im toggle Spell' })
+vim.keymap.set('n', '<leader>vm', ":new | put=execute('messages')<cr>", { desc = 'vim messages' })
+vim.keymap.set('n', '<leader>vf', ':FormatToggle<CR>', { desc = '[v]im toggle [f]ormat' })
+vim.keymap.set('n', '<leader>vd', toggle_inline_diagnostic, { desc = '[v]im toggle inline diagnostic' })
+vim.keymap.set('n', '<leader>vs', ':set invhlsearch<cr>', { desc = '[v]im toggle highlight [s]earch' })
+vim.keymap.set('n', '<leader>vS', ':set invspell<cr>', { desc = '[v]im toggle [S]pell' })
 
-vim.keymap.set('', '<leader>vtt', function()
+vim.keymap.set('', '<leader>tt', function()
   local config = vim.diagnostic.config() or {}
   if config.virtual_text then
     vim.diagnostic.config { virtual_text = false, virtual_lines = true }

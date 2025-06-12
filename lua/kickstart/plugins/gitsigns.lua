@@ -54,9 +54,9 @@ return {
           gitsigns.diffthis '@'
         end, { desc = 'git [D]iff against last commit' })
         -- Toggles
-        map('n', '<leader>vtb', gitsigns.toggle_current_line_blame, { desc = '[T]oggle git show [b]lame line' })
-        map('n', '<leader>vtw', gitsigns.toggle_word_diff, { desc = '[T]oggle [w]ord diff' })
-        map('n', '<leader>vtl', gitsigns.toggle_linehl, { desc = '[T]oggle git [l]ine higlight' })
+        map('n', '<leader>vb', gitsigns.toggle_current_line_blame, { desc = 'toggle git show [b]lame line' })
+        map('n', '<leader>vw', gitsigns.toggle_word_diff, { desc = 'toggle [w]ord diff' })
+        map('n', '<leader>vl', gitsigns.toggle_linehl, { desc = 'toggle git [l]ine higlight' })
       end,
     },
   },
