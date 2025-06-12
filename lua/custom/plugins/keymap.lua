@@ -1,5 +1,5 @@
 -- Commodity function to print stuff
-function p(v)
+function _G.p(v)
   print(vim.inspect(v))
 end
 
@@ -11,8 +11,6 @@ vim.opt.splitbelow = true
 vim.diagnostic.config { virtual_text = true, virtual_lines = false }
 
 vim.keymap.set('n', '<leader>m', require('telescope.builtin').marks, { desc = '[m]arks' })
-
-local line_with = { number = true, relativenumber = true }
 
 local function toggle_inline_diagnostic()
   vim.diagnostic.enable(not vim.diagnostic.is_enabled())
