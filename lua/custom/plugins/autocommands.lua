@@ -1,6 +1,25 @@
 vim.api.nvim_create_augroup('bufcheck', { clear = true })
 vim.api.nvim_create_augroup('markdown', { clear = true })
 
+--
+--
+-- Terminal
+--
+--
+
+-- start terminal in insert mode
+vim.api.nvim_create_autocmd('TermOpen', {
+  group = 'bufcheck',
+  pattern = '*',
+  command = 'startinsert | set winfixheight',
+})
+
+--
+--
+-- Buffer (which opened a file)
+--
+--
+
 -- auto create intermediate directories on save
 vim.api.nvim_create_autocmd({ 'FileWritePre', 'BufWritePre' }, {
   group = 'bufcheck',
@@ -11,13 +30,6 @@ vim.api.nvim_create_autocmd({ 'FileWritePre', 'BufWritePre' }, {
       'p' -- create intermediate directories
     )
   end,
-})
-
--- start terminal in insert mode
-vim.api.nvim_create_autocmd('TermOpen', {
-  group = 'bufcheck',
-  pattern = '*',
-  command = 'startinsert | set winfixheight',
 })
 
 -- Return to last edit position when opening files
@@ -32,6 +44,7 @@ vim.api.nvim_create_autocmd('BufReadPost', {
     end
   end,
 })
+
 
 vim.api.nvim_create_autocmd('BufReadPost', {
   group = 'markdown',
@@ -96,6 +109,12 @@ local function get_buffer_by_name_or_scratch(name, clean)
   vim.api.nvim_buf_set_name(buffer, name)
   return buffer
 end
+
+--
+--
+-- Autorun
+--
+--
 
 local function attach_to_buffer(bufnr, pattern, command)
   vim.api.nvim_create_autocmd('BufWritePost', {

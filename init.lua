@@ -472,7 +472,6 @@ require('lazy').setup({
       vim.keymap.set({ 'n', 'v' }, '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
       -- vim.keymap.set('n', '<leader>sg', buieselecttin.live_grep, { desc = '[S]earch by [G]rep' })
       vim.keymap.set('n', '<space>sg', require 'custom.multi-ripgrep', { desc = '[S]earch by [G]rep' })
-      vim.keymap.set('n', '<M-p>', require 'custom.repo-select', { desc = '[P]roject' })
       vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
       vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
       vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })

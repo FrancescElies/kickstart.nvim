@@ -12,6 +12,7 @@ vim.api.nvim_create_user_command('CdBufGitRoot', function()
 end, {})
 
 vim.api.nvim_create_user_command('CdGitRoot', function()
+  ---@diagnostic disable-next-line: missing-fields
   Job:new({
     command = 'git',
     args = { 'rev-parse', '--show-toplevel' },
