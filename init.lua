@@ -477,7 +477,13 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
       vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
 
-      vim.keymap.set('n', '<leader>sp', function()
+      local function find_file_in_all_projects()
+        require('telescope.builtin').find_files { cwd = vim.fn.expand '~/src' }
+      end
+      vim.keymap.set('n', '<leader>sp', find_file_in_all_projects, { desc = '[S]earch [P]rojects' })
+      vim.keymap.set('n', '<M-p>', find_file_in_all_projects, { desc = '[S]earch [P]rojects' })
+
+      vim.keymap.set('n', '<leader>sP', function()
         require('telescope.builtin').find_files { cwd = vim.fs.joinpath(vim.fn.stdpath 'data') }
       end, { desc = '[S]earch [P]ackages' })
 
