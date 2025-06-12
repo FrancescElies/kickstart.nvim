@@ -1,37 +1,36 @@
 local Job = require 'plenary.job'
 
-vim.api.nvim_create_user_command('CdBufParentDir', function()
-  local path = vim.fn.expand '%:p:h'
-  print('cd ' .. path)
-  vim.api.nvim_set_current_dir(path)
-end, {})
-
-vim.api.nvim_create_user_command('CdBufGitRoot', function()
-  vim.cmd.CdBufParentDir()
-  vim.cmd.CdGitRoot()
-end, {})
-
-vim.api.nvim_create_user_command('CdGitRoot', function()
+local function cdroot(opts)
   ---@diagnostic disable-next-line: missing-fields
   Job:new({
     command = 'git',
     args = { 'rev-parse', '--show-toplevel' },
-    cwd = '.',
-    on_exit = function(j, return_val)
+    cwd = opts.cwd,
+    on_exit = function(j, _)
       local path = j:result()[1]
       vim.schedule(function()
-        print('cd ' .. path)
         vim.api.nvim_set_current_dir(path)
       end)
     end,
   }):start()
-end, {})
+end
+
+vim.api.nvim_create_user_command('CdParent', function()
+  local path = vim.fn.expand '%:p:h'
+  vim.api.nvim_set_current_dir(path)
+end, { desc = 'changes directory to files parent dir' })
+
+vim.api.nvim_create_user_command('CdRoot', function()
+  cdroot { cwd = vim.fn.expand '%:p:h' }
+end, { desc = "changes dir to git's root (toplevel)" })
+
+vim.cmd.CdRoot()
 
 -- vim.api.nvim_create_autocmd('BufEnter', {
 --   group = vim.api.nvim_create_augroup('my-cd', { clear = true }),
 --   pattern = '*',
 --   callback = function()
---     vim.cmd.CdBufGitRoot()
+--     cdroot { cwd = vim.fn.expand '%:p:h' }
 --   end,
 -- })
 
