@@ -85,7 +85,7 @@ function vim.getVisualSelection()
 end
 
 -- Reload configuration
-vim.keymap.set('n', '<leader>xf', '<cmd>source %<cr>', { desc = 'load [L]ua [f]ile' })
+vim.keymap.set('n', '<leader>xf', '<cmd>w|source %<cr>', { desc = 'load [L]ua [f]ile' })
 vim.keymap.set('n', '<leader>xl', '<cmd>.lua<cr>', { desc = 'load [L]ua [l]ine' })
 vim.keymap.set('v', '<leader>x', ':lua<cr>', { desc = 'load [L]ua region' })
 
