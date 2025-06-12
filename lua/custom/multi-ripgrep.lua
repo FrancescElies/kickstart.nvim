@@ -14,17 +14,16 @@ return function(opts)
   opts.cwd = opts.cwd and vim.fn.expand(opts.cwd) or vim.loop.cwd()
   opts.shortcuts = opts.shortcuts
     or {
-      ['l'] = '*.lua',
-      ['v'] = '*.vim',
-      ['n'] = '*.{vim,lua}',
       ['c'] = '*.c',
-      ['r'] = '*.{rs,toml}',
-      ['json'] = '*.json',
-      ['js'] = '*.{js,ts,tsx,svelte,json}',
-      ['max'] = '*.{maxpat,json}',
-      ['md'] = '*.md',
-      ['p'] = '*.python',
       ['g'] = '*.go',
+      ['j'] = '*.{js,ts,tsx,svelte,json}',
+      ['l'] = '*.lua',
+      ['max'] = '*.{maxpat,json}',
+      ['m'] = '*.md',
+      ['n'] = '*.{vim,lua}',
+      ['p'] = '*.python',
+      ['r'] = '*.{rs,toml}',
+      ['v'] = '*.vim',
     }
   opts.pattern = opts.pattern or '%s'
 
@@ -70,7 +69,7 @@ return function(opts)
   pickers
     .new(opts, {
       debounce = 100,
-      prompt_title = 'Live Grep (with shortcuts)',
+      prompt_title = 'Live Grep (with shortcuts (c,g,j,l,m,max,n.p.r.v))',
       finder = custom_grep,
       previewer = conf.grep_previewer(opts),
       sorter = require('telescope.sorters').empty(),
