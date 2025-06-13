@@ -372,6 +372,7 @@ require('lazy').setup({
         { '<leader>c', group = '[c]ode' },
         { '<leader>C', group = '[C]hat' },
         { '<leader>v', group = '[v]im' },
+        { '<leader>vg', group = '[v]im [g]it' },
         { '<leader>f', group = '[f]ile/[f]ormat' },
       },
     },

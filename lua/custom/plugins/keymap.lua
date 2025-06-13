@@ -95,13 +95,13 @@ vim.keymap.set('n', '<leader>vd', toggle_inline_diagnostic, { desc = '[v]im togg
 vim.keymap.set('n', '<leader>vs', ':set invhlsearch<cr>', { desc = '[v]im toggle highlight [s]earch' })
 vim.keymap.set('n', '<leader>vS', ':set invspell<cr>', { desc = '[v]im toggle [S]pell' })
 
-vim.keymap.set('', '<leader>vt', function()
+vim.keymap.set('', '<leader>vl', function()
   local config = vim.diagnostic.config() or {}
   if config.virtual_text then
     vim.diagnostic.config { virtual_text = false, virtual_lines = true }
   else
     vim.diagnostic.config { virtual_text = true, virtual_lines = false }
   end
-end, { desc = 'toggle lsp virtual text' })
+end, { desc = 'toggle [l]sp virtual text' })
 
 return {}
