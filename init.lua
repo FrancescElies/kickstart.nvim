@@ -174,8 +174,24 @@ vim.o.confirm = true
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Diagnostic keymaps
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
-vim.keymap.set('n', '<leader>Q', vim.diagnostic.setqflist, { desc = 'Open diagnostic [Q]uickfix list' })
+-- set quickfix list from diagnostics in a certain buffer
+local set_qflist_for_buf = function(opts)
+  opts = {} or opts
+  opts.buf = opts.buf or 0
+
+  local diagnostics = nil
+  diagnostics = vim.diagnostic.get(opts.buf, { severity = opts.severity })
+
+  local qf_items = vim.diagnostic.toqflist(diagnostics)
+  local bufname = vim.api.nvim_buf_get_name(opts.buf)
+  vim.fn.setqflist({}, ' ', { title = 'Diagnostics' .. ' (' .. bufname .. ')', items = qf_items })
+
+  vim.cmd [[copen]]
+end
+vim.keymap.set('n', '<leader>q', function()
+  set_qflist_for_buf { buf = 0 }
+end, { desc = '[q]uickfix diagnostics current buf' })
+vim.keymap.set('n', '<leader>Q', vim.diagnostic.setqflist, { desc = '[Q]uickfix diagnostics all buffers' })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
