@@ -10,7 +10,7 @@ vim.keymap.set('n', '<leader>gb', telebin.git_branches, { desc = '[G]it [B]ranch
 vim.keymap.set('n', '<leader>gL', telebin.git_bcommits, { desc = '[G]it [L]og this [B]uffer' })
 vim.keymap.set('n', '<leader>gl', telebin.git_commits, { desc = '[G]it [L]og' })
 vim.keymap.set('n', '<leader>gf', telebin.git_files, { desc = '[G]it [F]iles' })
-vim.keymap.set('n', '<leader>gs', telebin.git_status, { desc = '[G]it [S]tatus' })
+vim.keymap.set('n', '<leader>g.', telebin.git_status, { desc = '[G]it [S]tatus' })
 vim.keymap.set('n', '<leader>gz', telebin.git_stash, { desc = '[G]it zstash' })
 
 vim.api.nvim_create_augroup('my_git_commands', { clear = true })
@@ -27,9 +27,31 @@ return {
   -- },
   {
     'tpope/vim-fugitive',
-    opts = {},
+    -- opts = {},
+    cmd = {
+      'G',
+      'Git',
+      'Gdiffsplit',
+      'Gread',
+      'Gwrite',
+      'Ggrep',
+      'GMove',
+      'GDelete',
+      'GBrowse',
+      'GRemove',
+      'GRename',
+      'Glgrep',
+      'Gedit',
+    },
+    ft = { 'fugitive' },
     keys = {
-      { '<leader>gS', vim.cmd.Git, desc = '[g]it [s]tatus (fugitive)' },
+      { '<leader>gB', '<cmd>Git blame<cr>', desc = 'Git blame' },
+      { '<leader>ga', '<cmd>Gwrite<cr>', desc = 'Git add current file' },
+      { '<leader>gr', '<cmd>Gread<cr>', desc = 'Git restore current file' },
+      { '<leader>grm', '<cmd>GRemove<cr>', desc = 'Git remove current file' },
+      { '<leader>gmv', '<cmd>GMove ', desc = 'Git move current file' },
+      { '<leader>gs', vim.cmd.Git, desc = '[g]it [s]tatus (fugitive)' },
+      { '<leader>gf', '<cmd>Git fetch<cr>', desc = 'Git fetch' },
       { '<leader>gp', '<cmd>Git! push --force-with-lease -u origin <cr>', desc = '[G]it [P]ush force with lease' },
       { '<leader>gP', '<cmd>Git! pull --rebase <cr>', desc = '[G]it [P]ull rebase' },
       { '<leader>gc', '<cmd>Git commit<cr>', desc = '[G]it [c]ommit' },
@@ -77,7 +99,7 @@ return {
     keys = {
       { '<leader>g/', ':AdvancedGitSearch<CR>', desc = '[G]it [S]earch' },
       { '<leader>gdl', ':AdvancedGitSearch diff_commit_line<cr>', mode = { 'n', 'v' }, desc = '[G]it [D]iff [L]ine' },
-      { '<leader>gr', ':AdvancedGitSearch checkout_reflog<cr>', desc = '[G]it [R]eflog' },
+      { '<leader>gR', ':AdvancedGitSearch checkout_reflog<cr>', desc = '[G]it [R]eflog' },
     },
     dependencies = {
       'nvim-telescope/telescope.nvim',
