@@ -39,31 +39,44 @@ vim.keymap.set('n', 'sv', '<cmd>vsplit<cr>', { desc = 'vertical split' })
 vim.keymap.set('n', 'sq', '<cmd>q<cr>', { desc = 'close split' })
 
 -- Move to next and previous buffer with ease
-vim.keymap.set('n', '<M-B>', '<cmd>bprevious<cr>', { desc = 'Prev buffer' })
-vim.keymap.set('n', '<M-b>', '<cmd>bnext<cr>', { desc = 'Next buffer' })
+-- Quick buffer switching
+vim.keymap.set('n', '<S-l>', ':bnext<CR>')
+vim.keymap.set('n', '<S-h>', ':bprevious<CR>')
+vim.keymap.set('n', '<leader>bd', ':bdelete<CR>')
 vim.keymap.set('n', '[b', '<cmd>bprevious<cr>', { desc = 'Prev buffer' })
 vim.keymap.set('n', ']b', '<cmd>bnext<cr>', { desc = 'Next buffer' })
 vim.keymap.set('n', '[t', '<cmd>tabprevious<cr>', { desc = 'Prev tab' })
 vim.keymap.set('n', ']t', '<cmd>tabnext<cr>', { desc = 'Next tab' })
 
+-- Keep cursor in place when joining lines
+vim.keymap.set('n', 'J', 'mzJ`z')
+-- Move lines up/down in visual mode
+vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
+vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
+
 -- quickfix
 vim.keymap.set('n', '<C-p>', '<cmd>cprevious<cr>zz', { desc = 'QuickfiX previous' })
 vim.keymap.set('n', '<C-n>', '<cmd>cnext<cr>zz', { desc = 'QuickfiX next' })
--- loclist
-vim.keymap.set('n', '<leader>lo', '<cmd>lopen<cr>zz', { desc = 'LocList open' })
-vim.keymap.set('n', '<leader>lc', '<cmd>lclose<cr>zz', { desc = 'LocList close' })
-vim.keymap.set('n', '<leader>lp', '<cmd>lprevious<cr>zz', { desc = 'LocList previous' })
-vim.keymap.set('n', '<leader>lp', '<cmd>lnext<cr>zz', { desc = 'LocList next' })
+
+-- -- loclist
+-- vim.keymap.set('n', '<leader>lo', '<cmd>lopen<cr>zz', { desc = 'LocList open' })
+-- vim.keymap.set('n', '<leader>lc', '<cmd>lclose<cr>zz', { desc = 'LocList close' })
+-- vim.keymap.set('n', '<leader>lp', '<cmd>lprevious<cr>zz', { desc = 'LocList previous' })
+-- vim.keymap.set('n', '<leader>lp', '<cmd>lnext<cr>zz', { desc = 'LocList next' })
 
 -- Keep things vertically centered during searches
--- vim.keymap.set('n', '<C-d>', '<C-d>zz')
--- vim.keymap.set('n', '<C-u>', '<C-u>zz')
+vim.keymap.set('n', '<C-d>', '<C-d>zz')
+vim.keymap.set('n', '<C-u>', '<C-u>zz')
 vim.keymap.set('n', 'n', 'nzzzv')
 vim.keymap.set('n', 'N', 'Nzzzv')
 
 -- Move lines in visual mode
--- vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
--- vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
+vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
+vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
+
+-- Keep cursor in place when joining lines
+vim.keymap.set('n', 'J', 'mzJ`z')
+
 vim.keymap.set('v', '<leader>r/', ':s/\\\\/\\//g<cr>', { desc = 'Replace \\ -> /' })
 vim.keymap.set('v', '<leader>r\\', ':s/\\//\\\\/g<cr>', { desc = 'Replace / -> [\\]' })
 
@@ -85,10 +98,13 @@ function vim.getVisualSelection()
   end
 end
 
+-- Open current file in external program
+vim.keymap.set('n', '<leader>o', ':!open %<CR>', { desc = '[o]pen in external program' })
+
 -- Reload configuration
-vim.keymap.set('n', '<leader>xf', '<cmd>w|source %<cr>', { desc = 'load [L]ua [f]ile' })
-vim.keymap.set('n', '<leader>xl', '<cmd>.lua<cr>', { desc = 'load [L]ua [l]ine' })
-vim.keymap.set('v', '<leader>x', ':lua<cr>', { desc = 'load [L]ua region' })
+vim.keymap.set('n', '<leader>lf', '<cmd>w|source %<cr>', { desc = 'load [L]ua [f]ile' })
+vim.keymap.set('n', '<leader>ll', '<cmd>.lua<cr>', { desc = 'load [L]ua [l]ine' })
+vim.keymap.set('v', '<leader>l', ':lua<cr>', { desc = 'load [L]ua region' })
 
 vim.keymap.set('n', '<leader>vm', ":new | put=execute('messages')<cr>", { desc = 'vim messages' })
 vim.keymap.set('n', '<leader>vf', ':FormatToggle<CR>', { desc = '[v]im toggle [f]ormat' })
