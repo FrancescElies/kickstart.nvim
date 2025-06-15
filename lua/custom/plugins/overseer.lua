@@ -1,4 +1,78 @@
 return {
-  'stevearc/overseer.nvim',
-  opts = {},
+  -- 'stevearc/overseer.nvim',
+  -- opts = {},
+  -- keys = {
+  --   { '<leader>Oa', '<cmd>OverseerTaskAction<cr>', desc = 'Task action menu' },
+  --   { '<leader>Ob', '<cmd>OverseerBuild<cr>', desc = 'Build/create task' },
+  --   { '<leader>Ob', '<cmd>OverseerLoadBundle<cr>', desc = 'Load task bundle' },
+  --   { '<leader>Oc', '<cmd>OverseerClose<cr>', desc = 'Close Overseer task list' },
+  --   { '<leader>Od', '<cmd>OverseerDeleteBundle<cr>', desc = 'Delete task bundle' },
+  --   { '<leader>Oi', '<cmd>OverseerInfo<cr>', desc = 'Show Overseer info' },
+  --   { '<leader>Oo', '<cmd>OverseerOpen<cr>', desc = 'Open Overseer task list' },
+  --   { '<leader>Oq', '<cmd>OverseerQuickAction<cr>', desc = 'Quick action on task' },
+  --   { '<leader>Or', '<cmd>OverseerRun<cr>', desc = 'Run task' },
+  --   { '<leader>Os', '<cmd>OverseerSaveBundle<cr>', desc = 'Save task bundle' },
+  --   { '<leader>Ot', '<cmd>OverseerToggle<cr>', desc = 'Toggle Overseer task list' },
+  --   { '<leader>Ox', '<cmd>OverseerClearCache<cr>', desc = 'Clear Overseer cache' },
+  --   {
+  --     '<leader>OR',
+  --     function()
+  --       local overseer = require 'overseer'
+  --       local tasks = overseer.list_tasks { recent_first = true }
+  --       if vim.tbl_isempty(tasks) then
+  --         vim.notify('No tasks found', vim.log.levels.WARN)
+  --       else
+  --         overseer.run_action(tasks[1], 'restart')
+  --       end
+  --     end,
+  --     desc = 'Re-run last task',
+  --   },
+  --
+  --   {
+  --     '<leader>Ok',
+  --     function()
+  --       local overseer = require 'overseer'
+  --       local tasks = overseer.list_tasks()
+  --       for _, task in ipairs(tasks) do
+  --         if task.status == overseer.STATUS.RUNNING then
+  --           overseer.run_action(task, 'stop')
+  --         end
+  --       end
+  --     end,
+  --     desc = 'Kill all running tasks',
+  --   },
+  --
+  --   {
+  --     '<leader>O.',
+  --     function()
+  --       local overseer = require 'overseer'
+  --       local ft = vim.bo.filetype
+  --       local fname = vim.fn.expand '%:p'
+  --
+  --       local runners = {
+  --         python = { cmd = { 'python3', fname }, name = 'Python Run' },
+  --         javascript = { cmd = { 'node', fname }, name = 'Node.js Run' },
+  --         typescript = { cmd = { 'ts-node', fname }, name = 'TypeScript Run' },
+  --         lua = { cmd = { 'lua', fname }, name = 'Lua Run' },
+  --         go = { cmd = { 'go', 'run', fname }, name = 'Go Run' },
+  --         rust = { cmd = { 'cargo', 'run' }, name = 'Cargo Run', cwd = vim.fn.expand '%:p:h' },
+  --         c = { cmd = { 'gcc', fname, '-o', '/tmp/a.out', '&&', '/tmp/a.out' }, name = 'C Compile & Run' },
+  --         cpp = { cmd = { 'g++', fname, '-o', '/tmp/a.out', '&&', '/tmp/a.out' }, name = 'C++ Compile & Run' },
+  --       }
+  --
+  --       local runner = runners[ft]
+  --       if runner then
+  --         overseer.new_task {
+  --           name = runner.name,
+  --           cmd = runner.cmd,
+  --           cwd = runner.cwd or vim.fn.expand '%:p:h',
+  --           components = { 'default' },
+  --         }
+  --       else
+  --         vim.notify('No runner configured for filetype: ' .. ft, vim.log.levels.WARN)
+  --       end
+  --     end,
+  --     desc = 'Quick run current file',
+  --   },
+  -- },
 }
