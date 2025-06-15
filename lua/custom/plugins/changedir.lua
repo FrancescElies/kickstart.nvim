@@ -24,8 +24,6 @@ vim.api.nvim_create_user_command('CdRoot', function()
   cdroot { cwd = vim.fn.expand '%:p:h' }
 end, { desc = "changes dir to git's root (toplevel)" })
 
-vim.cmd.CdRoot()
-
 -- vim.api.nvim_create_autocmd('BufEnter', {
 --   group = vim.api.nvim_create_augroup('my-cd', { clear = true }),
 --   pattern = '*',
