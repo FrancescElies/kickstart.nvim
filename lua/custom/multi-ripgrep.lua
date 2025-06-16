@@ -14,7 +14,7 @@ return function(opts)
   opts.cwd = opts.cwd and vim.fn.expand(opts.cwd) or vim.loop.cwd()
   opts.shortcuts = opts.shortcuts
     or {
-      ['c'] = '*.c',
+      ['c'] = '*.{c,h,cpp,hpp}',
       ['g'] = '*.go',
       ['j'] = '*.{js,ts,tsx,svelte,json}',
       ['l'] = '*.lua',
