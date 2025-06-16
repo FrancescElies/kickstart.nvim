@@ -10,7 +10,8 @@ vim.keymap.set('n', '<leader>gb', telebin.git_branches, { desc = '[G]it [B]ranch
 vim.keymap.set('n', '<leader>gL', telebin.git_bcommits, { desc = '[G]it [L]og this [B]uffer' })
 vim.keymap.set('n', '<leader>gl', telebin.git_commits, { desc = '[G]it [L]og' })
 vim.keymap.set('v', '<leader>gl', telebin.git_bcommits_range, { desc = '[G]it [L]og' }) --- Lists commits for a range of lines in the current buffer with diff preview
-vim.keymap.set('n', '<leader>gf', telebin.git_files, { desc = '[G]it [F]iles' })
+-- stylua: ignore
+vim.keymap.set('n', '<leader>gf', function() telebin.git_files { use_file_path = true } end, { desc = '[G]it [F]iles' })
 vim.keymap.set('n', '<leader>g.', telebin.git_status, { desc = '[G]it [S]tatus' })
 vim.keymap.set('n', '<leader>gz', telebin.git_stash, { desc = '[G]it zstash' })
 
