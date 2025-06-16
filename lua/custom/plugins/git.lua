@@ -50,8 +50,6 @@ return {
       { '<leader>gB', '<cmd>Git blame<cr>', desc = 'Git blame' },
       { '<leader>ga', '<cmd>Gwrite<cr>', desc = 'Git add current file' },
       { '<leader>gr', '<cmd>Gread<cr>', desc = 'Git restore current file' },
-      { '<leader>grm', '<cmd>GRemove<cr>', desc = 'Git remove current file' },
-      { '<leader>gmv', '<cmd>GMove ', desc = 'Git move current file' },
       { '<leader>gs', vim.cmd.Git, desc = '[g]it [s]tatus (fugitive)' },
       { '<leader>gf', '<cmd>Git fetch<cr>', desc = 'Git fetch' },
       { '<leader>gp', '<cmd>Git! push --force-with-lease -u origin <cr>', desc = '[G]it [P]ush force with lease' },
