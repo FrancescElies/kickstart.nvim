@@ -6,7 +6,7 @@ local telebin = require 'telescope.builtin'
 vim.keymap.set('n', 'gh', '<cmd>diffget //2<cr>', { desc = 'get left diff' })
 vim.keymap.set('n', 'gl', '<cmd>diffget //3<cr>', { desc = 'get right diff' })
 
-vim.keymap.set('n', '<leader>gb', telebin.git_branches, { desc = '[G]it [B]ranches' })
+vim.keymap.set('n', '<leader>gB', telebin.git_branches, { desc = '[G]it [B]ranches' })
 vim.keymap.set('n', '<leader>gL', telebin.git_bcommits, { desc = '[G]it [L]og this [B]uffer' })
 vim.keymap.set('n', '<leader>gl', telebin.git_commits, { desc = '[G]it [L]og' })
 vim.keymap.set('v', '<leader>gl', telebin.git_bcommits_range, { desc = '[G]it [L]og' }) --- Lists commits for a range of lines in the current buffer with diff preview
@@ -47,7 +47,7 @@ return {
     },
     ft = { 'fugitive' },
     keys = {
-      { '<leader>gB', '<cmd>Git blame<cr>', desc = 'Git blame' },
+      { '<leader>gb', '<cmd>Git blame<cr>', desc = 'Git blame' },
       { '<leader>ga', '<cmd>Gwrite<cr>', desc = 'Git add current file' },
       { '<leader>gr', '<cmd>Gread<cr>', desc = 'Git restore current file' },
       { '<leader>gs', vim.cmd.Git, desc = '[g]it [s]tatus (fugitive)' },
