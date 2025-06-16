@@ -436,7 +436,9 @@ require('lazy').setup({
         --
         defaults = {
           path_display = {
-            shorten = { len = 2, exclude = { -3, -2, -1 } },
+            filename_first = {
+              reverse_directories = true,
+            },
           },
           mappings = {
             i = {
