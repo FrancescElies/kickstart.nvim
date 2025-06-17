@@ -66,13 +66,14 @@ return {
     'sindrets/diffview.nvim',
     opts = {},
     keys = {
-      { '<leader>gdf', '<cmd>DiffviewFileHistory %<cr>', desc = '[G]it [D]iff [F]ile history' },
-      { '<leader>gdh', '<cmd>DiffviewFileHistory', desc = '[G]it [D]iff [H]istory' },
+      { '<leader>gdf', '<cmd>DiffviewFileHistory %<cr>', desc = '[G]it [D]iff [F]ile history (this file)' },
+      { '<leader>gdl', ':DiffviewFileHistory', desc = '[G]it [D]iff History ([l]ine evolution)', mode = { 'n', 'v' } },
+      { '<leader>gdb', ':DiffviewFileHistory', desc = '[G]it [D]iff History (this [b]ranch)' },
+
       { '<leader>gdo', '<cmd>DiffviewOpen<cr>', desc = '[G]it [D]iff [O]pen (merge conflicts)' },
-      { '<leader>gdb', '<cmd>DiffviewOpen origin/main...HEAD', desc = '[G]it [D]iff merge [B]ase' },
+      { '<leader>gdB', '<cmd>DiffviewOpen origin/main...HEAD', desc = '[G]it [D]iff merge [B]ase' },
       { '<leader>gdc', '<cmd>DiffviewClose<cr>', desc = '[G]it [D]iff [C]lose' },
       -- { '<leader>gdl', ':AdvancedGitSearch diff_commit_line<cr>', mode = { 'n', 'v' }, desc = '[G]it [D]iff [L]ine' },
-      { '<leader>gdt', "<cmd>'<,'>DiffviewOpen origin/main...HEAD", desc = '[G]it [D]iff [T]race line evolution' },
       -- Examples
       -- :DiffviewOpen
       -- :DiffviewOpen HEAD~2
