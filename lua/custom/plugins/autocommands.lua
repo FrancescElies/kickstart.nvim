@@ -7,12 +7,12 @@ vim.api.nvim_create_augroup('markdown', { clear = true })
 --
 --
 
--- start terminal in insert mode
-vim.api.nvim_create_autocmd('TermOpen', {
-  group = 'bufcheck',
-  pattern = '*',
-  command = 'startinsert | set winfixheight',
-})
+-- -- start terminal in insert mode
+-- vim.api.nvim_create_autocmd('TermOpen', {
+--   group = 'bufcheck',
+--   pattern = '*',
+--   command = 'startinsert | set winfixheight',
+-- })
 
 --
 --
@@ -44,7 +44,6 @@ vim.api.nvim_create_autocmd('BufReadPost', {
     end
   end,
 })
-
 
 vim.api.nvim_create_autocmd('BufReadPost', {
   group = 'markdown',
