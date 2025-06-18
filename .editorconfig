@@ -12,3 +12,8 @@ insert_final_newline = true
 [*.lua]
 indent_style = space
 indent_size = 2
+
+# 4 space indentation
+[*.nu]
+indent_style = space
+indent_size = 4

@@ -495,6 +495,7 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
       vim.keymap.set('n', '<leader>st', builtin.treesitter, { desc = '[S]earch [T]reesitter' })
       vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
+      vim.keymap.set('n', '<leader>e', builtin.symbols, { desc = '[S]earch [e]moji' })
 
       local function find_file_in_all_projects()
         require('telescope.builtin').find_files { cwd = vim.fn.expand '~/src' }
