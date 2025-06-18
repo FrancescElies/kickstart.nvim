@@ -3,19 +3,6 @@ vim.api.nvim_create_augroup('markdown', { clear = true })
 
 --
 --
--- Terminal
---
---
-
--- -- start terminal in insert mode
--- vim.api.nvim_create_autocmd('TermOpen', {
---   group = 'bufcheck',
---   pattern = '*',
---   command = 'startinsert | set winfixheight',
--- })
-
---
---
 -- Buffer (which opened a file)
 --
 --

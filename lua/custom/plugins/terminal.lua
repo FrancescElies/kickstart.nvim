@@ -24,37 +24,33 @@ vim.api.nvim_create_autocmd('TermOpen', {
   end,
 })
 
--- make sure we are on insert mode when entering the terminal
-vim.api.nvim_create_autocmd({ 'TermOpen', 'BufEnter' }, {
-  pattern = { '*' },
-  group = group,
-  callback = function()
-    if vim.opt.buftype:get() == 'terminal' then
-      vim.cmd ':startinsert'
-    end
-  end,
-})
+-- -- make sure we are on insert mode when entering the terminal
+-- vim.api.nvim_create_autocmd({ 'TermOpen', 'BufEnter' }, {
+--   pattern = { '*' },
+--   group = group,
+--   callback = function()
+--     if vim.opt.buftype:get() == 'terminal' then
+--       vim.cmd ':startinsert'
+--     end
+--   end,
+-- })
 
-local function reset_window_bottom_small()
+local function reset_pane_size_mini_term()
   vim.cmd.wincmd 'J'
   vim.api.nvim_win_set_height(0, 15)
 end
--- Open a terminal at the bottom of the screen with a fixed height.
-vim.keymap.set('n', '<leader>ts', function()
+
+local function mini_terminal()
   vim.cmd.new()
-  reset_window_bottom_small()
+  reset_pane_size_mini_term()
   vim.wo.winfixheight = true
   vim.cmd.term()
   TERM_CHANNELNR = vim.bo.channel
-end, { desc = '[t]erminal [s]mall' })
+end
 
-vim.keymap.set('n', '<leader>tl', function()
+local function send_line_to_mini_term()
   vim.fn.chansend(TERM_CHANNELNR, { vim.api.nvim_get_current_line() .. '\r\n' })
-end, { desc = '[t]erminal small send [l]ine' })
-
-vim.keymap.set('n', '<leader>tr', function()
-  reset_window_bottom_small()
-end, { desc = '[t]erminal small [r]esize' })
+end
 
 --
 -- https://github.com/tjdevries/advent-of-nvim/blob/master/nvim/plugin/floaterminal.lua
@@ -110,11 +106,17 @@ local toggle_terminal = function()
   end
 end
 
--- Example usage:
--- Create a floating window with default dimensions
-vim.api.nvim_create_user_command('Floaterminal', toggle_terminal, {})
-vim.keymap.set('n', '<leader>tf', '<cmd>Floaterminal<cr>', { desc = 'floating terminal' })
-vim.keymap.set('n', '<leader>tv', '<cmd>vsplit|terminal<cr>', { desc = 'floating terminal' })
-vim.keymap.set('n', '<leader>th', '<cmd>split|terminal<cr>', { desc = 'floating terminal' })
+vim.api.nvim_create_user_command('Floaterminal', toggle_terminal, {}) -- Create a floating window with default dimensions
 vim.keymap.set({ 'n', 't' }, '<C-,>', '<cmd>Floaterminal<cr>', { desc = 'floating terminal' })
+
+vim.keymap.set({ 'n', 't' }, '<M-s>', '<cmd>split|terminal<cr>', { desc = 'floating terminal' })
+vim.keymap.set({ 'n', 't' }, '<M-v>', '<cmd>vsplit|terminal<cr>', { desc = 'floating terminal' })
+vim.keymap.set({ 'n', 't' }, '<M-x>', '<cmd>bd!<cr>', { desc = 'close pane' })
+vim.keymap.set('n', '<leader>tf', '<cmd>Floaterminal<cr>', { desc = 'floating terminal' })
+vim.keymap.set('n', '<leader>th', '<cmd>split|terminal<cr>', { desc = 'floating terminal' })
+vim.keymap.set('n', '<leader>tl', send_line_to_mini_term, { desc = 'mini[t]erm send [l]ine' })
+vim.keymap.set('n', '<leader>tm', mini_terminal, { desc = '[m]ini[t]erm' }) -- Open a terminal at the bottom of the screen with a fixed height.
+vim.keymap.set('n', '<leader>tr', reset_pane_size_mini_term, { desc = 'mini[t]erm [r]esize' })
+vim.keymap.set('n', '<leader>tv', '<cmd>vsplit|terminal<cr>', { desc = 'floating terminal' })
+
 return {}
