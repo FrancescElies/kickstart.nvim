@@ -1,3 +1,6 @@
+local set = vim.keymap.set
+local k = vim.keycode
+
 -- Commodity function to print stuff
 function _G.p(v)
   print(vim.inspect(v))
@@ -121,5 +124,66 @@ vim.keymap.set('', '<leader>vd', function()
     vim.diagnostic.config { virtual_text = true, virtual_lines = false }
   end
 end, { desc = '[v]im toggle [d]iagnostic virtual text' })
+
+-- TODO: check this
+--
+-- -- Toggle hlsearch if it's on, otherwise just do "enter"
+-- set('n', '<CR>', function()
+--   ---@diagnostic disable-next-line: undefined-field
+--   if vim.v.hlsearch == 1 then
+--     vim.cmd.nohl()
+--     return ''
+--   else
+--     return k '<CR>'
+--   end
+-- end, { expr = true })
+--
+-- -- These mappings control the size of splits (height/width)
+-- set('n', '<M-,>', '<c-w>5<')
+-- set('n', '<M-.>', '<c-w>5>')
+-- set('n', '<M-t>', '<C-W>+')
+-- set('n', '<M-s>', '<C-W>-')
+--
+-- set('n', '<M-j>', function()
+--   if vim.opt.diff:get() then
+--     vim.cmd [[normal! ]c]]
+--   else
+--     vim.cmd [[m .+1<CR>==]]
+--   end
+-- end)
+--
+-- set('n', '<M-k>', function()
+--   if vim.opt.diff:get() then
+--     vim.cmd [[normal! [c]]
+--   else
+--     vim.cmd [[m .-2<CR>==]]
+--   end
+-- end)
+--
+-- set('n', '<space>tt', function()
+--   vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = 0 }, { bufnr = 0 })
+-- end)
+--
+-- vim.api.nvim_set_keymap('n', '<leader>t', '<Plug>PlenaryTestFile', { noremap = false, silent = false })
+--
+-- set('n', 'j', function(...)
+--   local count = vim.v.count
+--
+--   if count == 0 then
+--     return 'gj'
+--   else
+--     return 'j'
+--   end
+-- end, { expr = true })
+--
+-- set('n', 'k', function(...)
+--   local count = vim.v.count
+--
+--   if count == 0 then
+--     return 'gk'
+--   else
+--     return 'k'
+--   end
+-- end, { expr = true })
 
 return {}
