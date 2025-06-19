@@ -1,4 +1,6 @@
 -- https://ofirgall.github.io/learn-nvim/chapters/12-git.html
+-- practical.li gitlinker blame.nvim tinygit
+--
 
 local tele = require 'telescope.builtin'
 
