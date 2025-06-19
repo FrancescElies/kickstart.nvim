@@ -106,21 +106,21 @@ vim.keymap.set('n', '<leader>lf', '<cmd>w|source %<cr>', { desc = 'load [L]ua [f
 vim.keymap.set('n', '<leader>ll', '<cmd>.lua<cr>', { desc = 'load [L]ua [l]ine' })
 vim.keymap.set('v', '<leader>l', ':lua<cr>', { desc = 'load [L]ua region' })
 
-vim.keymap.set('n', '<leader>vc', '<cmd>TSContext toggle<cr>', { desc = '[v]im toggle TS [c]ontext' })
+vim.keymap.set('n', '<leader>vc', '<cmd>TSContext toggle<cr>', { desc = '[v]im TS [c]ontext toggle ' })
 vim.keymap.set('n', '<leader>vm', ":new | put=execute('messages')<cr>", { desc = 'vim messages' })
-vim.keymap.set('n', '<leader>vf', ':FormatToggle<CR>', { desc = '[v]im toggle [f]ormat' })
-vim.keymap.set('n', '<leader>vs', ':set invhlsearch<cr>', { desc = '[v]im toggle highlight [s]earch' })
-vim.keymap.set('n', '<leader>vS', ':set invspell<cr>', { desc = '[v]im toggle [S]pell' })
+vim.keymap.set('n', '<leader>vf', ':FormatToggle<CR>', { desc = '[v]im [f]ormat toggle' })
+vim.keymap.set('n', '<leader>vs', ':set invhlsearch<cr>', { desc = '[v]im highlight [s]earch toggle' })
+vim.keymap.set('n', '<leader>vS', ':set invspell<cr>', { desc = '[v]im [S]pell toggle' })
 
-vim.keymap.set('n', '<leader>vD', toggle_inline_diagnostic, { desc = '[v]im toggle [D]iagnostic' })
-vim.keymap.set('', '<leader>vd', function()
+vim.keymap.set('n', '<leader>vd', toggle_inline_diagnostic, { desc = '[v]im [D]iagnostic toggle' })
+vim.keymap.set('', '<leader>vv', function()
   local config = vim.diagnostic.config() or {}
   if config.virtual_text then
     vim.diagnostic.config { virtual_text = false, virtual_lines = true }
   else
     vim.diagnostic.config { virtual_text = true, virtual_lines = false }
   end
-end, { desc = '[v]im toggle [d]iagnostic virtual text' })
+end, { desc = '[v]im diagnostic [v]irtual text toggle ' })
 
 -- control splits size  <>., are on the same two keys
 -- width
