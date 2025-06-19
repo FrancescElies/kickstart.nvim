@@ -852,8 +852,8 @@ require('lazy').setup({
             return { 'isort', 'black' }
           end
         end,
-        typescript = { 'biome', lsp_format = 'fallback' },
-        json = { 'biome', lsp_format = 'fallback' },
+        typescript = { 'biome', 'prettierd', 'prettier', stop_after_first = true, lsp_format = 'fallback' },
+        json = { 'biome', 'prettierd', 'prettier', stop_after_first = true, lsp_format = 'fallback' },
         -- You can use 'stop_after_first' to run the first available formatter from the list
         javascript = { 'biome', 'prettierd', 'prettier', stop_after_first = true, lsp_format = 'fallback' },
         --
