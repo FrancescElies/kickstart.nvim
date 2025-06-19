@@ -454,8 +454,7 @@ require('lazy').setup({
               map({ 'i', 'n' }, '<C-o>', function(_)
                 local entry = action_state.get_selected_entry()
                 vim.inspect('Name = ' .. entry.value)
-                local ut = require 'custom.utils'
-                ut.open_with_default_app(entry.value)
+                require('custom.utils').open_with_default_app(entry.value)
               end, { desc = 'Open default OS App' })
               -- needs to return true if you want to map default_mappings and false if not
               return true
