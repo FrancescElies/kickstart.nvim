@@ -1,3 +1,10 @@
+--
+-- Find where a map was last defined
+--
+-- :verbose map <key>
+-- :verbose nmap <key>
+--
+
 -- Commodity function to print stuff
 function _G.p(v)
   print(vim.inspect(v))
