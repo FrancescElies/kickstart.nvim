@@ -1,6 +1,6 @@
 local Job = require 'plenary.job'
 
-local function cdroot(opts)
+local function cdroot_of(opts)
   ---@diagnostic disable-next-line: missing-fields
   Job:new({
     command = 'git',
@@ -18,18 +18,22 @@ end
 vim.api.nvim_create_user_command('CdParent', function()
   local path = vim.fn.expand '%:p:h'
   vim.api.nvim_set_current_dir(path)
+  -- vim.fn.chdir() maybe?
 end, { desc = 'changes directory to files parent dir' })
 
 vim.api.nvim_create_user_command('CdRoot', function()
-  cdroot { cwd = vim.fn.expand '%:p:h' }
+  cdroot_of { cwd = vim.fn.expand '%:p:h' }
 end, { desc = "changes dir to git's root (toplevel)" })
 
--- vim.api.nvim_create_autocmd('BufEnter', {
---   group = vim.api.nvim_create_augroup('my-cd', { clear = true }),
---   pattern = '*',
---   callback = function()
---     cdroot { cwd = vim.fn.expand '%:p:h' }
---   end,
--- })
+vim.api.nvim_create_autocmd('BufEnter', {
+  group = vim.api.nvim_create_augroup('my-cd', { clear = true }),
+  pattern = '*',
+  callback = function()
+    -- Only run for normal buffers, (no terminal, quickfix ...)
+    if vim.bo.buftype == '' then
+      cdroot_of { cwd = vim.fn.expand '%:p:h' }
+    end
+  end,
+})
 
 return {}
