@@ -1,6 +1,3 @@
-local set = vim.keymap.set
-local k = vim.keycode
-
 -- Commodity function to print stuff
 function _G.p(v)
   print(vim.inspect(v))
@@ -53,9 +50,6 @@ vim.keymap.set('n', ']t', '<cmd>tabnext<cr>', { desc = 'Next tab' })
 
 -- Keep cursor in place when joining lines
 vim.keymap.set('n', 'J', 'mzJ`z')
--- Move lines up/down in visual mode
-vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
-vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
 
 -- quickfix
 vim.keymap.set('n', '<C-p>', '<cmd>cprevious<cr>zz', { desc = 'QuickfiX previous' })
@@ -72,10 +66,6 @@ vim.keymap.set('n', '<C-d>', '<C-d>zz')
 vim.keymap.set('n', '<C-u>', '<C-u>zz')
 vim.keymap.set('n', 'n', 'nzzzv')
 vim.keymap.set('n', 'N', 'Nzzzv')
-
--- Move lines in visual mode
-vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
-vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
 
 -- Keep cursor in place when joining lines
 vim.keymap.set('n', 'J', 'mzJ`z')
@@ -125,65 +115,71 @@ vim.keymap.set('', '<leader>vd', function()
   end
 end, { desc = '[v]im toggle [d]iagnostic virtual text' })
 
--- TODO: check this
---
--- -- Toggle hlsearch if it's on, otherwise just do "enter"
--- set('n', '<CR>', function()
---   ---@diagnostic disable-next-line: undefined-field
---   if vim.v.hlsearch == 1 then
---     vim.cmd.nohl()
---     return ''
---   else
---     return k '<CR>'
---   end
--- end, { expr = true })
---
--- -- These mappings control the size of splits (height/width)
--- set('n', '<M-,>', '<c-w>5<')
--- set('n', '<M-.>', '<c-w>5>')
--- set('n', '<M-t>', '<C-W>+')
--- set('n', '<M-s>', '<C-W>-')
---
--- set('n', '<M-j>', function()
---   if vim.opt.diff:get() then
---     vim.cmd [[normal! ]c]]
---   else
---     vim.cmd [[m .+1<CR>==]]
---   end
--- end)
---
--- set('n', '<M-k>', function()
---   if vim.opt.diff:get() then
---     vim.cmd [[normal! [c]]
---   else
---     vim.cmd [[m .-2<CR>==]]
---   end
--- end)
---
--- set('n', '<space>tt', function()
---   vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = 0 }, { bufnr = 0 })
--- end)
---
--- vim.api.nvim_set_keymap('n', '<leader>t', '<Plug>PlenaryTestFile', { noremap = false, silent = false })
---
--- set('n', 'j', function(...)
---   local count = vim.v.count
---
---   if count == 0 then
---     return 'gj'
---   else
---     return 'j'
---   end
--- end, { expr = true })
---
--- set('n', 'k', function(...)
---   local count = vim.v.count
---
---   if count == 0 then
---     return 'gk'
---   else
---     return 'k'
---   end
--- end, { expr = true })
+-- control splits size  <>., are on the same two keys
+-- width
+vim.keymap.set('n', '<M->>', '<c-w>5<')
+vim.keymap.set('n', '<M-<>', '<c-w>5>')
+-- height
+vim.keymap.set('n', '<M-.>', '<C-W>+')
+vim.keymap.set('n', '<M-,>', '<C-W>-')
 
+-- NOTE: the thing below M-j and M-k feels better?
+-- Move lines in visual mode
+-- vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
+-- vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
+
+vim.keymap.set('n', '<M-j>', function()
+  if vim.opt.diff:get() then
+    vim.cmd [[normal! ]c]]
+  else
+    vim.cmd [[m .+1<CR>==]] -- move line down
+  end
+end)
+
+vim.keymap.set('n', '<M-k>', function()
+  if vim.opt.diff:get() then
+    vim.cmd [[normal! [c]]
+  else
+    vim.cmd [[m .-2<CR>==]] -- move line up
+  end
+end)
+
+--
+-- Neovide
+--
+
+local copy_key = '<C-S-C>'
+local paste_key = '<C-S-V>'
+
+if vim.g.neovide then
+  vim.keymap.set('v', copy_key, '"+y') -- Copy
+  vim.keymap.set('n', paste_key, '"+P') -- Paste normal mode
+  vim.keymap.set('v', paste_key, '"+P') -- Paste visual mode
+  vim.keymap.set('c', paste_key, '<C-R>+') -- Paste command mode
+  vim.keymap.set('i', paste_key, '<ESC>l"+Pli') -- Paste insert mode
+
+  vim.g.neovide_scale_factor = 1.0
+  local change_scale_factor = function(delta)
+    vim.g.neovide_scale_factor = vim.g.neovide_scale_factor * delta
+  end
+  vim.keymap.set('n', '<M-=>', function()
+    change_scale_factor(1.25)
+  end)
+  vim.keymap.set('n', '<M-->', function()
+    change_scale_factor(1 / 1.25)
+  end)
+  vim.keymap.set('n', '<M-0>', function()
+    vim.g.neovide_scale_factor = 1.0
+  end)
+end
+
+-- Allow clipboard copy paste in neovim
+vim.api.nvim_set_keymap('', paste_key, '+p<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('!', paste_key, '<C-R>+', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('t', paste_key, '<C-R>+', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('v', paste_key, '<C-R>+', { noremap = true, silent = true })
+
+--
+-- the end
+--
 return {}
