@@ -9,6 +9,10 @@ local function cdroot_of(opts)
     on_exit = function(j, _)
       local path = j:result()[1]
       vim.schedule(function()
+        if path == nil then
+          return
+        end
+        print('cwd: ' .. path)
         vim.api.nvim_set_current_dir(path)
       end)
     end,
