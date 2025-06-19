@@ -24,16 +24,16 @@ vim.api.nvim_create_autocmd('TermOpen', {
   end,
 })
 
--- -- make sure we are on insert mode when entering the terminal
--- vim.api.nvim_create_autocmd({ 'TermOpen', 'BufEnter' }, {
---   pattern = { '*' },
---   group = group,
---   callback = function()
---     if vim.opt.buftype:get() == 'terminal' then
---       vim.cmd ':startinsert'
---     end
---   end,
--- })
+-- make sure we are on insert mode when entering the terminal
+vim.api.nvim_create_autocmd({ 'TermOpen', 'BufEnter' }, {
+  pattern = { '*' },
+  group = group,
+  callback = function()
+    if vim.opt.buftype:get() == 'terminal' then
+      vim.cmd ':startinsert'
+    end
+  end,
+})
 
 local function reset_pane_size_mini_term()
   vim.cmd.wincmd 'J'
