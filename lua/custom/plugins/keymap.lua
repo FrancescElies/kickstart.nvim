@@ -55,9 +55,6 @@ vim.keymap.set('n', ']b', '<cmd>bnext<cr>', { desc = 'Next buffer' })
 vim.keymap.set('n', '[t', '<cmd>tabprevious<cr>', { desc = 'Prev tab' })
 vim.keymap.set('n', ']t', '<cmd>tabnext<cr>', { desc = 'Next tab' })
 
--- Keep cursor in place when joining lines
-vim.keymap.set('n', 'J', 'mzJ`z')
-
 -- quickfix
 vim.keymap.set('n', '<C-p>', '<cmd>cprevious<cr>zz', { desc = 'QuickfiX previous' })
 vim.keymap.set('n', '<C-n>', '<cmd>cnext<cr>zz', { desc = 'QuickfiX next' })
@@ -132,8 +129,8 @@ vim.keymap.set('n', '<M-,>', '<C-W>-')
 
 -- NOTE: the thing below M-j and M-k feels better?
 -- Move lines in visual mode
--- vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
--- vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
+vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
+vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
 
 vim.keymap.set('n', '<M-j>', function()
   if vim.opt.diff:get() then
