@@ -170,10 +170,10 @@ if vim.g.neovide then
     vim.g.neovide_scale_factor = vim.g.neovide_scale_factor * delta
   end
   vim.keymap.set('n', '<M-=>', function()
-    change_scale_factor(1.25)
+    change_scale_factor(1.10)
   end)
   vim.keymap.set('n', '<M-->', function()
-    change_scale_factor(1 / 1.25)
+    change_scale_factor(1 / 1.10)
   end)
   vim.keymap.set('n', '<M-0>', function()
     vim.g.neovide_scale_factor = 1.0
