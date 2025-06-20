@@ -107,7 +107,8 @@ local toggle_terminal = function()
 end
 
 vim.api.nvim_create_user_command('Floaterminal', toggle_terminal, {}) -- Create a floating window with default dimensions
-vim.keymap.set({ 'n', 't' }, '<M-,>', '<cmd>Floaterminal<cr>', { desc = 'floating terminal' })
+-- <C-,> (open floaterm) feels right when combined with <C-p> (previous command) and <C-m> (enter)
+vim.keymap.set({ 'n', 't' }, '<C-,>', '<cmd>Floaterminal<cr>', { desc = 'floating terminal' })
 
 vim.keymap.set({ 'n', 't' }, '<M-s>', '<cmd>split|terminal<cr>', { desc = 'floating terminal' })
 vim.keymap.set({ 'n', 't' }, '<M-v>', '<cmd>vsplit|terminal<cr>', { desc = 'floating terminal' })
