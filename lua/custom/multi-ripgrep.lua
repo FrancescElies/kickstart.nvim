@@ -7,7 +7,7 @@ local pickers = require 'telescope.pickers'
 
 -- i would like to be able to do telescope
 -- and have telescope do some filtering on files and some grepping
-return function(opts)
+local function find(opts)
   opts = opts or {}
   opts.cwd = opts.cwd and vim.fn.expand(opts.cwd) or vim.loop.cwd()
   opts.shortcuts = opts.shortcuts
@@ -78,3 +78,4 @@ return function(opts)
     })
     :find()
 end
+return { find = find }

@@ -491,7 +491,8 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
       vim.keymap.set({ 'n', 'v' }, '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
       vim.keymap.set('n', '<leader>sG', builtin.live_grep, { desc = '[S]earch by [G]rep' })
-      vim.keymap.set('n', '<space>sg', require 'custom.multi-ripgrep', { desc = '[S]earch by [G]rep' })
+      vim.keymap.set('n', '<leader>sg', require('custom.multi-ripgrep').find, { desc = '[S]earch by [G]rep' })
+      vim.keymap.set('n', '<leader>sp', require('custom.repo-select').project_file_picker, { desc = '[S]earch [P]roject files' })
       vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
       vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
       vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
@@ -499,15 +500,9 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
       vim.keymap.set('n', '<leader>e', builtin.symbols, { desc = '[S]earch [e]moji' })
 
-      local function find_file_in_all_projects()
-        require('telescope.builtin').find_files { cwd = vim.fn.expand '~/src' }
-      end
-      vim.keymap.set('n', '<leader>sp', find_file_in_all_projects, { desc = '[S]earch [P]rojects' })
-      vim.keymap.set('n', '<M-p>', find_file_in_all_projects, { desc = '[S]earch [P]rojects' })
-
-      vim.keymap.set('n', '<leader>sP', function()
+      vim.keymap.set('n', '<leader>sl', function()
         require('telescope.builtin').find_files { cwd = vim.fs.joinpath(vim.fn.stdpath 'data') }
-      end, { desc = '[S]earch [P]ackages' })
+      end, { desc = '[S]earch [l]ua packages' })
 
       -- Slightly advanced example of overriding default behavior and theme
       vim.keymap.set('n', '<leader>/', function()
