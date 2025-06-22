@@ -366,7 +366,7 @@ require('lazy').setup({
         { '<leader>gd', group = '[G]it [D]iff', mode = { 'n', 'v' } },
         { '<leader>r', group = '[R]eplace', mode = { 'v' } },
         { '<leader>t', group = '[T]erminal' },
-        { '<leader>n', group = '[n]otes' },
+        { '<leader>z', group = '[z]ettelkasten' },
         { '<leader>d', group = '[D]ebug' },
         { '<leader>p', group = '[p]roject' },
         { '<leader>c', group = '[c]ode' },
@@ -493,6 +493,7 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>sG', builtin.live_grep, { desc = '[S]earch by [G]rep' })
       vim.keymap.set('n', '<leader>sg', require('custom.multi-ripgrep').find, { desc = '[S]earch by [G]rep' })
       vim.keymap.set('n', '<leader>sp', require('custom.repo-select').project_file_picker, { desc = '[S]earch [P]roject files' })
+      vim.keymap.set('n', '<leader>sz', '<cmd> Telekasten search_notes<cr>', { desc = '[S]earch [Z]ettelkasten' })
       vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
       vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
       vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
