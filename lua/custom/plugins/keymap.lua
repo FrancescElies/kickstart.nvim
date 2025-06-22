@@ -15,6 +15,13 @@ vim.opt.tabstop = 4
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 
+vim.keymap.set('n', ']d', function()
+  vim.diagnostic.jump { count = 1, float = true }
+end)
+vim.keymap.set('n', '[d', function()
+  vim.diagnostic.jump { count = -1, float = true }
+end)
+
 vim.diagnostic.config { virtual_text = true, virtual_lines = false }
 
 vim.keymap.set('n', '<leader>m', require('telescope.builtin').marks, { desc = '[m]arks' })
@@ -121,6 +128,7 @@ end, { desc = '[v]im diagnostic [v]irtual text toggle ' })
 
 -- control splits size  <>., are on the same two keys
 -- width
+
 vim.keymap.set('n', '<M->>', '<c-w>5<')
 vim.keymap.set('n', '<M-<>', '<c-w>5>')
 -- height
