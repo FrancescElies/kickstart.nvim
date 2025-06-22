@@ -127,26 +127,24 @@ vim.keymap.set('n', '<M-<>', '<c-w>5>')
 vim.keymap.set('n', '<M-.>', '<C-W>+')
 vim.keymap.set('n', '<M-,>', '<C-W>-')
 
--- NOTE: the thing below M-j and M-k feels better?
 -- Move lines in visual mode
 vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
 vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
 
-vim.keymap.set('n', '<M-j>', function()
-  if vim.opt.diff:get() then
-    vim.cmd [[normal! ]c]]
-  else
-    vim.cmd [[m .+1<CR>==]] -- move line down
-  end
-end)
-
-vim.keymap.set('n', '<M-k>', function()
-  if vim.opt.diff:get() then
-    vim.cmd [[normal! [c]]
-  else
-    vim.cmd [[m .-2<CR>==]] -- move line up
-  end
-end)
+-- vim.keymap.set('n', '<M-j>', function()
+--   if vim.opt.diff:get() then
+--     vim.cmd [[normal! ]c]]
+--   else
+--     vim.cmd [[m .+1<CR>==]] -- move line down
+--   end
+-- end)
+-- vim.keymap.set('n', '<M-k>', function()
+--   if vim.opt.diff:get() then
+--     vim.cmd [[normal! [c]]
+--   else
+--     vim.cmd [[m .-2<CR>==]] -- move line up
+--   end
+-- end)
 
 --
 -- Neovide
