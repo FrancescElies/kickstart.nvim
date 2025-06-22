@@ -63,8 +63,25 @@ vim.keymap.set('n', '[t', '<cmd>tabprevious<cr>', { desc = 'Prev tab' })
 vim.keymap.set('n', ']t', '<cmd>tabnext<cr>', { desc = 'Next tab' })
 
 -- quickfix
-vim.keymap.set('n', '<C-p>', '<cmd>cprevious<cr>zz', { desc = 'QuickfiX previous' })
-vim.keymap.set('n', '<C-n>', '<cmd>cnext<cr>zz', { desc = 'QuickfiX next' })
+local function is_quickfix_open()
+  return vim.fn.getqflist({ winid = 0 }).winid ~= 0
+end
+vim.keymap.set('n', '<C-p>', function()
+  if is_quickfix_open() then
+    vim.cmd 'cprevious' -- previous quickfix item
+    vim.cmd 'normal! zz'
+  else
+    vim.cmd 'normal [c' -- next change
+  end
+end)
+vim.keymap.set('n', '<C-n>', function()
+  if is_quickfix_open() then
+    vim.cmd 'cnext' -- next quickfix item
+    vim.cmd 'normal! zz'
+  else
+    vim.cmd 'normal [c' -- previous change
+  end
+end)
 
 -- -- loclist
 -- vim.keymap.set('n', '<leader>lo', '<cmd>lopen<cr>zz', { desc = 'LocList open' })
@@ -139,29 +156,13 @@ vim.keymap.set('n', '<M-,>', '<C-W>-')
 vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
 vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
 
--- vim.keymap.set('n', '<M-j>', function()
---   if vim.opt.diff:get() then
---     vim.cmd [[normal! ]c]]
---   else
---     vim.cmd [[m .+1<CR>==]] -- move line down
---   end
--- end)
--- vim.keymap.set('n', '<M-k>', function()
---   if vim.opt.diff:get() then
---     vim.cmd [[normal! [c]]
---   else
---     vim.cmd [[m .-2<CR>==]] -- move line up
---   end
--- end)
-
 --
 -- Neovide
 --
-
-local copy_key = '<C-S-C>'
-local paste_key = '<C-S-V>'
-
 if vim.g.neovide then
+  local copy_key = '<C-S-C>'
+  local paste_key = '<C-S-V>'
+
   vim.keymap.set('v', copy_key, '"+y') -- Copy
   vim.keymap.set('n', paste_key, '"+P') -- Paste normal mode
   vim.keymap.set('v', paste_key, '"+P') -- Paste visual mode
@@ -181,13 +182,13 @@ if vim.g.neovide then
   vim.keymap.set('n', '<M-0>', function()
     vim.g.neovide_scale_factor = 1.0
   end)
-end
 
--- Allow clipboard copy paste in neovim
-vim.api.nvim_set_keymap('', paste_key, '+p<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('!', paste_key, '<C-R>+', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('t', paste_key, '<C-R>+', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('v', paste_key, '<C-R>+', { noremap = true, silent = true })
+  -- Allow clipboard copy paste in neovim
+  vim.api.nvim_set_keymap('', paste_key, '+p<CR>', { noremap = true, silent = true })
+  vim.api.nvim_set_keymap('!', paste_key, '<C-R>+', { noremap = true, silent = true })
+  vim.api.nvim_set_keymap('t', paste_key, '<C-R>+', { noremap = true, silent = true })
+  vim.api.nvim_set_keymap('v', paste_key, '<C-R>+', { noremap = true, silent = true })
+end
 
 --
 -- the end
