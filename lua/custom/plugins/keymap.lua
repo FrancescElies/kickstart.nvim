@@ -79,7 +79,7 @@ vim.keymap.set('n', '<C-n>', function()
     vim.cmd 'cnext' -- next quickfix item
     vim.cmd 'normal! zz'
   else
-    vim.cmd 'normal [c' -- previous change
+    vim.cmd 'normal ]c' -- previous change
   end
 end)
 
