@@ -110,12 +110,11 @@ vim.api.nvim_create_user_command('Floaterminal', toggle_terminal, {}) -- Create 
 -- <C-,> (open floaterm) feels right when combined with <C-p> (previous command) and <C-m> (enter)
 vim.keymap.set({ 'n', 't' }, '<C-,>', '<cmd>Floaterminal<cr>', { desc = 'float term' })
 
-vim.keymap.set({ 'n', 't' }, 'sm', small_term, { desc = '[s]mall [t]erm' })
-vim.keymap.set({ 'n', 't' }, 'st', '<cmd>term<cr>')
+vim.keymap.set({ 'n' }, 'sm', small_term, { desc = '[s]mall [t]erm' })
 
-vim.keymap.set({ 'n', 't' }, '<M-s>', '<cmd>split|terminal<cr>')
-vim.keymap.set({ 'n', 't' }, '<M-v>', '<cmd>vsplit|terminal<cr>')
-vim.keymap.set({ 'n', 't' }, '<M-x>', '<cmd>bd!<cr>')
+-- vim.keymap.set({ 'n', 't' }, '<M-s>', '<cmd>split|terminal<cr>')
+-- vim.keymap.set({ 'n', 't' }, '<M-v>', '<cmd>vsplit|terminal<cr>')
+-- vim.keymap.set({ 'n', 't' }, '<M-x>', '<cmd>bd!<cr>')
 
 vim.keymap.set('n', '<leader>tf', '<cmd>Floaterminal<cr>', { desc = 'floating terminal' })
 vim.keymap.set('n', '<leader>th', '<cmd>split|terminal<cr>', { desc = 'terminal' })
