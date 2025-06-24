@@ -1048,7 +1048,6 @@ require('lazy').setup({
     'nvim-treesitter/nvim-treesitter',
     dependencies = {
       -- NOTE: additional parser
-      { 'nushell/tree-sitter-nu' },
     },
     build = ':TSUpdate',
     main = 'nvim-treesitter.configs', -- Sets main module to use for opts
