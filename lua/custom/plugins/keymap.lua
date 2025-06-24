@@ -15,16 +15,39 @@ vim.opt.tabstop = 4
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 
-vim.keymap.set('n', ']d', function()
-  vim.diagnostic.jump { count = 1, float = true }
+-- quickfix
+local function is_quickfix_open()
+  return vim.fn.getqflist({ winid = 0 }).winid ~= 0
+end
+vim.keymap.set('n', '<C-p>', function()
+  if is_quickfix_open() then
+    vim.cmd 'cprevious' -- previous quickfix item
+    vim.cmd 'normal! zz'
+  else
+    vim.diagnostic.jump { count = -1, float = true }
+  end
 end)
-vim.keymap.set('n', '[d', function()
-  vim.diagnostic.jump { count = -1, float = true }
+vim.keymap.set('n', '<C-n>', function()
+  if is_quickfix_open() then
+    vim.cmd 'cnext' -- next quickfix item
+    vim.cmd 'normal! zz'
+  else
+    vim.diagnostic.jump { count = 1, float = true }
+  end
 end)
+
+-- -- loclist
+-- vim.keymap.set('n', '<leader>lo', '<cmd>lopen<cr>zz', { desc = 'LocList open' })
+-- vim.keymap.set('n', '<leader>lc', '<cmd>lclose<cr>zz', { desc = 'LocList close' })
+-- vim.keymap.set('n', '<leader>lp', '<cmd>lprevious<cr>zz', { desc = 'LocList previous' })
+-- vim.keymap.set('n', '<leader>lp', '<cmd>lnext<cr>zz', { desc = 'LocList next' })
+
+-- stylua: ignore start
+vim.keymap.set('n', '<S-l>', function() vim.cmd 'normal ]c' end, { desc = 'previous change (gitsigns)' })
+vim.keymap.set('n', '<S-h>', function() vim.cmd 'normal [c' end, { desc = 'next change (gitsigns)' })
+-- stylua: ignore end
 
 vim.diagnostic.config { virtual_text = true, virtual_lines = false }
-
-vim.keymap.set('n', '<leader>m', require('telescope.builtin').marks, { desc = '[m]arks' })
 
 local function toggle_inline_diagnostic()
   vim.diagnostic.enable(not vim.diagnostic.is_enabled())
@@ -53,41 +76,7 @@ vim.keymap.set('n', 'sv', '<cmd>vsplit<cr>', { desc = 'vertical split' })
 vim.keymap.set({ 'n', 't' }, 'sd', '<cmd>bd!<cr>', { desc = 'delete buffer and window' })
 
 -- Move to next and previous buffer with ease
--- Quick buffer switching
-vim.keymap.set('n', '<S-l>', ':bnext<CR>')
-vim.keymap.set('n', '<S-h>', ':bprevious<CR>')
 vim.keymap.set('n', '<leader>bd', ':bdelete<CR>')
-vim.keymap.set('n', '[b', '<cmd>bprevious<cr>', { desc = 'Prev buffer' })
-vim.keymap.set('n', ']b', '<cmd>bnext<cr>', { desc = 'Next buffer' })
-vim.keymap.set('n', '[t', '<cmd>tabprevious<cr>', { desc = 'Prev tab' })
-vim.keymap.set('n', ']t', '<cmd>tabnext<cr>', { desc = 'Next tab' })
-
--- quickfix
-local function is_quickfix_open()
-  return vim.fn.getqflist({ winid = 0 }).winid ~= 0
-end
-vim.keymap.set('n', '<C-p>', function()
-  if is_quickfix_open() then
-    vim.cmd 'cprevious' -- previous quickfix item
-    vim.cmd 'normal! zz'
-  else
-    vim.cmd 'normal [c' -- next change
-  end
-end)
-vim.keymap.set('n', '<C-n>', function()
-  if is_quickfix_open() then
-    vim.cmd 'cnext' -- next quickfix item
-    vim.cmd 'normal! zz'
-  else
-    vim.cmd 'normal ]c' -- previous change
-  end
-end)
-
--- -- loclist
--- vim.keymap.set('n', '<leader>lo', '<cmd>lopen<cr>zz', { desc = 'LocList open' })
--- vim.keymap.set('n', '<leader>lc', '<cmd>lclose<cr>zz', { desc = 'LocList close' })
--- vim.keymap.set('n', '<leader>lp', '<cmd>lprevious<cr>zz', { desc = 'LocList previous' })
--- vim.keymap.set('n', '<leader>lp', '<cmd>lnext<cr>zz', { desc = 'LocList next' })
 
 -- Keep things vertically centered during searches
 vim.keymap.set('n', '<C-d>', '<C-d>zz')
@@ -130,8 +119,8 @@ vim.keymap.set('v', '<leader>l', ':lua<cr>', { desc = 'load [L]ua region' })
 vim.keymap.set('n', '<leader>vc', '<cmd>TSContext toggle<cr>', { desc = '[v]im TS [c]ontext toggle ' })
 vim.keymap.set('n', '<leader>vm', ":new | put=execute('messages')<cr>", { desc = 'vim messages' })
 vim.keymap.set('n', '<leader>vf', ':FormatToggle<CR>', { desc = '[v]im [f]ormat toggle' })
-vim.keymap.set('n', '<leader>vs', ':set invhlsearch<cr>', { desc = '[v]im highlight [s]earch toggle' })
-vim.keymap.set('n', '<leader>vS', ':set invspell<cr>', { desc = '[v]im [S]pell toggle' })
+vim.keymap.set('n', '<leader>v/', ':set invhlsearch<cr>', { desc = '[v]im highlight [/]search toggle' })
+vim.keymap.set('n', '<leader>vs', ':set invspell<cr>', { desc = '[v]im [S]pell toggle' })
 
 vim.keymap.set('n', '<leader>vd', toggle_inline_diagnostic, { desc = '[v]im [D]iagnostic toggle' })
 vim.keymap.set('', '<leader>vv', function()
