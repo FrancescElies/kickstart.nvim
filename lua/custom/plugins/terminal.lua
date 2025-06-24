@@ -110,7 +110,6 @@ vim.api.nvim_create_user_command('Floaterminal', toggle_terminal, {}) -- Create 
 -- <C-,> (open floaterm) feels right when combined with <C-p> (previous command) and <C-m> (enter)
 vim.keymap.set({ 'n', 't' }, '<C-,>', '<cmd>Floaterminal<cr>', { desc = 'float term' })
 
-vim.keymap.set({ 'n', 't' }, 'sf', '<cmd>Floaterminal<cr>', { desc = '[s]mall [f]loat term' })
 vim.keymap.set({ 'n', 't' }, 'sm', small_term, { desc = '[s]mall [t]erm' })
 vim.keymap.set({ 'n', 't' }, 'st', '<cmd>term<cr>')
 
