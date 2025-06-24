@@ -47,9 +47,10 @@ vim.keymap.set('n', 'ı', 'i')
 vim.keymap.set('n', 'za', '1z=', { desc = 'fix word under cursor' }) --  https://nanotipsforvim.prose.sh/autofix-misspellings
 
 -- buffer
-vim.keymap.set('n', '<leader>`', '<cmd>e #<cr>', { desc = 'Switch to Other Buffer' })
+vim.keymap.set('n', 'so', '<cmd>e #<cr>', { desc = '[s]witch to [o]ther buffer' })
 vim.keymap.set('n', 'ss', '<cmd>split<cr>', { desc = 'split' })
 vim.keymap.set('n', 'sv', '<cmd>vsplit<cr>', { desc = 'vertical split' })
+vim.keymap.set({ 'n', 't' }, 'sd', '<cmd>bd!<cr>', { desc = 'delete buffer and window' })
 
 -- Move to next and previous buffer with ease
 -- Quick buffer switching
