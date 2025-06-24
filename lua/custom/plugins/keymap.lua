@@ -50,7 +50,6 @@ vim.keymap.set('n', 'za', '1z=', { desc = 'fix word under cursor' }) --  https:/
 vim.keymap.set('n', '<leader>`', '<cmd>e #<cr>', { desc = 'Switch to Other Buffer' })
 vim.keymap.set('n', 'ss', '<cmd>split<cr>', { desc = 'split' })
 vim.keymap.set('n', 'sv', '<cmd>vsplit<cr>', { desc = 'vertical split' })
-vim.keymap.set('n', 'sq', '<cmd>q<cr>', { desc = 'close split' })
 
 -- Move to next and previous buffer with ease
 -- Quick buffer switching
