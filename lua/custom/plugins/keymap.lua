@@ -19,7 +19,7 @@ vim.opt.splitbelow = true
 local function is_quickfix_open()
   return vim.fn.getqflist({ winid = 0 }).winid ~= 0
 end
-vim.keymap.set('n', '<C-p>', function()
+vim.keymap.set('n', '<M-k>', function()
   if is_quickfix_open() then
     vim.cmd 'cprevious' -- previous quickfix item
     vim.cmd 'normal! zz'
@@ -27,7 +27,7 @@ vim.keymap.set('n', '<C-p>', function()
     vim.diagnostic.jump { count = -1, float = true }
   end
 end)
-vim.keymap.set('n', '<C-n>', function()
+vim.keymap.set('n', '<M-j>', function()
   if is_quickfix_open() then
     vim.cmd 'cnext' -- next quickfix item
     vim.cmd 'normal! zz'
@@ -43,8 +43,8 @@ end)
 -- vim.keymap.set('n', '<leader>lp', '<cmd>lnext<cr>zz', { desc = 'LocList next' })
 
 -- stylua: ignore start
-vim.keymap.set('n', '<S-l>', function() vim.cmd 'normal ]c' end, { desc = 'previous change (gitsigns)' })
-vim.keymap.set('n', '<S-h>', function() vim.cmd 'normal [c' end, { desc = 'next change (gitsigns)' })
+vim.keymap.set('n', '<M-S-k>', function() vim.cmd 'normal [c' end, { desc = 'next change (gitsigns)' })
+vim.keymap.set('n', '<M-S-j>', function() vim.cmd 'normal ]c' end, { desc = 'previous change (gitsigns)' })
 -- stylua: ignore end
 
 vim.diagnostic.config { virtual_text = true, virtual_lines = false }
