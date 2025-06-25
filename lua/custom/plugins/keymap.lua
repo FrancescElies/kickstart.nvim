@@ -36,6 +36,14 @@ vim.keymap.set('n', '<M-j>', function()
   end
 end)
 
+-- nav buffers
+vim.keymap.set('n', '<M-h>', '<cmd>bprev<cr>')
+vim.keymap.set('n', '<M-l>', '<cmd>bnext<cr>')
+-- nav tabs
+vim.keymap.set('n', '<M-S-h>', '<cmd>tabprev<cr>')
+vim.keymap.set('n', '<M-S-l>', '<cmd>tabnext<cr>')
+vim.keymap.set('n', '<M-t>', '<cmd>tabnew<cr>')
+
 -- -- loclist
 -- vim.keymap.set('n', '<leader>lo', '<cmd>lopen<cr>zz', { desc = 'LocList open' })
 -- vim.keymap.set('n', '<leader>lc', '<cmd>lclose<cr>zz', { desc = 'LocList close' })
