@@ -5,39 +5,46 @@ local action_state = require 'telescope.actions.state'
 local actions = require 'telescope.actions'
 local builtin = require 'telescope.builtin'
 
-local joinpath = vim.fs.joinpath
-local isdirectory = vim.fn.isdirectory
-local expand = vim.fn.expand
-
 local project_dirs = {
-  expand '~/src',
-  expand '~/src/oss/',
-  expand '~/src/work',
+  vim.fn.expand '~/src',
+  vim.fn.expand '~/src/oss/',
+  vim.fn.expand '~/src/work',
 }
 
-local function get_projects()
-  local projects = {}
-
-  for _, dir in ipairs(project_dirs) do
-    if isdirectory(dir) then
-      local handle = vim.loop.fs_scandir(dir)
-      if handle then
-        while true do
-          local name, type = vim.loop.fs_scandir_next(handle)
-          if not name then
-            break
-          end
-          if type == 'directory' then
-            local project_path = joinpath(dir, name)
-            if isdirectory(project_path) then
-              table.insert(projects, {
-                name = name,
-                path = project_path,
-              })
-            end
+local function get_dirs_in(dir)
+  return coroutine.wrap(function()
+    local handle = vim.loop.fs_scandir(dir)
+    if handle then
+      while true do
+        local name, type = vim.loop.fs_scandir_next(handle)
+        if not name then
+          break
+        end
+        if type == 'directory' then
+          local project_path = vim.fs.joinpath(dir, name)
+          if vim.fn.isdirectory(project_path) then
+            coroutine.yield {
+              name = name,
+              path = project_path,
+            }
           end
         end
       end
+    end
+  end)
+end
+
+local function get_projects()
+  local projects = {}
+  for _, dir in ipairs(project_dirs) do
+    for project in get_dirs_in(dir) do
+      if string.find(project.name, 'worktree') then
+        for worktree in get_dirs_in(project.path) do
+          worktree.name = vim.fs.joinpath(project.name, worktree.name)
+          table.insert(projects, worktree)
+        end
+      end
+      table.insert(projects, project)
     end
   end
 
