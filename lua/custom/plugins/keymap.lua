@@ -37,8 +37,8 @@ vim.keymap.set('n', '<M-j>', function()
 end)
 
 -- nav buffers
-vim.keymap.set('n', '<M-h>', '<cmd>bprev<cr>')
-vim.keymap.set('n', '<M-l>', '<cmd>bnext<cr>')
+vim.keymap.set({ 'n', 't' }, '<M-h>', '<cmd>bprev<cr>')
+vim.keymap.set({ 'n', 't' }, '<M-l>', '<cmd>bnext<cr>')
 -- nav tabs
 vim.keymap.set('n', '<M-S-h>', '<cmd>tabprev<cr>')
 vim.keymap.set('n', '<M-S-l>', '<cmd>tabnext<cr>')
