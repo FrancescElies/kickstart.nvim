@@ -12,7 +12,7 @@ return {
     opts = {},
     keys = {
       {
-        '>',
+        '<M->>',
         function()
           local q = require 'quicker'
           if q.is_open() then
