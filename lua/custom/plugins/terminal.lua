@@ -116,7 +116,7 @@ vim.keymap.set({ 'n', 't' }, '<C-,>', '<cmd>Floaterminal<cr>', { desc = 'float t
 -- vim.keymap.set({ 'n', 't' }, '<Char-27>', '<cmd>Floaterminal<cr>', { desc = 'float term' })
 
 vim.keymap.set({ 'n', 't' }, '<M-m>', small_term, { desc = 'float term' })
-vim.keymap.set({ 'n', 't' }, '<M-x>', '<cmd>bd!<cr>', { desc = 'float term' })
+vim.keymap.set('t', '<M-x>', '<cmd>bd!<cr>', { desc = 'float term' })
 
 -- vim.keymap.set({ 'n', 't' }, '<M-s>', '<cmd>split|terminal<cr>')
 -- vim.keymap.set({ 'n', 't' }, '<M-v>', '<cmd>vsplit|terminal<cr>')
