@@ -12,28 +12,28 @@ return {
     opts = {},
     keys = {
       {
-        '<M->>',
+        '>',
         function()
           local q = require 'quicker'
           if q.is_open() then
             q.expand { before = 2, after = 2, add_to_existing = true }
           else
-            vim.cmd 'normal! <M->>'
+            vim.cmd 'normal! >'
           end
         end,
-        desc = 'Expand quickfix context',
+        desc = 'Expand quickfix context or >',
       },
       {
-        '<M-<>',
+        '>',
         function()
           local q = require 'quicker'
           if q.is_open() then
             q.collapse()
           else
-            vim.cmd 'normal! <M-<>'
+            vim.cmd 'normal! <'
           end
         end,
-        desc = 'Collapse quickfix context',
+        desc = 'Collapse quickfix context or <',
       },
     },
   },
