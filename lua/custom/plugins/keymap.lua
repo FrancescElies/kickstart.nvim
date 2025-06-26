@@ -81,10 +81,9 @@ vim.keymap.set('n', 'za', '1z=', { desc = 'fix word under cursor' }) --  https:/
 vim.keymap.set('n', 'so', '<cmd>e #<cr>', { desc = '[s]witch to [o]ther buffer' })
 vim.keymap.set('n', 'ss', '<cmd>split<cr>', { desc = 'split' })
 vim.keymap.set('n', 'sv', '<cmd>vsplit<cr>', { desc = 'vertical split' })
-vim.keymap.set({ 'n', 't' }, 'sd', '<cmd>bd!<cr>', { desc = 'delete buffer and window' })
 
 -- Move to next and previous buffer with ease
-vim.keymap.set('n', '<leader>bd', ':bdelete<CR>')
+vim.keymap.set({ 'n', 't' }, '<leader>bdelete', '<cmd>bd<cr>', { desc = '[b]uffer [d]elete ' })
 
 -- Keep things vertically centered during searches
 vim.keymap.set('n', '<C-d>', '<C-d>zz')
