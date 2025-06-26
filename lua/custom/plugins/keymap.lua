@@ -39,10 +39,12 @@ end)
 -- nav buffers
 vim.keymap.set({ 'n', 't' }, '<M-h>', '<cmd>bprev<cr>')
 vim.keymap.set({ 'n', 't' }, '<M-l>', '<cmd>bnext<cr>')
+vim.keymap.set({ 'n', 't' }, '<leader>bd', '<cmd>bd<cr>', { desc = '[b]uffer [d]elete ' })
+vim.keymap.set('n', '<leader>bn', '<cmd>new<cr>', { desc = '[b]uffer[n]ew ' })
 -- nav tabs
 vim.keymap.set('n', '<M-S-h>', '<cmd>tabprev<cr>')
 vim.keymap.set('n', '<M-S-l>', '<cmd>tabnext<cr>')
-vim.keymap.set('n', '<M-t>', '<cmd>tabnew<cr>')
+vim.keymap.set('n', '<leader>tn', '<cmd>tabnew<cr>', { desc = '[t]ab[n]ew' })
 
 -- -- loclist
 -- vim.keymap.set('n', '<leader>lo', '<cmd>lopen<cr>zz', { desc = 'LocList open' })
@@ -81,9 +83,6 @@ vim.keymap.set('n', 'za', '1z=', { desc = 'fix word under cursor' }) --  https:/
 vim.keymap.set('n', 'so', '<cmd>e #<cr>', { desc = '[s]witch to [o]ther buffer' })
 vim.keymap.set('n', 'ss', '<cmd>split<cr>', { desc = 'split' })
 vim.keymap.set('n', 'sv', '<cmd>vsplit<cr>', { desc = 'vertical split' })
-
--- Move to next and previous buffer with ease
-vim.keymap.set({ 'n', 't' }, '<leader>bdelete', '<cmd>bd<cr>', { desc = '[b]uffer [d]elete ' })
 
 -- Keep things vertically centered during searches
 vim.keymap.set('n', '<C-d>', '<C-d>zz')

@@ -115,18 +115,12 @@ vim.keymap.set({ 'n', 't' }, '<C-,>', '<cmd>Floaterminal<cr>', { desc = 'float t
 -- shows alacrity sends char-27 (0x1b) for unicode \uE000 see alacritty.toml
 -- vim.keymap.set({ 'n', 't' }, '<Char-27>', '<cmd>Floaterminal<cr>', { desc = 'float term' })
 
-vim.keymap.set({ 'n', 't' }, '<M-m>', small_term, { desc = 'float term' })
-vim.keymap.set('t', '<M-x>', '<cmd>bd!<cr>', { desc = 'float term' })
+vim.keymap.set({ 'n', 't' }, '<M-x>', '<cmd>bd!<cr>', { desc = 'float term' })
 
--- vim.keymap.set({ 'n', 't' }, '<M-s>', '<cmd>split|terminal<cr>')
--- vim.keymap.set({ 'n', 't' }, '<M-v>', '<cmd>vsplit|terminal<cr>')
--- vim.keymap.set({ 'n', 't' }, '<M-x>', '<cmd>bd!<cr>')
-
-vim.keymap.set('n', '<leader>tf', '<cmd>Floaterminal<cr>', { desc = 'floating terminal' })
-vim.keymap.set('n', '<leader>th', '<cmd>split|terminal<cr>', { desc = 'terminal' })
-vim.keymap.set('n', '<leader>tv', '<cmd>vsplit|terminal<cr>', { desc = 'floating terminal' })
-vim.keymap.set('n', '<leader>tsl', send_line_to_small_term, { desc = 'small[t]erm send [l]ine' })
-vim.keymap.set('n', '<leader>tst', small_term, { desc = '[s]mall[t]erm' }) -- Open a terminal at the bottom of the screen with a fixed height.
-vim.keymap.set('n', '<leader>tsr', reset_pane_size_small_term, { desc = 'small [t]erm [r]esize' })
+vim.keymap.set('n', '<leader>tt', '<cmd>term<cr>', { desc = 'float term' })
+vim.keymap.set('n', '<leader>tf', '<cmd>Floaterminal<cr>', { desc = 'float term' })
+vim.keymap.set('n', '<leader>tl', send_line_to_small_term, { desc = 'small[t]erm send [l]ine' })
+vim.keymap.set('n', '<leader>ts', small_term, { desc = '[s]mall[t]erm' }) -- Open a terminal at the bottom of the screen with a fixed height.
+vim.keymap.set('n', '<leader>tr', reset_pane_size_small_term, { desc = 'small[t]erm [r]esize' })
 
 return {}
