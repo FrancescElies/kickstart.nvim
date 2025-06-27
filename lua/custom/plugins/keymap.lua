@@ -40,6 +40,7 @@ end)
 vim.keymap.set({ 'n', 't' }, '<M-h>', '<cmd>bprev<cr>')
 vim.keymap.set({ 'n', 't' }, '<M-l>', '<cmd>bnext<cr>')
 vim.keymap.set({ 'n', 't' }, '<leader>bd', '<cmd>bd<cr>', { desc = '[b]uffer [d]elete ' })
+vim.keymap.set({ 'n', 't' }, '<leader>bo', '<cmd>%bd|e#<cr>', { desc = '[b]uffer delete [o]thers' })
 vim.keymap.set('n', '<leader>bn', '<cmd>new<cr>', { desc = '[b]uffer[n]ew ' })
 -- nav tabs
 vim.keymap.set('n', '<M-S-h>', '<cmd>tabprev<cr>')
