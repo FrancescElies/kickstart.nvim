@@ -39,14 +39,16 @@ end)
 -- nav buffers
 vim.keymap.set({ 'n', 't' }, '<M-h>', '<cmd>bprev<cr>')
 vim.keymap.set({ 'n', 't' }, '<M-l>', '<cmd>bnext<cr>')
-vim.keymap.set({ 'n', 't' }, '<leader>bd', '<cmd>bd<cr>', { desc = '[b]uffer [d]elete ' })
-vim.keymap.set({ 'n', 't' }, '<leader>bo', '<cmd>%bd|e#<cr>', { desc = '[b]uffer delete [o]thers' })
-vim.keymap.set({ 'n', 't' }, '<leader>bs', '<cmd>w<cr>', { desc = '[b]uffer [s]ave' })
+vim.keymap.set('n', '<leader>bd', '<cmd>bd<cr>', { desc = '[b]uffer [d]elete ' })
+vim.keymap.set('n', '<leader>bo', '<cmd>%bd|e#<cr>', { desc = '[b]uffer delete [o]thers' })
+vim.keymap.set('n', '<leader>bs', '<cmd>w<cr>', { desc = '[b]uffer [s]ave' })
 vim.keymap.set('n', '<leader>bn', '<cmd>new<cr>', { desc = '[b]uffer[n]ew ' })
 -- nav tabs
-vim.keymap.set('n', '<M-S-h>', '<cmd>tabprev<cr>')
-vim.keymap.set('n', '<M-S-l>', '<cmd>tabnext<cr>')
-vim.keymap.set('n', '<leader>tn', '<cmd>tabnew<cr>', { desc = '[t]ab[n]ew' })
+vim.keymap.set({ 'n', 't' }, '<M-i>', '<cmd>tabprev<cr>')
+vim.keymap.set({ 'n', 't' }, '<M-o>', '<cmd>tabnext<cr>')
+vim.keymap.set('n', '<leader>tt', '<cmd>tabnew<cr>', { desc = '[t]ab new' })
+vim.keymap.set('n', '<leader>tn', '<cmd>tabnext<cr>', { desc = '[t]ab [n]ext' })
+vim.keymap.set('n', '<leader>tp', '<cmd>tabprev<cr>', { desc = '[t]ab [p]rev' })
 
 -- -- loclist
 -- vim.keymap.set('n', '<leader>lo', '<cmd>lopen<cr>zz', { desc = 'LocList open' })
