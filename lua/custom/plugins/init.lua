@@ -38,7 +38,6 @@ function region_to_text(region)
 end
 
 vim.o.wrap = true
-vim.o.shell = 'nu'
 vim.o.swapfile = false
 
 -- Don't have `o` add a comment
