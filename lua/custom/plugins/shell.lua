@@ -4,8 +4,6 @@
 --
 -- INFO: settings to set nushell as the shell for the :! command
 
--- path to the Nushell executable
-
 -- NOTE: you can uncomment the following to for instance provide custom config paths
 -- depending on the OS
 -- In this particular example using vim.env.HOME is also cross-platform
@@ -67,6 +65,11 @@ local function nu_shell_options()
   vim.o.shellxquote = ''
 end
 
+-- path to the Nushell executable
+-- set default
+vim.o.shell = 'nu'
+nu_shell_options()
+
 -- listen for changes to the shell option
 vim.api.nvim_create_autocmd('OptionSet', {
   pattern = 'shell',
@@ -78,9 +81,5 @@ vim.api.nvim_create_autocmd('OptionSet', {
     end
   end,
 })
-
--- set default
-vim.o.shell = 'nu'
-nu_shell_options()
 
 return {}
