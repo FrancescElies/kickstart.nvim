@@ -77,24 +77,24 @@ return {
         end
 
         if vim.bo.filetype == 'rust' then
-          rust_keymap('<localleader>cD', ':RustLsp openDocs<cr>', '[o]pen docs')
-          rust_keymap('<localleader>cE', ':RustLsp expandMacro<cr>', '[e]xpand macros')
-          rust_keymap('<localleader>cP', ':RustLsp rebuildProcMacros<cr>', 'rebuild [p]roc macros')
-          rust_keymap('<localleader>cR', ':RustLsp runnables', 'show [r]unnables')
-          rust_keymap('<localleader>ca', ':RustLsp codeAction<cr>', 'code [a]ction')
-          rust_keymap('<localleader>cd', ':RustLsp renderDiagnostic', 'render [d]iagnostic') --  Useful for solving bugs around borrowing and generics, as it consolidates the important bits (sometimes across files) together.
-          rust_keymap('<localleader>ce', ':RustLsp explainError', '[e]xplain error')
-          rust_keymap('<localleader>cf', ':RustLsp flyCheck ', '[f]ly check')
-          rust_keymap('<localleader>ch', ':RustLsp hover ', '[h]over actions|range')
-          rust_keymap('<localleader>cj', ':RustLsp joinLines<cr>', 'join lines')
-          rust_keymap('<localleader>cm', ':RustLsp moveItem ', '[m]ove up|down')
-          rust_keymap('<localleader>co', ':RustLsp openCargo<cr>', '[o]pen cargo')
-          rust_keymap('<localleader>cp', ':RustLsp parentModule', '[p]arent module')
-          rust_keymap('<localleader>cr', ':RustLsp run', '[r]un target current position')
-          rust_keymap('<localleader>cs', ':RustLsp ssr ', 'structural search and replace')
-          rust_keymap('<localleader>ct', ':RustLsp testables', 'tests[!]')
-          rust_keymap('<localleader>cv', ':RustLsp view ', '[v]iew hir|mir')
-          rust_keymap('<localleader>cw', ':RustLsp workspaceSymbol ', '[w]orkspace symbol')
+          rust_keymap(',D', ':RustLsp openDocs<cr>', '[o]pen docs')
+          rust_keymap(',E', ':RustLsp expandMacro<cr>', '[e]xpand macros')
+          rust_keymap(',P', ':RustLsp rebuildProcMacros<cr>', 'rebuild [p]roc macros')
+          rust_keymap(',R', ':RustLsp runnables', 'show [r]unnables')
+          rust_keymap(',a', ':RustLsp codeAction<cr>', 'code [a]ction')
+          rust_keymap(',d', ':RustLsp renderDiagnostic', 'render [d]iagnostic') --  Useful for solving bugs around borrowing and generics, as it consolidates the important bits (sometimes across files) together.
+          rust_keymap(',e', ':RustLsp explainError', '[e]xplain error')
+          rust_keymap(',f', ':RustLsp flyCheck ', '[f]ly check')
+          rust_keymap(',h', ':RustLsp hover ', '[h]over actions|range')
+          rust_keymap(',j', ':RustLsp joinLines<cr>', 'join lines')
+          rust_keymap(',m', ':RustLsp moveItem ', '[m]ove up|down')
+          rust_keymap(',o', ':RustLsp openCargo<cr>', '[o]pen cargo')
+          rust_keymap(',p', ':RustLsp parentModule', '[p]arent module')
+          rust_keymap(',r', ':RustLsp run', '[r]un target current position')
+          rust_keymap(',s', ':RustLsp ssr ', 'structural search and replace')
+          rust_keymap(',t', ':RustLsp testables', 'tests[!]')
+          rust_keymap(',v', ':RustLsp view ', '[v]iew hir|mir')
+          rust_keymap(',w', ':RustLsp workspaceSymbol ', '[w]orkspace symbol')
           -- :RustLsp crateGraph {backend {output}}
           -- :RustLsp syntaxTree
           -- :Rustc unpretty {hir|mir|...}
