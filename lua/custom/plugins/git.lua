@@ -17,49 +17,48 @@ vim.keymap.set('n', '<leader>gf', function() tele.git_files { use_file_path = tr
 vim.keymap.set('n', '<leader>g.', tele.git_status, { desc = '[G]o [G]it' })
 vim.keymap.set('n', '<leader>gz', tele.git_stash, { desc = '[G]it zstash' })
 
-vim.api.nvim_create_augroup('my_git_commands', { clear = true })
-
+--
 return {
-  -- {
-  --   'NeogitOrg/neogit',
-  --   dependencies = {
-  --     'nvim-lua/plenary.nvim', -- required
-  --     'sindrets/diffview.nvim', -- optional - Diff integration
-  --     'nvim-telescope/telescope.nvim', -- optional
-  --   },
-  --   keys = { { '<leader>gn', vim.cmd.Neogit, desc = '[G]it [N]eogit' } },
-  -- },
   {
-    'tpope/vim-fugitive',
-    -- opts = {},
-    cmd = {
-      'G',
-      'Git',
-      'Gdiffsplit',
-      'Gread',
-      'Gwrite',
-      'Ggrep',
-      'GMove',
-      'GDelete',
-      'GBrowse',
-      'GRemove',
-      'GRename',
-      'Glgrep',
-      'Gedit',
+    'NeogitOrg/neogit',
+    dependencies = {
+      'nvim-lua/plenary.nvim', -- required
+      'sindrets/diffview.nvim', -- optional - Diff integration
+      'nvim-telescope/telescope.nvim', -- optional
     },
-    ft = { 'fugitive' },
-    keys = {
-      { '<leader>gb', '<cmd>Git blame<cr>', desc = 'Git blame' },
-      { '<leader>ga', '<cmd>Gwrite<cr>', desc = 'Git add current file' },
-      { '<leader>gr', '<cmd>Gread<cr>', desc = 'Git restore current file' },
-      { '<leader>gs', vim.cmd.Git, desc = '[g]it [s]tatus (fugitive)' },
-      { '<leader>gf', '<cmd>Git fetch<cr>', desc = 'Git fetch' },
-      { '<leader>gp', '<cmd>Git! push --force-with-lease -u origin <cr>', desc = '[G]it [P]ush force with lease' },
-      { '<leader>gP', '<cmd>Git! pull --rebase <cr>', desc = '[G]it [P]ull rebase' },
-      { '<leader>gc', '<cmd>Git commit<cr>', desc = '[G]it [c]ommit' },
-      { '<leader>gu', '<cmd>Git reset HEAD~1<cr>', desc = '[G]it [u]ndo last commit' },
-    },
+    keys = { { '<leader>gs', vim.cmd.Neogit, desc = '[G]it [S]status' } },
   },
+  -- {
+  --   'tpope/vim-fugitive',
+  --   -- opts = {},
+  --   cmd = {
+  --     'G',
+  --     'Git',
+  --     'Gdiffsplit',
+  --     'Gread',
+  --     'Gwrite',
+  --     'Ggrep',
+  --     'GMove',
+  --     'GDelete',
+  --     'GBrowse',
+  --     'GRemove',
+  --     'GRename',
+  --     'Glgrep',
+  --     'Gedit',
+  --   },
+  --   ft = { 'fugitive' },
+  --   keys = {
+  --     { '<leader>gb', '<cmd>Git blame<cr>', desc = 'Git blame' },
+  --     { '<leader>ga', '<cmd>Gwrite<cr>', desc = 'Git add current file' },
+  --     { '<leader>gr', '<cmd>Gread<cr>', desc = 'Git restore current file' },
+  --     { '<leader>gs', vim.cmd.Git, desc = '[g]it [s]tatus (fugitive)' },
+  --     { '<leader>gf', '<cmd>Git fetch<cr>', desc = 'Git fetch' },
+  --     { '<leader>gp', '<cmd>Git! push --force-with-lease -u origin <cr>', desc = '[G]it [P]ush force with lease' },
+  --     { '<leader>gP', '<cmd>Git! pull --rebase <cr>', desc = '[G]it [P]ull rebase' },
+  --     { '<leader>gc', '<cmd>Git commit<cr>', desc = '[G]it [c]ommit' },
+  --     { '<leader>gu', '<cmd>Git reset HEAD~1<cr>', desc = '[G]it [u]ndo last commit' },
+  --   },
+  -- },
   {
     'rhysd/git-messenger.vim',
     keys = { { '<leader>gm', ':GitMessenger<CR>', desc = '[G]it [M]essenger' } },
