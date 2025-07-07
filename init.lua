@@ -491,8 +491,8 @@ require('lazy').setup({
       end, { desc = '[S]earch all [F]iles' })
       vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
       vim.keymap.set({ 'n', 'v' }, '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
-      vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
-      vim.keymap.set('n', '<leader>sG', require('custom.multi-ripgrep').find, { desc = '[S]earch by [G]rep' })
+      vim.keymap.set('n', '<leader>sG', builtin.live_grep, { desc = '[S]earch by [G]rep' })
+      vim.keymap.set('n', '<leader>sg', require('custom.multi-ripgrep').find, { desc = '[S]earch by [G]rep' })
       vim.keymap.set('n', '<leader>sp', require('custom.repo-select').project_file_picker, { desc = '[S]earch [P]roject files' })
       vim.keymap.set('n', '<M-p>', require('custom.repo-select').project_file_picker, { desc = '[S]earch [P]roject files' })
       vim.keymap.set('n', '<leader>sz', '<cmd> Telekasten search_notes<cr>', { desc = '[S]earch [Z]ettelkasten' })
@@ -762,7 +762,6 @@ require('lazy').setup({
       -- for you, so that they are available from within Neovim.
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
-        'biome', -- typescript formatter
         -- 'clangd',
         'codespell',
         -- 'harper_ls',
@@ -852,10 +851,10 @@ require('lazy').setup({
             return { 'isort', 'black' }
           end
         end,
-        typescript = { 'biome', 'prettierd', 'prettier', stop_after_first = true, lsp_format = 'fallback' },
-        json = { 'biome', 'prettierd', 'prettier', stop_after_first = true, lsp_format = 'fallback' },
+        typescript = { 'prettierd', 'prettier', stop_after_first = true, lsp_format = 'fallback' },
+        json = { 'prettierd', 'prettier', stop_after_first = true, lsp_format = 'fallback' },
         -- You can use 'stop_after_first' to run the first available formatter from the list
-        javascript = { 'biome', 'prettierd', 'prettier', stop_after_first = true, lsp_format = 'fallback' },
+        javascript = { 'prettierd', 'prettier', stop_after_first = true, lsp_format = 'fallback' },
         --
         -- Use the "*" filetype to run formatters on all filetypes.
         -- ['*'] = { 'typos' },
