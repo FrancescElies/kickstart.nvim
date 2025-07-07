@@ -17,7 +17,7 @@ local function find(opts)
     ['lua'] = '*.lua',
     ['max'] = '*.{maxpat,json}',
     ['md'] = '*.md',
-    ['py'] = '*.python',
+    ['py'] = '*.py',
     ['rs'] = '*.{rs,toml}',
     ['toml'] = '*.toml',
     ['ts'] = '*.{js,ts,tsx,svelte,json}',
