@@ -68,6 +68,7 @@ end
 -- path to the Nushell executable
 -- set default
 vim.o.shell = 'nu'
+vim.o.shellslash = true
 nu_shell_options()
 
 -- listen for changes to the shell option
