@@ -1026,12 +1026,12 @@ require('lazy').setup({
       -- ... and there is more!
       --  Check out: https://github.com/echasnovski/mini.nvim
 
-      -- local MiniFiles = require 'mini.files'
-      -- MiniFiles.setup()
-      -- vim.keymap.set('n', '<leader>fd', function()
-      --   MiniFiles.open(vim.api.nvim_buf_get_name(0), false)
-      -- end, { desc = '[f]ile [d]irectory' })
-      -- vim.keymap.set('n', '-', MiniFiles.open, { desc = 'edit current cwd' })
+      local MiniFiles = require 'mini.files'
+      MiniFiles.setup()
+      vim.keymap.set('n', '<leader>fd', function()
+        MiniFiles.open(vim.api.nvim_buf_get_name(0), false)
+      end, { desc = '[f]ile [d]irectory' })
+      vim.keymap.set('n', '-', MiniFiles.open, { desc = 'edit current cwd' })
 
       local mini_trailspace = require 'mini.trailspace'
       mini_trailspace.setup()
