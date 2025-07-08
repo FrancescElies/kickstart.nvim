@@ -374,7 +374,6 @@ require('lazy').setup({
         { '<leader>C', group = '[C]hat' },
         { '<leader>v', group = '[v]im' },
         { '<leader>vg', group = '[v]im [g]it' },
-        { '<leader>f', group = '[f]ile/[f]ormat' },
       },
     },
   },
@@ -803,12 +802,12 @@ require('lazy').setup({
     cmd = { 'ConformInfo' },
     keys = {
       {
-        '<leader>fb',
+        '<leader>f',
         function()
           require('conform').format { async = true, lsp_format = 'fallback' }
         end,
         mode = '',
-        desc = '[f]ormat [b]buffer',
+        desc = '[b]buffer [f]ormat',
       },
     },
     opts = {
@@ -1029,16 +1028,16 @@ require('lazy').setup({
 
       -- local MiniFiles = require 'mini.files'
       -- MiniFiles.setup()
-      -- vim.keymap.set('n', '<leader>fd', function()
+      -- vim.keymap.set('n', '_', function()
       --   MiniFiles.open(vim.api.nvim_buf_get_name(0), false)
       -- end, { desc = '[f]ile [d]irectory' })
       -- vim.keymap.set('n', '-', MiniFiles.open, { desc = 'edit current cwd' })
 
       local mini_trailspace = require 'mini.trailspace'
       mini_trailspace.setup()
-      vim.keymap.set('n', '<leader>ft', function()
+      vim.keymap.set('n', '<leader>bt', function()
         mini_trailspace.trim()
-      end, { desc = '[f]ormat [t]railspace only' })
+      end, { desc = '[b]uffer [t]railspaces' })
 
       -- - ga - [a]lign
       -- - gA - [a]lign with preview

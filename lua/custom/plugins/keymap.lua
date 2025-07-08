@@ -93,9 +93,9 @@ vim.o.spell = true
 vim.cmd [[ let g:neo_tree_remove_legacy_commands = 1 ]]
 
 -- File
-vim.keymap.set('n', '<leader>fy', ":call setreg('+', expand('%:.') .. ':' .. line('.'))<CR>", { desc = '[f]ilepath: [y]ank' })
-vim.keymap.set('n', '<leader>fY', ":call setreg('+', expand('%:p'))<CR>", { desc = '[f]ilepath: [Y]ank (absolute)' })
-vim.keymap.set('n', '<Leader>fo', ':e <C-r>+<CR>', { desc = '[f]ilepath: [o]pen from clipboard' })
+vim.keymap.set('n', '<leader>by', ":call setreg('+', expand('%:.') .. ':' .. line('.'))<CR>", { desc = '[b]uffer [y]ank path' })
+vim.keymap.set('n', '<leader>bY', ":call setreg('+', expand('%:p'))<CR>", { desc = '[b]uffer [Y]ank abs. path' })
+vim.keymap.set('n', '<leader>bo', ':e <C-r>+<CR>', { desc = '[b]uffer [o]pen from clipboard' })
 
 -- quick scape
 vim.keymap.set('i', 'jk', '<Esc>')

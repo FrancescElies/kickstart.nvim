@@ -1,5 +1,5 @@
 -- good for getting lsp diagnostics accross the whole project
-function open_similar_files()
+local function open_similar_files()
   local root = vim.fs.root(0, '.git')
 
   local files = vim.fn.split(vim.system({ 'git', 'ls-files' }, { text = true, cwd = root }):wait().stdout, '\n')
@@ -35,7 +35,7 @@ end
 
 vim.api.nvim_create_user_command('MyOpenSimilarFiles', open_similar_files, {})
 
-vim.keymap.set('n', '<leader>fs', '<cmd>MyOpenSimilarFiles<cr>', { desc = '[f]ile open [s]imilar]' })
+vim.keymap.set('n', '<leader>bs', '<cmd>MyOpenSimilarFiles<cr>', { desc = '[b]uffer open [s]imilar files' })
 
 -- vim.api.nvim_set_keymap('n', '<leader>x', '', {
 --   noremap = true,
