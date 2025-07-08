@@ -109,7 +109,7 @@ end
 
 vim.api.nvim_create_user_command('Floaterminal', toggle_terminal, {}) -- Create a floating window with default dimensions
 -- <C-,> (open floaterm) feels right when combined with <C-p> (previous command) and <C-m> (enter)
-vim.keymap.set({ 'n', 't' }, '<M-,>', '<cmd>Floaterminal<cr>', { desc = 'float term' })
+-- vim.keymap.set({ 'n', 't' }, '<M-,>', '<cmd>Floaterminal<cr>', { desc = 'float term' })
 vim.keymap.set({ 'n', 't' }, '<C-,>', '<cmd>Floaterminal<cr>', { desc = 'float term' })
 -- vim.keymap.set({ 'n', 't' }, '\u{E000}', '<cmd>Floaterminal<cr>', { desc = 'float term' })
 -- =vim.fn.getchar()
@@ -119,7 +119,7 @@ vim.keymap.set({ 'n', 't' }, '<C-,>', '<cmd>Floaterminal<cr>', { desc = 'float t
 vim.keymap.set({ 'n', 't' }, '<M-x>', '<cmd>bd!<cr>', { desc = 'float term' })
 
 vim.keymap.set('n', '<leader>tf', '<cmd>Floaterminal<cr>', { desc = 'float term' })
-vim.keymap.set('n', '<leader>tl', send_line_to_small_term, { desc = 'small[t]erm send [l]ine' })
+vim.keymap.set('n', '<leader>tl', send_line_to_small_term, { desc = '[l]ine to small[t]erm' })
 vim.keymap.set('n', '<leader>ts', small_term, { desc = '[s]mall[t]erm' }) -- Open a terminal at the bottom of the screen with a fixed height.
 vim.keymap.set('n', '<leader>tr', reset_pane_size_small_term, { desc = 'small[t]erm [r]esize' })
 

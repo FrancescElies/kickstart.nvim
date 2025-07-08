@@ -365,7 +365,7 @@ require('lazy').setup({
         { '<leader>g', group = '[G]it', mode = { 'n', 'v' } },
         { '<leader>gd', group = '[G]it [D]iff', mode = { 'n', 'v' } },
         { '<leader>r', group = '[R]eplace', mode = { 'v' } },
-        { '<leader>t', group = '[T]erminal/[T]ab (nav M-S-h M-S-l)' },
+        { '<leader>t', group = '[T]erminal' },
         { '<leader>z', group = '[z]ettelkasten' },
         { '<leader>d', group = '[D]ebug' },
         { '<leader>b', group = '[B]uffer (nav M-h M-l)' },
