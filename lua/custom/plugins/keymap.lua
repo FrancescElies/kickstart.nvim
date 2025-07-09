@@ -162,11 +162,11 @@ end, { desc = '[v]im diagnostic [v]irtual text toggle ' })
 -- control splits size  <>., are on the same two keys
 -- width
 
-vim.keymap.set('n', '<M->>', '<c-w>5<')
-vim.keymap.set('n', '<M-<>', '<c-w>5>')
+-- vim.keymap.set('n', '<M->>', '<c-w>5<')
+-- vim.keymap.set('n', '<M-<>', '<c-w>5>')
 -- height
-vim.keymap.set('n', '<M-.>', '<C-W>+')
-vim.keymap.set('n', '<M-,>', '<C-W>-')
+-- vim.keymap.set('n', '<M-.>', '<C-W>+')
+-- vim.keymap.set('n', '<M-,>', '<C-W>-')
 
 -- Move lines in visual mode
 vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")

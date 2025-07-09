@@ -19,7 +19,7 @@ return {
         desc = 'Expand quickfix context or >',
       },
       {
-        '<M->>',
+        '<M-<>',
         function()
           require('quicker').collapse()
         end,
