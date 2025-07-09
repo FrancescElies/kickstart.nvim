@@ -118,8 +118,9 @@ vim.keymap.set({ 'n', 't' }, '<C-,>', '<cmd>Floaterminal<cr>', { desc = 'float t
 
 vim.keymap.set({ 'n', 't' }, '<M-x>', '<cmd>bd!<cr>', { desc = 'float term' })
 
-vim.keymap.set('n', '<leader>tf', '<cmd>Floaterminal<cr>', { desc = 'float term' })
-vim.keymap.set('n', '<leader>tl', send_line_to_small_term, { desc = '[l]ine to small[t]erm' })
+vim.keymap.set('n', '<leader>tf', '<cmd>Floaterminal<cr>', { desc = 'float term <C-,>' })
+vim.keymap.set('n', '<leader>tl', send_line_to_small_term, { desc = '[l]ine to small[t]erm <C-.>' })
+vim.keymap.set('n', '<C-.>', send_line_to_small_term)
 vim.keymap.set('n', '<leader>ts', small_term, { desc = '[s]mall[t]erm' }) -- Open a terminal at the bottom of the screen with a fixed height.
 vim.keymap.set('n', '<leader>tr', reset_pane_size_small_term, { desc = 'small[t]erm [r]esize' })
 
