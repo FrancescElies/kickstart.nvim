@@ -15,7 +15,7 @@ return {
     }
   end,
   keys = {
-    -- { '<leader>z', '<cmd>Telekasten panel<cr>', desc = '[n]otes' },
+    { '<leader>z', '<cmd>Telekasten panel<cr>', desc = '[n]otes' },
     -- Most used functions
     { '<leader>z#', '<cmd> Telekasten show_tags<cr>', desc = 'Show [#] Tags' },
     { '<leader>za', '<cmd> Telekasten show_tags<cr>', desc = 'Show T[a]gs' },
