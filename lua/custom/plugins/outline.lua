@@ -1,13 +1,13 @@
 return {
-  'hedyhli/outline.nvim',
-  lazy = true,
-  cmd = { 'Outline', 'OutlineOpen' },
-  keys = {
-    { '<leader>o', '<cmd>Outline<CR>', desc = '[c]ode [o]utline' },
-  },
-  opts = {
-    -- Your setup opts here
-  },
+  -- 'hedyhli/outline.nvim',
+  -- lazy = true,
+  -- cmd = { 'Outline', 'OutlineOpen' },
+  -- keys = {
+  --   { '<leader>co', '<cmd>Outline<CR>', desc = '[c]ode [o]utline' },
+  -- },
+  -- opts = {
+  --   -- Your setup opts here
+  -- },
 }
 
 -- return {
@@ -15,7 +15,7 @@ return {
 --   opts = {},
 --   -- Optional dependencies
 --   keys = {
---     { '<leader>o', '<cmd>AerialToggle!<CR>', desc = 'Toggle outline' },
+--     { '<leader>co', '<cmd>AerialToggle!<CR>', desc = '[c]ode [o]utline' },
 --   },
 --   dependencies = {
 --     'nvim-treesitter/nvim-treesitter',

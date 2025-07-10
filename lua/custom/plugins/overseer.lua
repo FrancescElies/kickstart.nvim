@@ -2,20 +2,20 @@ return {
   -- 'stevearc/overseer.nvim',
   -- opts = {},
   -- keys = {
-  --   { '<leader>Oa', '<cmd>OverseerTaskAction<cr>', desc = 'Task action menu' },
-  --   { '<leader>Ob', '<cmd>OverseerBuild<cr>', desc = 'Build/create task' },
-  --   { '<leader>Ob', '<cmd>OverseerLoadBundle<cr>', desc = 'Load task bundle' },
-  --   { '<leader>Oc', '<cmd>OverseerClose<cr>', desc = 'Close Overseer task list' },
-  --   { '<leader>Od', '<cmd>OverseerDeleteBundle<cr>', desc = 'Delete task bundle' },
-  --   { '<leader>Oi', '<cmd>OverseerInfo<cr>', desc = 'Show Overseer info' },
-  --   { '<leader>Oo', '<cmd>OverseerOpen<cr>', desc = 'Open Overseer task list' },
-  --   { '<leader>Oq', '<cmd>OverseerQuickAction<cr>', desc = 'Quick action on task' },
-  --   { '<leader>Or', '<cmd>OverseerRun<cr>', desc = 'Run task' },
-  --   { '<leader>Os', '<cmd>OverseerSaveBundle<cr>', desc = 'Save task bundle' },
-  --   { '<leader>Ot', '<cmd>OverseerToggle<cr>', desc = 'Toggle Overseer task list' },
-  --   { '<leader>Ox', '<cmd>OverseerClearCache<cr>', desc = 'Clear Overseer cache' },
+  --   { '<leader>oa', '<cmd>OverseerTaskAction<cr>', desc = 'Task action menu' },
+  --   { '<leader>ob', '<cmd>OverseerBuild<cr>', desc = 'Build/create task' },
+  --   { '<leader>ob', '<cmd>OverseerLoadBundle<cr>', desc = 'Load task bundle' },
+  --   { '<leader>oc', '<cmd>OverseerClose<cr>', desc = 'Close Overseer task list' },
+  --   { '<leader>od', '<cmd>OverseerDeleteBundle<cr>', desc = 'Delete task bundle' },
+  --   { '<leader>oi', '<cmd>OverseerInfo<cr>', desc = 'Show Overseer info' },
+  --   { '<leader>oo', '<cmd>OverseerOpen<cr>', desc = 'Open Overseer task list' },
+  --   { '<leader>oq', '<cmd>OverseerQuickAction<cr>', desc = 'Quick action on task' },
+  --   { '<leader>or', '<cmd>OverseerRun<cr>', desc = 'Run task' },
+  --   { '<leader>os', '<cmd>OverseerSaveBundle<cr>', desc = 'Save task bundle' },
+  --   { '<leader>ot', '<cmd>OverseerToggle<cr>', desc = 'Toggle Overseer task list' },
+  --   { '<leader>ox', '<cmd>OverseerClearCache<cr>', desc = 'Clear Overseer cache' },
   --   {
-  --     '<leader>OR',
+  --     '<leader>oR',
   --     function()
   --       local overseer = require 'overseer'
   --       local tasks = overseer.list_tasks { recent_first = true }
@@ -29,7 +29,7 @@ return {
   --   },
   --
   --   {
-  --     '<leader>Ok',
+  --     '<leader>ok',
   --     function()
   --       local overseer = require 'overseer'
   --       local tasks = overseer.list_tasks()
@@ -43,7 +43,7 @@ return {
   --   },
   --
   --   {
-  --     '<leader>O.',
+  --     '<leader>o.',
   --     function()
   --       local overseer = require 'overseer'
   --       local ft = vim.bo.filetype
