@@ -135,9 +135,6 @@ function vim.getVisualSelection()
   end
 end
 
--- Open current file in external program
-vim.keymap.set('n', '<leader>o', ':!open %<CR>', { desc = '[o]pen in external program' })
-
 -- Reload configuration
 vim.keymap.set('n', '<leader>lf', '<cmd>w|source %<cr>', { desc = 'load [L]ua [f]ile' })
 vim.keymap.set('n', '<leader>ll', '<cmd>.lua<cr>', { desc = 'load [L]ua [l]ine' })

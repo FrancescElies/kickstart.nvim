@@ -3,7 +3,7 @@ return {
   lazy = true,
   cmd = { 'Outline', 'OutlineOpen' },
   keys = {
-    { '<leader>co', '<cmd>Outline<CR>', desc = '[c]ode [o]utline' },
+    { '<leader>o', '<cmd>Outline<CR>', desc = '[c]ode [o]utline' },
   },
   opts = {
     -- Your setup opts here
