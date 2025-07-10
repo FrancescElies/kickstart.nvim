@@ -454,10 +454,7 @@ require('lazy').setup({
               map({ 'i', 'n' }, '<C-o>', function(_)
                 local entry = action_state.get_selected_entry()
                 vim.inspect('Name = ' .. entry.value)
-                -- require('custom.utils').open_with_default_app(entry.value)
-                local cmd = vim.fn.has 'win32' == 1 and 'start' or vim.fn.has 'mac' == 1 and 'open' or 'xdg-open'
-                ---@diagnostic disable-next-line: missing-fields
-                require('plenary.job'):new({ command = cmd, args = { entry.value } }):start()
+                require('custom.utils').open_with_default_app(entry.value)
               end, { desc = 'Open default OS App' })
               -- needs to return true if you want to map default_mappings and false if not
               return true
