@@ -7,6 +7,8 @@ M.open_with_default_app = function(path)
   -- require('plenary.job'):new({ command = cmd, args = { entry.value } }):start()
   local cmd
 
+  path = vim.fs.normalize(path)
+
   if vim.fn.has 'mac' == 1 then
     cmd = { 'open', path }
   elseif vim.fn.has 'unix' == 1 then
@@ -18,6 +20,7 @@ M.open_with_default_app = function(path)
     return
   end
 
+  print(table.concat(cmd, ' '))
   vim.fn.jobstart(cmd, { detach = true })
 end
 
