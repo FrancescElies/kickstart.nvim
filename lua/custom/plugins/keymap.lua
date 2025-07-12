@@ -27,7 +27,7 @@ local function jump_diagnostic_by_severity(opts)
   for _, severity in ipairs(severities) do
     local diagnostics = vim.diagnostic.get(0, { severity = severity })
     if #diagnostics > 0 then
-      vim.diagnostic.goto_next { severity = severity }
+      -- vim.diagnostic.goto_next { severity = severity }
       vim.diagnostic.jump { count = count, float = true, severity = severity }
       return
     end
