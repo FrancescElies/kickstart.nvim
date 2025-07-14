@@ -37,7 +37,7 @@ function region_to_text(region)
   return text
 end
 
-vim.o.wrap = true
+vim.o.wrap = false
 vim.o.swapfile = false
 
 -- Don't have `o` add a comment
