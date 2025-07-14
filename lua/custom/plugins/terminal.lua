@@ -117,8 +117,10 @@ vim.keymap.set({ 'n', 't' }, '<C-,>', '<cmd>Floaterminal<cr>', { desc = 'float t
 -- shows alacrity sends char-27 (0x1b) for unicode \uE000 see alacritty.toml
 -- vim.keymap.set({ 'n', 't' }, '<Char-27>', '<cmd>Floaterminal<cr>', { desc = 'float term' })
 
+vim.keymap.set('n', '<M-f>', '<cmd>Floaterminal<cr>', { desc = '[f]loatterm' })
 vim.keymap.set('n', '<leader>tf', '<cmd>Floaterminal<cr>', { desc = '[f]loatterm' })
 vim.keymap.set('n', '<leader>tl', send_line_to_small_term, { desc = '[l]ine to smallterm' })
+vim.keymap.set('n', '<M-s>', small_term, { desc = '[s]mallterm' }) -- Open a terminal at the bottom of the screen with a fixed height.
 vim.keymap.set('n', '<leader>ts', small_term, { desc = '[s]mallterm' }) -- Open a terminal at the bottom of the screen with a fixed height.
 vim.keymap.set('n', '<leader>tr', reset_pane_size_small_term, { desc = '[r]eset size smallterm' })
 
