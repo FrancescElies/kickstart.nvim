@@ -839,16 +839,18 @@ require('lazy').setup({
           vim.api.nvim_get_current_buf()
 
           ---@param formatter string The name of the formatter
-          ---@param bufnr? integer
-          local finfo = function(formatter, bufnr)
-            return require('conform').get_formatter_info(formatter, bufnr).available and formatter or nil
+          ---@param buf? integer
+          local finfo = function(formatter, buf)
+            return require('conform').get_formatter_info(formatter, buf).available and formatter or nil
           end
           local ruff_format = finfo('ruff_format', bufnr)
           local ruff_fix = finfo('ruff_fix', bufnr)
           local ruff_organize_imports = finfo('ruff_organize_imports', bufnr)
           if ruff_fix and ruff_format and ruff_organize_imports then
+            print 'using ruff'
             return { ruff_fix, ruff_organize_imports, ruff_format }
           else
+            print 'using isort and black'
             return { 'isort', 'black' }
           end
         end,
