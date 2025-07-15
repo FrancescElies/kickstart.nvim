@@ -1053,7 +1053,7 @@ require('lazy').setup({
     -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
     opts = {
       -- 'bash', 'c_sharp', 'cpp', 'go', 'html', 'mermaid', 'typescript', 'query', 'vim', 'sql', 'zig',
-      ensure_installed = { 'c', 'diff', 'lua', 'markdown', 'markdown_inline', 'python', 'rust', 'nu', 'vim', 'vimdoc', 'yaml' },
+      ensure_installed = { 'c', 'diff', 'lua', 'markdown', 'markdown_inline', 'python', 'rust', 'nu', 'vim', 'vimdoc', 'yaml', 'norg' },
       -- Autoinstall languages that are not installed
       auto_install = false,
       highlight = {
