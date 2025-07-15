@@ -2,7 +2,7 @@
 -- Neovide
 --
 if vim.g.neovide then
-  -- vim.o.guifont="FireCode Nerd Font:h14"
+  vim.o.guifont = 'FiraCode Nerd Font:h14'
   -- vim.g.neovide_cursor_vfx_mode = 'torpedo' -- railgun, torpedo, sonicboom, ripple, wireframe
   vim.keymap.set('n', '<f11>', function()
     vim.g.neovide_fullscreen = not vim.g.neovide_fullscreen
