@@ -3,7 +3,9 @@ return {
     'nvim-treesitter/nvim-treesitter-context',
     config = function()
       require('treesitter-context').setup {
-        enable = false, -- Enable this plugin (Can be enabled/disabled later via commands)
+        enable = true,
+        max_lines = '30%', -- How many lines the window should span. Values <= 0 mean no limit.
+        multiwindow = true,
       }
     end,
   },
