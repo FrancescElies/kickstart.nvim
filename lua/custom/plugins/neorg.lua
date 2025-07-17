@@ -1,3 +1,8 @@
+local function get_todos(dir, states)
+  require('telescope.builtin').live_grep { cwd = dir }
+  vim.fn.feedkeys('^ *([*]+|[-]+) +[(]' .. states .. '[)]')
+end
+
 return {
   'nvim-neorg/neorg',
   lazy = false, -- Disable lazy loading as some `lazy.nvim` distributions set `lazy = true` by default
@@ -14,6 +19,12 @@ return {
     { '<leader>jn', ':Neorg workspace notes<CR>:Neorg journal today<CR>', desc = '[J]ournal [N]owday ' },
     { '<leader>jy', ':Neorg workspace notes<CR>:Neorg journal yesterday<CR>', desc = '[J]ournal [Y]esterday' },
     { '<leader>jt', ':Neorg workspace notes<CR>:Neorg journal tomorrow<CR>', desc = '[J]ournal [T]omorrow ' },
+    {
+      '<c-t>',
+      function()
+        get_todos('~/neorg/notes', '[^x_]')
+      end,
+    },
   },
   opts = {
     load = {
