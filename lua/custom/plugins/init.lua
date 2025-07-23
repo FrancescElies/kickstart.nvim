@@ -43,9 +43,9 @@ vim.o.swapfile = false
 -- Don't have `o` add a comment
 vim.opt.formatoptions:remove 'o'
 
--- `gf` path shenaningan, allow single quotes and spaces in paths
-vim.opt.isfname:append "'"
-vim.opt.isfname:append '32'
+-- `gf` path shenaningan
+-- vim.opt.isfname:append "'" -- allow single quotes
+-- vim.opt.isfname:append '32' -- allow spaces in paths
 
 if vim.env.SSH_CONNECTION then
   local function vim_paste()
