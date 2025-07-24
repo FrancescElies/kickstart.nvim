@@ -38,7 +38,7 @@ end
 local function is_quickfix_open()
   return vim.fn.getqflist({ winid = 0 }).winid ~= 0
 end
-vim.keymap.set('n', '<M-k>', function()
+vim.keymap.set('n', '<C-k>', function()
   if is_quickfix_open() then
     vim.cmd 'cprevious' -- previous quickfix item
     vim.cmd 'normal! zz'
@@ -47,7 +47,7 @@ vim.keymap.set('n', '<M-k>', function()
     jump_diagnostic_by_severity { count = -1 }
   end
 end)
-vim.keymap.set('n', '<M-j>', function()
+vim.keymap.set('n', '<C-j>', function()
   if is_quickfix_open() then
     vim.cmd 'cnext' -- next quickfix item
     vim.cmd 'normal! zz'
@@ -58,9 +58,9 @@ vim.keymap.set('n', '<M-j>', function()
 end)
 
 -- nav buffers and tabs
-vim.keymap.set({ 'n', 't' }, '<M-x>', '<cmd>bd!<cr>')
-vim.keymap.set({ 'n', 't' }, '<M-h>', '<cmd>tabprev<cr>')
-vim.keymap.set({ 'n', 't' }, '<M-l>', '<cmd>tabnext<cr>')
+-- vim.keymap.set({ 'n', 't' }, '<M-x>', '<cmd>bd!<cr>')
+vim.keymap.set({ 'n', 't' }, '<C-h>', '<cmd>tabprev<cr>')
+vim.keymap.set({ 'n', 't' }, '<C-l>', '<cmd>tabnext<cr>')
 vim.keymap.set('n', '<leader>bd', '<cmd>bp<bar>bd #<CR>', { desc = '[b]uffer [d]elete ' })
 vim.keymap.set('n', '<leader>bo', '<cmd>%bd<bar>e#<cr>', { desc = '[b]uffer delete [o]thers' })
 vim.keymap.set('n', '<leader>bs', '<cmd>w<cr>', { desc = '[b]uffer [s]ave' })
@@ -71,11 +71,6 @@ vim.keymap.set('n', '<leader>bn', '<cmd>new<cr>', { desc = '[b]uffer[n]ew ' })
 -- vim.keymap.set('n', '<leader>lc', '<cmd>lclose<cr>zz', { desc = 'LocList close' })
 -- vim.keymap.set('n', '<leader>lp', '<cmd>lprevious<cr>zz', { desc = 'LocList previous' })
 -- vim.keymap.set('n', '<leader>lp', '<cmd>lnext<cr>zz', { desc = 'LocList next' })
-
--- stylua: ignore start
-vim.keymap.set('n', '<M-S-k>', function() vim.cmd 'normal [c' end, { desc = 'next change (gitsigns)' })
-vim.keymap.set('n', '<M-S-j>', function() vim.cmd 'normal ]c' end, { desc = 'previous change (gitsigns)' })
--- stylua: ignore end
 
 vim.diagnostic.config { virtual_text = true, virtual_lines = false }
 

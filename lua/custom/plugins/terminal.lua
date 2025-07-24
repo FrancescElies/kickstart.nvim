@@ -2,10 +2,10 @@
 
 -- Terminal Mappings
 vim.keymap.set('t', '<esc><esc>', '<c-\\><c-n>', { desc = 'Enter Normal Mode' })
-vim.keymap.set('t', '<C-h>', '<cmd>wincmd h<cr>', { desc = 'Go to left window' })
-vim.keymap.set('t', '<C-j>', '<cmd>wincmd j<cr>', { desc = 'Go to lower window' })
-vim.keymap.set('t', '<C-k>', '<cmd>wincmd k<cr>', { desc = 'Go to upper window' })
-vim.keymap.set('t', '<C-l>', '<cmd>wincmd l<cr>', { desc = 'Go to right window' })
+-- vim.keymap.set('t', '<C-h>', '<cmd>wincmd h<cr>', { desc = 'Go to left window' })
+-- vim.keymap.set('t', '<C-j>', '<cmd>wincmd j<cr>', { desc = 'Go to lower window' })
+-- vim.keymap.set('t', '<C-k>', '<cmd>wincmd k<cr>', { desc = 'Go to upper window' })
+-- vim.keymap.set('t', '<C-l>', '<cmd>wincmd l<cr>', { desc = 'Go to right window' })
 vim.keymap.set('t', '<C-/>', '<cmd>close<cr>', { desc = 'Hide Terminal' })
 vim.keymap.set('t', '<c-_>', '<cmd>close<cr>', { desc = 'which_key_ignore' })
 
@@ -111,15 +111,12 @@ vim.api.nvim_create_user_command('Floaterminal', toggle_terminal, {}) -- Create 
 
 -- <C-,> (open floaterm) feels right when combined with <C-p> (previous command) and <C-m> (enter)
 vim.keymap.set({ 'n', 't' }, '<C-,>', '<cmd>Floaterminal<cr>', { desc = 'float term' })
-
--- Binding for alacritty
--- =vim.fn.getchar()
+-- Binding for alacritty, check which char `=vim.fn.getchar()`
 vim.keymap.set({ 'n', 't' }, '\u{f8ff}', '<cmd>Floaterminal<cr>', { desc = 'float term' })
+vim.keymap.set('n', '<M-f>', '<cmd>Floaterminal<cr>', { desc = '[f]loat term' })
+vim.keymap.set('n', '<leader>tf', '<cmd>Floaterminal<cr>', { desc = '[f]loat term' })
 
-vim.keymap.set('n', '<M-f>', '<cmd>Floaterminal<cr>', { desc = '[f]loatterm' })
-vim.keymap.set('n', '<leader>tf', '<cmd>Floaterminal<cr>', { desc = '[f]loatterm' })
 vim.keymap.set('n', '<leader>tl', send_line_to_small_term, { desc = '[l]ine to smallterm' })
-vim.keymap.set('n', '<M-s>', small_term, { desc = '[s]mallterm' }) -- Open a terminal at the bottom of the screen with a fixed height.
 vim.keymap.set('n', '<leader>ts', small_term, { desc = '[s]mallterm' }) -- Open a terminal at the bottom of the screen with a fixed height.
 vim.keymap.set('n', '<leader>tr', reset_pane_size_small_term, { desc = '[r]eset size smallterm' })
 
