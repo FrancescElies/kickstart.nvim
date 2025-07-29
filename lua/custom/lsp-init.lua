@@ -45,24 +45,24 @@ M.servers = {
           callSnippet = 'Replace',
         },
         -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-        -- diagnostics = { disable = { 'missing-fields' } },
+        diagnostics = { disable = { 'missing-fields' } },
       },
     },
   },
   clangd = { filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda' }, capabilities = M.clangd_capabilities },
-  biome = { filetypes = { 'typescript', 'json', 'maxpat', 'json' }, init_options = { provideFormatter = true } },
+  -- biome = { filetypes = { 'typescript', 'json', 'maxpat', 'json' }, init_options = { provideFormatter = true } },
   -- sqls = {},
   -- gopls = {},
   -- basedpyright = {}, -- pyright fork with inlay hints
   -- pyright = {},
-  jsonls = {
-    filetypes = { 'maxpat', 'json' },
-    init_options = { provideFormatter = true },
-    capabilities = M.jsonls_capabilities,
-  },
+  -- jsonls = {
+  --   filetypes = { 'maxpat', 'json' },
+  --   init_options = { provideFormatter = true },
   --   capabilities = M.jsonls_capabilities,
   -- },
-  ruff = {},
+  --   capabilities = M.jsonls_capabilities,
+  -- },
+  -- ruff = {},
 
   -- slint_lsp = { filetypes = { 'slint' }, capabilities = slint_capabilities },
 
@@ -157,7 +157,7 @@ M.servers = {
   --     },
   --   },
   -- },
-  html = { filetypes = { 'html', 'twig', 'hbs' } },
+  -- html = { filetypes = { 'html', 'twig', 'hbs' } },
   -- omnisharp = {
   --   -- cmd = { 'dotnet', '~/bin/omnisharp/Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.dll' },
   --   enable_editorconfig_support = true,
