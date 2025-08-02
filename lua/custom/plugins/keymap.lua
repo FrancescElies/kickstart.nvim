@@ -113,7 +113,7 @@ vim.keymap.set('n', 'n', 'nzzzv')
 vim.keymap.set('n', 'N', 'Nzzzv')
 
 -- Keep cursor in place when joining lines
-vim.keymap.set('n', 'J', 'mzJ`z')
+-- vim.keymap.set('n', 'J', 'mzJ`z')
 
 vim.keymap.set({ 'n', 'v' }, '<leader>r\\', ':s/\\\\/\\//g<cr>', { desc = 'Replace \\ -> /' })
 vim.keymap.set({ 'n', 'v' }, '<leader>r/', ':s/\\//\\\\/g<cr>', { desc = 'Replace / -> [\\]' })
