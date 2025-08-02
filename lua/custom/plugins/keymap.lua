@@ -80,7 +80,14 @@ local function toggle_inline_diagnostic()
 end
 
 vim.o.spell = true
-vim.cmd [[ let g:neo_tree_remove_legacy_commands = 1 ]]
+
+-- delete & paste text without overwriting yank register
+vim.keymap.set('x', '<leader>p', [["_dP]])
+vim.keymap.set({ 'n', 'v' }, '<leader>d', '"_d')
+
+-- yank to clipboard
+vim.keymap.set({ 'n', 'v' }, '<leader>y', [["+y]]) -- motion or selection
+vim.keymap.set('n', '<leader>Y', [["+Y]]) -- whole line
 
 -- File
 vim.keymap.set('n', '<leader>by', ":call setreg('+', expand('%:.') .. ':' .. line('.'))<CR>", { desc = '[b]uffer [y]ank path' })
