@@ -81,14 +81,6 @@ end
 
 vim.o.spell = true
 
--- delete & paste text without overwriting yank register
-vim.keymap.set('x', '<leader>p', [["_dP]])
-vim.keymap.set({ 'n', 'v' }, '<leader>d', '"_d')
-
--- yank to clipboard
-vim.keymap.set({ 'n', 'v' }, '<leader>y', [["+y]]) -- motion or selection
-vim.keymap.set('n', '<leader>Y', [["+Y]]) -- whole line
-
 -- File
 vim.keymap.set('n', '<leader>by', ":call setreg('+', expand('%:.') .. ':' .. line('.'))<CR>", { desc = '[b]uffer [y]ank path' })
 vim.keymap.set('n', '<leader>bY', ":call setreg('+', expand('%:p'))<CR>", { desc = '[b]uffer [Y]ank abs. path' })
