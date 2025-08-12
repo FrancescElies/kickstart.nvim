@@ -770,19 +770,13 @@ require('lazy').setup({
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
         -- 'clangd',
-        -- 'codespell',
-        -- 'harper_ls',
-        -- 'markdownlint',
-        'typos',
-        'lua_ls',
-        -- 'markdown_oxide',
-        -- 'marksman',
-        -- 'omnisharp',
-        -- 'powershell_es',
-        -- 'ruff', -- python linter and formatter
-        -- 'ruff-lsp', -- python linter and formatter
+        -- 'codespell', 'harper_ls', 'markdownlint', 'typos',
+        -- 'markdown_oxide', 'marksman',
+        -- 'omnisharp', 'powershell_es',
+        -- 'ruff', 'ruff-lsp',
         -- 'sqlfluff',
-        'stylua', -- Used to format lua code
+        'lua_ls',
+        'stylua',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
