@@ -6,9 +6,9 @@ M.jsonls_capabilities.textDocument.completion.completionItem.snippetSupport = tr
 -- https://github.com/neovim/nvim-lspconfig/issues/2184
 -- local offsetEncoding = { 'utf-16' }
 -- local offsetEncoding = { 'utf-8', 'utf-16' }
-local offsetEncoding = 'utf-16'
-M.clangd_capabilities = vim.lsp.protocol.make_client_capabilities()
-M.clangd_capabilities.offsetEncoding = offsetEncoding
+-- local offsetEncoding = 'utf-16'
+-- M.clangd_capabilities = vim.lsp.protocol.make_client_capabilities()
+-- M.clangd_capabilities.offsetEncoding = offsetEncoding
 
 M.servers = {
 
@@ -49,7 +49,8 @@ M.servers = {
       },
     },
   },
-  clangd = { filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda' }, capabilities = M.clangd_capabilities },
+  -- clangd = { filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda' }, capabilities = M.clangd_capabilities },
+  clangd = {},
   -- biome = { filetypes = { 'typescript', 'json', 'maxpat', 'json' }, init_options = { provideFormatter = true } },
   -- sqls = {},
   -- gopls = {},
