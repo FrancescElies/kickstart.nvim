@@ -42,6 +42,17 @@ vim.api.nvim_create_autocmd('BufReadPost', {
     vim.wo.spell = true
   end,
 })
+--
+-- Autosave Markdown files
+vim.api.nvim_create_autocmd({ 'TextChanged', 'InsertLeave' }, {
+  group = 'markdown',
+  pattern = '*.md',
+  callback = function()
+    if vim.bo.modified then
+      vim.cmd 'silent write'
+    end
+  end,
+})
 
 local function find_typescript_for_javascript_file()
   local buffnr = vim.api.nvim_get_current_buf()
