@@ -71,16 +71,16 @@ vim.o.shell = 'nu'
 vim.o.shellslash = true
 nu_shell_options()
 
--- listen for changes to the shell option
-vim.api.nvim_create_autocmd('OptionSet', {
-  pattern = 'shell',
-  callback = function()
-    if vim.opt.shell:get():match 'nu$' then
-      nu_shell_options()
-    else
-      reset_shell_defaults()
-    end
-  end,
-})
+-- -- listen for changes to the shell option
+-- vim.api.nvim_create_autocmd('OptionSet', {
+--   pattern = 'shell',
+--   callback = function()
+--     if vim.opt.shell:get():match 'nu$' then
+--       nu_shell_options()
+--     else
+--       reset_shell_defaults()
+--     end
+--   end,
+-- })
 
 return {}
