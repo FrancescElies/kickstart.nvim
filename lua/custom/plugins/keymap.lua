@@ -91,7 +91,7 @@ vim.keymap.set('i', 'jk', '<Esc>')
 vim.keymap.set('n', 'ı', 'i')
 
 -- quick spellfix
-vim.keymap.set('n', 'za', '1z=', { desc = 'fix word under cursor' }) --  https://nanotipsforvim.prose.sh/autofix-misspellings
+vim.keymap.set('n', 'za', '<leader>fw', { desc = 'fix word' })
 
 -- buffer
 vim.keymap.set('n', 'so', '<cmd>e #<cr>', { desc = '[s]witch to [o]ther buffer' })
@@ -162,6 +162,8 @@ end, { desc = '[v]im diagnostic [v]irtual text toggle ' })
 -- Move lines in visual mode
 vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
 vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
+vim.keymap.set('n', 'ZW', ':w')
+vim.keymap.set('n', 'ZA', ':wa')
 
 --
 -- the end

@@ -367,6 +367,7 @@ require('lazy').setup({
 
       -- Document existing key chains
       spec = {
+        { '<leader>f', group = '[f]ix,format' },
         { '<leader>s', group = '[S]earch' },
         { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
         { '<leader>g', group = '[G]it', mode = { 'n', 'v' } },
@@ -803,12 +804,12 @@ require('lazy').setup({
     cmd = { 'ConformInfo' },
     keys = {
       {
-        '<leader>f',
+        '<leader>fb',
         function()
           require('conform').format { async = true, lsp_format = 'fallback' }
         end,
         mode = '',
-        desc = '[b]buffer [f]ormat',
+        desc = '[f]ormat [b]buffer ',
       },
     },
     opts = {

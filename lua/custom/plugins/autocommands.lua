@@ -54,6 +54,14 @@ vim.api.nvim_create_autocmd({ 'TextChanged', 'InsertLeave' }, {
   end,
 })
 
+-- Autosave when leaving window
+vim.api.nvim_create_autocmd({ 'WinLeave', 'VimLeavePre', 'FocusLost' }, {
+  pattern = '*',
+  callback = function()
+    vim.cmd 'silent! wall'
+  end,
+})
+
 local function find_typescript_for_javascript_file()
   local buffnr = vim.api.nvim_get_current_buf()
   -- local bufname = vim.fn.bufname(buffnr)
