@@ -40,20 +40,20 @@ vim.api.nvim_create_autocmd('TermOpen', {
 --   end,
 -- })
 
-local function reset_pane_size_small_term()
+local function small_term_reset_size()
   vim.cmd.wincmd 'J'
   vim.api.nvim_win_set_height(0, 15)
 end
 
 local function small_term()
   vim.cmd.new()
-  reset_pane_size_small_term()
+  small_term_reset_size()
   vim.wo.winfixheight = true
   vim.cmd.term()
   TERM_CHANNELNR = vim.bo.channel
 end
 
-local function send_line_to_small_term()
+local function small_term_send_line()
   vim.fn.chansend(TERM_CHANNELNR, { vim.api.nvim_get_current_line() .. '\r\n' })
 end
 
@@ -114,15 +114,15 @@ end
 vim.api.nvim_create_user_command('Floaterminal', toggle_terminal, {}) -- Create a floating window with default dimensions
 
 -- <C-,> (open floaterm) feels right when combined with <C-p> (previous command) and <C-m> (enter)
-vim.keymap.set({ 'n', 't' }, '<C-,>', '<cmd>Floaterminal<cr>', { desc = 'float term' })
-vim.keymap.set({ 'n', 't' }, ',f', '<cmd>Floaterminal<cr>', { desc = 'float term' })
+vim.keymap.set({ 'n', 't' }, '<C-,>', '<cmd>SmallFloatTerm<cr>', { desc = 'float term' })
+vim.keymap.set({ 'n', 't' }, 'sf', '<cmd>Floaterminal<cr>', { desc = 'float term' })
 -- Binding for alacritty, check which char `=vim.fn.getchar()`
 vim.keymap.set({ 'n', 't' }, '\u{f8ff}', '<cmd>Floaterminal<cr>', { desc = 'float term' })
 vim.keymap.set('n', '<M-f>', '<cmd>Floaterminal<cr>', { desc = '[f]loat term' })
 vim.keymap.set('n', '<leader>tf', '<cmd>Floaterminal<cr>', { desc = '[f]loat term' })
 
-vim.keymap.set('n', '<leader>tl', send_line_to_small_term, { desc = '[l]ine to smallterm' })
-vim.keymap.set('n', '<leader>ts', small_term, { desc = '[s]mallterm' }) -- Open a terminal at the bottom of the screen with a fixed height.
-vim.keymap.set('n', '<leader>tr', reset_pane_size_small_term, { desc = '[r]eset size smallterm' })
+vim.keymap.set('n', 'sl', small_term_send_line, { desc = '[l]ine to smallterm' })
+vim.keymap.set('n', 'st', small_term, { desc = '[s]mallterm' }) -- Open a terminal at the bottom of the screen with a fixed height.
+vim.keymap.set('n', 'sr', small_term_reset_size, { desc = '[r]eset size smallterm' })
 
 return {}
