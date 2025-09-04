@@ -91,7 +91,8 @@ vim.keymap.set('i', 'jk', '<Esc>')
 vim.keymap.set('n', 'ı', 'i')
 
 -- quick spellfix
-vim.keymap.set('n', 'za', '<leader>fw', { desc = 'fix word' })
+-- vim.keymap.set('n', '<leader>fw', 'z=1', { desc = 'fix word' })
+vim.keymap.set('n', '<leader>fw', require('telescope.builtin').spell_suggest, { desc = 'fix word' })
 
 -- buffer
 vim.keymap.set('n', 'so', '<cmd>e #<cr>', { desc = '[s]witch to [o]ther buffer' })
