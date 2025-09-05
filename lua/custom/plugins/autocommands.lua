@@ -86,7 +86,7 @@ local function find_typescript_for_javascript_file()
   end
 end
 
-vim.api.nvim_create_user_command('MyFindTSForCurrentJSfile', find_typescript_for_javascript_file, {})
+vim.api.nvim_create_user_command('FindTSForCurrentJSfile', find_typescript_for_javascript_file, {})
 
 -- When opening a javascript file opens it's associated
 -- typescript file if a mapping is found
@@ -148,7 +148,7 @@ end
 
 -- attach_to_buffer('*.ts', { 'npm', 'run', 'build_dev' })
 
-vim.api.nvim_create_user_command('MyAutoRun', function()
+vim.api.nvim_create_user_command('AutoRun', function()
   local pattern = vim.fn.input 'Pattern (*.ts):'
   local command = vim.fn.input 'Command:'
 

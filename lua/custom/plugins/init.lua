@@ -13,8 +13,8 @@ end
 
 -- https://www.reddit.com/r/neovim/comments/zhweuc/whats_a_fast_way_to_load_the_output_of_a_command/
 -- Example:
--- :MyRedir =vim.lsp.get_active_clients()
-vim.api.nvim_create_user_command('MyRedir', function(ctx)
+-- :Redir =vim.lsp.get_active_clients()
+vim.api.nvim_create_user_command('Redir', function(ctx)
   local result = vim.api.nvim_exec2(ctx.args, { output = true })
   local lines = vim.split(result.output, '\n', { plain = true })
   vim.cmd 'new'
