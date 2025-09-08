@@ -163,4 +163,11 @@ vim.api.nvim_create_user_command('AutoRun', function()
   attach_to_buffer(bufnr, vim.split(pattern, ' '), vim.split(command, ' '))
 end, {})
 
+vim.api.nvim_create_autocmd('VimResized', {
+  pattern = '*',
+  callback = function()
+    vim.cmd 'wincmd ='
+  end,
+})
+
 return {}
