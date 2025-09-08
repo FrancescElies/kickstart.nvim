@@ -38,7 +38,7 @@ end
 local function is_quickfix_open()
   return vim.fn.getqflist({ winid = 0 }).winid ~= 0
 end
-vim.keymap.set('n', '<C-S-k>', function()
+vim.keymap.set('n', '<C-p>', function()
   if is_quickfix_open() then
     vim.cmd 'cprevious' -- previous quickfix item
     vim.cmd 'normal! zz'
@@ -47,7 +47,7 @@ vim.keymap.set('n', '<C-S-k>', function()
     jump_diagnostic_by_severity { count = -1 }
   end
 end)
-vim.keymap.set('n', '<C-S-j>', function()
+vim.keymap.set('n', '<C-n>', function()
   if is_quickfix_open() then
     vim.cmd 'cnext' -- next quickfix item
     vim.cmd 'normal! zz'
