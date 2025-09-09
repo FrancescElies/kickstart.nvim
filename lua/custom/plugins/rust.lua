@@ -77,24 +77,18 @@ return {
         end
 
         if vim.bo.filetype == 'rust' then
-          rust_keymap('<localleader>D', ':RustLsp openDocs<cr>', '[o]pen docs')
-          rust_keymap('<localleader>E', ':RustLsp expandMacro<cr>', '[e]xpand macros')
-          rust_keymap('<localleader>P', ':RustLsp rebuildProcMacros<cr>', 'rebuild [p]roc macros')
-          rust_keymap('<localleader>R', ':RustLsp runnables', 'show [r]unnables')
           rust_keymap('<localleader>a', ':RustLsp codeAction<cr>', 'code [a]ction')
-          rust_keymap('<localleader>d', ':RustLsp renderDiagnostic', 'render [d]iagnostic') --  Useful for solving bugs around borrowing and generics, as it consolidates the important bits (sometimes across files) together.
           rust_keymap('<localleader>e', ':RustLsp explainError', '[e]xplain error')
-          rust_keymap('<localleader>f', ':RustLsp flyCheck ', '[f]ly check')
+          rust_keymap('<localleader>E', ':RustLsp expandMacro<cr>', '[e]xpand macros')
+          rust_keymap('<localleader>f', ':RustLsp flyCheck run', '[f]ly check')
           rust_keymap('<localleader>h', ':RustLsp hover ', '[h]over actions|range')
           rust_keymap('<localleader>j', ':RustLsp joinLines<cr>', 'join lines')
           rust_keymap('<localleader>m', ':RustLsp moveItem ', '[m]ove up|down')
           rust_keymap('<localleader>o', ':RustLsp openCargo<cr>', '[o]pen cargo')
-          rust_keymap('<localleader>p', ':RustLsp parentModule', '[p]arent module')
-          rust_keymap('<localleader>r', ':RustLsp run', '[r]un target current position')
-          rust_keymap('<localleader>s', ':RustLsp ssr ', 'structural search and replace')
-          rust_keymap('<localleader>t', ':RustLsp testables', 'tests[!]')
-          rust_keymap('<localleader>v', ':RustLsp view ', '[v]iew hir|mir')
-          rust_keymap('<localleader>w', ':RustLsp workspaceSymbol ', '[w]orkspace symbol')
+          rust_keymap('<localleader>p', ':RustLsp parentModule<cr>', '[p]arent module')
+          rust_keymap('<localleader>t', ':RustLsp! testables<cr>', 'run previous [t]ests')
+          rust_keymap('<localleader>T', ':RustLsp testables<cr>', 'run [t]ests')
+          rust_keymap('<localleader>w', ':RustLsp workspaceSymbol allSymbols ', '[w]orkspace symbol')
           -- :RustLsp crateGraph {backend {output}}
           -- :RustLsp syntaxTree
           -- :Rustc unpretty {hir|mir|...}
