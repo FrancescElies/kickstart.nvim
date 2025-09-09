@@ -170,4 +170,12 @@ vim.api.nvim_create_autocmd('VimResized', {
   end,
 })
 
+-- WARN: can't setqflist in callback
+-- vim.api.nvim_create_user_command('QuickfixCmd', function(opts)
+--   vim.system(vim.fn.split(opts.args), { text = true }, function(obj)
+--     vim.fn.setqflist(vim.fn.split(obj.stdout))
+--     vim.cmd 'copen'
+--   end)
+-- end, { nargs = 1 })
+
 return {}
