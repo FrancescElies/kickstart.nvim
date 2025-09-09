@@ -1,6 +1,6 @@
 return {
   'stevearc/aerial.nvim',
-  keys = {'<leader>o', ':AerialOpen<cr>', 'code [o]utline'}
+  keys = { '<leader>o', '<cmd>AerialOpen<cr>', 'code [o]utline' },
   opts = {},
   -- Optional dependencies
   dependencies = {
