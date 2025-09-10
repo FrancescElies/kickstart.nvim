@@ -115,14 +115,12 @@ vim.api.nvim_create_user_command('Floaterminal', toggle_terminal, {}) -- Create 
 
 -- <C-,> (open floaterm) feels right when combined with <C-p> (previous command) and <C-m> (enter)
 vim.keymap.set({ 'n', 't' }, '<C-,>', '<cmd>SmallFloatTerm<cr>', { desc = 'float term' })
-vim.keymap.set({ 'n', 't' }, 'sf', '<cmd>Floaterminal<cr>', { desc = 'float term' })
 -- Binding for alacritty, check which char `=vim.fn.getchar()`
 vim.keymap.set({ 'n', 't' }, '\u{f8ff}', '<cmd>Floaterminal<cr>', { desc = 'float term' })
-vim.keymap.set('n', '<M-f>', '<cmd>Floaterminal<cr>', { desc = '[f]loat term' })
-vim.keymap.set('n', '<leader>tf', '<cmd>Floaterminal<cr>', { desc = '[f]loat term' })
 
-vim.keymap.set('n', 'sl', small_term_send_line, { desc = '[l]ine to smallterm' })
-vim.keymap.set('n', 'st', small_term, { desc = '[s]mallterm' }) -- Open a terminal at the bottom of the screen with a fixed height.
-vim.keymap.set('n', 'sr', small_term_reset_size, { desc = '[r]eset size smallterm' })
+vim.keymap.set({ 'n', 't' }, '<leader>tf', '<cmd>Floaterminal<cr>', { desc = 'float term' })
+vim.keymap.set('n', '<leader>tl', small_term_send_line, { desc = '[l]ine to smallterm' })
+vim.keymap.set('n', '<leader>ts', small_term, { desc = '[s]mallterm' }) -- Open a terminal at the bottom of the screen with a fixed height.
+vim.keymap.set('n', '<leader>tr', small_term_reset_size, { desc = '[r]eset size smallterm' })
 
 return {}
