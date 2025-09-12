@@ -15,54 +15,54 @@ vim.opt.tabstop = 4
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 
-local function jump_diagnostic_by_severity(opts)
-  local count = opts.count or 1
-  local severities = {
-    vim.diagnostic.severity.ERROR,
-    vim.diagnostic.severity.WARN,
-    vim.diagnostic.severity.INFO,
-    vim.diagnostic.severity.HINT,
-  }
-
-  for _, severity in ipairs(severities) do
-    local diagnostics = vim.diagnostic.get(0, { severity = severity })
-    if #diagnostics > 0 then
-      -- vim.diagnostic.goto_next { severity = severity }
-      vim.diagnostic.jump { count = count, float = true, severity = severity }
-      return
-    end
-  end
-end
-
--- quickfix
-local function is_quickfix_open()
-  return vim.fn.getqflist({ winid = 0 }).winid ~= 0
-end
-vim.keymap.set('n', '<C-p>', function()
-  if is_quickfix_open() then
-    vim.cmd 'cprevious' -- previous quickfix item
-    vim.cmd 'normal! zz'
-  else
-    -- vim.diagnostic.jump { count = -1, float = true }
-    jump_diagnostic_by_severity { count = -1 }
-  end
-end)
-vim.keymap.set('n', '<C-n>', function()
-  if is_quickfix_open() then
-    vim.cmd 'cnext' -- next quickfix item
-    vim.cmd 'normal! zz'
-  else
-    -- vim.diagnostic.jump { count = 1, float = true }
-    jump_diagnostic_by_severity { count = 1 }
-  end
-end)
+-- local function jump_diagnostic_by_severity(opts)
+--   local count = opts.count or 1
+--   local severities = {
+--     vim.diagnostic.severity.ERROR,
+--     vim.diagnostic.severity.WARN,
+--     vim.diagnostic.severity.INFO,
+--     vim.diagnostic.severity.HINT,
+--   }
+--   for _, severity in ipairs(severities) do
+--     local diagnostics = vim.diagnostic.get(0, { severity = severity })
+--     if #diagnostics > 0 then
+--       -- vim.diagnostic.goto_next { severity = severity }
+--       vim.diagnostic.jump { count = count, float = true, severity = severity }
+--       return
+--     end
+--   end
+-- end
+-- -- quickfix
+-- local function is_quickfix_open()
+--   return vim.fn.getqflist({ winid = 0 }).winid ~= 0
+-- end
+-- vim.keymap.set('n', '<C-p>', function()
+--   if is_quickfix_open() then
+--     vim.cmd 'cprevious' -- previous quickfix item
+--     vim.cmd 'normal! zz'
+--   else
+--     -- vim.diagnostic.jump { count = -1, float = true }
+--     jump_diagnostic_by_severity { count = -1 }
+--   end
+-- end)
+-- vim.keymap.set('n', '<C-n>', function()
+--   if is_quickfix_open() then
+--     vim.cmd 'cnext' -- next quickfix item
+--     vim.cmd 'normal! zz'
+--   else
+--     -- vim.diagnostic.jump { count = 1, float = true }
+--     jump_diagnostic_by_severity { count = 1 }
+--   end
+-- end)
+vim.keymap.set('n', '<C-p>', ':cprev<cr>')
+vim.keymap.set('n', '<C-n>', ':cnext<cr>')
 
 -- nav buffers and tabs
 -- vim.keymap.set({ 'n', 't' }, '<M-x>', '<cmd>bd!<cr>')
-vim.keymap.set('n', '<leader>bd', '<cmd>bp<bar>bd #<CR>', { desc = '[b]uffer [d]elete ' })
-vim.keymap.set('n', '<leader>bo', '<cmd>%bd<bar>e#<cr>', { desc = '[b]uffer delete [o]thers' })
-vim.keymap.set('n', '<leader>bs', '<cmd>w<cr>', { desc = '[b]uffer [s]ave' })
-vim.keymap.set('n', '<leader>bn', '<cmd>new<cr>', { desc = '[b]uffer[n]ew ' })
+-- vim.keymap.set('n', '<leader>bd', '<cmd>bp<bar>bd #<CR>', { desc = '[b]uffer [d]elete ' })
+-- vim.keymap.set('n', '<leader>bo', '<cmd>%bd<bar>e#<cr>', { desc = '[b]uffer delete [o]thers' })
+-- vim.keymap.set('n', '<leader>bs', '<cmd>w<cr>', { desc = '[b]uffer [s]ave' })
+-- vim.keymap.set('n', '<leader>bn', '<cmd>new<cr>', { desc = '[b]uffer[n]ew ' })
 
 -- -- loclist
 -- vim.keymap.set('n', '<leader>lo', '<cmd>lopen<cr>zz', { desc = 'LocList open' })
