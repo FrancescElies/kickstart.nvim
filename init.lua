@@ -798,7 +798,7 @@ require('lazy').setup({
         -- sqls = {},
         -- gopls = {},
         -- basedpyright = {}, -- pyright fork with inlay hints
-        -- pyright = {},
+        pyright = {},
         -- jsonls = {
         --   filetypes = { 'maxpat', 'json' },
         --   init_options = { provideFormatter = true },
@@ -806,70 +806,68 @@ require('lazy').setup({
         -- },
         --   capabilities = M.jsonls_capabilities,
         -- },
-        -- ruff = {},
+        ruff = {},
 
-        -- slint_lsp = { filetypes = { 'slint' }, capabilities = slint_capabilities },
-
-        -- using rustaceanvim instead
-        -- rust_analyzer = {
-        --   ['rust-analyzer'] = {
-        --     diagnostics = { enable = true },
-        --     check = { command = 'check' }, -- can be clippy too
-        --     cargo = { features = 'all' },
-        --     checkOnSave = {
-        --       assist = {
-        --         importGranularity = 'module',
-        --         importPrefix = 'by_self',
-        --       },
-        --       cargo = { loadOutDirsFromCheck = true },
-        --       procMacro = { enable = true },
-        --       command = 'clippy',
-        --       inlayHints = true,
-        --     },
-        --     inlayHints = {
-        --       enabled = true,
-        --       chainingHints = { enable = false }, -- do not enable
-        --       closingBraceHints = { enable = false },
-        --       bindingModeHints = { enable = true },
-        --       closureCaptureHints = { enable = true },
-        --       closureReturnTypeHints = { enable = 'always' },
-        --       expressionAdjustmentHints = { enable = 'always' },
-        --       lifetimeElisionHints = { enable = 'always', useParameterNames = true },
-        --       reborrowHints = { enable = 'always' },
-        --       typeHints = { hideClosureInitialization = true, hideNamedConstructor = true },
-        --       locationLinks = false,
-        --     },
-        --     completion = {
-        --       completionItem = {
-        --         commitCharactersSupport = true,
-        --         deprecatedSupport = true,
-        --         documentationFormat = { 'markdown', 'plaintext' },
-        --         preselectSupport = true,
-        --         snippetSupport = true,
-        --       },
-        --     },
-        --     signatureHelp = {
-        --       dynamicRegistration = true,
-        --       signatureInformation = {
-        --         activeParameterSupport = true,
-        --         documentationFormat = { 'markdown', 'plaintext' },
-        --         parameterInformation = {
-        --           labelOffsetSupport = true,
-        --         },
-        --       },
-        --     },
-        --     procMacro = {
-        --       enable = true,
-        --       methodReference = true,
-        --     },
-        --     lens = {
-        --       enable = true,
-        --       methodReferences = true,
-        --       references = true,
-        --       implementations = false,
-        --     },
-        --   },
-        -- },
+        -- if using rustaceanvim instead comment the following
+        rust_analyzer = {
+          ['rust-analyzer'] = {
+            diagnostics = { enable = true },
+            check = { command = 'check' }, -- can be clippy too
+            cargo = { features = 'all' },
+            checkOnSave = {
+              assist = {
+                importGranularity = 'module',
+                importPrefix = 'by_self',
+              },
+              cargo = { loadOutDirsFromCheck = true },
+              procMacro = { enable = true },
+              command = 'clippy',
+              inlayHints = true,
+            },
+            inlayHints = {
+              enabled = true,
+              chainingHints = { enable = false }, -- do not enable
+              closingBraceHints = { enable = false },
+              bindingModeHints = { enable = true },
+              closureCaptureHints = { enable = true },
+              closureReturnTypeHints = { enable = 'always' },
+              expressionAdjustmentHints = { enable = 'always' },
+              lifetimeElisionHints = { enable = 'always', useParameterNames = true },
+              reborrowHints = { enable = 'always' },
+              typeHints = { hideClosureInitialization = true, hideNamedConstructor = true },
+              locationLinks = false,
+            },
+            completion = {
+              completionItem = {
+                commitCharactersSupport = true,
+                deprecatedSupport = true,
+                documentationFormat = { 'markdown', 'plaintext' },
+                preselectSupport = true,
+                snippetSupport = true,
+              },
+            },
+            signatureHelp = {
+              dynamicRegistration = true,
+              signatureInformation = {
+                activeParameterSupport = true,
+                documentationFormat = { 'markdown', 'plaintext' },
+                parameterInformation = {
+                  labelOffsetSupport = true,
+                },
+              },
+            },
+            procMacro = {
+              enable = true,
+              methodReference = true,
+            },
+            lens = {
+              enable = true,
+              methodReferences = true,
+              references = true,
+              implementations = false,
+            },
+          },
+        },
 
         -- ts_ls = {
         --   init_options = {
@@ -901,7 +899,9 @@ require('lazy').setup({
         --     },
         --   },
         -- },
+
         -- html = { filetypes = { 'html', 'twig', 'hbs' } },
+
         -- omnisharp = {
         --   -- cmd = { 'dotnet', '~/bin/omnisharp/Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.dll' },
         --   enable_editorconfig_support = true,
