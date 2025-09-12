@@ -21,14 +21,31 @@ vim.keymap.set('n', '<leader>gz', tele.git_stash, { desc = '[g]it zstash' })
 --
 return {
   {
-    'NeogitOrg/neogit',
-    dependencies = {
-      'nvim-lua/plenary.nvim', -- required
-      'sindrets/diffview.nvim', -- optional - Diff integration
-      'nvim-telescope/telescope.nvim', -- optional
+    'kdheepak/lazygit.nvim',
+    lazy = true,
+    cmd = {
+      'LazyGit',
+      'LazyGitConfig',
+      'LazyGitCurrentFile',
+      'LazyGitFilter',
+      'LazyGitFilterCurrentFile',
     },
-    keys = { { '<leader>gs', vim.cmd.Neogit, desc = '[g]it [s]status' } },
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+    },
+    keys = {
+      { '<leader>gs', '<cmd>LazyGit<cr>', desc = 'LazyGit' },
+    },
   },
+  -- {
+  --   'NeogitOrg/neogit',
+  --   dependencies = {
+  --     'nvim-lua/plenary.nvim', -- required
+  --     'sindrets/diffview.nvim', -- optional - Diff integration
+  --     'nvim-telescope/telescope.nvim', -- optional
+  --   },
+  --   keys = { { '<leader>gs', vim.cmd.Neogit, desc = '[g]it [s]status' } },
+  -- },
   -- {
   --   'tpope/vim-fugitive',
   --   -- opts = {},
