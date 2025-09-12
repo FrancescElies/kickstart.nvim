@@ -79,6 +79,7 @@ return {
   -- },
   {
     'rhysd/git-messenger.vim',
+    cmd = { 'GitMessenger' },
     keys = { { '<leader>gm', ':GitMessenger<CR>', desc = '[g]it [m]essenger' } },
   },
   {
