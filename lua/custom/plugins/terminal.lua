@@ -117,6 +117,10 @@ vim.api.nvim_create_user_command('Floaterminal', toggle_terminal, {}) -- Create 
 vim.keymap.set({ 'n', 't' }, '<C-,>', '<cmd>SmallFloatTerm<cr>', { desc = 'float term' })
 -- Binding for alacritty, check which char `=vim.fn.getchar()`
 vim.keymap.set({ 'n', 't' }, '\u{f8ff}', '<cmd>Floaterminal<cr>', { desc = 'float term' })
+-- vim.keymap.set('', '\u{f8fe}', '<C-Space>')
+-- vim.keymap.set('', '\u{f8fe}', function()
+--   print 'Control-Space pressed!'
+-- end, { noremap = true, silent = false })
 
 vim.keymap.set({ 'n', 't' }, 'sf', '<cmd>Floaterminal<cr>', { desc = 'float term' })
 vim.keymap.set({ 'n', 't' }, '<leader>tf', '<cmd>Floaterminal<cr>', { desc = 'float term' })
