@@ -8,14 +8,14 @@ local tele = require 'telescope.builtin'
 vim.keymap.set('n', 'gh', '<cmd>diffget //2<cr>', { desc = 'get left diff' })
 vim.keymap.set('n', 'gl', '<cmd>diffget //3<cr>', { desc = 'get right diff' })
 
-vim.keymap.set('n', '<leader>gB', tele.git_branches, { desc = '[g]it [b]ranches' })
-vim.keymap.set('n', '<leader>gL', tele.git_bcommits, { desc = '[g]it [l]og this [b]uffer' })
-vim.keymap.set('n', '<leader>gl', tele.git_commits, { desc = '[g]it [l]og' })
+vim.keymap.set('n', '<leader>gb', tele.git_branches, { desc = '[g]it [b]ranches' })
+vim.keymap.set('n', '<leader>glb', tele.git_bcommits, { desc = '[g]it [l]og [b]uffer' })
+vim.keymap.set('n', '<leader>gl.', tele.git_commits, { desc = '[g]it [l]og' })
 --- Lists commits for a range of lines in the current buffer with diff preview
 -- vim.keymap.set('v', '<leader>gl', tele.git_bcommits_range, { desc = '[g]it [l]og' })
 -- stylua: ignore
 vim.keymap.set('n', '<leader>gf', function() tele.git_files { use_file_path = true } end, { desc = '[g]it [f]iles' })
-vim.keymap.set('n', '<leader>g.', tele.git_status, { desc = '[g]o [g]it' })
+vim.keymap.set('n', '<leader>gg', tele.git_status, { desc = '[g]o [g]it' })
 vim.keymap.set('n', '<leader>gz', tele.git_stash, { desc = '[g]it zstash' })
 
 --
@@ -91,7 +91,7 @@ return {
       { '<leader>gdf', '<cmd>DiffviewFileHistory %', desc = '[g]it [d]iff [f]ile current [f]ile' },
       { '<leader>gdw', '<cmd>DiffviewOpen<cr>', desc = '[g]it [d]iff working tree' },
       { '<leader>gdb', '<cmd>DiffviewOpen origin/main...HEAD', desc = '[g]it [d]iff against merge [b]ase' },
-      { '<leader>gdl', ':DiffviewFileHistory', desc = '[g]it [d]iff History ([l]ine evolution)', mode = { 'v' } },
+      { '<leader>gde', ':DiffviewFileHistory', desc = '[g]it [d]iff History (line [e]volution)', mode = { 'v' } },
 
       -- Examples
       -- :DiffviewOpen
@@ -119,8 +119,8 @@ return {
     end,
     keys = {
       { '<leader>g/', ':AdvancedGitSearch<CR>', desc = '[g]it [s]earch' },
-      { '<leader>gdL', ':AdvancedGitSearch diff_commit_line<cr>', mode = { 'n', 'v' }, desc = '[g]it [d]iff [l]ine' },
-      { '<leader>gR', ':AdvancedGitSearch checkout_reflog<cr>', desc = '[g]it [r]eflog' },
+      { '<leader>gdl', ':AdvancedGitSearch diff_commit_line<cr>', mode = { 'n', 'v' }, desc = '[g]it [d]iff [l]ine' },
+      { '<leader>gr', ':AdvancedGitSearch checkout_reflog<cr>', desc = '[g]it [r]eflog' },
     },
     dependencies = {
       'nvim-telescope/telescope.nvim',
