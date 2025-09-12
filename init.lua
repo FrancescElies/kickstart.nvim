@@ -445,12 +445,12 @@ require('lazy').setup({
         --
         defaults = {
           layout_strategy = 'vertical',
-          -- path_display = {
-          -- shorten = { len = 2, exclude = { -2, -1 } },
-          -- filename_first = {
-          --   reverse_directories = true,
-          -- },
-          -- },
+          path_display = {
+            -- shorten = { len = 2, exclude = { -2, -1 } },
+            filename_first = {
+              -- reverse_directories = true,
+            },
+          },
           mappings = {
             i = {
               ['<c-enter>'] = 'to_fuzzy_refine',
