@@ -20,23 +20,23 @@ vim.keymap.set('n', '<leader>gz', tele.git_stash, { desc = '[g]it zstash' })
 
 --
 return {
-  {
-    'kdheepak/lazygit.nvim',
-    lazy = true,
-    cmd = {
-      'LazyGit',
-      'LazyGitConfig',
-      'LazyGitCurrentFile',
-      'LazyGitFilter',
-      'LazyGitFilterCurrentFile',
-    },
-    dependencies = {
-      'nvim-lua/plenary.nvim',
-    },
-    keys = {
-      { '<leader>gs', '<cmd>LazyGit<cr>', desc = 'LazyGit' },
-    },
-  },
+  -- {
+  --   'kdheepak/lazygit.nvim',
+  --   lazy = true,
+  --   cmd = {
+  --     'LazyGit',
+  --     'LazyGitConfig',
+  --     'LazyGitCurrentFile',
+  --     'LazyGitFilter',
+  --     'LazyGitFilterCurrentFile',
+  --   },
+  --   dependencies = {
+  --     'nvim-lua/plenary.nvim',
+  --   },
+  --   keys = {
+  --     { '<leader>gs', '<cmd>LazyGit<cr>', desc = 'LazyGit' },
+  --   },
+  -- },
   -- {
   --   'NeogitOrg/neogit',
   --   dependencies = {
@@ -46,37 +46,37 @@ return {
   --   },
   --   keys = { { '<leader>gs', vim.cmd.Neogit, desc = '[g]it [s]status' } },
   -- },
-  -- {
-  --   'tpope/vim-fugitive',
-  --   -- opts = {},
-  --   cmd = {
-  --     'G',
-  --     'Git',
-  --     'Gdiffsplit',
-  --     'Gread',
-  --     'Gwrite',
-  --     'Ggrep',
-  --     'GMove',
-  --     'GDelete',
-  --     'GBrowse',
-  --     'GRemove',
-  --     'GRename',
-  --     'Glgrep',
-  --     'Gedit',
-  --   },
-  --   ft = { 'fugitive' },
-  --   keys = {
-  --     { '<leader>gb', '<cmd>Git blame<cr>', desc = 'Git blame' },
-  --     { '<leader>ga', '<cmd>Gwrite<cr>', desc = 'Git add current file' },
-  --     { '<leader>gr', '<cmd>Gread<cr>', desc = 'Git restore current file' },
-  --     { '<leader>gs', vim.cmd.Git, desc = '[g]it [s]tatus (fugitive)' },
-  --     { '<leader>gf', '<cmd>Git fetch<cr>', desc = 'Git fetch' },
-  --     { '<leader>gp', '<cmd>Git! push --force-with-lease -u origin <cr>', desc = '[g]it [p]ush force with lease' },
-  --     { '<leader>gP', '<cmd>Git! pull --rebase <cr>', desc = '[g]it [p]ull rebase' },
-  --     { '<leader>gc', '<cmd>Git commit<cr>', desc = '[g]it [c]ommit' },
-  --     { '<leader>gu', '<cmd>Git reset HEAD~1<cr>', desc = '[g]it [u]ndo last commit' },
-  --   },
-  -- },
+  {
+    'tpope/vim-fugitive',
+    -- opts = {},
+    cmd = {
+      'G',
+      'Git',
+      'Gdiffsplit',
+      'Gread',
+      'Gwrite',
+      'Ggrep',
+      'GMove',
+      'GDelete',
+      'GBrowse',
+      'GRemove',
+      'GRename',
+      'Glgrep',
+      'Gedit',
+    },
+    ft = { 'fugitive' },
+    keys = {
+      { '<leader>gb', '<cmd>Git blame<cr>', desc = 'Git blame' },
+      { '<leader>ga', '<cmd>Gwrite<cr>', desc = 'Git add current file' },
+      { '<leader>gr', '<cmd>Gread<cr>', desc = 'Git restore current file' },
+      { '<leader>gs', vim.cmd.Git, desc = '[g]it [s]tatus (fugitive)' },
+      { '<leader>gf', '<cmd>Git fetch<cr>', desc = 'Git fetch' },
+      { '<leader>gp', '<cmd>Git! push --force-with-lease -u origin <cr>', desc = '[g]it [p]ush force with lease' },
+      { '<leader>gP', '<cmd>Git! pull --rebase <cr>', desc = '[g]it [p]ull rebase' },
+      { '<leader>gc', '<cmd>Git commit<cr>', desc = '[g]it [c]ommit' },
+      -- { '<leader>gu', '<cmd>Git reset HEAD~1<cr>', desc = '[g]it [u]ndo last commit' },
+    },
+  },
   {
     'rhysd/git-messenger.vim',
     cmd = { 'GitMessenger' },
