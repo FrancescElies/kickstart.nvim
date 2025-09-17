@@ -122,8 +122,8 @@ end)
 -- vim.keymap.set('n', '<leader>Y', [["+Y]]) -- whole line
 --
 -- delete & paste text without overwriting yank register
-vim.keymap.set('x', '<leader>p', [["_dP]])
-vim.keymap.set({ 'n', 'v' }, '<leader>d', '"_d')
+vim.keymap.set('x', '<leader>p', [["_dP]], { desc = '[p]aste (yank reg untouched)' })
+vim.keymap.set({ 'n', 'v' }, '<leader>d', '"_d', { desc = '[d]elete (yank reg untouched)' })
 
 -- Enable break indent
 vim.o.breakindent = true
@@ -375,7 +375,7 @@ require('lazy').setup({
         { '<leader>gl', group = '[G]it [L]og', mode = { 'n', 'v' } },
         { '<leader>r', group = '[R]eplace', mode = { 'v' } },
         { '<leader>t', group = '[T]erminal' },
-        { '<leader>d', group = '[D]ebug' },
+        -- { '<leader>d', group = '[D]ebug' },
         { '<leader>l', group = '[L]ua' },
         { '<leader>b', group = '[B]uffer' },
         { '<leader>p', group = '[p]roject' },
