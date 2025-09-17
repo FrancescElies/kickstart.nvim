@@ -122,7 +122,7 @@ vim.keymap.set({ 'n', 't' }, '\u{f8ff}', '<cmd>Floaterminal<cr>', { desc = 'floa
 --   print 'Control-Space pressed!'
 -- end, { noremap = true, silent = false })
 
-vim.keymap.set({ 'n', 't' }, 'sf', '<cmd>Floaterminal<cr>', { desc = 'float term' })
+vim.keymap.set({ 'n', 't' }, 'sl', '<cmd>Floaterminal<cr>', { desc = 'f[l]oat term' }) -- sf taken by mini.surround
 vim.keymap.set({ 'n', 't' }, '<leader>tf', '<cmd>Floaterminal<cr>', { desc = 'float term' })
 vim.keymap.set('n', '<leader>tl', small_term_send_line, { desc = '[l]ine to smallterm' })
 vim.keymap.set('n', '<leader>ts', small_term, { desc = '[s]mallterm' }) -- Open a terminal at the bottom of the screen with a fixed height.
