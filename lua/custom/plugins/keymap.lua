@@ -170,6 +170,8 @@ vim.keymap.set('n', 'ZW', ':w<cr>')
 vim.keymap.set('n', 'ZA', ':wa<cr>')
 vim.keymap.set('n', 'ZS', ':w<cr>')
 
+vim.keymap.set('n', 'su', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+
 --
 -- the end
 --
