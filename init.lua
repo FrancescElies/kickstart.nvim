@@ -1189,6 +1189,8 @@ require('lazy').setup({
       --
       -- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
       -- - sd'   - [S]urround [D]elete [']quotes
+      -- - sdb   - [S]urround [D]elete [B]alanced, either ], ) or }
+      -- - sdq   - [S]urround [D]elete [q]uotes, either ' or "
       -- - sr)'  - [S]urround [R]eplace [)] [']
       require('mini.surround').setup()
 
