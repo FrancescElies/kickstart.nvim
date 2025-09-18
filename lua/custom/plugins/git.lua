@@ -15,7 +15,7 @@ vim.keymap.set('n', '<leader>gll', tele.git_commits, { desc = '[g]it [l]og' })
 vim.keymap.set('v', '<leader>gll', tele.git_bcommits_range, { desc = '[g]it [l]og' })
 -- stylua: ignore
 vim.keymap.set('n', '<leader>gf', function() tele.git_files { use_file_path = true } end, { desc = '[g]it [f]iles' })
-vim.keymap.set('n', '<leader>gg', tele.git_status, { desc = '[g]o [g]it' })
+vim.keymap.set('n', 'gs', tele.git_status, { desc = '[g]it [s]tatus' })
 vim.keymap.set('n', '<leader>gz', tele.git_stash, { desc = '[g]it zstash' })
 
 --
