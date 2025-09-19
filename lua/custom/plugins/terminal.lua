@@ -30,15 +30,15 @@ vim.api.nvim_create_autocmd('TermOpen', {
 
 -- NOTE: forces term every time to scroll to the bottom
 -- -- make sure we are on insert mode when entering the terminal
--- vim.api.nvim_create_autocmd({ 'TermOpen', 'BufEnter' }, {
---   pattern = { '*' },
---   group = group,
---   callback = function()
---     if vim.opt.buftype:get() == 'terminal' then
---       vim.cmd ':startinsert'
---     end
---   end,
--- })
+vim.api.nvim_create_autocmd({ 'TermOpen', 'BufEnter' }, {
+  pattern = { '*' },
+  group = group,
+  callback = function()
+    if vim.opt.buftype:get() == 'terminal' then
+      vim.cmd ':startinsert'
+    end
+  end,
+})
 
 local function small_term_reset_size()
   vim.cmd.wincmd 'J'
