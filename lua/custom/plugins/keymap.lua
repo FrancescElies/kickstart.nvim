@@ -54,8 +54,8 @@ vim.opt.splitbelow = true
 --     jump_diagnostic_by_severity { count = 1 }
 --   end
 -- end)
-vim.keymap.set('n', '<C-p>', ':cprev<cr>')
-vim.keymap.set('n', '<C-n>', ':cnext<cr>')
+vim.keymap.set('n', '<C-k>', ':cprev<cr>zz')
+vim.keymap.set('n', '<C-j>', ':cnext<cr>zz')
 
 -- nav buffers and tabs
 -- vim.keymap.set({ 'n', 't' }, '<M-x>', '<cmd>bd!<cr>')
