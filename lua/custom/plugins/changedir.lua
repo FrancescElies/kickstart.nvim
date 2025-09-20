@@ -19,15 +19,17 @@ local function cdroot_of(opts)
   }):start()
 end
 
-vim.api.nvim_create_user_command('CdParent', function()
+vim.api.nvim_create_user_command('CdBufDir', function()
   local path = vim.fn.expand '%:p:h'
   vim.api.nvim_set_current_dir(path)
   -- vim.fn.chdir() maybe?
-end, { desc = 'changes directory to files parent dir' })
+end, { desc = 'changes directory to current buffer dir' })
+vim.keymap.set('n', 'cdb', ':CdBufDir<cr>')
 
 vim.api.nvim_create_user_command('CdRoot', function()
   cdroot_of { cwd = vim.fn.expand '%:p:h' }
 end, { desc = "changes dir to git's root (toplevel)" })
+vim.keymap.set('n', 'cdr', ':CdRoot<cr>')
 
 -- vim.api.nvim_create_autocmd('BufEnter', {
 --   group = vim.api.nvim_create_augroup('my-cd', { clear = true }),
