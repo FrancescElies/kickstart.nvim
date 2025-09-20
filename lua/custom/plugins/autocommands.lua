@@ -55,7 +55,10 @@ vim.api.nvim_create_autocmd({ 'TextChanged', 'InsertLeave' }, {
 })
 
 -- Autosave when leaving window
-vim.api.nvim_create_autocmd({ 'WinLeave', 'VimLeavePre', 'FocusLost' }, {
+vim.api.nvim_create_autocmd({
+  'VimLeavePre',
+  'FocusLost',
+}, {
   pattern = '*',
   callback = function()
     vim.cmd 'silent! wall'
