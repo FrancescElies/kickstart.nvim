@@ -438,6 +438,10 @@ require('lazy').setup({
       -- Telescope picker. This is really useful to discover what Telescope can
       -- do as well as how to actually do it!
 
+      -- Telescope tricks
+      -- https://github.com/nvim-telescope/telescope.nvim/wiki/Configuration-Recipes#running-external-commands
+      local tele_actions = require 'telescope.actions'
+      local tele_action_layout = require 'telescope.actions.layout'
       -- [[ Configure Telescope ]]
       -- See `:help telescope` and `:help telescope.setup()`
       require('telescope').setup {
@@ -454,6 +458,17 @@ require('lazy').setup({
           mappings = {
             i = {
               ['<c-enter>'] = 'to_fuzzy_refine',
+              ['tp'] = tele_action_layout.toggle_preview,
+              -- cycle previewer for git commits to show full message
+              ['np'] = tele_actions.cycle_previewers_next,
+              ['pp'] = tele_actions.cycle_previewers_prev,
+              ['cd'] = function(prompt_bufnr)
+                local selection = require('telescope.actions.state').get_selected_entry()
+                local dir = vim.fn.fnamemodify(selection.path, ':p:h')
+                require('telescope.actions').close(prompt_bufnr)
+                -- Depending on what you want put `cd`, `lcd`, `tcd`
+                vim.cmd(string.format('silent lcd %s', dir))
+              end,
             },
           },
         },
@@ -497,6 +512,15 @@ require('lazy').setup({
         builtin.find_files { no_ignore = true, no_ignore_parent = true, hidden = true }
       end
 
+      local function jj_files()
+        builtin.git_files {
+          prompt_title = 'jj Files',
+          git_command = { 'jj', 'file', 'list', '--no-pager' },
+        }
+      end
+      vim.keymap.set('n', '<leader>.', function()
+        builtin.find_files { cwd = vim.fn.expand '%:p:h' }
+      end, { desc = ' [.] Find cwd (./)' })
       vim.keymap.set('n', '<leader>sm', builtin.marks, { desc = '[S]earch [M]arks' })
       vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
       vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })

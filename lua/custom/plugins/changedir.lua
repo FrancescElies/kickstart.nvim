@@ -29,15 +29,15 @@ vim.api.nvim_create_user_command('CdRoot', function()
   cdroot_of { cwd = vim.fn.expand '%:p:h' }
 end, { desc = "changes dir to git's root (toplevel)" })
 
-vim.api.nvim_create_autocmd('BufEnter', {
-  group = vim.api.nvim_create_augroup('my-cd', { clear = true }),
-  pattern = '*',
-  callback = function()
-    -- Only run for normal buffers, (no terminal, quickfix ...)
-    if vim.bo.buftype == '' then
-      cdroot_of { cwd = vim.fn.expand '%:p:h' }
-    end
-  end,
-})
+-- vim.api.nvim_create_autocmd('BufEnter', {
+--   group = vim.api.nvim_create_augroup('my-cd', { clear = true }),
+--   pattern = '*',
+--   callback = function()
+--     -- Only run for normal buffers, (no terminal, quickfix ...)
+--     if vim.bo.buftype == '' then
+--       cdroot_of { cwd = vim.fn.expand '%:p:h' }
+--     end
+--   end,
+-- })
 
 return {}
