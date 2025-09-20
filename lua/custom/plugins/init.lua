@@ -38,6 +38,7 @@ function region_to_text(region)
 end
 
 vim.o.wrap = false
+
 vim.o.swapfile = false
 
 -- Don't have `o` add a comment
@@ -46,6 +47,7 @@ vim.opt.formatoptions:remove 'o'
 -- `gf` path shenaningan
 -- vim.opt.isfname:append "'" -- allow single quotes
 -- vim.opt.isfname:append '32' -- allow spaces in paths
+vim.opt.isfname:append '@'
 
 if vim.env.SSH_CONNECTION then
   local function vim_paste()
