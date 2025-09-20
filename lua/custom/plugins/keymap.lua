@@ -54,8 +54,10 @@ vim.opt.splitbelow = true
 --     jump_diagnostic_by_severity { count = 1 }
 --   end
 -- end)
-vim.keymap.set('n', '<C-k>', ':cprev<cr>zz')
-vim.keymap.set('n', '<C-j>', ':cnext<cr>zz')
+vim.keymap.set('n', '<C-h>', ':colder<cr>', { desc = 'open older error list' })
+vim.keymap.set('n', '<C-l>', ':cnewer<cr>', { desc = 'open newer error list' })
+vim.keymap.set('n', '<C-k>', ':cprev<cr>zz', { desc = 'previous error' })
+vim.keymap.set('n', '<C-j>', ':cnext<cr>zz', { desc = 'next error' })
 
 -- nav buffers and tabs
 -- vim.keymap.set({ 'n', 't' }, '<M-x>', '<cmd>bd!<cr>')
