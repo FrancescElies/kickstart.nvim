@@ -46,6 +46,7 @@ local function small_term_reset_size()
   vim.api.nvim_win_set_height(0, 15)
 end
 
+--- Open a terminal at the bottom of the screen with a fixed height.
 local function small_term()
   vim.cmd.new()
   small_term_reset_size()
@@ -112,22 +113,20 @@ local toggle_terminal = function()
   end
 end
 
-vim.api.nvim_create_user_command('Floaterminal', toggle_terminal, {}) -- Create a floating window with default dimensions
-
 -- <C-,> (open floaterm) feels right when combined with <C-p> (previous command) and <C-m> (enter)
 vim.keymap.set({ 'n', 't' }, '<C-,>', '<cmd>SmallFloatTerm<cr>', { desc = 'float term' })
 -- Binding for alacritty, check which char `=vim.fn.getchar()`
-vim.keymap.set({ 'n', 't' }, '\u{f8ff}', '<cmd>Floaterminal<cr>', { desc = 'float term' })
+vim.keymap.set({ 'n', 't' }, '\u{f8ff}', '<cmd>SmallFloatTerm<cr>', { desc = 'float term' })
 -- vim.keymap.set('', '\u{f8fe}', '<C-Space>')
 -- vim.keymap.set('', '\u{f8fe}', function()
 --   print 'Control-Space pressed!'
 -- end, { noremap = true, silent = false })
 
-vim.keymap.set({ 'n', 't' }, 'sl', '<cmd>Floaterminal<cr>', { desc = 'f[l]oat term' }) -- sf taken by mini.surround
-vim.keymap.set({ 'n', 't' }, '<leader>tf', '<cmd>Floaterminal<cr>', { desc = 'float term' })
-vim.keymap.set('n', '<leader>tl', small_term_send_line, { desc = '[l]ine to smallterm' })
-vim.keymap.set('n', '<leader>ts', small_term, { desc = '[s]mallterm' }) -- Open a terminal at the bottom of the screen with a fixed height.
-vim.keymap.set('n', 'st', small_term, { desc = '[s]mallterm' }) -- Open a terminal at the bottom of the screen with a fixed height.
-vim.keymap.set('n', '<leader>tr', small_term_reset_size, { desc = '[r]eset size smallterm' })
+vim.keymap.set({ 'n', 't' }, 'sl', '<cmd>SmallFloatTerm<cr>', { desc = '[s]mall f[l]oat term' }) -- sf taken by mini.surround
+vim.keymap.set('n', 'sT', small_term_send_line, { desc = 'send line to [s]mall[t]erm' })
+vim.keymap.set('n', 'st', small_term, { desc = '[s]mall[t]erm' })
+
+vim.api.nvim_create_user_command('SmallFloatTerm', toggle_terminal, {}) -- Create a floating window with default dimensions
+vim.api.nvim_create_user_command('SmallTermResetSize', small_term_reset_size, {}) -- Create a floating window with default dimensions
 
 return {}
