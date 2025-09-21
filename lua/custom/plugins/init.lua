@@ -68,4 +68,18 @@ if vim.env.SSH_CONNECTION then
   }
 end
 
-return {}
+return {
+  -- { 'm4xshen/hardtime.nvim', lazy = false, dependencies = { 'MunifTanjim/nui.nvim' }, opts = {} },
+  -- { 'tris203/precognition.nvim', opts = {} },
+  -- {
+  --   'dmtrKovalenko/fff.nvim',
+  --   build = function()
+  --     require('fff.download').download_or_build_binary()
+  --   end,
+  --   lazy = false, -- This plugin initializes itself lazily.
+  --   keys = {
+  --     { 'ff', require('fff').find_files, desc = 'FFFind files' },
+  --   },
+  -- },
+  -- { 'monaqa/dial.nvim', }
+}
