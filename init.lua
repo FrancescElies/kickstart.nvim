@@ -465,7 +465,7 @@ require('lazy').setup({
         map({ 'i', 'n' }, '<C-0>', function(_)
           local entry = action_state.get_selected_entry()
           local path = vim.fs.abspath(entry.value)
-          p('opening ' .. path)
+          print('opening ' .. path)
           vim.ui.open(path)
         end, { desc = 'Open default OS App' })
         -- needs to return true if you want to map default_mappings and false if not
