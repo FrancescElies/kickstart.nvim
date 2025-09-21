@@ -1,3 +1,9 @@
+" Sensible defaults
+" mkdir -p ~/.vim/pack/tpope/start
+" cd ~/.vim/pack/tpope/start
+" git clone https://tpope.io/vim/sensible.git
+"
+"
 " Something simple for emergencies or to easily copy on servers.
 "
 " https://github.com/changemewtf/no_plugins
@@ -6,7 +12,7 @@
 "    When moving to another buffer with :b, hit tab to autocomplete, or simply hit Enter to go to the first buffer with a unique match to what you have already typed.
 "
 "    By adding set path+=** and set wildmenu to the vimrc, we are now able to hit Tab when running a :find command to expand partial matches.
-" 
+"
 "    Another asterisk (*) can be placed in the query to return fuzzy/partial matches.
 "    ^x^n to search within the file
 "    ^x^f to complete filenames (works with path+=**!)
