@@ -459,6 +459,18 @@ require('lazy').setup({
         live_multi_grep { default_text = current_input, cwd = cwd }
       end
 
+      local function tele_open_with_default_os_app(_, map)
+        local action_state = require 'telescope.actions.state'
+        map({ 'i', 'n' }, '<C-0>', function(_)
+          local entry = action_state.get_selected_entry()
+          local path = vim.fs.abspath(entry.value)
+          p('opening ' .. path)
+          vim.ui.open(path)
+        end, { desc = 'Open default OS App' })
+        -- needs to return true if you want to map default_mappings and false if not
+        return true
+      end
+
       -- [[ Configure Telescope ]]
       -- See `:help telescope` and `:help telescope.setup()`
       require('telescope').setup {
@@ -485,19 +497,14 @@ require('lazy').setup({
           },
         },
         pickers = {
-          -- NOTE: mine
+          live_multi_grep = {
+            attach_mappings = tele_open_with_default_os_app,
+          },
+          live_grep = {
+            attach_mappings = tele_open_with_default_os_app,
+          },
           find_files = {
-            attach_mappings = function(_, map)
-              local action_state = require 'telescope.actions.state'
-              map({ 'i', 'n' }, '<C-o>', function(_)
-                local entry = action_state.get_selected_entry()
-                local path = vim.fs.abspath(entry.value)
-                p('opening ' .. path)
-                vim.ui.open(path)
-              end, { desc = 'Open default OS App' })
-              -- needs to return true if you want to map default_mappings and false if not
-              return true
-            end,
+            attach_mappings = tele_open_with_default_os_app,
           },
         },
         extensions = {
