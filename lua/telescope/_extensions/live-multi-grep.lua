@@ -91,4 +91,8 @@ local function find(opts)
     :find()
 end
 
-return { find = find }
+return require('telescope').register_extension {
+  exports = {
+    ['live-multi-grep'] = find,
+  },
+}

@@ -440,7 +440,6 @@ require('lazy').setup({
 
       -- Telescope tricks
       -- https://github.com/nvim-telescope/telescope.nvim/wiki/Configuration-Recipes#running-external-commands
-      local live_multi_grep = require('custom.multi-ripgrep').find
 
       local function tele_cd_buf_dir(prompt_bufnr)
         local selection = require('telescope.actions.state').get_selected_entry()
@@ -456,7 +455,9 @@ require('lazy').setup({
         local selected_entry = require('telescope.actions.state').get_selected_entry()
         local cwd = getmetatable(selected_entry).cwd
         require('telescope.actions').close(prompt_bufnr)
-        live_multi_grep { default_text = current_input, cwd = cwd }
+        -- live_multi_grep { default_text = current_input, cwd = cwd }
+        -- require 'telescope._extensions.live-multi-grep' { default_text = current_input, cwd = cwd }
+        require('telescope.builtin').live_grep { default_text = current_input, cwd = cwd }
       end
 
       local function tele_open_with_default_os_app(_, map)
@@ -522,6 +523,7 @@ require('lazy').setup({
 
       -- Enable Telescope extensions if they are installed
       pcall(require('telescope').load_extension, 'fzf')
+      pcall(require('telescope').load_extension, 'live-multi-grep')
       pcall(require('telescope').load_extension, 'ui-select')
 
       -- See `:help telescope.builtin`
@@ -543,7 +545,7 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
       vim.keymap.set({ 'n', 'v' }, '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
       vim.keymap.set('n', '<leader>sG', builtin.live_grep, { desc = '[S]earch by [G]rep' })
-      vim.keymap.set('n', '<leader>sg', live_multi_grep, { desc = '[S]earch by [G]rep' })
+      vim.keymap.set('n', '<leader>sg', ':Telescope live-multi-grep<cr>', { desc = '[S]earch by [G]rep' })
       vim.keymap.set('n', '<leader>sp', require('custom.repo-select').project_file_picker, { desc = '[S]earch [P]roject files' })
       vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
       vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
