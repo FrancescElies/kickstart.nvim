@@ -440,8 +440,7 @@ require('lazy').setup({
 
       -- Telescope tricks
       -- https://github.com/nvim-telescope/telescope.nvim/wiki/Configuration-Recipes#running-external-commands
-      local tele_actions = require 'telescope.actions'
-      local tele_action_layout = require 'telescope.actions.layout'
+      local live_multi_grep = require('custom.multi-ripgrep').find
 
       local function tele_cd_buf_dir(prompt_bufnr)
         local selection = require('telescope.actions.state').get_selected_entry()
@@ -450,6 +449,16 @@ require('lazy').setup({
         -- Depending on what you want put `cd`, `lcd`, `tcd`
         vim.cmd(string.format('silent lcd %s', dir))
       end
+
+      local function switch_to_grep(prompt_bufnr)
+        local opts = {}
+        local current_input = require('telescope.actions.state').get_current_line()
+        local selected_entry = require('telescope.actions.state').get_selected_entry()
+        local cwd = getmetatable(selected_entry).cwd
+        require('telescope.actions').close(prompt_bufnr)
+        live_multi_grep { default_text = current_input, cwd = cwd }
+      end
+
       -- [[ Configure Telescope ]]
       -- See `:help telescope` and `:help telescope.setup()`
       require('telescope').setup {
@@ -466,10 +475,11 @@ require('lazy').setup({
           mappings = {
             i = {
               ['<c-enter>'] = 'to_fuzzy_refine',
-              ['tp'] = tele_action_layout.toggle_preview,
+              ['<c-g>'] = switch_to_grep,
+              ['tp'] = require('telescope.actions.layout').toggle_preview,
               -- cycle previewer for git commits to show full message
-              ['np'] = tele_actions.cycle_previewers_next,
-              ['pp'] = tele_actions.cycle_previewers_prev,
+              ['np'] = require('telescope.actions').cycle_previewers_next,
+              ['pp'] = require('telescope.actions').cycle_previewers_prev,
               ['cd'] = tele_cd_buf_dir,
             },
           },
