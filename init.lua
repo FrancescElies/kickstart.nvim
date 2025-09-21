@@ -514,25 +514,19 @@ require('lazy').setup({
         builtin.find_files { no_ignore = true, no_ignore_parent = true, hidden = true }
       end
 
-      local function jj_files()
-        builtin.git_files {
-          prompt_title = 'jj Files',
-          git_command = { 'jj', 'file', 'list', '--no-pager' },
-        }
-      end
-      vim.keymap.set('n', '<leader>.', function()
+      local function find_files_buf_dir()
         builtin.find_files { cwd = vim.fn.expand '%:p:h' }
-      end, { desc = ' [.] Find cwd (./)' })
+      end
+      vim.keymap.set('n', '<leader>si', find_files_buf_dir, { desc = 'Find Files buf d[i]r' })
       vim.keymap.set('n', '<leader>sm', builtin.marks, { desc = '[S]earch [M]arks' })
       vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
       vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
-      vim.keymap.set('n', 'ff', builtin.find_files, { desc = '[F]ind [F]iles' })
       vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
-      vim.keymap.set('n', '<leader>sF', tele_find_all_files, { desc = '[S]earch all [F]iles' })
+      vim.keymap.set('n', '<leader>sa', tele_find_all_files, { desc = '[S]earch [A]ll files' })
       vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
       vim.keymap.set({ 'n', 'v' }, '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
       vim.keymap.set('n', '<leader>sG', builtin.live_grep, { desc = '[S]earch by [G]rep' })
-      vim.keymap.set('n', '<leader>sg', require('custom.multi-ripgrep').find, { desc = '[S]earch by [G]rep' })
+      vim.keymap.set('n', '<leader>sg', live_multi_grep, { desc = '[S]earch by [G]rep' })
       vim.keymap.set('n', '<leader>sp', require('custom.repo-select').project_file_picker, { desc = '[S]earch [P]roject files' })
       vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
       vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
