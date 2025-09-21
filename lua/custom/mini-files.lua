@@ -62,7 +62,7 @@ vim.api.nvim_create_autocmd('User', {
   pattern = 'MiniFilesBufferCreate',
   callback = function(args)
     local b = args.data.buf_id
-    vim.keymap.set('n', 'g~', set_cwd, { buffer = b, desc = 'Set cwd' })
+    vim.keymap.set('n', 'g.', set_cwd, { buffer = b, desc = 'Set cwd' })
     vim.keymap.set('n', 'gx', ui_open, { buffer = b, desc = 'OS open' })
     vim.keymap.set('n', 'gy', yank_path, { buffer = b, desc = 'Yank path' })
   end,
