@@ -49,6 +49,8 @@ vim.opt.formatoptions:remove 'o'
 -- vim.opt.isfname:append '32' -- allow spaces in paths
 vim.opt.isfname:append '@'
 
+vim.o.complete = '.,w,b,u,t,i,kspell'
+
 if vim.env.SSH_CONNECTION then
   local function vim_paste()
     local content = vim.fn.getreg '"'
