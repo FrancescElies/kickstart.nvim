@@ -442,6 +442,14 @@ require('lazy').setup({
       -- https://github.com/nvim-telescope/telescope.nvim/wiki/Configuration-Recipes#running-external-commands
       local tele_actions = require 'telescope.actions'
       local tele_action_layout = require 'telescope.actions.layout'
+
+      local function tele_cd_buf_dir(prompt_bufnr)
+        local selection = require('telescope.actions.state').get_selected_entry()
+        local dir = vim.fn.fnamemodify(selection.path, ':p:h')
+        require('telescope.actions').close(prompt_bufnr)
+        -- Depending on what you want put `cd`, `lcd`, `tcd`
+        vim.cmd(string.format('silent lcd %s', dir))
+      end
       -- [[ Configure Telescope ]]
       -- See `:help telescope` and `:help telescope.setup()`
       require('telescope').setup {
@@ -462,13 +470,7 @@ require('lazy').setup({
               -- cycle previewer for git commits to show full message
               ['np'] = tele_actions.cycle_previewers_next,
               ['pp'] = tele_actions.cycle_previewers_prev,
-              ['cd'] = function(prompt_bufnr)
-                local selection = require('telescope.actions.state').get_selected_entry()
-                local dir = vim.fn.fnamemodify(selection.path, ':p:h')
-                require('telescope.actions').close(prompt_bufnr)
-                -- Depending on what you want put `cd`, `lcd`, `tcd`
-                vim.cmd(string.format('silent lcd %s', dir))
-              end,
+              ['cd'] = tele_cd_buf_dir,
             },
           },
         },
