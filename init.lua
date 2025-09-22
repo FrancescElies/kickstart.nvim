@@ -475,6 +475,7 @@ require('lazy').setup({
       vim.keymap.set({ 'n', 'v' }, '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
       vim.keymap.set('n', '<leader>sG', builtin.live_grep, { desc = '[S]earch by [G]rep' })
       vim.keymap.set('n', '<leader>sg', ':Telescope live-multi-grep<cr>', { desc = '[S]earch by [G]rep' })
+      vim.keymap.set('n', 'z=', builtin.spell_suggest, { desc = 'Spell suggest (Telescope)' })
       vim.keymap.set('n', '<leader>sp', require('custom.repo-select').project_file_picker, { desc = '[S]earch [P]roject files' })
       vim.keymap.set('n', '<leader>se', builtin.diagnostics, { desc = '[S]earch diagnostics [E]rrors' })
       vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
