@@ -87,11 +87,10 @@ return {
     keys = {
       -- :h diff-mode
       -- :h copy-diffs
-      { '<leader>gdb', ':DiffviewFileHistory<cr>', desc = '[g]it [d]iff History current [b]ranch' },
-      { '<leader>gdf', '<cmd>DiffviewFileHistory %', desc = '[g]it [d]iff [f]ile current [f]ile' },
+      { '<leader>ghb', ':DiffviewFileHistory<cr>', desc = '[g]it diff [H]istory current [b]ranch' },
+      { '<leader>ghf', '<cmd>DiffviewFileHistory %', desc = '[g]it diff [H]istory [f]ile' },
       { '<leader>gdw', '<cmd>DiffviewOpen<cr>', desc = '[g]it [d]iff working tree' },
-      { '<leader>gdb', '<cmd>DiffviewOpen origin/main...HEAD', desc = '[g]it [d]iff against merge [b]ase' },
-      { '<leader>gde', ':DiffviewFileHistory', desc = '[g]it [d]iff History (line [e]volution)', mode = { 'v' } },
+      { '<leader>ghl', ':DiffviewFileHistory', desc = '[g]it diff [H]istory ([l]ine evolution)', mode = { 'v' } },
 
       -- Examples
       -- :DiffviewOpen

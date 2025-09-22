@@ -86,4 +86,5 @@ return {
   -- { 'monaqa/dial.nvim', }
   -- hover.nvim
   -- spaceless.nvim
+  -- unimpaired.nvim
 }
