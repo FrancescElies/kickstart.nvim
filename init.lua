@@ -334,7 +334,7 @@ require('lazy').setup({
         { 's', group = '[s]urround' },
         { '<leader>C', group = '[C]hat' },
         { '<leader>v', group = '[v]im' },
-        { '<leader>vg', group = '[v]im [g]it' },
+        { '<leader>vh', group = '[v]im git[h]unks' },
       },
     },
   },

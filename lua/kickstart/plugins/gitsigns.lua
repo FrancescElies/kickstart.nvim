@@ -6,13 +6,13 @@ return {
   {
     'lewis6991/gitsigns.nvim',
     opts = {
-      signs = {
-        add = { text = '+' },
-        change = { text = '~' },
-        delete = { text = '_' },
-        topdelete = { text = '‾' },
-        changedelete = { text = '~' },
-      },
+      -- signs = {
+      --   add = { text = '+' },
+      --   change = { text = '~' },
+      --   delete = { text = '_' },
+      --   topdelete = { text = '‾' },
+      --   changedelete = { text = '~' },
+      -- },
       on_attach = function(bufnr)
         local gitsigns = require 'gitsigns'
 
@@ -66,9 +66,12 @@ return {
         end, { desc = 'git [D]iff against [H]EAD (last commit)' })
 
         -- [V]im Toggles
-        map('n', '<leader>vgb', gitsigns.toggle_current_line_blame, { desc = 'toggle git show [b]lame line' })
-        map('n', '<leader>vgw', gitsigns.toggle_word_diff, { desc = 'toggle [w]ord diff' })
-        map('n', '<leader>vgl', gitsigns.toggle_linehl, { desc = 'toggle [g]it [l]ine higlight' })
+        map('n', '<leader>vhb', gitsigns.toggle_current_line_blame, { desc = 'toggle git[h]unks [b]lame line' })
+        map('n', '<leader>vhw', gitsigns.toggle_word_diff, { desc = 'toggle git[h]unks [w]ord diff' })
+        map('n', '<leader>vhl', gitsigns.toggle_linehl, { desc = 'toggle git[h]unks [l]ine higlight' })
+
+        -- Select [h]unks as a vim text object
+        vim.keymap.set({ 'o', 'x' }, 'ih', '<Cmd>Gitsigns select_hunk<CR>')
       end,
     },
   },
