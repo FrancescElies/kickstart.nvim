@@ -1,67 +1,31 @@
+local tele_builtin = require 'telescope.builtin'
+
 local function get_todos(dir, states)
-  require('telescope.builtin').live_grep { cwd = dir }
+  tele_builtin.live_grep { cwd = dir }
   vim.fn.feedkeys('^ *([*]+|[-]+) +[(]' .. states .. '[)]')
 end
 
+vim.keymap.set('n', '<leader>snt', function()
+  get_todos('~/src/_notes ', '[^x_]')
+end, { desc = '[s]earch [n]otes [t]odos' })
+
+vim.keymap.set('n', '<leader>sng', function()
+  tele_builtin.live_grep { cwd = '~/src/_notes/' }
+end, { desc = '[s]earch [n]otes by [g]rep' })
+
+vim.keymap.set('n', '<leader>snf', function()
+  tele_builtin.find_files { cwd = '~/src/_notes/' }
+end, { desc = '[s]earch [n]otes [f]iles' })
+
 return {
-  {
-    -- go install github.com/zyedidia/eget@latest
-    -- eget zk-org/zk
-    'zk-org/zk-nvim',
-    config = function()
-      require('zk').setup {
-        -- See Setup section below
-      }
-    end,
-  },
   -- {
-  --   'nvim-neorg/neorg',
-  --   lazy = false, -- Disable lazy loading as some `lazy.nvim` distributions set `lazy = true` by default
-  --   version = '*', -- Pin Neorg to the latest stable release
-  --   dependencies = {
-  --     'nvim-lua/plenary.nvim',
-  --     'nvim-neorg/neorg-telescope',
-  --   },
-  --   -- build = ":Neorg sync-parsers",
-  --   -- enabled = false,
-  --   ft = 'norg',
-  --   keys = {
-  --     { '<leader>sz', '<Plug>(neorg.telescope.search_headings)' },
-  --     { '<leader>jn', ':Neorg workspace notes<CR>:Neorg journal today<CR>', desc = '[J]ournal [N]owday ' },
-  --     { '<leader>jy', ':Neorg workspace notes<CR>:Neorg journal yesterday<CR>', desc = '[J]ournal [Y]esterday' },
-  --     { '<leader>jt', ':Neorg workspace notes<CR>:Neorg journal tomorrow<CR>', desc = '[J]ournal [T]omorrow ' },
-  --     {
-  --       '<c-t>',
-  --       function()
-  --         get_todos('~/neorg/notes', '[^x_]')
-  --       end,
-  --     },
-  --   },
-  --   opts = {
-  --     load = {
-  --       ['core.keybinds'] = {
-  --         config = {
-  --           default_keybinds = true,
-  --         },
-  --       },
-  --       ['core.defaults'] = {}, -- Load all default modules
-  --       ['core.concealer'] = {}, -- Icons and pretty output
-  --       ['core.dirman'] = {
-  --         config = {
-  --           workspaces = {
-  --             notes = '~/neorg/notes',
-  --             journal = '~/neorg/journal',
-  --           },
-  --           default_workspace = 'notes',
-  --         },
-  --       },
-  --       ['core.integrations.telescope'] = {},
-  --       ['core.journal'] = {
-  --         config = {
-  --           workspace = 'journal',
-  --         },
-  --       },
-  --     },
-  --   },
+  --   -- go install github.com/zyedidia/eget@latest
+  --   -- eget zk-org/zk
+  --   'zk-org/zk-nvim',
+  --   config = function()
+  --     require('zk').setup {
+  --       -- See Setup section below
+  --     }
+  --   end,
   -- },
 }
