@@ -371,7 +371,7 @@ require('lazy').setup({
       -- Telescope tricks:
       --  - https://github.com/nvim-telescope/telescope.nvim/wiki/Configuration-Recipes#running-external-commands
 
-      local function tele_cd_buf_dir(prompt_bufnr)
+      local function cd_buffer_dir(prompt_bufnr)
         local selection = require('telescope.actions.state').get_selected_entry()
         local dir = vim.fn.fnamemodify(selection.path, ':p:h')
         require('telescope.actions').close(prompt_bufnr)
@@ -390,7 +390,7 @@ require('lazy').setup({
         require('telescope.builtin').live_grep { default_text = current_input, cwd = cwd }
       end
 
-      local function tele_open_with_default_os_app(_, map)
+      local function open_with_default_os_app(_, map)
         local action_state = require 'telescope.actions.state'
         map({ 'i', 'n' }, '<C-0>', function(_)
           local entry = action_state.get_selected_entry()
@@ -419,23 +419,25 @@ require('lazy').setup({
             i = {
               ['<c-enter>'] = 'to_fuzzy_refine',
               ['<c-g>'] = switch_to_grep,
-              ['tp'] = require('telescope.actions.layout').toggle_preview,
-              -- cycle previewer for git commits to show full message
-              ['np'] = require('telescope.actions').cycle_previewers_next,
-              ['pp'] = require('telescope.actions').cycle_previewers_prev,
-              ['cd'] = tele_cd_buf_dir,
+            },
+            n = {
+              -- <h,l> to cycle previewer for git commits to show full message
+              ['gh'] = require('telescope.actions').cycle_previewers_prev,
+              ['gl'] = require('telescope.actions').cycle_previewers_next,
+              ['gc'] = cd_buffer_dir,
+              ['gt'] = require('telescope.actions.layout').toggle_preview,
             },
           },
         },
         pickers = {
           live_multi_grep = {
-            attach_mappings = tele_open_with_default_os_app,
+            attach_mappings = open_with_default_os_app,
           },
           live_grep = {
-            attach_mappings = tele_open_with_default_os_app,
+            attach_mappings = open_with_default_os_app,
           },
           find_files = {
-            attach_mappings = tele_open_with_default_os_app,
+            attach_mappings = open_with_default_os_app,
           },
         },
         extensions = {
