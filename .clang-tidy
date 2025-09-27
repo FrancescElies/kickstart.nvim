@@ -1,0 +1,47 @@
+# https://clang.llvm.org/extra/clang-tidy/
+#
+# Override this config for specific files via // NOLINT or // NOLINTNEXTLINE.
+Checks: >
+  clang-analyzer-*,                                 # Clang static analyzer checks
+  bugprone-*,                                       # Find bugs and potential errors
+  modernize-*,                                      # Suggest modern C++ features
+  performance-*,                                    # Performance improvements
+  readability-*,                                    # Improve readability
+  cppcoreguidelines-*,                              # C++ Core Guidelines
+  misc-*,                                           # Miscellaneous checks
+  portability-*,                                    # Cross-platform safety
+  -clang-analyzer-alpha.*,                          # Disable alpha (experimental) checks
+  -readability-magic-numbers,                       # Too noisy in some codebases
+  -cppcoreguidelines-avoid-magic-numbers,
+  -modernize-use-trailing-return-type,              # Preference-based
+  -cppcoreguidelines-owning-memory,                 # Noisy unless smart pointers enforced
+  -cppcoreguidelines-pro-type-vararg,               # False positives in real-world APIs
+  -cppcoreguidelines-pro-bounds-pointer-arithmetic  # Noisy in low-level code
+
+WarningsAsErrors: '*' # all warnings as errors
+                      # WarningsAsErrors: 'modernize-*' # only modernize-* will be treated as errors.
+                      # WarningsAsErrors: ''            # Do nothing
+
+# List available checks:
+# > clang-tidy -checks=* -list-checks
+CheckOptions:
+  - key:             modernize-use-nullptr.NullMacros
+    value:           'NULL'
+  - key:             readability-identifier-naming.VariableCase
+    value:           lower_case
+  - key:             readability-identifier-naming.MemberVariableCase
+    value:           camelBack
+  - key:             readability-identifier-naming.ClassCase
+    value:           CamelCase
+  - key:             cppcoreguidelines-no-malloc.Allocations
+    value:           'false'  # Allow malloc if needed
+  - key:             modernize-loop-convert.MinConfidence
+    value:           reasonable
+  - key:             modernize-use-auto.MinTypeNameLength
+    value:           '5'  # Use auto only if type name is long
+  - key:             performance-unnecessary-value-param.AllowedTypes
+    value:           'std::string'
+
+FormatStyle: file  # Use .clang-format in the project root if available
+HeaderFilterRegex: '.*'  # Analyze all project headers
+AnalyzeTemporaryDtors: false

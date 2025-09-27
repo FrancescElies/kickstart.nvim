@@ -729,7 +729,15 @@ require('lazy').setup({
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
         clangd = {
-          cmd = { 'clangd', '--log=verbose', '--enable-config' },
+          cmd = {
+            'clangd',
+            '--background-index', -- persist index on disk
+            '--clang-tidy', -- enables tidy
+            '--fallback-style="{BasedOnStyle: LLVM, IndentWidth: 4}"',
+            '--log=verbose',
+            '--enable-config',
+            --- NOTE: see .clang-tidy in repo for example
+          },
         },
         -- gopls = {},
         -- pyright = {},
