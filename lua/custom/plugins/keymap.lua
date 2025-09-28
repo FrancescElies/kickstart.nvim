@@ -139,7 +139,6 @@ vim.keymap.set('n', '<leader>lf', '<cmd>w|source %<cr>', { desc = 'load [L]ua [f
 vim.keymap.set('n', '<leader>ll', '<cmd>.lua<cr>', { desc = 'load [L]ua [l]ine' })
 vim.keymap.set('v', '<leader>l', ':lua<cr>', { desc = 'load [L]ua region' })
 
-vim.keymap.set('n', '<leader>vc', '<cmd>TSContext toggle<cr>', { desc = '[v]im TS [c]ontext toggle ' })
 vim.keymap.set('n', '<leader>vm', ":new | put=execute('messages')<cr>", { desc = 'vim messages' })
 vim.keymap.set('n', '<leader>vf', ':FormatToggle<CR>', { desc = '[v]im [f]ormat toggle' })
 vim.keymap.set('n', '<leader>vw', ':set invwrap<cr>', { desc = '[v]im [w]rap toggle' })
