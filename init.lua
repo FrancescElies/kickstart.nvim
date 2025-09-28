@@ -1203,6 +1203,19 @@ require('lazy').setup({
       -- - gA - [a]lign with preview
       local mini_align = require 'mini.align'
       mini_align.setup()
+
+      local hipatterns = require 'mini.hipatterns'
+      hipatterns.setup {
+        highlighters = {
+          hex_color = hipatterns.gen_highlighter.hex_color(),
+          word_color = { pattern = '%S+', group = word_color_group },
+          censor = {
+            pattern = 'password: ()%S+()',
+            group = '',
+            extmark_opts = censor_extmark_opts,
+          },
+        },
+      }
     end,
   },
   { -- Highlight, edit, and navigate code
