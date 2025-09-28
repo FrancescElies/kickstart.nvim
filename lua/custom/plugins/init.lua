@@ -87,4 +87,9 @@ return {
   -- hover.nvim
   -- spaceless.nvim
   -- unimpaired.nvim
+  --
+  -- connect to databases
+  --  "tpope/vim-dadbod",
+  -- "kristijanhusak/vim-dadbod-completion",
+  -- "kristijanhusak/vim-dadbod-ui",
 }
