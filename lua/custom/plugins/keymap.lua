@@ -173,6 +173,8 @@ vim.keymap.set('n', 'ZS', ':w<cr>')
 
 vim.keymap.set('n', 'su', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gIc<Left><Left><Left><Left>]], { desc = 'substitute current word' })
 
+
+ vim.keymap.set({'n', 'v'}, '<leader>x', vim.lsp.buf.references, { buffer = true })
 --
 -- the end
 --
