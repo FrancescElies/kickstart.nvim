@@ -1208,11 +1208,31 @@ require('lazy').setup({
       hipatterns.setup {
         highlighters = {
           hex_color = hipatterns.gen_highlighter.hex_color(),
-          word_color = { pattern = '%S+', group = word_color_group },
+          word_color = {
+            pattern = '%S+',
+            group = function(_, match)
+              -- highlight words with certain colors
+              local words = { red = '#aa0000', green = '#00aa00', blue = '#0000aa' }
+              local hex = words[match]
+              if hex == nil then
+                return nil
+              end
+              return MiniHipatterns.compute_hex_color_group(hex, 'bg')
+            end,
+          },
           censor = {
             pattern = 'password: ()%S+()',
             group = '',
-            extmark_opts = censor_extmark_opts,
+            extmark_opts = function(_, match, _)
+              -- censors certain sensitive information
+              local mask = string.rep('x', vim.fn.strchars(match))
+              return {
+                virt_text = { { mask, 'Comment' } },
+                virt_text_pos = 'overlay',
+                priority = 200,
+                right_gravity = false,
+              }
+            end,
           },
         },
       }
