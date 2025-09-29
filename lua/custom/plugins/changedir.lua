@@ -36,7 +36,8 @@ vim.api.nvim_create_autocmd('BufEnter', {
   pattern = '*',
   callback = function()
     -- Only run for normal buffers, (no terminal, quickfix ...)
-    if vim.bo.buftype == '' then
+    local filename = vim.fn.expand '%'
+    if vim.bo.buftype == '' and filename ~= '' and vim.fn.filereadable(filename) == 1 then
       cdroot_of { cwd = vim.fn.expand '%:p:h' }
     end
   end,
