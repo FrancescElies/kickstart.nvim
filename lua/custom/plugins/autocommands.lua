@@ -152,7 +152,7 @@ end
 -- attach_to_buffer('*.ts', { 'npm', 'run', 'build_dev' })
 
 vim.api.nvim_create_user_command('AutoRun', function()
-  local pattern = vim.fn.input 'Pattern (*.ts):'
+  local pattern = vim.fn.input('Pattern:', '*.rs')
   local command = vim.fn.input 'Command:'
 
   -- create new split

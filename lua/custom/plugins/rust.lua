@@ -60,7 +60,7 @@ return {
           -- see `lsp-init.lua` too
           ['rust-analyzer'] = {
             diagnostics = { experimental = { enable = true } },
-            -- checkOnSave = true, -- disables running clippy on save
+            -- checkOnSave = true,
             checkOnSave = { command = 'clippy', enable = true },
           },
         },
@@ -77,18 +77,18 @@ return {
         end
 
         if vim.bo.filetype == 'rust' then
-          rust_keymap('<localleader>a', ':RustLsp codeAction<cr>', 'code [a]ction')
-          rust_keymap('<localleader>e', ':RustLsp explainError', '[e]xplain error')
-          rust_keymap('<localleader>E', ':RustLsp expandMacro<cr>', '[e]xpand macros')
-          rust_keymap('<localleader>f', ':RustLsp flyCheck run', '[f]ly check')
-          rust_keymap('<localleader>h', ':RustLsp hover ', '[h]over actions|range')
-          rust_keymap('<localleader>j', ':RustLsp joinLines<cr>', 'join lines')
-          rust_keymap('<localleader>m', ':RustLsp moveItem ', '[m]ove up|down')
-          rust_keymap('<localleader>o', ':RustLsp openCargo<cr>', '[o]pen cargo')
-          rust_keymap('<localleader>p', ':RustLsp parentModule<cr>', '[p]arent module')
-          rust_keymap('<localleader>t', ':RustLsp! testables<cr>', 'run previous [t]ests')
-          rust_keymap('<localleader>T', ':RustLsp testables<cr>', 'run [t]ests')
-          rust_keymap('<localleader>w', ':RustLsp workspaceSymbol allSymbols ', '[w]orkspace symbol')
+          -- rust_keymap('<localleader>a', ':RustLsp codeAction<cr>', 'code [a]ction')
+          -- rust_keymap('<localleader>e', ':RustLsp explainError', '[e]xplain error')
+          -- rust_keymap('<localleader>E', ':RustLsp expandMacro<cr>', '[e]xpand macros')
+          -- rust_keymap('<localleader>f', ':RustLsp flyCheck run', '[f]ly check')
+          -- rust_keymap('<localleader>h', ':RustLsp hover ', '[h]over actions|range')
+          -- rust_keymap('<localleader>j', ':RustLsp joinLines<cr>', 'join lines')
+          -- rust_keymap('<localleader>m', ':RustLsp moveItem ', '[m]ove up|down')
+          -- rust_keymap('<localleader>o', ':RustLsp openCargo<cr>', '[o]pen cargo')
+          -- rust_keymap('<localleader>p', ':RustLsp parentModule<cr>', '[p]arent module')
+          -- rust_keymap('<localleader>t', ':RustLsp! testables<cr>', 'run previous [t]ests')
+          -- rust_keymap('<localleader>T', ':RustLsp testables<cr>', 'run [t]ests')
+          -- rust_keymap('<localleader>w', ':RustLsp workspaceSymbol allSymbols ', '[w]orkspace symbol')
           -- :RustLsp crateGraph {backend {output}}
           -- :RustLsp syntaxTree
           -- :Rustc unpretty {hir|mir|...}
