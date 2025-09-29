@@ -9,11 +9,15 @@ return {
       vim.keymap.set('n', '{', function()
         if require('aerial').is_open() then
           vim.cmd [[AerialPrev]]
+        else
+          vim.cmd [[normal! {{]]
         end
       end, { buffer = bufnr })
       vim.keymap.set('n', '}', function()
         if require('aerial').is_open() then
           vim.cmd [[AerialNext]]
+        else
+          vim.cmd [[normal! }}]]
         end
       end, { buffer = bufnr })
     end,
