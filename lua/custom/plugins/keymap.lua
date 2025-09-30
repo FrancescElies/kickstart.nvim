@@ -90,10 +90,6 @@ vim.keymap.set('n', '<leader>bo', ':e <C-r>+<CR>', { desc = '[b]uffer [o]pen fro
 vim.keymap.set('i', 'jk', '<Esc>')
 vim.keymap.set('n', 'ı', 'i')
 
--- quick spellfix
--- vim.keymap.set('n', '<leader>fw', 'z=1', { desc = 'fix word' })
-vim.keymap.set('n', '<leader>fw', require('telescope.builtin').spell_suggest, { desc = 'fix word' })
-
 -- buffer
 -- vim.keymap.set('n', 'so', '<cmd>e #<cr>', { desc = '[s]witch to [o]ther buffer' })
 -- vim.keymap.set('n', 'ss', '<cmd>split<cr>', { desc = 'split' })
@@ -173,8 +169,7 @@ vim.keymap.set('n', 'ZS', ':w<cr>')
 
 vim.keymap.set('n', 'su', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gIc<Left><Left><Left><Left>]], { desc = 'substitute current word' })
 
-
- vim.keymap.set({'n', 'v'}, '<leader>x', vim.lsp.buf.references, { buffer = true })
+vim.keymap.set({ 'n', 'v' }, '<leader>x', vim.lsp.buf.references, { buffer = true })
 --
 -- the end
 --
