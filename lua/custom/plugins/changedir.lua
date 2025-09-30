@@ -24,23 +24,23 @@ vim.api.nvim_create_user_command('CdBufDir', function()
   vim.api.nvim_set_current_dir(path)
   -- vim.fn.chdir() maybe?
 end, { desc = 'changes directory to current buffer dir' })
-vim.keymap.set('n', 'cdb', ':CdBufDir<cr>')
+vim.keymap.set('n', '<leader>cd', ':CdBufDir<cr>', { desc = '[c]d buf [d]ir' })
 
 vim.api.nvim_create_user_command('CdRoot', function()
   cdroot_of { cwd = vim.fn.expand '%:p:h' }
 end, { desc = "changes dir to git's root (toplevel)" })
-vim.keymap.set('n', 'cdr', ':CdRoot<cr>')
+vim.keymap.set('n', '<leader>cr', ':CdRoot<cr>', { desc = '[c]d buf [r]oot dir' })
 
-vim.api.nvim_create_autocmd('BufEnter', {
-  group = vim.api.nvim_create_augroup('my-cd', { clear = true }),
-  pattern = '*',
-  callback = function()
-    -- Only run for normal buffers, (no terminal, quickfix ...)
-    local filename = vim.fn.expand '%'
-    if vim.bo.buftype == '' and filename ~= '' and vim.fn.filereadable(filename) == 1 then
-      cdroot_of { cwd = vim.fn.expand '%:p:h' }
-    end
-  end,
-})
+-- vim.api.nvim_create_autocmd('BufEnter', {
+--   group = vim.api.nvim_create_augroup('my-cd', { clear = true }),
+--   pattern = '*',
+--   callback = function()
+--     -- Only run for normal buffers, (no terminal, quickfix ...)
+--     local filename = vim.fn.expand '%'
+--     if vim.bo.buftype == '' and filename ~= '' and vim.fn.filereadable(filename) == 1 then
+--       cdroot_of { cwd = vim.fn.expand '%:p:h' }
+--     end
+--   end,
+-- })
 
 return {}
