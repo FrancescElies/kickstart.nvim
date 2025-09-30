@@ -5,6 +5,6 @@ return {
   -- Uncomment next line if you want to follow only stable versions
   version = '*',
   keys = {
-    { '<leader>cc', ':Neogen ', desc = '[c]ode [c]omment' },
+    { '<leader>cg', ':Neogen ', desc = '[c]ode [g]en docs' },
   },
 }

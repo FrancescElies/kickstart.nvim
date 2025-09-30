@@ -61,7 +61,7 @@ return {
           ['rust-analyzer'] = {
             diagnostics = { experimental = { enable = true } },
             -- checkOnSave = true,
-            checkOnSave = { command = 'clippy', enable = true },
+            checkOnSave = { command = 'clippy', enable = false },
           },
         },
       },
@@ -80,7 +80,7 @@ return {
           -- rust_keymap('<localleader>a', ':RustLsp codeAction<cr>', 'code [a]ction')
           -- rust_keymap('<localleader>e', ':RustLsp explainError', '[e]xplain error')
           -- rust_keymap('<localleader>E', ':RustLsp expandMacro<cr>', '[e]xpand macros')
-          -- rust_keymap('<localleader>f', ':RustLsp flyCheck run', '[f]ly check')
+          rust_keymap('<leader>cc', ':RustLsp flyCheck run<cr>', '[c]ode [c]lippy')
           -- rust_keymap('<localleader>h', ':RustLsp hover ', '[h]over actions|range')
           -- rust_keymap('<localleader>j', ':RustLsp joinLines<cr>', 'join lines')
           -- rust_keymap('<localleader>m', ':RustLsp moveItem ', '[m]ove up|down')
