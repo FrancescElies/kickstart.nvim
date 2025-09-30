@@ -91,7 +91,7 @@ vim.keymap.set('i', 'jk', '<Esc>')
 vim.keymap.set('n', 'ı', 'i')
 
 -- buffer
--- vim.keymap.set('n', 'so', '<cmd>e #<cr>', { desc = '[s]witch to [o]ther buffer' })
+vim.keymap.set('n', 'se', '<cmd>e #<cr>', { desc = '[s]witch to alternat[e]' })
 -- vim.keymap.set('n', 'ss', '<cmd>split<cr>', { desc = 'split' })
 -- vim.keymap.set('n', 'sv', '<cmd>vsplit<cr>', { desc = 'vertical split' })
 vim.keymap.set({ 'n', 'x', 'o' }, 's', '<Nop>')
