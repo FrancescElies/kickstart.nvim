@@ -43,16 +43,25 @@ vim.api.nvim_create_autocmd('BufReadPost', {
   end,
 })
 --
--- Autosave Markdown files
+
+_G.autosave_enabled = true
+vim.api.nvim_create_augroup('autosave', { clear = true })
+-- Autosave
 vim.api.nvim_create_autocmd({ 'TextChanged', 'InsertLeave' }, {
-  group = 'markdown',
-  pattern = '*.md',
+  group = 'autosave',
+  pattern = '*',
   callback = function()
-    if vim.bo.modified then
+    local bufname = vim.api.nvim_buf_get_name(0)
+    if vim.bo.modified and bufname ~= '' then
       vim.cmd 'silent write'
     end
   end,
 })
+vim.api.nvim_create_user_command('ToggleAutosave', function()
+  _G.autosave_enabled = not _G.autosave_enabled
+  print('Autosave ' .. (_G.autosave_enabled and 'enabled' or 'disabled'))
+end, {})
+vim.keymap.set('n', '<leader>va', ':ToggleAutosave<cr>', { desc = '[a]utosave' })
 
 -- Autosave when leaving window
 vim.api.nvim_create_autocmd({
