@@ -1177,6 +1177,14 @@ require('lazy').setup({
       -- - sr)'  - [S]urround [R]eplace [)] [']
       require('mini.surround').setup()
 
+      -- - ii, ai textobjects,
+      -- - [i  top indent
+      -- - ]i bottom indent
+      require('mini.indentscope').setup()
+
+      require('mini.bufremove').setup()
+      require('mini.cursorword').setup()
+
       -- Simple and easy statusline.
       --  You could remove this setup call if you don't like it,
       --  and try some other statusline plugin
