@@ -1184,6 +1184,11 @@ require('lazy').setup({
 
       require('mini.bufremove').setup()
       require('mini.cursorword').setup()
+      -- TODO:
+      -- require('mini.pairs') -- over autopiars?
+      -- require('mini.comment') --- over todo comments?
+      -- require('mini.splitjoin')
+      -- require('mini.sessions') -- over autosession?
 
       -- Simple and easy statusline.
       --  You could remove this setup call if you don't like it,
