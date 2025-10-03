@@ -434,6 +434,18 @@ require('lazy').setup({
           },
         },
         pickers = {
+          buffers = {
+            show_all_buffers = true,
+            sort_lastused = true,
+            -- theme = 'dropdown',
+            -- previewer = false,
+            mappings = {
+              -- i = { ['gd'] = require('telescope.actions').delete_buffer, },
+              n = {
+                ['d'] = require('telescope.actions').delete_buffer,
+              },
+            },
+          },
           live_multi_grep = {
             attach_mappings = open_with_default_os_app,
           },
