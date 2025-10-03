@@ -1,5 +1,6 @@
 return {
   { 'tpope/vim-abolish' },
+  { 'tpope/vim-rsi' },
   -- { 'tpope/vim-unimpaired', event = 'VeryLazy' },
   -- { 'tpope/vim-repeat', event = 'VeryLazy' },
   -- { "wincent/loupe", event = "VeryLazy" },
