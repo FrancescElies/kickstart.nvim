@@ -29,6 +29,13 @@ set path+=**
 
 " Display all matching files when we tab complete
 set wildmenu
+set wildignorecase
+set wildmode=list:longest,full
+nnoremap gb :ls<cr>:b
+nnoremap cgn *Ncgn
+"^/$ (start/end) of line is more common than H/L defaults top/bottom of buffer"
+map H ^
+map L $
 
 " NOW WE CAN:
 " - Hit tab to :find by partial match
