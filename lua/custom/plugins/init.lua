@@ -51,6 +51,20 @@ vim.opt.isfname:append '@'
 
 vim.o.complete = '.,w,b,u,t,i,kspell'
 
+-- Folds
+-- za                | Toggle fold
+-- zA                | Toggle fold recursively
+-- zc                | Close fold
+-- zo                | Open fold
+-- zM                | Close **all** folds
+-- zR                | Open **all** folds
+-- zm / zr           | Increase/decrease fold level
+-- :set foldenable   | Enable folding
+-- :set nofoldenable | Disable folding
+vim.opt.foldmethod = 'expr'
+vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
+vim.opt.foldopen:remove 'block' -- avoid fold opening when moving {, [[ ...
+
 if vim.env.SSH_CONNECTION then
   local function vim_paste()
     local content = vim.fn.getreg '"'
