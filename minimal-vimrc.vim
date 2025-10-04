@@ -82,6 +82,27 @@ nnoremap ı  i
 let mapleader = " "
 nnoremap <leader>ve  :e $MYVIMRC<cr>
 
+" quickly cd to current file dir or it's root dir project
+function! FindRootAndCd()
+  let l:markers = ['.git', 'Cargo.toml', 'package.json', 'pyproject.toml', '.hg']
+  let l:dir = expand('%:p:h')
+  while l:dir !=# '/'
+    for l:marker in l:markers
+      if filereadable(l:dir . '/' . l:marker) || isdirectory(l:dir . '/' . l:marker)
+        execute 'cd' fnameescape(l:dir)
+        echo "Changed directory to project root: " . l:dir
+        return
+      endif
+    endfor
+    let l:dir = fnamemodify(l:dir, ':h')
+  endwhile
+  echo "No project root marker found."
+endfunction
+
+command! Cdd call FindRootAndCd()
+nnoremap cdb  :cd %:p:h<cr>
+nnoremap cdd  :Cdd<cr>
+
 " QUICKLY EDIT YOUR MACROS: https://github.com/mhinz/vim-galore?tab=readme-ov-file#quickly-edit-your-macros
 " "q<leader>m  edits macro in register q
 nnoremap <leader>m  :<c-u><c-r><c-r>='let @'. v:register .' = '. string(getreg(v:register))<cr><c-f><left>
