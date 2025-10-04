@@ -72,7 +72,7 @@ nnoremap g*    g*zzzv
 nnoremap g#    g#zzzv
 
 " QUICK ESCAPE:
-nnoremap jk <Esc>
+inoremap jk <Esc>
 
 " Turkish keyboard
 nnoremap ı  i
