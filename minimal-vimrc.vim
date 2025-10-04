@@ -1,19 +1,23 @@
 " viemu.com graphical cheat sheet - http://www.viemu.com/a_vi_vim_graphical_cheat_sheet_tutorial.html
 
+" https://github.com/wklken/vim-for-server/blob/master/vimrc
+
 " Sensible defaults
 " mkdir -p ~/.vim/pack/tpope/start
 " cd ~/.vim/pack/tpope/start
 " git clone https://tpope.io/vim/sensible.git
-"
-"
+
 " Something simple for emergencies or to easily copy on servers.
 "
 " https://github.com/changemewtf/no_plugins
 "
 "    Fuzzy search:
-"    When moving to another buffer with :b, hit tab to autocomplete, or simply hit Enter to go to the first buffer with a unique match to what you have already typed.
+"    When moving to another buffer with :b, hit tab to autocomplete, or simply
+"    hit Enter to go to the first buffer with a unique match to what you have
+"    already typed.
 "
-"    By adding set path+=** and set wildmenu to the vimrc, we are now able to hit Tab when running a :find command to expand partial matches.
+"    By adding set path+=** and set wildmenu to the vimrc, we are now able to
+"    hit Tab when running a :find command to expand partial matches.
 "
 "    Another asterisk (*) can be placed in the query to return fuzzy/partial matches.
 "    ^x^n to search within the file
@@ -33,10 +37,58 @@ set path+=**
 set wildmenu
 set wildignorecase
 set wildmode=list:longest,full
+set wildignore=*.o,*~,*.pyc,*.class
+
+
+" encoding
+set encoding=utf-8
+set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
+set termencoding=utf-8
+set ffs=unix,dos,mac
+set formatoptions+=m
+set formatoptions+=B
+
+
+" encoding
+set encoding=utf-8
+set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
+set termencoding=utf-8
+set ffs=unix,dos,mac
+set formatoptions+=m
+set formatoptions+=B
+
+
+" encoding
+set encoding=utf-8
+set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
+set termencoding=utf-8
+set ffs=unix,dos,mac
+set formatoptions+=m
+set formatoptions+=B
+
+" https://github.com/mhinz/vim-galore?tab=readme-ov-file#cosmetic-changes-to-colorschemes
+autocmd ColorScheme * highlight StatusLine ctermbg=darkgray cterm=NONE guibg=darkgray gui=NONE
+colorscheme desert
+
+" save
+cmap w!! w !sudo tee > /dev/null %
+
+set pastetoggle=<F5>            "    when in insert mode, press <F5> to go to
+                                "    paste mode, where you can paste mass data
+                                "    that won't be autoindented
+au InsertLeave * set nopaste
+nnoremap <F6> :exec exists('syntax_on') ? 'syn off' : 'syn on'<CR>
+
+" cycle previous entries showing only the ones starting with current input
+cnoremap <C-j> <t_kd>
+cnoremap <C-k> <t_ku>
+
+" y$ -> Y Make Y behave like other capitals
+map Y y$
+
 nnoremap gb :ls<cr>:b
 nnoremap cgn *Ncgn
 
-set relativenumber
 
 " https://github.com/iggredible/Learn-Vim/blob/master/ch03_searching_files.md
 ":grep "pizza"
@@ -136,10 +188,6 @@ autocmd BufWritePost $MYVIMRC source $MYVIMRC
 command! Bigger  :let &guifont = substitute(&guifont, '\d\+$', '\=submatch(0)+1', '')
 command! Smaller :let &guifont = substitute(&guifont, '\d\+$', '\=submatch(0)-1', '')
 
-" https://github.com/mhinz/vim-galore?tab=readme-ov-file#cosmetic-changes-to-colorschemes
-autocmd ColorScheme * highlight StatusLine ctermbg=darkgray cterm=NONE guibg=darkgray gui=NONE
-colorscheme desert
-
 " CHANGE CURSOR STYLE DEPENDENT ON MODE: https://github.com/mhinz/vim-galore?tab=readme-ov-file#change-cursor-style-dependent-on-mode
 set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
 
@@ -163,6 +211,22 @@ set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
 " NOW WE CAN:
 " - Use ^n and ^p to go back and forth in the suggestion list
 "
+
+" movement
+set scrolloff=5
+
+" show
+set ruler                       " show the current row and column
+set number                      " show line numbers
+set relativenumber              " easier vertical jumps, 4j 5k...
+set nowrap
+set showcmd                     " display incomplete commands
+set showmode                    " display current modes
+set showmatch                   " jump to matches when entering parentheses
+set matchtime=2                 " tenths of a second to show the matching parenthesis
+
+
+"set history=2000 " how many lines of history VIM has to remember
 
 "---------------------------------------------------------------------------
 
@@ -197,6 +261,8 @@ set showcmd                " Show already typed keys when more are expected.
 
 set incsearch              " Highlight while searching with / or ?.
 set hlsearch               " Keep matches highlighted.
+set ignorecase             " ignore case when searching
+set smartcase              " no ignorecase if Uppercase char present
 
 set ttyfast                " Faster redrawing.
 set lazyredraw             " Only redraw when necessary.
