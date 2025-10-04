@@ -1,5 +1,8 @@
 --https://github.com/akinsho/toggleterm.nvim
 
+-- <C-r> doesn't work in terminal mode, it will perform `reverse search`
+vim.keymap.set('t', '<A-r>', "'<C-\\><C-N>\"'.nr2char(getchar()).'pi'", { desc = '<C-r> fellow' })
+
 -- Terminal Mappings
 vim.keymap.set('t', '<esc><esc>', '<c-\\><c-n>', { desc = 'Enter Normal Mode' })
 vim.keymap.set('t', '<C-w><C-h>', '<cmd>wincmd h<cr>', { desc = 'go left window' })

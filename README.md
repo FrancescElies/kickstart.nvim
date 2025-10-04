@@ -7,6 +7,7 @@ Marco Hinz - [Vim galore](https://github.com/mhinz)
 Jon Beltran - [Why, oh WHY, do those #?@! nutheads use vi?](http://www.viemu.com/a-why-vi-vim.html)
 Bram Moolenaar - [Seven habits of effective text editing 2.0](https://www.moolenaar.net/habits_2007.pdf)
 Drew Neil - [vimcasts](vimcasts.org)
+Igor Irianto - [Learn Vim](https://github.com/iggredible/Learn-Vim)
 
 ## Introduction
 
