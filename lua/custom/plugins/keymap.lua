@@ -86,6 +86,8 @@ vim.keymap.set('n', '<leader>by', ":call setreg('+', expand('%:.') .. ':' .. lin
 vim.keymap.set('n', '<leader>bY', ":call setreg('+', expand('%:p'))<CR>", { desc = '[b]uffer [Y]ank abs. path' })
 vim.keymap.set('n', '<leader>bo', ':e <C-r>+<CR>', { desc = '[b]uffer [o]pen from clipboard' })
 
+vim.keymap.set('n', 'gb', ':ls<cr>:b', { desc = '[g]o [b]uffer' }) -- ala vim
+
 -- Not using H/L as go to Top and Bottom of file,
 -- but using ^/$ way more often to go to begining and end of line
 vim.keymap.set({ 'n', 'v', 'o' }, 'H', '^')
