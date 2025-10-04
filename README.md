@@ -1,4 +1,12 @@
 # kickstart.nvim
+## Resources
+Herding Lions - [Learning Vim in 2014: Vim as Language](https://benmccormick.org/2014/07/02/062700.html)
+Jared Carroll - [Vim Text Objects: The Definitive Guide](https://web.archive.org/web/20120328142511/http://blog.carbonfive.com/2011/10/17/vim-text-objects-the-definitive-guide/)
+Derek Wyatt - [28 Vim videios](https://vimeo.com/user1690209)
+Marco Hinz - [Vim galore](https://github.com/mhinz)
+Jon Beltran - [Why, oh WHY, do those #?@! nutheads use vi?](http://www.viemu.com/a-why-vi-vim.html)
+Bram Moolenaar - [Seven habits of effective text editing 2.0](https://www.moolenaar.net/habits_2007.pdf)
+Drew Neil - [vimcasts](vimcasts.org)
 
 ## Introduction
 
