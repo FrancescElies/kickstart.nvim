@@ -141,15 +141,7 @@ autocmd ColorScheme * highlight StatusLine ctermbg=darkgray cterm=NONE guibg=dar
 colorscheme desert
 
 " CHANGE CURSOR STYLE DEPENDENT ON MODE: https://github.com/mhinz/vim-galore?tab=readme-ov-file#change-cursor-style-dependent-on-mode
-if empty($TMUX)
-  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-  let &t_SR = "\<Esc>]50;CursorShape=2\x7"
-else
-  let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-  let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
-  let &t_SR = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=2\x7\<Esc>\\"
-endif
+set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
 
 " NOW WE CAN:
 " - Hit tab to :find by partial match
