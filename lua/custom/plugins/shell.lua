@@ -27,6 +27,14 @@
 --   vim.opt.sh = 'nu --env-config /Users/mel/.dot/env/env.nu --config /Users/mel/.dot/env/config.nu'
 -- end
 
+local bin_nu = vim.fs.joinpath(vim.fs.normalize '~', '.cargo/bin/nu')
+if vim.fn.exepath(bin_nu) then
+  print 'using nushell'
+else
+  print('using ' .. vim.o.shell)
+  return {}
+end
+
 local function reset_shell_defaults()
   vim.set.cmd 'shellcmdflag&'
   vim.set.cmd 'shellpipe&'
@@ -67,7 +75,7 @@ end
 
 -- path to the Nushell executable
 -- set default
-vim.o.shell = 'nu'
+vim.o.shell = bin_nu
 vim.o.shellslash = true
 nu_shell_options()
 
