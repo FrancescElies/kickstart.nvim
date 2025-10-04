@@ -50,6 +50,9 @@ nnoremap <c-n> :cnext<cr>
 
 " !ip!sort will sort the lines of the current paragraph.
 
+let mapleader = " "
+nnoremap <leader>ve  :e $MYVIMRC
+
 " QUICKLY EDIT YOUR MACROS: https://github.com/mhinz/vim-galore?tab=readme-ov-file#quickly-edit-your-macros
 nnoremap <leader>m  :<c-u><c-r><c-r>='let @'. v:register .' = '. string(getreg(v:register))<cr><c-f><left>
 
