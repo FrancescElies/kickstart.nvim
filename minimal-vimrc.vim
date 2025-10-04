@@ -45,15 +45,35 @@ map H ^
 map L $
 
 " QUICKLY NAVIGATE QUICKFIX LIST:
-nnoremap <c-p> :cprev<cr>
-nnoremap <c-n> :cnext<cr>
+nnoremap <c-h> :colder<cr>
+nnoremap <c-l> :cnewer<cr>
+nnoremap <c-k> :cprev<cr>zz
+nnoremap <c-j> :cnext<cr>zz
+
+
+" KEEP THINGS VERTICALLY CENTERED DURING SEARCHES:
+nnoremap <C-d> <C-d>zz
+nnoremap <C-u> <C-u>zz
+nnoremap n     nzzzv
+nnoremap N     Nzzzv
+nnoremap *     *zzzv
+nnoremap #     #zzzv
+nnoremap g*    g*zzzv
+nnoremap g#    g#zzzv
+
+" QUICK ESCAPE:
+nnoremap jk <Esc>
+
+" Turkish keyboard
+nnoremap ı  i
 
 " !ip!sort will sort the lines of the current paragraph.
 
 let mapleader = " "
-nnoremap <leader>ve  :e $MYVIMRC
+nnoremap <leader>ve  :e $MYVIMRC<cr>
 
 " QUICKLY EDIT YOUR MACROS: https://github.com/mhinz/vim-galore?tab=readme-ov-file#quickly-edit-your-macros
+" "q<leader>m  edits macro in register q
 nnoremap <leader>m  :<c-u><c-r><c-r>='let @'. v:register .' = '. string(getreg(v:register))<cr><c-f><left>
 
 " SMARTER CURSORLINE: https://github.com/mhinz/vim-galore?tab=readme-ov-file#smarter-cursorline
@@ -65,7 +85,9 @@ nnoremap [<space>  :<c-u>put! =repeat(nr2char(10), v:count1)<cr>'[
 nnoremap ]<space>  :<c-u>put =repeat(nr2char(10), v:count1)<cr>
 
 " MATCHIT A BUILTIN PLUGIN: https://github.com/mhinz/vim-galore?tab=readme-ov-file#matchit
-packadd! matchit
+if exists("loaded_matchit") == 0
+  packadd! matchit
+endif
 " Since the documentation of matchit is pretty extensive, I suggest also doing the following once:
 " :!mkdir -p ~/.vim/doc
 " :!cp $VIMRUNTIME/macros/matchit.txt ~/.vim/doc
