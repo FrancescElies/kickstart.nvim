@@ -88,8 +88,8 @@ vim.keymap.set('n', '<leader>bo', ':e <C-r>+<CR>', { desc = '[b]uffer [o]pen fro
 
 -- Not using H/L as go to Top and Bottom of file,
 -- but using ^/$ way more often to go to begining and end of line
-vim.keymap.set('n', 'H', '^')
-vim.keymap.set('n', 'L', '$')
+vim.keymap.set({ 'n', 'v', 'o' }, 'H', '^')
+vim.keymap.set({ 'n', 'v', 'o' }, 'L', '$')
 
 -- quick scape
 vim.keymap.set('i', 'jk', '<Esc>')
