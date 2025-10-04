@@ -38,6 +38,16 @@ nnoremap cgn *Ncgn
 
 set relativenumber
 
+" https://github.com/iggredible/Learn-Vim/blob/master/ch03_searching_files.md
+":grep "pizza"
+":cfdo %s/pizza/donut/g | update
+if executable('rg')
+  " Use ripgrep in “vimgrep” (parseable) mode
+  set grepprg=rg\ --vimgrep\ --smart-case\ --follow
+  " Format: file:line:column:message
+  "set grepformat=%f:%l:%c:%m
+endif
+
 " WHICH KEYS TO MAP: :h map-which-keys
 
 "^/$ (start/end) of line is more common than H/L defaults top/bottom of buffer"
