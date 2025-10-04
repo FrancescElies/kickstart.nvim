@@ -1,3 +1,5 @@
+" viemu.com graphical cheat sheet - http://www.viemu.com/a_vi_vim_graphical_cheat_sheet_tutorial.html
+
 " Sensible defaults
 " mkdir -p ~/.vim/pack/tpope/start
 " cd ~/.vim/pack/tpope/start
@@ -33,9 +35,65 @@ set wildignorecase
 set wildmode=list:longest,full
 nnoremap gb :ls<cr>:b
 nnoremap cgn *Ncgn
+
+set relativenumber
+
+" WHICH KEYS TO MAP: :h map-which-keys
+
 "^/$ (start/end) of line is more common than H/L defaults top/bottom of buffer"
 map H ^
 map L $
+
+" QUICKLY NAVIGATE QUICKFIX LIST:
+nnoremap <c-p> :cprev<cr>
+nnoremap <c-n> :cnext<cr>
+
+" !ip!sort will sort the lines of the current paragraph.
+
+" QUICKLY EDIT YOUR MACROS: https://github.com/mhinz/vim-galore?tab=readme-ov-file#quickly-edit-your-macros
+nnoremap <leader>m  :<c-u><c-r><c-r>='let @'. v:register .' = '. string(getreg(v:register))<cr><c-f><left>
+
+" SMARTER CURSORLINE: https://github.com/mhinz/vim-galore?tab=readme-ov-file#smarter-cursorline
+autocmd InsertLeave,WinEnter * set cursorline
+autocmd InsertEnter,WinLeave * set nocursorline
+
+" easily add empty lines
+nnoremap [<space>  :<c-u>put! =repeat(nr2char(10), v:count1)<cr>'[
+nnoremap ]<space>  :<c-u>put =repeat(nr2char(10), v:count1)<cr>
+
+" MATCHIT A BUILTIN PLUGIN: https://github.com/mhinz/vim-galore?tab=readme-ov-file#matchit
+packadd! matchit
+" Since the documentation of matchit is pretty extensive, I suggest also doing the following once:
+" :!mkdir -p ~/.vim/doc
+" :!cp $VIMRUNTIME/macros/matchit.txt ~/.vim/doc
+" :helptags ~/.vim/doc
+autocmd FileType python let b:match_words = '\<if\>:\<elif\>:\<else\>'
+
+" QUICKLY JUMP TO HEADER OR SOURCE FILE: https://github.com/mhinz/vim-galore?tab=readme-ov-file#quickly-jump-to-header-or-source-file
+autocmd BufLeave *.{c,cpp} mark C
+autocmd BufLeave *.h       mark H
+
+" RELOAD FILE ON SAVING: https://github.com/mhinz/vim-galore?tab=readme-ov-file#reload-a-file-on-saving
+autocmd BufWritePost $MYVIMRC source $MYVIMRC
+
+" QUICKLY CHANGE FONT SIZE:
+command! Bigger  :let &guifont = substitute(&guifont, '\d\+$', '\=submatch(0)+1', '')
+command! Smaller :let &guifont = substitute(&guifont, '\d\+$', '\=submatch(0)-1', '')
+
+" https://github.com/mhinz/vim-galore?tab=readme-ov-file#cosmetic-changes-to-colorschemes
+autocmd ColorScheme * highlight StatusLine ctermbg=darkgray cterm=NONE guibg=darkgray gui=NONE
+colorscheme desert
+
+" CHANGE CURSOR STYLE DEPENDENT ON MODE: https://github.com/mhinz/vim-galore?tab=readme-ov-file#change-cursor-style-dependent-on-mode
+if empty($TMUX)
+  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+  let &t_SR = "\<Esc>]50;CursorShape=2\x7"
+else
+  let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+  let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+  let &t_SR = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=2\x7\<Esc>\\"
+endif
 
 " NOW WE CAN:
 " - Hit tab to :find by partial match
