@@ -2,6 +2,7 @@
 
 " https://github.com/wklken/vim-for-server/blob/master/vimrc
 
+nnoremap <F4> :execute system(getline('.'))<CR>
 " TPOPE PLUGINS COMMON STEPS:
 " mkdir -p ~/.vim/pack/tpope/start
 " cd ~/.vim/pack/tpope/start
@@ -69,7 +70,6 @@ colorscheme desert
 " save
 cmap w!! w !sudo tee > /dev/null %
 
-nnoremap <F4> :execute getline('.')<CR>
 " Toggle syntax on/off
 nnoremap <F6> :exec exists('syntax_on') ? 'syn off' : 'syn on'<CR>
 set synmaxcol=500
@@ -127,6 +127,15 @@ nnoremap ı  i
 " !ip!sort will sort the lines of the current paragraph.
 
 let mapleader = " "
+
+nnoremap <leader>y "+y
+vnoremap <leader>y "+yg_
+nnoremap <leader>d "_d
+vnoremap <leader>d "_d
+nnoremap <leader>p "+p
+vnoremap <leader>p "+p
+
+
 nnoremap <leader>ve  :e $MYVIMRC<cr>
 
 " quickly cd to current file dir or it's root dir project
@@ -298,3 +307,4 @@ if has('nvim')
 else
     set viminfo     ='100,n$HOME/.vim/files/info/viminfo
 endif
+
