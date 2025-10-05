@@ -59,6 +59,10 @@ vim.keymap.set('n', '<C-l>', ':cnewer<cr>', { desc = 'open newer error list' })
 vim.keymap.set('n', '<C-k>', ':cprev<cr>zz', { desc = 'previous error' })
 vim.keymap.set('n', '<C-j>', ':cnext<cr>zz', { desc = 'next error' })
 
+-- cycle entries showing only the ones starting with current input
+vim.keymap.set('c', '<C-k>', '<t_ku>', { desc = 'previous similar entry' })
+vim.keymap.set('c', '<C-j>', '<t_kd>', { desc = 'next similar entry' })
+
 -- nav buffers and tabs
 -- vim.keymap.set({ 'n', 't' }, '<M-x>', '<cmd>bd!<cr>')
 -- vim.keymap.set('n', '<leader>bd', '<cmd>bp<bar>bd #<CR>', { desc = '[b]uffer [d]elete ' })
