@@ -102,6 +102,7 @@ vim.keymap.set({ 'n', 'v' }, '<leader>d', [["_d]], { desc = '[d]elete' })
 
 -- quick scape
 vim.keymap.set('i', 'jk', '<Esc>')
+vim.keymap.set('i', '<C-c>', '<Esc>')
 vim.keymap.set('n', 'ı', 'i')
 
 -- buffer
