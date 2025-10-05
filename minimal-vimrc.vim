@@ -2,10 +2,30 @@
 
 " https://github.com/wklken/vim-for-server/blob/master/vimrc
 
-" Sensible defaults
+" TPOPE PLUGINS COMMON STEPS:
 " mkdir -p ~/.vim/pack/tpope/start
 " cd ~/.vim/pack/tpope/start
+" SENSIBLE DEFAULTS:
 " git clone https://tpope.io/vim/sensible.git
+" SUBSTITUTE WORD VARIANTS:
+" git clone https://tpope.io/vim/abolish.git
+" vim -u NONE -c "helptags abolish/doc" -c q
+" NIX SHELL COMMANDS: :Remove, :Delete, :Move, :Chmod, :Mkdir, :Cfind, :Clocate, :Lfind/, :Wall, :SudoWrite, :SudoEdit
+" git clone https://tpope.io/vim/eunuch.git
+" vim -u NONE -c "helptags eunuch/doc" -c q
+" UNIMPAIRED:
+" git clone https://tpope.io/vim/unimpaired.git
+" vim -u NONE -c "helptags unimpaired/doc" -c q
+" GIT:
+" git clone https://tpope.io/vim/fugitive.git
+" vim -u NONE -c "helptags fugitive/doc" -c q
+" COMMENTARY: gc
+" git clone https://tpope.io/vim/commentary.git
+" vim -u NONE -c "helptags commentary/doc" -c q
+" SURROUND:
+" git clone https://tpope.io/vim/surround.git
+" vim -u NONE -c "helptags surround/doc" -c q
+
 
 " Something simple for emergencies or to easily copy on servers.
 "
@@ -40,31 +60,7 @@ set wildmode=list:longest,full
 set wildignore=*.o,*~,*.pyc,*.class
 
 
-" encoding
-set encoding=utf-8
-set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
-set termencoding=utf-8
-set ffs=unix,dos,mac
-set formatoptions+=m
-set formatoptions+=B
 
-
-" encoding
-set encoding=utf-8
-set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
-set termencoding=utf-8
-set ffs=unix,dos,mac
-set formatoptions+=m
-set formatoptions+=B
-
-
-" encoding
-set encoding=utf-8
-set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
-set termencoding=utf-8
-set ffs=unix,dos,mac
-set formatoptions+=m
-set formatoptions+=B
 
 " https://github.com/mhinz/vim-galore?tab=readme-ov-file#cosmetic-changes-to-colorschemes
 autocmd ColorScheme * highlight StatusLine ctermbg=darkgray cterm=NONE guibg=darkgray gui=NONE
@@ -73,11 +69,10 @@ colorscheme desert
 " save
 cmap w!! w !sudo tee > /dev/null %
 
-set pastetoggle=<F5>            "    when in insert mode, press <F5> to go to
-                                "    paste mode, where you can paste mass data
-                                "    that won't be autoindented
-au InsertLeave * set nopaste
+nnoremap <F4> :execute getline('.')<CR>
+" Toggle syntax on/off
 nnoremap <F6> :exec exists('syntax_on') ? 'syn off' : 'syn on'<CR>
+set synmaxcol=500
 
 " cycle previous entries showing only the ones starting with current input
 cnoremap <C-j> <t_kd>
@@ -298,4 +293,8 @@ set directory   =$HOME/.vim/files/swap//
 set updatecount =100
 set undofile
 set undodir     =$HOME/.vim/files/undo/
-set viminfo     ='100,n$HOME/.vim/files/info/viminfo
+if has('nvim')
+    set viminfo     ='100,n$HOME/.local/state/nvim/viminfo
+else
+    set viminfo     ='100,n$HOME/.vim/files/info/viminfo
+endif
