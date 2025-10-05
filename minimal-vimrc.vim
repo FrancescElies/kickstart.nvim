@@ -3,11 +3,14 @@
 " https://github.com/wklken/vim-for-server/blob/master/vimrc
 
 " execute as shell command from cursor to EOL
-nnoremap <F4> :execute system(getline('.')[col('.')-1:])<CR>
+"nnoremap <F4> :execute system(getline('.')[col('.')-1:])<CR>
+nnoremap <F4> "eY:!<c-r>e<cr>
 " execute as : command from cursor to EOL
-nnoremap <F5> :execute getline('.')[col('.')-1:]<CR>
+"nnoremap <F5> :execute getline('.')[col('.')-1:]<CR>
+nnoremap <F5> "eY:<c-r>e<cr>
+
 " TPOPE PLUGINS COMMON STEPS:
-" mkdir -p ~/.vim/pack/tpope/start
+" mkdir ~/.vim/pack/tpope/start
 " cd ~/.vim/pack/tpope/start
 " SENSIBLE DEFAULTS:
 " git clone https://tpope.io/vim/sensible.git
@@ -88,6 +91,11 @@ map Y y$
 
 nnoremap gb :ls<cr>:b
 nnoremap cgn *Ncgn
+" [s]witch to alternat[e] buffer
+nnoremap se :e #<cr>
+" [s]ource buffer
+nnoremap so :so %<cr>
+
 
 
 " https://github.com/iggredible/Learn-Vim/blob/master/ch03_searching_files.md
@@ -294,7 +302,6 @@ endif
 
 " The fish shell is not very compatible to other shells and unexpectedly
 " breaks things that use 'shell'.
-set shell=/bin/bash
 if &shell =~# 'nu$'
     " see https://github.com/nushell/integrations/blob/main/nvim/init.lua
     set shellcmdflag=--stdin\ --no-newline\ -c
