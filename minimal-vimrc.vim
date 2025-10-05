@@ -120,6 +120,7 @@ nnoremap g#    g#zzzv
 
 " QUICK ESCAPE:
 inoremap jk <Esc>
+nnoremap Q <nop>
 
 " Turkish keyboard
 nnoremap ı  i
