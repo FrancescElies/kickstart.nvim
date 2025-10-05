@@ -4,10 +4,10 @@
 
 " execute as shell command from cursor to EOL
 "nnoremap <F4> :execute system(getline('.')[col('.')-1:])<CR>
-nnoremap <F4> "eY:!<c-r>e<cr>
+nnoremap <F4> "ey$:!<c-r>e<cr>
 " execute as : command from cursor to EOL
 "nnoremap <F5> :execute getline('.')[col('.')-1:]<CR>
-nnoremap <F5> "eY:<c-r>e<cr>
+nnoremap <F5> "ey$:<c-r>e<cr>
 
 " TPOPE PLUGINS COMMON STEPS:
 " mkdir ~/.vim/pack/tpope/start
