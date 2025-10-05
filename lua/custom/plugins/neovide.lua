@@ -32,15 +32,15 @@ if vim.g.neovide then
   local change_scale_factor = function(delta)
     vim.g.neovide_scale_factor = vim.g.neovide_scale_factor * delta
   end
-  vim.keymap.set('n', '<M-=>', function()
+  vim.api.nvim_create_user_command('BiggerScale', function()
     change_scale_factor(1.10)
-  end)
-  vim.keymap.set('n', '<M-->', function()
+  end, { desc = 'increase text size' })
+  vim.api.nvim_create_user_command('SmallerScale', function()
     change_scale_factor(1 / 1.10)
-  end)
-  vim.keymap.set('n', '<M-0>', function()
+  end, { desc = 'decrease text size' })
+  vim.api.nvim_create_user_command('ResetScale', function()
     vim.g.neovide_scale_factor = 1.0
-  end)
+  end, { desc = 'reset text size' })
 
   -- Allow clipboard copy paste in neovim
   vim.api.nvim_set_keymap('', paste_key, '+p<CR>', { noremap = true, silent = true })
