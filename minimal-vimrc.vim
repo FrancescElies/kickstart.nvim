@@ -2,7 +2,10 @@
 
 " https://github.com/wklken/vim-for-server/blob/master/vimrc
 
-nnoremap <F4> :execute system(getline('.'))<CR>
+" execute as shell command from cursor to EOL
+nnoremap <F4> :execute system(getline('.')[col('.')-1:])<CR>
+" execute as : command from cursor to EOL
+nnoremap <F5> :execute getline('.')[col('.')-1:]<CR>
 " TPOPE PLUGINS COMMON STEPS:
 " mkdir -p ~/.vim/pack/tpope/start
 " cd ~/.vim/pack/tpope/start
@@ -189,7 +192,7 @@ autocmd BufLeave *.{c,cpp} mark C
 autocmd BufLeave *.h       mark H
 
 " RELOAD FILE ON SAVING: https://github.com/mhinz/vim-galore?tab=readme-ov-file#reload-a-file-on-saving
-autocmd BufWritePost $MYVIMRC source $MYVIMRC
+" autocmd BufWritePost $MYVIMRC source $MYVIMRC
 
 " QUICKLY CHANGE FONT SIZE:
 command! Bigger  :let &guifont = substitute(&guifont, '\d\+$', '\=submatch(0)+1', '')
@@ -291,8 +294,18 @@ endif
 
 " The fish shell is not very compatible to other shells and unexpectedly
 " breaks things that use 'shell'.
-if &shell =~# 'fish$'
-  set shell=/bin/bash
+set shell=/bin/bash
+if &shell =~# 'nu$'
+    " see https://github.com/nushell/integrations/blob/main/nvim/init.lua
+    set shellcmdflag=--stdin\ --no-newline\ -c
+    set shellpipe   =\|\ complete\ \|\ update\ stderr\ {\ ansi\ strip\ \}\ \|\ tee\ {\ get\ stderr\ \|\ save\ --force\ --raw\ %s\ }\ \|\ into\ record
+    set shellredir  =out+err>\ %s
+    set noshelltemp
+    set shellquote  =
+    set shellxescape=
+    set shellxquote =
+else
+    set shell=/bin/bash
 endif
 
 " Put all temporary files under the same directory.
