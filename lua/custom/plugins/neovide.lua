@@ -1,7 +1,14 @@
 --
 -- Neovide
 --
+
 if vim.g.neovide then
+  -- GUI might not find binaries
+  vim.fn.setenv('PATH', table.concat({
+    vim.fn.expand '~/.cargo/bin/',
+    vim.fn.expand '~/bin/',
+  }, ':') .. ':' .. vim.fn.expand '$PATH')
+
   -- https://www.nerdfonts.com/font-downloads
   vim.o.guifont = 'IntoneMono Nerd Font:h12'
   -- vim.o.guifont = 'FiraCode Nerd Font:h12'
