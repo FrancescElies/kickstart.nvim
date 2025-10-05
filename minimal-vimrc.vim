@@ -26,7 +26,9 @@ nnoremap <F4> :execute system(getline('.'))<CR>
 " SURROUND:
 " git clone https://tpope.io/vim/surround.git
 " vim -u NONE -c "helptags surround/doc" -c q
-
+" SESSIONS:
+" git clone https://github.com/tpope/vim-obsession.git
+" vim -u NONE -c "helptags vim-obsession/doc" -c q
 
 " Something simple for emergencies or to easily copy on servers.
 "
