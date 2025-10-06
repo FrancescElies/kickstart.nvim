@@ -1191,8 +1191,6 @@ require('lazy').setup({
       -- require('mini.pairs') -- over autopiars?
       -- require('mini.comment') --- over todo comments?
       -- require('mini.splitjoin')
-      vim.o.sessionoptions = 'blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions'
-      require('mini.sessions').setup { autoread = true } -- mksession
 
       -- Simple and easy statusline.
       --  You could remove this setup call if you don't like it,
