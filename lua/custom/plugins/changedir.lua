@@ -27,13 +27,13 @@ vim.api.nvim_create_user_command('CdBufDir', function()
 end, { desc = 'changes directory to current buffer dir' })
 vim.keymap.set('n', '<leader>cd', ':CdBufDir<cr>', { desc = '[c]d buf [d]ir' })
 
-vim.api.nvim_create_user_command('CdRootDir', function()
+vim.api.nvim_create_user_command('CdBufRootDir', function()
   cdroot_of { cwd = vim.fn.expand '%:p:h' }
 end, { desc = "changes dir to git's root (toplevel)" })
-vim.keymap.set('n', '<leader>cr', ':CdRootDir<cr>', { desc = '[c]d buf [r]oot dir' })
+vim.keymap.set('n', '<leader>cr', ':CdBufRootDir<cr>', { desc = '[c]d buf [r]oot dir' })
 
-vim.keymap.set('n', 'cdb', ':CdBufDir<cr>', { desc = '[c]d [b]uf [d]ir' })
-vim.keymap.set('n', 'cdd', ':CdRootDir<cr>', { desc = '[c]d buf root [d]ir' })
+vim.keymap.set('n', 'cdd', ':CdBufDir<cr>', { desc = '[cd] buf [d]ir' })
+vim.keymap.set('n', 'cd', ':CdBufRootDir<cr>', { desc = '[cd] buf root dir' })
 
 -- vim.api.nvim_create_autocmd('BufEnter', {
 --   group = vim.api.nvim_create_augroup('my-cd', { clear = true }),
