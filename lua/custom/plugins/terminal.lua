@@ -19,6 +19,34 @@ vim.keymap.set('t', '<c-_>', '<cmd>close<cr>', { desc = 'which_key_ignore' })
 
 local set = vim.opt_local
 
+local function create_tgpt_window()
+  vim.cmd.new()
+  WIDTH = vim.api.nvim_get_option 'columns'
+  HEIGHT = vim.api.nvim_get_option 'lines'
+  vim.api.nvim_open_win(vim.api.nvim_create_buf(false, true), true, {
+    relative = 'editor',
+    width = math.floor(WIDTH * 0.2),
+    height = math.floor(HEIGHT * 0.9),
+    col = WIDTH,
+    row = 0,
+    anchor = 'NE',
+    style = 'minimal',
+    border = 'single',
+  })
+end
+
+--- Open a terminal at the bottom of the screen with a fixed height.
+local function tgpt()
+  create_tgpt_window()
+  vim.wo.winfixheight = true
+  vim.fn.termopen('tgpt -i', {
+    on_exit = function()
+      local win_id = vim.api.nvim_get_current_win()
+      vim.api.nvim_win_close(win_id, true)
+    end,
+  })
+end
+
 local group = vim.api.nvim_create_augroup('custom-term-open', {})
 -- Set local settings for terminal buffers
 vim.api.nvim_create_autocmd('TermOpen', {
@@ -125,6 +153,7 @@ vim.keymap.set({ 'n', 't' }, '\u{f8ff}', '<cmd>SmallFloatTerm<cr>', { desc = 'fl
 --   print 'Control-Space pressed!'
 -- end, { noremap = true, silent = false })
 
+vim.keymap.set('n', 'sh', tgpt, { desc = '[s]mallc[h]atgpt' })
 vim.keymap.set({ 'n', 't' }, 'sl', '<cmd>SmallFloatTerm<cr>', { desc = '[s]mall f[l]oat term' }) -- sf taken by mini.surround
 vim.keymap.set('n', 'sT', small_term_send_line, { desc = 'send line to [s]mall[t]erm' })
 vim.keymap.set('n', 'st', small_term, { desc = '[s]mall[t]erm' })
