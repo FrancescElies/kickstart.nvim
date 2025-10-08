@@ -84,6 +84,13 @@ if vim.env.SSH_CONNECTION then
   }
 end
 
+vim.opt.diffopt:append {
+  'internal', -- built-in diff engine (faster, supports fine-grained diffs)
+  'algorithm:patience', -- better for readable diffs (especially for reordered blocks)
+  'indent-heuristic', -- improves diffs when indentation changes
+  'linematch:60', -- enables intraline (word-level) diff matching on similar lines (up to 60 chars difference allowed
+}
+
 return {
   -- { 'm4xshen/hardtime.nvim', lazy = false, dependencies = { 'MunifTanjim/nui.nvim' }, opts = {} },
   -- { 'tris203/precognition.nvim', opts = {} },
