@@ -61,7 +61,7 @@ vim.o.complete = '.,w,b,u,t,i,kspell'
 -- zm / zr           | Increase/decrease fold level
 -- :set foldenable   | Enable folding
 -- :set nofoldenable | Disable folding
-vim.opt.foldmethod = 'expr'
+-- vim.opt.foldmethod = 'expr'
 vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
 vim.opt.foldopen:remove 'block' -- avoid fold opening when moving {, [[ ...
 

@@ -20,14 +20,14 @@ vim.api.nvim_create_autocmd({ 'FileWritePre', 'BufWritePre' }, {
 })
 
 -- Return to last edit position when opening files
-vim.api.nvim_create_autocmd('BufReadPost', {
+vim.api.nvim_create_autocmd({ 'FileReadPost', 'BufReadPost' }, {
   group = 'bufcheck',
   pattern = '*',
   callback = function()
     if vim.fn.line '\'"' > 0 and vim.fn.line '\'"' <= vim.fn.line '$' then
       vim.fn.setpos('.', vim.fn.getpos '\'"')
-      -- vim.cmd('normal zz') -- how do I center the buffer in a sane way??
-      vim.cmd 'silent! foldopen'
+      vim.cmd 'normal zz' -- center buffer
+      vim.cmd 'silent! %foldopen!' -- open all folds
     end
   end,
 })
