@@ -488,7 +488,7 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>sg', ':Telescope live-multi-grep<cr>', { desc = '[S]earch by [G]rep' })
       vim.keymap.set('n', 'z=', builtin.spell_suggest, { desc = 'Spell suggest (Telescope)' })
       vim.keymap.set('n', '<leader>sp', require('custom.repo-select').project_file_picker, { desc = '[S]earch [P]roject files' })
-      vim.keymap.set('n', '<leader>se', builtin.diagnostics, { desc = '[S]earch diagnostics [E]rrors' })
+      vim.keymap.set('n', '<leader>si', builtin.diagnostics, { desc = '[S]earch d[i]agnostics' })
       vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
       vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
       vim.keymap.set('n', '<leader>st', builtin.treesitter, { desc = '[S]earch [T]reesitter' })

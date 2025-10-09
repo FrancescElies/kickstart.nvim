@@ -62,7 +62,10 @@ return {
           -- https://rust-analyzer.github.io/manual.html
           -- see `lsp-init.lua` too
           ['rust-analyzer'] = {
-            diagnostics = { experimental = { enable = true } },
+            diagnostics = {
+              -- enable = true,
+              experimental = { enable = true },
+            },
             -- checkOnSave = true,
             checkOnSave = { command = 'clippy', enable = false },
           },
