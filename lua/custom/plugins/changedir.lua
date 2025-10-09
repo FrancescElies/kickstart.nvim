@@ -25,12 +25,10 @@ vim.api.nvim_create_user_command('CdBufDir', function()
   vim.api.nvim_set_current_dir(path)
   -- vim.fn.chdir() maybe?
 end, { desc = 'changes directory to current buffer dir' })
-vim.keymap.set('n', '<leader>cd', ':CdBufDir<cr>', { desc = '[c]d buf [d]ir' })
 
 vim.api.nvim_create_user_command('CdBufRootDir', function()
   cdroot_of { cwd = vim.fn.expand '%:p:h' }
 end, { desc = "changes dir to git's root (toplevel)" })
-vim.keymap.set('n', '<leader>cr', ':CdBufRootDir<cr>', { desc = '[c]d buf [r]oot dir' })
 
 vim.keymap.set('n', 'cdd', ':CdBufDir<cr>', { desc = '[cd] buf [d]ir' })
 vim.keymap.set('n', 'cd', ':CdBufRootDir<cr>', { desc = '[cd] buf root dir' })

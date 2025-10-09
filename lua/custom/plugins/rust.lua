@@ -4,7 +4,7 @@
 --https://github.com/dsully/nvim/blob/ddcd5971bc061440d3b0e798ffa15edfd6a7f77b/after/ftplugin/rust.lua#L1
 -- if vim.fn.executable 'codesort' == 1 then
 --   --
---   keys.bmap('<localleader>cs', function()
+--   keys.bmap('<leader>cs', function()
 --     --
 --     local result = vim
 --       .system({
@@ -25,7 +25,7 @@
 --     end
 --   end, 'Sort code', bufnr)
 --
---   keys.xmap('<localleader>cs', function()
+--   keys.xmap('<leader>cs', function()
 --     local start_line = vim.api.nvim_buf_get_mark(0, '<')[1]
 --     local end_line = vim.api.nvim_buf_get_mark(0, '>')[1]
 --
@@ -48,6 +48,9 @@ return {
   config = function()
     -- You only need to specify the keys that you want to be changed, because defaults are applied for keys that are not provided.
     vim.g.rustaceanvim = {
+      tools = {
+        test_executor = 'background',
+      },
       -- Plugin configuration
       -- tools = {},
       -- LSP configuration
@@ -77,18 +80,18 @@ return {
         end
 
         if vim.bo.filetype == 'rust' then
-          -- rust_keymap('<localleader>a', ':RustLsp codeAction<cr>', 'code [a]ction')
-          -- rust_keymap('<localleader>e', ':RustLsp explainError', '[e]xplain error')
-          -- rust_keymap('<localleader>E', ':RustLsp expandMacro<cr>', '[e]xpand macros')
+          -- rust_keymap('<leader>ca', ':RustLsp codeAction<cr>', 'code [a]ction')
+          -- rust_keymap('<leader>ce', ':RustLsp explainError', '[e]xplain error')
+          -- rust_keymap('<leader>cE', ':RustLsp expandMacro<cr>', '[e]xpand macros')
           rust_keymap('<leader>cc', ':RustLsp flyCheck run<cr>', '[c]ode [c]lippy')
-          -- rust_keymap('<localleader>h', ':RustLsp hover ', '[h]over actions|range')
-          -- rust_keymap('<localleader>j', ':RustLsp joinLines<cr>', 'join lines')
-          -- rust_keymap('<localleader>m', ':RustLsp moveItem ', '[m]ove up|down')
-          -- rust_keymap('<localleader>o', ':RustLsp openCargo<cr>', '[o]pen cargo')
-          -- rust_keymap('<localleader>p', ':RustLsp parentModule<cr>', '[p]arent module')
-          -- rust_keymap('<localleader>t', ':RustLsp! testables<cr>', 'run previous [t]ests')
-          -- rust_keymap('<localleader>T', ':RustLsp testables<cr>', 'run [t]ests')
-          -- rust_keymap('<localleader>w', ':RustLsp workspaceSymbol allSymbols ', '[w]orkspace symbol')
+          -- rust_keymap('<leader>ch', ':RustLsp hover ', '[h]over actions|range')
+          -- rust_keymap('<leader>cj', ':RustLsp joinLines<cr>', 'join lines')
+          -- rust_keymap('<leader>cm', ':RustLsp moveItem ', '[m]ove up|down')
+          -- rust_keymap('<leader>co', ':RustLsp openCargo<cr>', '[o]pen cargo')
+          -- rust_keymap('<leader>cp', ':RustLsp parentModule<cr>', '[p]arent module')
+          rust_keymap('<leader>c.', ':RustLsp! testables<cr>', 'run previous [t]ests')
+          rust_keymap('<leader>ct', ':RustLsp testables<cr>', 'run [t]ests')
+          -- rust_keymap('<leader>cw', ':RustLsp workspaceSymbol allSymbols ', '[w]orkspace symbol')
           -- :RustLsp crateGraph {backend {output}}
           -- :RustLsp syntaxTree
           -- :Rustc unpretty {hir|mir|...}
