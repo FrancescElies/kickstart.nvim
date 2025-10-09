@@ -484,9 +484,9 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>sa', tele_find_all_files, { desc = '[S]earch [A]ll files' })
       vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
       vim.keymap.set({ 'n', 'v' }, '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
-      vim.keymap.set('n', '<leader>sG', builtin.live_grep, { desc = '[S]earch by [G]rep' })
+      vim.keymap.set('n', '<leader>sG', builtin.git_status, { desc = '[S]earch git [s]tatus' })
       vim.keymap.set('n', '<leader>sg', ':Telescope live-multi-grep<cr>', { desc = '[S]earch by [G]rep' })
-      vim.keymap.set('n', 'z=', builtin.spell_suggest, { desc = 'Spell suggest (Telescope)' })
+      -- vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
       vim.keymap.set('n', '<leader>sp', require('custom.repo-select').project_file_picker, { desc = '[S]earch [P]roject files' })
       vim.keymap.set('n', '<leader>si', builtin.diagnostics, { desc = '[S]earch d[i]agnostics' })
       vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
@@ -494,10 +494,11 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>st', builtin.treesitter, { desc = '[S]earch [T]reesitter' })
       vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
       vim.keymap.set('n', '<leader>se', builtin.symbols, { desc = '[S]earch [e]moji' })
-
       vim.keymap.set('n', '<leader>sl', function()
         require('telescope.builtin').find_files { cwd = vim.fs.joinpath(vim.fn.stdpath 'data') }
       end, { desc = '[S]earch [l]ua packages' })
+
+      vim.keymap.set('n', 'z=', builtin.spell_suggest, { desc = 'Spell suggest (Telescope)' })
 
       -- Slightly advanced example of overriding default behavior and theme
       vim.keymap.set('n', '<leader>/', function()
@@ -1192,6 +1193,7 @@ require('lazy').setup({
       -- require('mini.pairs') -- over autopiars?
       -- require('mini.comment') --- over todo comments?
       -- require('mini.splitjoin')
+      require('mini.git').setup()
 
       -- Simple and easy statusline.
       --  You could remove this setup call if you don't like it,

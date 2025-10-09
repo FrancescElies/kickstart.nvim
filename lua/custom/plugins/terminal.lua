@@ -153,7 +153,7 @@ vim.keymap.set({ 'n', 't' }, '\u{f8ff}', '<cmd>SmallFloatTerm<cr>', { desc = 'fl
 --   print 'Control-Space pressed!'
 -- end, { noremap = true, silent = false })
 
-vim.keymap.set('n', 'sh', tgpt, { desc = '[s]mallc[h]atgpt' })
+vim.keymap.set('n', '<leader>ch', tgpt, { desc = '[ch]atgpt' })
 vim.keymap.set({ 'n', 't' }, 'sl', '<cmd>SmallFloatTerm<cr>', { desc = '[s]mall f[l]oat term' }) -- sf taken by mini.surround
 vim.keymap.set('n', 'sT', small_term_send_line, { desc = 'send line to [s]mall[t]erm' })
 vim.keymap.set('n', 'st', small_term, { desc = '[s]mall[t]erm' })
