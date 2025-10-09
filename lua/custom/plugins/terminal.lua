@@ -19,32 +19,53 @@ vim.keymap.set('t', '<c-_>', '<cmd>close<cr>', { desc = 'which_key_ignore' })
 
 local set = vim.opt_local
 
+--
+-- https://github.com/tjdevries/advent-of-nvim/blob/master/nvim/plugin/floaterminal.lua
+--
+local state = {
+  tgpt = {
+    buf = -1,
+    win = -1,
+  },
+  floatterm = {
+    buf = -1,
+    win = -1,
+  },
+}
+
 local function create_tgpt_window()
-  vim.cmd.new()
-  WIDTH = vim.api.nvim_get_option 'columns'
-  HEIGHT = vim.api.nvim_get_option 'lines'
-  vim.api.nvim_open_win(vim.api.nvim_create_buf(false, true), true, {
+  local width = vim.api.nvim_get_option 'columns'
+  local height = vim.api.nvim_get_option 'lines'
+  local buf = vim.api.nvim_create_buf(false, true)
+  local win = vim.api.nvim_open_win(buf, true, {
     relative = 'editor',
-    width = math.floor(WIDTH * 0.2),
-    height = math.floor(HEIGHT * 0.9),
-    col = WIDTH,
+    width = math.floor(width * 0.3),
+    height = math.floor(height * 0.9),
+    col = width,
     row = 0,
     anchor = 'NE',
     style = 'minimal',
     border = 'single',
   })
+  return win
 end
 
 --- Open a terminal at the bottom of the screen with a fixed height.
 local function tgpt()
   create_tgpt_window()
   vim.wo.winfixheight = true
-  vim.fn.termopen('tgpt -i', {
-    on_exit = function()
-      local win_id = vim.api.nvim_get_current_win()
-      vim.api.nvim_win_close(win_id, true)
-    end,
-  })
+  vim.fn.jobstart('tgpt -i', { term = true })
+end
+
+local function toggle_tgpt()
+  if not vim.api.nvim_win_is_valid(state.tgpt.win) then
+    state.tgpt = create_floating_window { buf = state.floating.buf }
+    if vim.bo[state.tgpt.buf].buftype ~= 'terminal' then
+      tgpt()
+    end
+  else
+    vim.api.nvim_win_hide(state.tgpt.win)
+  end
 end
 
 local group = vim.api.nvim_create_augroup('custom-term-open', {})
@@ -90,15 +111,6 @@ local function small_term_send_line()
   vim.fn.chansend(TERM_CHANNELNR, { vim.api.nvim_get_current_line() .. '\r\n' })
 end
 
---
--- https://github.com/tjdevries/advent-of-nvim/blob/master/nvim/plugin/floaterminal.lua
-local state = {
-  floating = {
-    buf = -1,
-    win = -1,
-  },
-}
-
 local function create_floating_window(opts)
   opts = opts or {}
   local width = opts.width or math.floor(vim.o.columns * 0.8)
@@ -133,14 +145,14 @@ local function create_floating_window(opts)
   return { buf = buf, win = win }
 end
 
-local toggle_terminal = function()
-  if not vim.api.nvim_win_is_valid(state.floating.win) then
-    state.floating = create_floating_window { buf = state.floating.buf }
-    if vim.bo[state.floating.buf].buftype ~= 'terminal' then
+local function toggle_terminal()
+  if not vim.api.nvim_win_is_valid(state.floatterm.win) then
+    state.floatterm = create_floating_window { buf = state.floatterm.buf }
+    if vim.bo[state.floatterm.buf].buftype ~= 'terminal' then
       vim.cmd.terminal()
     end
   else
-    vim.api.nvim_win_hide(state.floating.win)
+    vim.api.nvim_win_hide(state.floatterm.win)
   end
 end
 
@@ -153,7 +165,7 @@ vim.keymap.set({ 'n', 't' }, '\u{f8ff}', '<cmd>SmallFloatTerm<cr>', { desc = 'fl
 --   print 'Control-Space pressed!'
 -- end, { noremap = true, silent = false })
 
-vim.keymap.set('n', '<leader>ch', tgpt, { desc = '[ch]atgpt' })
+vim.keymap.set('n', 'ch', tgpt, { desc = '[ch]atgpt' })
 vim.keymap.set({ 'n', 't' }, 'sl', '<cmd>SmallFloatTerm<cr>', { desc = '[s]mall f[l]oat term' }) -- sf taken by mini.surround
 vim.keymap.set('n', 'sT', small_term_send_line, { desc = 'send line to [s]mall[t]erm' })
 vim.keymap.set('n', 'st', small_term, { desc = '[s]mall[t]erm' })
