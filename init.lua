@@ -1195,6 +1195,11 @@ require('lazy').setup({
       -- require('mini.splitjoin')
       require('mini.git').setup()
 
+      require('mini.sessions').setup {
+        autoread = true,
+      }
+      vim.o.sessionoptions = 'blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions'
+
       -- Simple and easy statusline.
       --  You could remove this setup call if you don't like it,
       --  and try some other statusline plugin
