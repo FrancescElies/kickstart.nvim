@@ -60,10 +60,21 @@ return {
         -- end,
         default_settings = {
           -- https://rust-analyzer.github.io/manual.html
+          -- https://rust-analyzer.github.io/book/configuration.html
+          -- https://github.com/BurntSushi/dotfiles/blob/a6c516e6c4c7f7afae4f3171be4c5404d367ffbe/.config/ag/nvim/default#L16
           -- see `lsp-init.lua` too
           ['rust-analyzer'] = {
+            check = { allTargets = true, features = 'all' },
             diagnostics = {
-              -- enable = true,
+              enable = true,
+              disabled = {
+                'inactive-code',
+                'incorrect-ident-case',
+                'unlinked-file',
+                'unresolved-macro-call',
+                'unresolved-proc-macro',
+              },
+              styleLints = { enable = true },
               experimental = { enable = true },
             },
             -- checkOnSave = true,
