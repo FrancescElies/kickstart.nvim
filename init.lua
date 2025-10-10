@@ -174,10 +174,13 @@ vim.o.confirm = true
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Diagnostic keymaps
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setqflist, { desc = '[q]uickfix diagnostics' })
+vim.keymap.set('n', '<leader>q', vim.diagnostic.setqflist, { desc = '[q]uickfix diag.' })
+vim.keymap.set('n', '<leader>w', function()
+  vim.diagnostic.setqflist { severity = 'WARN' }
+end, { desc = 'quickfix diag. [w]arnings' })
 vim.keymap.set('n', '<leader>e', function()
   vim.diagnostic.setqflist { severity = 'ERROR' }
-end, { desc = 'Open diagnostic [q]uickfix diag. [e]rrors' })
+end, { desc = 'quickfix diag. [e]rrors' })
 
 -- local set_qflist_for_buf = function(opts)
 --   opts = {} or opts
