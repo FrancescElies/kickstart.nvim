@@ -20,8 +20,8 @@ vim.api.nvim_create_autocmd('BufEnter', {
   group = 'markdown',
   pattern = '*COMMIT*',
   callback = function(_)
-    print 'gitcommit keymap leader i'
-    vim.keymap.set('n', 'is', 'istoFya #$', { desc = '[i]nsert story' })
+    print 'gitcommit n-keymap [i]nsert [s]tory: is'
+    vim.keymap.set('n', 'is', 'istoFya #$', { desc = '[i]nsert [s]tory' })
   end,
 })
 
