@@ -388,12 +388,11 @@ require('lazy').setup({
 
       local function open_with_default_os_app(_, map)
         local action_state = require 'telescope.actions.state'
-        map({ 'i', 'n' }, '<C-0>', function(_)
+        map('n', 'go', function(_)
           local entry = action_state.get_selected_entry()
           local path = vim.fs.abspath(entry.value)
-          print('opening ' .. path)
           vim.ui.open(path)
-        end, { desc = 'Open default OS App' })
+        end, { desc = '[g]o [o]pen default OS App' })
         -- needs to return true if you want to map default_mappings and false if not
         return true
       end
