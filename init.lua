@@ -1201,6 +1201,7 @@ require('lazy').setup({
         autoread = true,
       }
       vim.o.sessionoptions = 'blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions'
+      vim.keymap.set('n', 'ss', '<cmd>mksession!<cr>')
 
       -- Simple and easy statusline.
       --  You could remove this setup call if you don't like it,
