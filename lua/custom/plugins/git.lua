@@ -16,6 +16,15 @@ vim.keymap.set('v', '<leader>gll', tele.git_bcommits_range, { desc = '[g]it [l]o
 -- stylua: ignore
 vim.keymap.set('n', '<leader>gz', tele.git_stash, { desc = '[g]it zstash' })
 
+vim.api.nvim_create_autocmd('BufEnter', {
+  group = 'markdown',
+  pattern = '*COMMIT*',
+  callback = function(_)
+    print 'gitcommit keymap leader i'
+    vim.keymap.set('n', 'is', 'istoFya #$', { desc = '[i]nsert story' })
+  end,
+})
+
 --
 return {
   -- {
