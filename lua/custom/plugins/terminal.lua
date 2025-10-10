@@ -33,41 +33,6 @@ local state = {
   },
 }
 
-local function create_tgpt_window()
-  local width = vim.api.nvim_get_option 'columns'
-  local height = vim.api.nvim_get_option 'lines'
-  local buf = vim.api.nvim_create_buf(false, true)
-  local win = vim.api.nvim_open_win(buf, true, {
-    relative = 'editor',
-    width = math.floor(width * 0.3),
-    height = math.floor(height * 0.9),
-    col = width,
-    row = 0,
-    anchor = 'NE',
-    style = 'minimal',
-    border = 'single',
-  })
-  return win
-end
-
---- Open a terminal at the bottom of the screen with a fixed height.
-local function tgpt()
-  create_tgpt_window()
-  vim.wo.winfixheight = true
-  vim.fn.jobstart('tgpt -i', { term = true })
-end
-
-local function toggle_tgpt()
-  if not vim.api.nvim_win_is_valid(state.tgpt.win) then
-    state.tgpt = create_floating_window { buf = state.floating.buf }
-    if vim.bo[state.tgpt.buf].buftype ~= 'terminal' then
-      tgpt()
-    end
-  else
-    vim.api.nvim_win_hide(state.tgpt.win)
-  end
-end
-
 local group = vim.api.nvim_create_augroup('custom-term-open', {})
 -- Set local settings for terminal buffers
 vim.api.nvim_create_autocmd('TermOpen', {
@@ -156,6 +121,17 @@ local function toggle_terminal()
   end
 end
 
+local function toggle_tgpt()
+  if not vim.api.nvim_win_is_valid(state.tgpt.win) then
+    state.tgpt = create_floating_window { buf = state.tgpt.buf }
+    if vim.bo[state.tgpt.buf].buftype ~= 'terminal' then
+      vim.fn.jobstart('tgpt -i', { term = true })
+    end
+  else
+    vim.api.nvim_win_hide(state.tgpt.win)
+  end
+end
+
 -- <C-,> (open floaterm) feels right when combined with <C-p> (previous command) and <C-m> (enter)
 vim.keymap.set({ 'n', 't' }, '<C-,>', '<cmd>SmallFloatTerm<cr>', { desc = 'float term' })
 -- Binding for alacritty, check which char `=vim.fn.getchar()`
@@ -165,7 +141,7 @@ vim.keymap.set({ 'n', 't' }, '\u{f8ff}', '<cmd>SmallFloatTerm<cr>', { desc = 'fl
 --   print 'Control-Space pressed!'
 -- end, { noremap = true, silent = false })
 
-vim.keymap.set('n', 'ch', tgpt, { desc = '[ch]atgpt' })
+vim.keymap.set({ 'n', 't' }, 'ch', toggle_tgpt, { desc = '[ch]atgpt' })
 vim.keymap.set({ 'n', 't' }, 'sl', '<cmd>SmallFloatTerm<cr>', { desc = '[s]mall f[l]oat term' }) -- sf taken by mini.surround
 vim.keymap.set('n', 'sT', small_term_send_line, { desc = 'send line to [s]mall[t]erm' })
 vim.keymap.set('n', 'st', small_term, { desc = '[s]mall[t]erm' })
