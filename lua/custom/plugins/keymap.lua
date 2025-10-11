@@ -36,28 +36,28 @@ end
 local function is_quickfix_open()
   return vim.fn.getqflist({ winid = 0 }).winid ~= 0
 end
-vim.keymap.set('n', '[e', function()
+vim.keymap.set('n', '<C-h>', ':colder<cr>', { desc = 'open older error list' })
+vim.keymap.set('n', '<C-l>', ':cnewer<cr>', { desc = 'open newer error list' })
+-- vim.keymap.set('n', '<C-k>', ':cprev<cr>zz', { desc = 'previous error' })
+vim.keymap.set('n', '<C-k>', function()
   if is_quickfix_open() then
     vim.cmd 'cprevious' -- previous quickfix item
     vim.cmd 'normal! zz'
   else
-    -- vim.diagnostic.jump { count = -1, float = true }
-    jump_diagnostic_by_severity { count = -1 }
+    vim.diagnostic.jump { count = -1, float = true }
+    -- jump_diagnostic_by_severity { count = -1 }
   end
 end)
-vim.keymap.set('n', ']e', function()
+-- vim.keymap.set('n', '<C-j>', ':cnext<cr>zz', { desc = 'next error' })
+vim.keymap.set('n', '<C-j>', function()
   if is_quickfix_open() then
     vim.cmd 'cnext' -- next quickfix item
     vim.cmd 'normal! zz'
   else
-    -- vim.diagnostic.jump { count = 1, float = true }
-    jump_diagnostic_by_severity { count = 1 }
+    vim.diagnostic.jump { count = 1, float = true }
+    -- jump_diagnostic_by_severity { count = 1 }
   end
 end)
-vim.keymap.set('n', '<C-h>', ':colder<cr>', { desc = 'open older error list' })
-vim.keymap.set('n', '<C-l>', ':cnewer<cr>', { desc = 'open newer error list' })
-vim.keymap.set('n', '<C-k>', ':cprev<cr>zz', { desc = 'previous error' })
-vim.keymap.set('n', '<C-j>', ':cnext<cr>zz', { desc = 'next error' })
 
 -- cycle entries showing only the ones starting with current input
 vim.keymap.set('c', '<C-k>', '<t_ku>', { desc = 'previous similar entry' })
