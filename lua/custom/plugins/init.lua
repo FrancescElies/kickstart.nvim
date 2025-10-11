@@ -116,3 +116,5 @@ return {
   -- guessindent
   -- octo.nvim
 }
+-- https://github.com/wezm/rsspls rrs please, make rss from website
+-- https://github.com/wezm/titlecase titlecase - is a small tool and library (crate) that capitalizes English text according to a style defined by John Gruber
