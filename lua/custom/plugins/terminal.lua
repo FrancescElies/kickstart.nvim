@@ -132,6 +132,9 @@ local function toggle_tgpt()
   end
 end
 
+vim.api.nvim_create_user_command('SmallFloatTerm', toggle_terminal, {}) -- Create a floating window with default dimensions
+vim.api.nvim_create_user_command('SmallTermResetSize', small_term_reset_size, {}) -- Create a floating window with default dimensions
+
 -- <C-,> (open floaterm) feels right when combined with <C-p> (previous command) and <C-m> (enter)
 vim.keymap.set({ 'n', 't' }, '<C-,>', '<cmd>SmallFloatTerm<cr>', { desc = 'float term' })
 -- Binding for alacritty, check which char `=vim.fn.getchar()`
@@ -140,13 +143,10 @@ vim.keymap.set({ 'n', 't' }, '\u{f8ff}', '<cmd>SmallFloatTerm<cr>', { desc = 'fl
 -- vim.keymap.set('', '\u{f8fe}', function()
 --   print 'Control-Space pressed!'
 -- end, { noremap = true, silent = false })
+vim.keymap.set({ 'n', 't' }, ',f', '<cmd>SmallFloatTerm<cr>', { desc = 'f[l]oat term' }) -- sf taken by mini.surround
+vim.keymap.set('n', ',l', small_term_send_line, { desc = 'send [l]ine to small term' })
+vim.keymap.set('n', ',s', small_term, { desc = '[s]mall term' })
 
-vim.keymap.set({ 'n', 't' }, 'ch', toggle_tgpt, { desc = '[ch]atgpt' })
-vim.keymap.set({ 'n', 't' }, 'sl', '<cmd>SmallFloatTerm<cr>', { desc = '[s]mall f[l]oat term' }) -- sf taken by mini.surround
-vim.keymap.set('n', 'sT', small_term_send_line, { desc = 'send line to [s]mall[t]erm' })
-vim.keymap.set('n', 'st', small_term, { desc = '[s]mall[t]erm' })
-
-vim.api.nvim_create_user_command('SmallFloatTerm', toggle_terminal, {}) -- Create a floating window with default dimensions
-vim.api.nvim_create_user_command('SmallTermResetSize', small_term_reset_size, {}) -- Create a floating window with default dimensions
+vim.keymap.set({ 'n', 't' }, ',c', toggle_tgpt, { desc = '[c]hatgpt' })
 
 return {}
