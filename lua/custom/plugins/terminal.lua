@@ -140,14 +140,15 @@ vim.keymap.set({ 'n', 't' }, '\u{f8ff}', '<cmd>FloatTerm<cr>', { desc = 'float t
 -- vim.keymap.set('', '\u{f8fe}', function()
 --   print 'Control-Space pressed!'
 -- end, { noremap = true, silent = false })
-vim.keymap.set({ 'n', 't' }, 'sf', '<cmd>FloatTerm<cr>', { desc = '[s]witch [f]loat term' }) -- sf taken by mini.surround
-vim.keymap.set({ 'n', 't' }, 'sb', bottom_term, { desc = '[s]witch bottom term' })
-vim.keymap.set({ 'n', 't' }, 'ss', send_line_to_bottom_term, { desc = '[s]end line bottom term' })
-vim.keymap.set({ 'n', 't' }, 'sw', '<C-w><C-w>', { desc = '[s]witch [w]indow' })
-vim.keymap.set({ 't' }, 'sd', '<cmd>bd!<cr>', { desc = '[d]elete' })
+vim.keymap.set({ 'n', 't' }, ',f', '<cmd>FloatTerm<cr>', { desc = '[f]loat term' })
+vim.keymap.set({ 'n', 't' }, ',t', '<cmd>FloatTerm<cr>', { desc = 'float [t]erm' })
+vim.keymap.set({ 'n', 't' }, ',b', bottom_term, { desc = '[b]ottom term' })
+vim.keymap.set({ 'n', 't' }, ',s', send_line_to_bottom_term, { desc = '[s]end line bottom term' })
+vim.keymap.set({ 'n', 't' }, ',w', '<C-w><C-w>', { desc = 'switch [w]indow' })
+vim.keymap.set({ 'n', 't' }, ',d', '<cmd>bd!<cr>', { desc = '[d]elete' })
 -- <C-r> doesn't work in terminal mode, it will perform `reverse search`
 -- vim.keymap.set('t','sr', "'<C-\\><C-N>\"'.nr2char(getchar()).'pi'", { desc = '<C-r> fellow' })
 
-vim.keymap.set({ 'n', 't' }, 'sh', toggle_tgpt, { desc = '[s]witch c[h]atgpt' })
+vim.keymap.set({ 'n', 't' }, ',c', toggle_tgpt, { desc = 'c[h]atgpt' })
 
 return {}
