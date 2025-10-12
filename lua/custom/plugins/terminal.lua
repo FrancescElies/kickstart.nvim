@@ -61,7 +61,7 @@ local function small_term_reset_size()
 end
 
 --- Open a terminal at the bottom of the screen with a fixed height.
-local function small_term()
+local function bottom_term()
   vim.cmd.new()
   small_term_reset_size()
   vim.wo.winfixheight = true
@@ -69,7 +69,7 @@ local function small_term()
   TERM_CHANNELNR = vim.bo.channel
 end
 
-local function small_term_send_line()
+local function send_line_to_bottom_term()
   vim.fn.chansend(TERM_CHANNELNR, { vim.api.nvim_get_current_line() .. '\r\n' })
 end
 
@@ -129,24 +129,25 @@ local function toggle_tgpt()
   end
 end
 
-vim.api.nvim_create_user_command('SmallFloatTerm', toggle_terminal, {}) -- Create a floating window with default dimensions
+vim.api.nvim_create_user_command('FloatTerm', toggle_terminal, {}) -- Create a floating window with default dimensions
 vim.api.nvim_create_user_command('SmallTermResetSize', small_term_reset_size, {}) -- Create a floating window with default dimensions
 
 -- <C-,> (open floaterm) feels right when combined with <C-p> (previous command) and <C-m> (enter)
-vim.keymap.set({ 'n', 't' }, '<C-,>', '<cmd>SmallFloatTerm<cr>', { desc = 'float term' })
+vim.keymap.set({ 'n', 't' }, '<C-,>', '<cmd>FloatTerm<cr>', { desc = 'float term' })
 -- Binding for alacritty, check which char `=vim.fn.getchar()`
-vim.keymap.set({ 'n', 't' }, '\u{f8ff}', '<cmd>SmallFloatTerm<cr>', { desc = 'float term' })
+vim.keymap.set({ 'n', 't' }, '\u{f8ff}', '<cmd>FloatTerm<cr>', { desc = 'float term' })
 -- vim.keymap.set('', '\u{f8fe}', '<C-Space>')
 -- vim.keymap.set('', '\u{f8fe}', function()
 --   print 'Control-Space pressed!'
 -- end, { noremap = true, silent = false })
-vim.keymap.set({ 'n', 't' }, ',f', '<cmd>SmallFloatTerm<cr>', { desc = 'f[l]oat term' }) -- sf taken by mini.surround
-vim.keymap.set('n', ',l', small_term_send_line, { desc = 'send [l]ine to small term' })
-vim.keymap.set({ 'n', 't' }, ',s', small_term, { desc = '[s]mall term' })
-vim.keymap.set({ 'n', 't' }, ',d', '<cmd>bd!<cr>', { desc = 'delete term' })
+vim.keymap.set({ 'n', 't' }, 'sf', '<cmd>FloatTerm<cr>', { desc = '[s]witch [f]loat term' }) -- sf taken by mini.surround
+vim.keymap.set({ 'n', 't' }, 'sb', bottom_term, { desc = '[s]witch bottom term' })
+vim.keymap.set({ 'n', 't' }, 'ss', send_line_to_bottom_term, { desc = '[s]end line bottom term' })
+vim.keymap.set({ 'n', 't' }, 'sw', '<C-w><C-w>', { desc = '[s]witch [w]indow' })
+vim.keymap.set({ 't' }, 'sd', '<cmd>bd!<cr>', { desc = '[d]elete' })
 -- <C-r> doesn't work in terminal mode, it will perform `reverse search`
--- vim.keymap.set('t', ',r', "'<C-\\><C-N>\"'.nr2char(getchar()).'pi'", { desc = '<C-r> fellow' })
+-- vim.keymap.set('t','sr', "'<C-\\><C-N>\"'.nr2char(getchar()).'pi'", { desc = '<C-r> fellow' })
 
-vim.keymap.set({ 'n', 't' }, ',c', toggle_tgpt, { desc = '[c]hatgpt' })
+vim.keymap.set({ 'n', 't' }, 'sh', toggle_tgpt, { desc = '[s]witch c[h]atgpt' })
 
 return {}

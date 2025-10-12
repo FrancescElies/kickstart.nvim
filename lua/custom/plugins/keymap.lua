@@ -97,7 +97,6 @@ vim.keymap.set('n', 'gb', ':ls<cr>:b', { desc = '[g]o [b]uffer' }) -- à la vim
 vim.keymap.set({ 'n', 'v', 'o' }, 'H', '^')
 vim.keymap.set({ 'n', 'v', 'o' }, 'L', '$')
 
-
 -- quick scape
 vim.keymap.set('c', 'jk', '<Esc>')
 vim.keymap.set('c', 'kj', '<Esc>')
@@ -106,11 +105,9 @@ vim.keymap.set('i', 'kj', '<Esc>')
 vim.keymap.set('i', '<C-c>', '<Esc>')
 vim.keymap.set('n', 'ı', 'i')
 
--- buffer
+-- [s]witch commands
+vim.keymap.set({ 'n', 'x', 'o' }, 's', '<Nop>') -- disables default behaviour
 vim.keymap.set('n', 'se', '<cmd>e #<cr>', { desc = '[s]witch to alternat[e]' })
--- vim.keymap.set('n', 'ss', '<cmd>split<cr>', { desc = 'split' })
--- vim.keymap.set('n', 'sv', '<cmd>vsplit<cr>', { desc = 'vertical split' })
-vim.keymap.set({ 'n', 'x', 'o' }, 's', '<Nop>')
 
 -- Keep things vertically centered during searches
 vim.keymap.set('n', '<C-d>', '<C-d>zz')
