@@ -142,8 +142,8 @@ vim.keymap.set({ 'n', 't' }, '\u{f8ff}', '<cmd>SmallFloatTerm<cr>', { desc = 'fl
 -- end, { noremap = true, silent = false })
 vim.keymap.set({ 'n', 't' }, ',f', '<cmd>SmallFloatTerm<cr>', { desc = 'f[l]oat term' }) -- sf taken by mini.surround
 vim.keymap.set('n', ',l', small_term_send_line, { desc = 'send [l]ine to small term' })
-vim.keymap.set('n', ',s', small_term, { desc = '[s]mall term' })
-vim.keymap.set('t', ',d', '<cmd>bd!<cr>', { desc = 'delete term' })
+vim.keymap.set({ 'n', 't' }, ',s', small_term, { desc = '[s]mall term' })
+vim.keymap.set({ 'n', 't' }, ',d', '<cmd>bd!<cr>', { desc = 'delete term' })
 -- <C-r> doesn't work in terminal mode, it will perform `reverse search`
 -- vim.keymap.set('t', ',r', "'<C-\\><C-N>\"'.nr2char(getchar()).'pi'", { desc = '<C-r> fellow' })
 

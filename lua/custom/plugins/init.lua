@@ -41,6 +41,8 @@ vim.o.wrap = false
 
 vim.o.swapfile = false
 
+vim.o.inccommand = 'split'
+
 -- Don't have `o` add a comment
 vim.opt.formatoptions:remove 'o'
 
