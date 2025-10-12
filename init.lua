@@ -494,7 +494,7 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>sa', tele_find_all_files, { desc = '[S]earch [A]ll files' })
       vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
       vim.keymap.set({ 'n', 'v' }, '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
-      vim.keymap.set('n', '<leader>sG', builtin.git_status, { desc = '[S]earch git [s]tatus' })
+      vim.keymap.set('n', 'sg', builtin.git_status, { desc = '[s]witch git [s]tatus' })
       vim.keymap.set('n', '<leader>sg', ':Telescope live-multi-grep<cr>', { desc = '[S]earch by [G]rep' })
       -- vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
       vim.keymap.set('n', '<leader>sp', require('custom.repo-select').project_file_picker, { desc = '[S]earch [P]roject files' })
@@ -1202,7 +1202,10 @@ require('lazy').setup({
       -- require('mini.pairs') -- over autopiars?
       -- require('mini.comment') --- over todo comments?
       -- require('mini.splitjoin')
-      require('mini.git').setup()
+      local MiniGit = require 'mini.git'
+      MiniGit.setup()
+
+      vim.keymap.set('n', 'co', '<cmd>Git commit<cr>', { desc = '[c]ommit' })
 
       require('mini.sessions').setup {
         autoread = true,
