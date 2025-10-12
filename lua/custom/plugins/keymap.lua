@@ -97,12 +97,6 @@ vim.keymap.set('n', 'gb', ':ls<cr>:b', { desc = '[g]o [b]uffer' }) -- à la vim
 vim.keymap.set({ 'n', 'v', 'o' }, 'H', '^')
 vim.keymap.set({ 'n', 'v', 'o' }, 'L', '$')
 
--- yank to clipboard
-vim.keymap.set({ 'n', 'v' }, '<leader>y', [["+y]], { desc = '[y]ank to OS-clipboard' }) -- motion or selection
-vim.keymap.set('n', '<leader>Y', [["+yg_]], { desc = '[y]ank to OS-clipboard' })
--- paste/delete text without overwriting yank register
-vim.keymap.set({ 'n', 'v' }, '<leader>p', [["+p]], { desc = '[p]aste from OS-clipboard' })
-vim.keymap.set({ 'n', 'v' }, '<leader>d', [["_d]], { desc = '[d]elete' })
 
 -- quick scape
 vim.keymap.set('c', 'jk', '<Esc>')
