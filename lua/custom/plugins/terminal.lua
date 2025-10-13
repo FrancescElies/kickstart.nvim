@@ -45,7 +45,10 @@ vim.api.nvim_create_autocmd('TermOpen', {
 
 -- NOTE: forces term every time to scroll to the bottom
 -- -- make sure we are on insert mode when entering the terminal
-vim.api.nvim_create_autocmd({ 'TermOpen', 'BufEnter' }, {
+vim.api.nvim_create_autocmd({
+  'TermOpen',
+  -- 'BufEnter'
+}, {
   pattern = { '*' },
   group = group,
   callback = function()
