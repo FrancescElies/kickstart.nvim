@@ -1,12 +1,12 @@
 local tele_builtin = require 'telescope.builtin'
 
-local function get_todos(dir, states)
+local function get_todos(dir)
   tele_builtin.live_grep { cwd = dir }
-  vim.fn.feedkeys('^ *([*]+|[-]+) +[(]' .. states .. '[)]')
+  vim.fn.feedkeys 'TODO'
 end
 
 vim.keymap.set('n', '<leader>nt', function()
-  get_todos('~/src/_notes ', '[^x_]')
+  get_todos '~/src/_notes '
 end, { desc = '[s]earch [n]otes [t]odos' })
 
 vim.keymap.set('n', '<leader>ng', function()
