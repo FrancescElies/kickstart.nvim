@@ -1211,7 +1211,7 @@ require('lazy').setup({
         autoread = true,
       }
       vim.o.sessionoptions = 'blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions'
-      vim.keymap.set('n', 'save', '<cmd>mksession!|echo "session saved"<cr>', { desc = 'saves session' })
+      -- press 'ss' to [s]ave [s]ession
 
       -- Simple and easy statusline.
       --  You could remove this setup call if you don't like it,

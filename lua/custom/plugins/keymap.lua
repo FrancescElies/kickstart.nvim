@@ -108,8 +108,15 @@ vim.keymap.set('n', 'ı', 'i')
 -- [s]witch commands
 vim.keymap.set({ 'n', 'x', 'o' }, 's', '<Nop>') -- disables default behaviour
 vim.keymap.set('n', 'se', '<cmd>e #<cr>', { desc = '[s]witch to alternat[e]' })
+vim.keymap.set('n', 'so', '<cmd>so %<cr>', { desc = '[s]ouce current buffer' })
+vim.keymap.set('n', 'ss', '<cmd>mksession!|echo "session saved"<cr>', { desc = '[s]ave [s]ession' })
 
--- Keep things vertically centered during searches
+-- execute as shell command from cursor to EOL
+vim.keymap.set('n', ',x', '"ey$:!<c-r>e<cr>', { desc = 'e[x]ecute line as shell command' })
+-- execute as : command from cursor to EOL
+vim.keymap.set('n', ',X', '"ey$:!<c-r>e<cr>', { desc = 'e[x]ecute line as vim command (:)' })
+
+-- Keep things vertically centered during search
 vim.keymap.set('n', '<C-d>', '<C-d>zz')
 vim.keymap.set('n', '<C-u>', '<C-u>zz')
 vim.keymap.set('n', 'n', 'nzzzv')
