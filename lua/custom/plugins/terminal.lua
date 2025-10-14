@@ -24,6 +24,10 @@ local state = {
     buf = -1,
     win = -1,
   },
+  bottomterm = {
+    buf = -1,
+    win = -1,
+  },
   floatterm = {
     buf = -1,
     win = -1,
@@ -58,18 +62,33 @@ vim.api.nvim_create_autocmd({
   end,
 })
 
-local function small_term_reset_size()
+local function win_stick_to_bottom(opts)
+  opts = opts or {}
+  local win = opts.win or 0
+  vim.api.nvim_set_current_win(win)
   vim.cmd.wincmd 'J'
-  vim.api.nvim_win_set_height(0, 15)
+  vim.api.nvim_win_set_height(win, 15)
 end
 
 --- Open a terminal at the bottom of the screen with a fixed height.
-local function bottom_term()
-  vim.cmd.new()
-  small_term_reset_size()
-  vim.wo.winfixheight = true
-  vim.cmd.term()
-  TERM_CHANNELNR = vim.bo.channel
+local function bottom_term(opts)
+  opts = opts or {}
+  -- Create a buffer
+  local buf = nil
+  if vim.api.nvim_buf_is_valid(opts.buf) then
+    buf = opts.buf
+  else
+    buf = vim.api.nvim_create_buf(false, true)
+  end
+  -- Create  window
+  local win_config = {
+    split = 'left',
+    win = 0,
+  }
+  local win = vim.api.nvim_open_win(buf, true, win_config)
+  win_stick_to_bottom { win = win }
+
+  return { buf = buf, win = win }
 end
 
 local function send_line_to_bottom_term()
@@ -90,7 +109,7 @@ local function create_floating_window(opts)
   if vim.api.nvim_buf_is_valid(opts.buf) then
     buf = opts.buf
   else
-    buf = vim.api.nvim_create_buf(false, true) -- No file, scratch buffer
+    buf = vim.api.nvim_create_buf(false, true)
   end
 
   -- Define window configuration
@@ -132,8 +151,21 @@ local function toggle_tgpt()
   end
 end
 
+local function toggle_bottomterm()
+  if not vim.api.nvim_win_is_valid(state.bottomterm.win) then
+    state.bottomterm = bottom_term { buf = state.bottomterm.buf }
+    if vim.bo[state.bottomterm.buf].buftype ~= 'terminal' then
+      vim.wo.winfixheight = true
+      vim.cmd.terminal()
+      TERM_CHANNELNR = vim.bo.channel
+    end
+  else
+    vim.api.nvim_win_hide(state.bottomterm.win)
+  end
+end
+
 vim.api.nvim_create_user_command('FloatTerm', toggle_terminal, {}) -- Create a floating window with default dimensions
-vim.api.nvim_create_user_command('SmallTermResetSize', small_term_reset_size, {}) -- Create a floating window with default dimensions
+vim.api.nvim_create_user_command('SmallTermResetSize', win_stick_to_bottom, {}) -- Create a floating window with default dimensions
 
 -- <C-,> (open floaterm) feels right when combined with <C-p> (previous command) and <C-m> (enter)
 vim.keymap.set({ 'n', 't' }, '<C-,>', '<cmd>FloatTerm<cr>', { desc = 'float term' })
@@ -145,7 +177,7 @@ vim.keymap.set({ 'n', 't' }, '\u{f8ff}', '<cmd>FloatTerm<cr>', { desc = 'float t
 -- end, { noremap = true, silent = false })
 vim.keymap.set({ 'n', 't' }, ',f', '<cmd>FloatTerm<cr>', { desc = '[f]loat term' })
 vim.keymap.set({ 'n', 't' }, ',t', '<cmd>FloatTerm<cr>', { desc = 'float [t]erm' })
-vim.keymap.set({ 'n', 't' }, ',b', bottom_term, { desc = '[b]ottom term' })
+vim.keymap.set({ 'n', 't' }, ',b', toggle_bottomterm, { desc = '[b]ottom term' })
 vim.keymap.set({ 'n', 't' }, ',s', send_line_to_bottom_term, { desc = '[s]end line bottom term' })
 vim.keymap.set({ 'n', 't' }, ',w', '<C-w><C-w>', { desc = 'switch [w]indow' })
 vim.keymap.set({ 'n', 't' }, ',d', '<cmd>bd!<cr>', { desc = '[d]elete' })
