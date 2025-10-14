@@ -502,6 +502,9 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
       vim.keymap.set('n', '<leader>st', builtin.treesitter, { desc = '[S]earch [T]reesitter' })
       vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
+      vim.keymap.set('n', 'ls', builtin.buffers, { desc = '[ ] Find existing buffers' })
+      -- vim.keymap.set('n', 'ls', ':ls<cr>:b', { desc = 'Find existing buffers' })
+
       vim.keymap.set('n', '<leader>se', builtin.symbols, { desc = '[S]earch [e]moji' })
       vim.keymap.set('n', '<leader>sl', function()
         require('telescope.builtin').find_files { cwd = vim.fs.joinpath(vim.fn.stdpath 'data') }
@@ -1215,6 +1218,7 @@ require('lazy').setup({
       }
       vim.o.sessionoptions = 'blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions'
       -- press 'ss' to [s]ave [s]ession
+      vim.keymap.set('n', 'ss', '<cmd>lua MiniSessions.write()<cr>', { desc = '[s]ave [s]ession' })
 
       -- Simple and easy statusline.
       --  You could remove this setup call if you don't like it,

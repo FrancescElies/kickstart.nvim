@@ -89,7 +89,7 @@ cnoremap <C-k> <t_ku>
 " y$ -> Y Make Y behave like other capitals
 map Y y$
 
-nnoremap gb :ls<cr>:b
+nnoremap ls :ls<cr>:b
 nnoremap cgn *Ncgn
 " [s]witch to alternat[e] buffer
 nnoremap se :e #<cr>

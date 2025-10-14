@@ -109,7 +109,6 @@ vim.keymap.set('n', 'ı', 'i')
 vim.keymap.set({ 'n', 'x', 'o' }, 's', '<Nop>') -- disables default behaviour
 vim.keymap.set('n', 'se', '<cmd>e #<cr>', { desc = '[s]witch to alternat[e]' })
 vim.keymap.set('n', 'so', '<cmd>so %<cr>', { desc = '[s]ouce current buffer' })
-vim.keymap.set('n', 'ss', '<cmd>mksession!|echo "session saved"<cr>', { desc = '[s]ave [s]ession' })
 
 -- execute as shell command from cursor to EOL
 vim.keymap.set('n', ',x', '"ey$:!<c-r>e<cr>', { desc = 'e[x]ecute line as shell command' })
