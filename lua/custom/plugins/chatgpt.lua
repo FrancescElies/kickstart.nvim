@@ -1,4 +1,52 @@
+-- vim.api.nvim_create_autocmd('User', {
+--   pattern = 'BlinkCmpMenuOpen',
+--   callback = function()
+--     vim.b.copilot_suggestion_hidden = true
+--   end,
+-- })
+--
+-- vim.api.nvim_create_autocmd('User', {
+--   pattern = 'BlinkCmpMenuClose',
+--   callback = function()
+--     vim.b.copilot_suggestion_hidden = false
+--   end,
+-- })
+
 return {
+  -- {
+  --   'github/copilot.vim',
+  --   cmd = 'Copilot',
+  --   -- event = 'InsertEnter',
+  --   opts = {
+  --     auto_activate = false,
+  --   },
+  -- },
+  -- {
+  --   'zbirenbaum/copilot.lua',
+  --   dependencies = {
+  --     {
+  --       'copilotlsp-nvim/copilot-lsp',
+  --       config = function()
+  --         vim.g.copilot_nes_debounce = 500
+  --       end,
+  --     },
+  --   },
+  --   cmd = 'Copilot',
+  --   event = 'InsertEnter',
+  --   config = function()
+  --     require('copilot').setup {
+  --       nes = {
+  --         enabled = true,
+  --         keymap = {
+  --           accept_and_goto = '<leader>p',
+  --           accept = false,
+  --           dismiss = '<Esc>',
+  --         },
+  --       },
+  --     }
+  --   end,
+  -- },
+
   -- 'jackMort/ChatGPT.nvim',
   -- event = 'VeryLazy',
   -- config = function()
