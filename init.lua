@@ -1206,6 +1206,7 @@ require('lazy').setup({
       MiniGit.setup()
 
       vim.keymap.set('n', 'co', '<cmd>Git commit<cr>', { desc = '[c]ommit' })
+      vim.keymap.set('n', 'ca', '<cmd>Git commit --amend<cr>', { desc = '[c]ommit [a]mend' })
       vim.keymap.set('n', 'pus', '<cmd>Git push --force-with-lease<cr>', { desc = 'push' })
       vim.keymap.set('n', 'pul', '<cmd>Git pull<cr>', { desc = 'pull' })
 
