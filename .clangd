@@ -1,0 +1,25 @@
+# Diagnostics:
+ClangTidy: # it respects .clang-tidy
+  # https://clang.llvm.org/extra/clang-tidy/checks/list.html
+  Add: [
+    modernize-*,
+   'bugprone-*',
+  ]
+  Remove: [clang-analyzer-*]
+  CheckOptions:
+    modernize-use-nullptr.NullMacros: 'NULL'
+  FastCheckFilter: None
+  UnusedIncludes: Strict
+
+InlayHints:
+  Enabled: true
+  ParameterNames: true
+  DeducedTypes: true
+
+CompileFlags:
+  Add: [
+  -Wall, -Wextra,
+  -IC:/windows/folder,  # needs to be absolute :/
+  -Iunix/dir,  # absolute or relative
+  ]
+
