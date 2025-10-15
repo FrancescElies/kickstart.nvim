@@ -1215,10 +1215,12 @@ require('lazy').setup({
 
       require('mini.sessions').setup {
         autoread = true,
+        verbose = { read = true, write = true, delete = true },
       }
       vim.o.sessionoptions = 'blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions'
-      -- press 'ss' to [s]ave [s]ession
-      vim.keymap.set('n', 'ss', '<cmd>lua MiniSessions.write()<cr>', { desc = '[s]ave [s]ession' })
+      vim.keymap.set('n', '<leader>Sw', ':lua MiniSessions.write()<cr>', { desc = 'write session' })
+      vim.keymap.set('n', '<leader>Sd', ':lua MiniSessions.delete()<cr>', { desc = 'delete session' })
+      vim.keymap.set('n', '<leader>Ss', ':lua MiniSessions.select()<cr>', { desc = 'select session' })
 
       -- Simple and easy statusline.
       --  You could remove this setup call if you don't like it,
