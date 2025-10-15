@@ -8,11 +8,11 @@ local tele = require 'telescope.builtin'
 vim.keymap.set('n', 'gh', '<cmd>diffget //2<cr>', { desc = 'get left diff' })
 vim.keymap.set('n', 'gl', '<cmd>diffget //3<cr>', { desc = 'get right diff' })
 
-vim.keymap.set('n', '<leader>gB', tele.git_branches, { desc = '[g]it [b]ranches' })
-vim.keymap.set('n', '<leader>glb', tele.git_bcommits, { desc = '[g]it [l]og [b]uffer' })
-vim.keymap.set('n', '<leader>gl', tele.git_commits, { desc = '[g]it [l]og' })
+vim.keymap.set('n', '<leader>gb', tele.git_branches, { desc = '[g]it [b]ranches' })
+vim.keymap.set('n', '<leader>gl', tele.git_bcommits, { desc = '[g]it [l]og buffer' })
+vim.keymap.set('n', '<leader>gL', tele.git_commits, { desc = '[g]it [l]og (cwd)' })
 --- Lists commits for a range of lines in the current buffer with diff preview
-vim.keymap.set('v', '<leader>gL', tele.git_bcommits_range, { desc = '[g]it [l]og' })
+vim.keymap.set('v', '<leader>gl', tele.git_bcommits_range, { desc = '[g]it [l]og (sel. lines)' })
 -- stylua: ignore
 vim.keymap.set('n', '<leader>gz', tele.git_stash, { desc = '[g]it zstash' })
 
@@ -27,23 +27,69 @@ vim.api.nvim_create_autocmd('BufEnter', {
 
 --
 return {
-  -- {
-  --   'kdheepak/lazygit.nvim',
-  --   lazy = true,
-  --   cmd = {
-  --     'LazyGit',
-  --     'LazyGitConfig',
-  --     'LazyGitCurrentFile',
-  --     'LazyGitFilter',
-  --     'LazyGitFilterCurrentFile',
-  --   },
-  --   dependencies = {
-  --     'nvim-lua/plenary.nvim',
-  --   },
-  --   keys = {
-  --     { '<leader>gs', '<cmd>LazyGit<cr>', desc = 'LazyGit' },
-  --   },
-  -- },
+  {
+    'lewis6991/gitsigns.nvim',
+    opts = {
+      numhl = true, -- Toggle with `:Gitsigns toggle_numhl`
+      linehl = true, -- Toggle with `:Gitsigns toggle_linehl`
+      current_line_blame = true, -- Toggle with `:Gitsigns toggle_current_line_blame`
+      on_attach = function(bufnr)
+        local gitsigns = require 'gitsigns'
+
+        local function map(mode, l, r, opts)
+          opts = opts or {}
+          opts.buffer = bufnr
+          vim.keymap.set(mode, l, r, opts)
+        end
+
+        -- Navigation
+        map('n', ']c', function()
+          if vim.wo.diff then
+            vim.cmd.normal { ']c', bang = true }
+          else
+            gitsigns.nav_hunk 'next'
+          end
+        end, { desc = 'Jump to next git [c]hange' })
+
+        map('n', '[c', function()
+          if vim.wo.diff then
+            vim.cmd.normal { '[c', bang = true }
+          else
+            gitsigns.nav_hunk 'prev'
+          end
+        end, { desc = 'Jump to previous git [c]hange' })
+
+        -- Actions
+        -- visual mode
+        map('v', '<leader>hs', function()
+          gitsigns.stage_hunk { vim.fn.line '.', vim.fn.line 'v' }
+        end, { desc = 'git[h]unk [s]tage' })
+        map('v', '<leader>hr', function()
+          gitsigns.reset_hunk { vim.fn.line '.', vim.fn.line 'v' }
+        end, { desc = 'git[h]unk [r]eset' })
+        -- normal mode
+        map('n', '<leader>hb', gitsigns.blame, { desc = 'git[h]unk [b]lame [b]uffer' })
+        map('n', '<leader>hl', gitsigns.blame_line, { desc = 'git[h]unk blame [l]ine' })
+        map('n', '<leader>hq', function()
+          gitsigns.setqflist 'all'
+        end, { desc = 'git[h]unks [q]uickfix ' })
+        map('n', '<leader>hs', gitsigns.stage_hunk, { desc = 'git[h]unk [s]tage' })
+        map('n', '<leader>hS', gitsigns.stage_buffer, { desc = 'git[h]unks [S]tage buffer' })
+        map('n', '<leader>hr', gitsigns.reset_hunk, { desc = 'git[h]unk [r]eset' })
+        map('n', '<leader>hR', gitsigns.reset_buffer, { desc = 'git[h]unks [R]eset buffer' })
+        map('n', '<leader>hu', gitsigns.stage_hunk, { desc = 'git[h]unk [u]ndo stage' })
+        map('n', '<leader>hp', gitsigns.preview_hunk_inline, { desc = 'git[h]unk [p]review inline' })
+        map('n', '<leader>hP', gitsigns.preview_hunk, { desc = 'git[h]unk [p]review' })
+        map('n', '<leader>hdi', gitsigns.diffthis, { desc = 'git[h]unk [d]iff against index' })
+        map('n', '<leader>hdh', function()
+          gitsigns.diffthis '@'
+        end, { desc = 'git [D]iff against [H]EAD (last commit)' })
+
+        -- Select [h]unks as a vim text object
+        vim.keymap.set({ 'o', 'x' }, 'ih', '<Cmd>Gitsigns select_hunk<CR>')
+      end,
+    },
+  },
   {
     'NeogitOrg/neogit',
     dependencies = {
@@ -53,52 +99,16 @@ return {
     },
     keys = { { '<leader>gs', vim.cmd.Neogit, desc = '[g]it [s]status' } },
   },
-  -- {
-  --   'tpope/vim-fugitive',
-  --   -- opts = {},
-  --   cmd = {
-  --     'G',
-  --     'Git',
-  --     'Gdiffsplit',
-  --     'Gread',
-  --     'Gwrite',
-  --     'Ggrep',
-  --     'GMove',
-  --     'GDelete',
-  --     'GBrowse',
-  --     'GRemove',
-  --     'GRename',
-  --     'Glgrep',
-  --     'Gedit',
-  --   },
-  --   ft = { 'fugitive' },
-  --   keys = {
-  --     { '<leader>gb', '<cmd>Git blame<cr>', desc = 'Git blame' },
-  --     -- { '<leader>ga', '<cmd>Gwrite<cr>', desc = 'Git add current file' },
-  --     -- { '<leader>gr', '<cmd>Gread<cr>', desc = 'Git restore current file' },
-  --     { '<leader>gs', vim.cmd.Git, desc = '[g]it [s]tatus (fugitive)' },
-  --     { '<leader>gf', '<cmd>Git fetch<cr>', desc = 'Git fetch' },
-  --     { '<leader>gp', '<cmd>Git! push --force-with-lease -u origin <cr>', desc = '[g]it [p]ush force with lease' },
-  --     { '<leader>gP', '<cmd>Git! pull --rebase <cr>', desc = '[g]it [p]ull rebase' },
-  --     { '<leader>gc', '<cmd>Git commit<cr>', desc = '[g]it [c]ommit' },
-  --     { '<leader>gu', '<cmd>Git reset HEAD~1', desc = '[g]it [u]ndo commit (reset HEAD~1)' },
-  --   },
-  -- },
-  {
-    'rhysd/git-messenger.vim',
-    cmd = { 'GitMessenger' },
-    keys = { { '<leader>gm', ':GitMessenger<CR>', desc = '[g]it [m]essenger' } },
-  },
   {
     'sindrets/diffview.nvim',
     opts = {},
     keys = {
       -- :h diff-mode
       -- :h copy-diffs
-      { '<leader>ghb', ':DiffviewFileHistory<cr>', desc = '[g]it diff [H]istory current [b]ranch' },
-      { '<leader>ghf', '<cmd>DiffviewFileHistory %', desc = '[g]it diff [H]istory [f]ile' },
-      { '<leader>gdw', '<cmd>DiffviewOpen<cr>', desc = '[g]it [d]iff working tree' },
-      { '<leader>ghl', ':DiffviewFileHistory', desc = '[g]it diff [H]istory ([l]ine evolution)', mode = { 'v' } },
+      { '<leader>db', ':DiffviewFileHistory<cr>', desc = '[d]iff History [b]ranch' },
+      { '<leader>df', '<cmd>DiffviewFileHistory %', desc = '[d]iff history [f]ile' },
+      { '<leader>d.', '<cmd>DiffviewOpen<cr>', desc = '[d]iff (.) working tree' },
+      { '<leader>dl', ':DiffviewFileHistory', desc = '[d]iff history ([l]ine evolution)', mode = { 'v' } },
 
       -- Examples
       -- :DiffviewOpen
@@ -125,9 +135,9 @@ return {
       require('telescope').load_extension 'advanced_git_search'
     end,
     keys = {
-      { '<leader>g/', ':AdvancedGitSearch<CR>', desc = '[g]it [s]earch' },
-      { '<leader>gdl', ':AdvancedGitSearch diff_commit_line<cr>', mode = { 'n', 'v' }, desc = '[g]it [d]iff [l]ine' },
-      { '<leader>gr', ':AdvancedGitSearch checkout_reflog<cr>', desc = '[g]it [r]eflog' },
+      { '<leader>g//', ':AdvancedGitSearch<CR>', desc = '[g]it [s]earch' },
+      { '<leader>g/l', ':AdvancedGitSearch diff_commit_line<cr>', mode = { 'n', 'v' }, desc = '[g]it [d]iff [l]ine' },
+      { '<leader>g/r', ':AdvancedGitSearch checkout_reflog<cr>', desc = '[g]it [r]eflog' },
     },
     dependencies = {
       'nvim-telescope/telescope.nvim',

@@ -328,11 +328,10 @@ require('lazy').setup({
         { '<leader>C', group = '[C]hat' },
         { '<leader>b', group = '[B]uffer' },
         { '<leader>c', group = '[c]ode' },
-        { '<leader>g', group = '[G]it', mode = { 'n', 'v' } },
-        { '<leader>gd', group = '[G]it [D]iff', mode = { 'n', 'v' } },
-        { '<leader>gh', group = '[G]it diff [H]istory', mode = { 'n', 'v' } },
-        { '<leader>gl', group = '[G]it [L]og', mode = { 'n', 'v' } },
-        { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
+        { '<leader>g', group = 'git', mode = { 'n', 'v' } },
+        { '<leader>g/', group = '[g]it [/]search', mode = { 'n', 'v' } },
+        { '<leader>d', group = 'git [D]iff', mode = { 'n', 'v' } },
+        { '<leader>h', group = 'git [H]unk', mode = { 'n', 'v' } },
         { '<leader>l', group = '[L]ua' },
         { '<leader>n', group = '[N]otes' },
         { '<leader>r', group = '[R]eplace', mode = { 'v' } },
@@ -1328,8 +1327,6 @@ require('lazy').setup({
   require 'kickstart.plugins.indent_line',
   require 'kickstart.plugins.lint',
   require 'kickstart.plugins.autopairs',
-  -- require 'kickstart.plugins.neo-tree',
-  require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    This is the easiest way to modularize your config.
