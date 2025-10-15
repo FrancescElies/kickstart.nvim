@@ -43,5 +43,3 @@ CheckOptions:
     value:           'std::string'
 
 FormatStyle: file  # Use .clang-format in the project root if available
-HeaderFilterRegex: '.*'  # Analyze all project headers
-AnalyzeTemporaryDtors: false
