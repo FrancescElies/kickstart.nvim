@@ -1023,16 +1023,16 @@ require('lazy').setup({
           local finfo = function(formatter, buf)
             return require('conform').get_formatter_info(formatter, buf).available and formatter or nil
           end
-          local ruff_format = finfo('ruff_format', bufnr)
-          local ruff_fix = finfo('ruff_fix', bufnr)
-          local ruff_organize_imports = finfo('ruff_organize_imports', bufnr)
-          if ruff_fix and ruff_format and ruff_organize_imports then
-            print 'using ruff'
-            return { ruff_fix, ruff_organize_imports, ruff_format }
-          else
-            print 'using isort and black'
-            return { 'isort', 'black' }
-          end
+          local formatters = {
+            finfo('ruff_format', bufnr),
+            finfo('ruff_fix', bufnr),
+            finfo('ruff_organize_imports', bufnr),
+            finfo('black', bufnr),
+          }
+          local available = vim.tbl_filter(function(x)
+            return x ~= nil
+          end, formatters)
+          return available
         end,
         typescript = { 'prettierd', 'prettier', stop_after_first = true, lsp_format = 'fallback' },
         json = { 'prettierd', 'prettier', stop_after_first = true, lsp_format = 'fallback' },
