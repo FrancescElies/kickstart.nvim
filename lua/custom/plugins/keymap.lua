@@ -15,6 +15,8 @@ vim.opt.tabstop = 4
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 
+vim.opt.iskeyword:append '-' -- helps vim-abolish to convert from kebab-case
+
 local function jump_diagnostic_by_severity(opts)
   local count = opts.count or 1
   local severities = {
