@@ -1289,7 +1289,7 @@ require('lazy').setup({
                 red = '#aa0000',
                 green = '#00aa00',
                 blue = '#0000aa',
-                TODO = '#ff5555',
+                TODO = '#1166bb',
                 DELEGATED = '#771111',
                 ONHOLD = '#ddbe0b',
                 WONT = '#ababab',
