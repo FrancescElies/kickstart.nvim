@@ -15,7 +15,8 @@ vim.opt.tabstop = 4
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 
-vim.opt.iskeyword:append '-' -- helps vim-abolish to convert from kebab-case
+-- NOTE: breaks <c-x><c-n> as it doesn't find inner words
+-- vim.opt.iskeyword:append '-' -- helps vim-abolish to convert from kebab-case
 
 --
 -- quickfix
