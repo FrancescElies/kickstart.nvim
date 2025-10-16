@@ -17,6 +17,10 @@ vim.opt.splitbelow = true
 
 vim.opt.iskeyword:append '-' -- helps vim-abolish to convert from kebab-case
 
+--
+-- quickfix
+--
+
 local function jump_diagnostic_by_severity(opts)
   local count = opts.count or 1
   local severities = {
@@ -34,15 +38,24 @@ local function jump_diagnostic_by_severity(opts)
     end
   end
 end
--- quickfix
+
+local function is_loclist_open()
+  return #vim.fn.getloclist(0) ~= 0
+end
+
 local function is_quickfix_open()
   return vim.fn.getqflist({ winid = 0 }).winid ~= 0
 end
+
 vim.keymap.set('n', '<C-h>', ':colder<cr>', { desc = 'open older error list' })
 vim.keymap.set('n', '<C-l>', ':cnewer<cr>', { desc = 'open newer error list' })
+
 -- vim.keymap.set('n', '<C-k>', ':cprev<cr>zz', { desc = 'previous error' })
 vim.keymap.set('n', '<C-k>', function()
-  if is_quickfix_open() then
+  if is_loclist_open() then
+    vim.cmd 'lprevious' -- previous quickfix item
+    vim.cmd 'normal! zz'
+  elseif is_quickfix_open() then
     vim.cmd 'cprevious' -- previous quickfix item
     vim.cmd 'normal! zz'
   else
@@ -52,7 +65,10 @@ vim.keymap.set('n', '<C-k>', function()
 end)
 -- vim.keymap.set('n', '<C-j>', ':cnext<cr>zz', { desc = 'next error' })
 vim.keymap.set('n', '<C-j>', function()
-  if is_quickfix_open() then
+  if is_loclist_open() then
+    vim.cmd 'lnext' -- next quickfix item
+    vim.cmd 'normal! zz'
+  elseif is_quickfix_open() then
     vim.cmd 'cnext' -- next quickfix item
     vim.cmd 'normal! zz'
   else
