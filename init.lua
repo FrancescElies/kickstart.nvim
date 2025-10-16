@@ -1171,7 +1171,19 @@ require('lazy').setup({
   },
 
   -- Highlight todo, notes, etc in comments
-  { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
+  {
+    'folke/todo-comments.nvim',
+    event = 'VimEnter',
+    dependencies = { 'nvim-lua/plenary.nvim' },
+    opts = {
+      signs = false,
+      keywords = {
+        ONHOLD = { icon = '🪝', color = '#ddbe0b', alt = { 'HALTED' } },
+        WONT = { icon = '🛑', color = '#ab3e8f', alt = { 'HALTED' } },
+        DONE = { icon = '', color = '#00a087', alt = { 'HALTED' } },
+      },
+    },
+  },
 
   { -- Collection of various small independent plugins/modules
     'echasnovski/mini.nvim',
@@ -1253,15 +1265,35 @@ require('lazy').setup({
       local mini_align = require 'mini.align'
       mini_align.setup()
 
+      local words = { red = '#ff0000', green = '#00ff00', blue = '#0000ff' }
+      local word_color_group = function(_, match)
+        local hex = words[match]
+        if hex == nil then
+          return nil
+        end
+        return MiniHipatterns.compute_hex_color_group(hex, 'bg')
+      end
       local hipatterns = require 'mini.hipatterns'
       hipatterns.setup {
         highlighters = {
+          fixme = { pattern = 'FIXME', group = 'MiniHipatternsFixme' },
+          hack = { pattern = 'HACK', group = 'MiniHipatternsHack' },
+          todo = { pattern = 'TODO', group = 'MiniHipatternsTodo' },
+          note = { pattern = 'NOTE', group = 'MiniHipatternsNote' },
           hex_color = hipatterns.gen_highlighter.hex_color(),
           word_color = {
             pattern = '%S+',
             group = function(_, match)
               -- highlight words with certain colors
-              local words = { red = '#aa0000', green = '#00aa00', blue = '#0000aa' }
+              local words = {
+                red = '#aa0000',
+                green = '#00aa00',
+                blue = '#0000aa',
+                TODO = '#bb2222',
+                ONHOLD = '#ddbe0b',
+                WONT = '#ababab',
+                DONE = '#00a087',
+              }
               local hex = words[match]
               if hex == nil then
                 return nil

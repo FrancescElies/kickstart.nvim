@@ -1,21 +1,25 @@
 local tele_builtin = require 'telescope.builtin'
 
-local function get_todos(dir)
-  tele_builtin.live_grep { cwd = dir }
-  vim.fn.feedkeys 'TODO'
+local function notes_live_grep(opts)
+  tele_builtin.live_grep { cwd = '~/src/_notes' }
+  vim.fn.feedkeys(opts.what)
 end
 
+vim.keymap.set('n', '<leader>nh', function()
+  notes_live_grep { what = 'ONHOLD' }
+end, { desc = '[n]otes view on[h]old' })
+
 vim.keymap.set('n', '<leader>nt', function()
-  get_todos '~/src/_notes '
-end, { desc = '[s]earch [n]otes [t]odos' })
+  notes_live_grep { what = 'TODO' }
+end, { desc = '[n]otes view [t]odos' })
 
 vim.keymap.set('n', '<leader>ng', function()
-  tele_builtin.live_grep { cwd = '~/src/_notes/' }
-end, { desc = '[s]earch [n]otes by [g]rep' })
+  notes_live_grep { what = '' }
+end, { desc = '[n]otes [g]rep' })
 
 vim.keymap.set('n', '<leader>nf', function()
   tele_builtin.find_files { cwd = '~/src/_notes/' }
-end, { desc = '[s]earch [n]otes [f]iles' })
+end, { desc = '[n]ote [f]iles' })
 
 return {
   -- {
