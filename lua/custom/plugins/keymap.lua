@@ -137,6 +137,7 @@ vim.keymap.set('n', ',X', '"ey$:!<c-r>e<cr>', { desc = 'e[x]ecute line as vim co
 -- Keep things vertically centered during search
 vim.keymap.set('n', '<C-d>', '<C-d>zz')
 vim.keymap.set('n', '<C-u>', '<C-u>zz')
+vim.keymap.set('n', '`', 'n.') -- n. is a common pattern, let's make it one key instead
 vim.keymap.set('n', 'n', 'nzzzv')
 vim.keymap.set('n', 'N', 'Nzzzv')
 vim.keymap.set('n', '*', '*zzzv')
