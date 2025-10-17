@@ -1289,13 +1289,13 @@ require('lazy').setup({
                 red = '#aa0000',
                 green = '#00aa00',
                 blue = '#0000aa',
-                TODO = '#1166bb',
                 DELEGATED = '#771111',
                 ONHOLD = '#ddbe0b',
                 WONT = '#ababab',
                 DONE = '#00a087',
               }
-              local hex = words[match]
+              local stripped = match:gsub(':$', '')
+              local hex = words[stripped]
               if hex == nil then
                 return nil
               end
