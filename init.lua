@@ -1265,7 +1265,7 @@ require('lazy').setup({
       local mini_align = require 'mini.align'
       mini_align.setup()
 
-      local words = { red = '#ff0000', green = '#00ff00', blue = '#0000ff' }
+      local words = { red = '#aa0000', green = '#00aa00', blue = '#0000aa' }
       local word_color_group = function(_, match)
         local hex = words[match]
         if hex == nil then
