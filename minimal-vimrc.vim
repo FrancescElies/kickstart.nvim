@@ -10,7 +10,7 @@ nnoremap ,x "ey$:!<c-r>e<cr>
 nnoremap ,X "ey$:<c-r>e<cr>
 
 " TPOPE PLUGINS COMMON STEPS:
-" mkdir ~/.vim/pack/tpope/start
+" mkdir ~/.vim/pack/plugins/start
 " cd ~/.vim/pack/tpope/start
 " SENSIBLE DEFAULTS:
 " git clone https://tpope.io/vim/sensible.git
@@ -35,6 +35,8 @@ nnoremap ,X "ey$:<c-r>e<cr>
 " SESSIONS:
 " git clone https://github.com/tpope/vim-obsession.git
 " vim -u NONE -c "helptags vim-obsession/doc" -c q
+" This plugin highlights patterns and ranges, closest thing to neovim 'inccommand'
+" git clone --depth 1 https://github.com/markonm/traces.vim
 
 " Something simple for emergencies or to easily copy on servers.
 "
