@@ -82,19 +82,6 @@ end)
 vim.keymap.set('c', '<C-k>', '<t_ku>', { desc = 'previous similar entry' })
 vim.keymap.set('c', '<C-j>', '<t_kd>', { desc = 'next similar entry' })
 
--- nav buffers and tabs
--- vim.keymap.set({ 'n', 't' }, '<M-x>', '<cmd>bd!<cr>')
--- vim.keymap.set('n', '<leader>bd', '<cmd>bp<bar>bd #<CR>', { desc = '[b]uffer [d]elete ' })
--- vim.keymap.set('n', '<leader>bo', '<cmd>%bd<bar>e#<cr>', { desc = '[b]uffer delete [o]thers' })
--- vim.keymap.set('n', '<leader>bs', '<cmd>w<cr>', { desc = '[b]uffer [s]ave' })
--- vim.keymap.set('n', '<leader>bn', '<cmd>new<cr>', { desc = '[b]uffer[n]ew ' })
-
--- -- loclist
--- vim.keymap.set('n', '<leader>lo', '<cmd>lopen<cr>zz', { desc = 'LocList open' })
--- vim.keymap.set('n', '<leader>lc', '<cmd>lclose<cr>zz', { desc = 'LocList close' })
--- vim.keymap.set('n', '<leader>lp', '<cmd>lprevious<cr>zz', { desc = 'LocList previous' })
--- vim.keymap.set('n', '<leader>lp', '<cmd>lnext<cr>zz', { desc = 'LocList next' })
-
 vim.diagnostic.config { virtual_text = true, virtual_lines = false }
 
 local function toggle_inline_diagnostic()
