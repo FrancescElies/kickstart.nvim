@@ -1,6 +1,6 @@
 local tele_builtin = require 'telescope.builtin'
 
-local notes_dir = '/src/notes'
+local notes_dir = '~/src/notes'
 local function notes_live_grep(opts)
   tele_builtin.live_grep { cwd = notes_dir }
   vim.fn.feedkeys(opts.what)
