@@ -1,7 +1,8 @@
 local tele_builtin = require 'telescope.builtin'
 
+local notes_dir = '/src/notes'
 local function notes_live_grep(opts)
-  tele_builtin.live_grep { cwd = '~/src/_notes' }
+  tele_builtin.live_grep { cwd = notes_dir }
   vim.fn.feedkeys(opts.what)
 end
 
@@ -18,7 +19,7 @@ vim.keymap.set('n', '<leader>ng', function()
 end, { desc = '[n]otes [g]rep' })
 
 vim.keymap.set('n', '<leader>nf', function()
-  tele_builtin.find_files { cwd = '~/src/_notes/' }
+  tele_builtin.find_files { cwd = notes_dir }
 end, { desc = '[n]ote [f]iles' })
 
 return {
