@@ -117,13 +117,6 @@ vim.o.showmode = false
 vim.schedule(function()
   vim.o.clipboard = 'unnamedplus'
 end)
--- If not using unnamedplus the following bindings are useful
--- -- yank to clipboard
--- vim.keymap.set({ 'n', 'v' }, '<leader>y', [["+y]], { desc = '[y]ank to OS-clipboard' }) -- motion or selection
--- vim.keymap.set('n', '<leader>Y', [["+yg_]], { desc = '[y]ank to OS-clipboard' })
--- -- paste/delete text without overwriting yank register
--- vim.keymap.set({ 'n', 'v' }, '<leader>p', [["+p]], { desc = '[p]aste from OS-clipboard' })
--- vim.keymap.set({ 'n', 'v' }, '<leader>d', [["_d]], { desc = '[d]elete' })
 
 -- Enable break indent
 vim.o.breakindent = true
