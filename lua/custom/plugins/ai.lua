@@ -45,6 +45,7 @@ return {
     end,
   },
   -- {
+  -- TODO: check [lewis6991/dotfiles](https://github.com/lewis6991/dotfiles/blob/main/config/nvim/lua/lewis6991/codecompanion.lua)
   --   'olimorris/codecompanion.nvim',
   --   opts = {},
   --   dependencies = {
