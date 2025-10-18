@@ -13,6 +13,44 @@
 -- })
 
 return {
+  {
+    'NickvanDyke/opencode.nvim',
+    dependencies = {
+      -- Recommended for `ask()` and `select()`.
+      -- Required for `toggle()`.
+      { 'folke/snacks.nvim', opts = { input = {}, picker = {} } },
+    },
+    config = function()
+      vim.g.opencode_opts = {
+        -- Your configuration, if any — see `lua/opencode/config.lua`
+      }
+
+      -- Required for `vim.g.opencode_opts.auto_reload`
+      vim.opt.autoread = true
+
+    -- Recommended/example keymaps
+    -- stylua: ignore start
+    local oc = require("opencode")
+    vim.keymap.set({ "n", "x" }, "<leader>oa", function() oc.ask("@this: ", { submit = true }) end, { desc = "Ask about this" })
+    vim.keymap.set({ "n", "x" }, "<leader>o+", function() oc.prompt("@this") end, { desc = "Add this" })
+    vim.keymap.set({ "n", "x" }, "<leader>os", function() oc.select() end, { desc = "Select prompt" })
+    vim.keymap.set("n", "<leader>ot", function() oc.toggle() end, { desc = "Toggle embedded" })
+    vim.keymap.set("n", "<leader>oc", function() oc.command() end, { desc = "Select command" })
+    vim.keymap.set("n", "<leader>on", function() oc.command("session_new") end, { desc = "New session" })
+    vim.keymap.set("n", "<leader>oi", function() oc.command("session_interrupt") end, { desc = "Interrupt session" })
+    vim.keymap.set("n", "<leader>oA", function() oc.command("agent_cycle") end, { desc = "Cycle selected agent" })
+    vim.keymap.set("n", "<S-C-u>",    function() oc.command("messages_half_page_up") end, { desc = "Messages half page up" })
+    vim.keymap.set("n", "<S-C-d>",    function() oc.command("messages_half_page_down") end, { desc = "Messages half page down" })
+      -- stylua: ignore end
+    end,
+  },
+  -- {
+  --   'olimorris/codecompanion.nvim',
+  --   opts = {},
+  --   dependencies = {
+  --     'nvim-lua/plenary.nvim',
+  --   },
+  -- },
   -- {
   --   'github/copilot.vim',
   --   cmd = 'Copilot',
