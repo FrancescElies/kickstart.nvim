@@ -205,12 +205,12 @@ vim.keymap.set({ 'n', 'v' }, '<leader>x', vim.lsp.buf.references, { buffer = tru
 --   "qp paste the contents of the register to the current cursor position
 --   add the missing motion, then <Esc> return to visual mode
 --   "qyy yank this new modified macro back into the q register
-vim.keymap.set(
-  'n',
-  '<leader>m',
-  ":<c-u><c-r><c-r>='let @'. v:register .' = '. string(getreg(v:register))<cr><c-f><left>p",
-  { desc = 'edit macro, e.g. "q<leader>m' }
-)
+-- vim.keymap.set(
+--   'n',
+--   '<leader>m',
+--   ":<c-u><c-r><c-r>='let @'. v:register .' = '. string(getreg(v:register))<cr><c-f><left>p",
+--   { desc = 'edit macro, e.g. "q<leader>m' }
+-- )
 
 --
 -- the end
