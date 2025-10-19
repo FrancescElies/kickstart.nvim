@@ -29,9 +29,9 @@
 
 local bin_nu = vim.fs.joinpath(vim.fs.normalize '~', '.cargo/bin/nu')
 if vim.fn.exepath(bin_nu) then
-  print 'using nushell'
+  vim.notify('using nushell', vim.log.levels.INFO)
 else
-  print('using ' .. vim.o.shell)
+  vim.notify('using ' .. vim.o.shell, vim.log.levels.INFO)
   return {}
 end
 
