@@ -49,10 +49,7 @@ vim.api.nvim_create_autocmd('TermOpen', {
 
 -- NOTE: forces term every time to scroll to the bottom
 -- -- make sure we are on insert mode when entering the terminal
-vim.api.nvim_create_autocmd({
-  'TermOpen',
-  -- 'BufEnter'
-}, {
+vim.api.nvim_create_autocmd({ 'TermOpen' }, {
   pattern = { '*' },
   group = group,
   callback = function()
@@ -171,10 +168,7 @@ vim.api.nvim_create_user_command('SmallTermResetSize', win_stick_to_bottom, {}) 
 vim.keymap.set({ 'n', 't' }, '<C-,>', '<cmd>FloatTerm<cr>', { desc = 'float term' })
 -- Binding for alacritty, check which char `=vim.fn.getchar()`
 vim.keymap.set({ 'n', 't' }, '\u{f8ff}', '<cmd>FloatTerm<cr>', { desc = 'float term' })
--- vim.keymap.set('', '\u{f8fe}', '<C-Space>')
--- vim.keymap.set('', '\u{f8fe}', function()
---   print 'Control-Space pressed!'
--- end, { noremap = true, silent = false })
+vim.keymap.set({ 'n', 't' }, ',r', '<cmd>:startinsert<cr><C-p><cr>', { desc = '[r]erun last command' })
 vim.keymap.set({ 'n', 't' }, ',f', '<cmd>FloatTerm<cr>', { desc = '[f]loat term' })
 vim.keymap.set({ 'n', 't' }, ',t', '<cmd>FloatTerm<cr>', { desc = 'float [t]erm' })
 vim.keymap.set({ 'n', 't' }, ',b', toggle_bottomterm, { desc = '[b]ottom term' })
