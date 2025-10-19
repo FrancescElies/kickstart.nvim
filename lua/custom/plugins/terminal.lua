@@ -164,17 +164,18 @@ end
 vim.api.nvim_create_user_command('FloatTerm', toggle_terminal, {}) -- Create a floating window with default dimensions
 vim.api.nvim_create_user_command('SmallTermResetSize', win_stick_to_bottom, {}) -- Create a floating window with default dimensions
 
--- <C-,> (open floaterm) feels right when combined with <C-p> (previous command) and <C-m> (enter)
+-- <C-,><C-p><C-m> feels right <open floaterm> then get <previous command> and <enter> without releasing CTRL
 vim.keymap.set({ 'n', 't' }, '<C-,>', '<cmd>FloatTerm<cr>', { desc = 'float term' })
 -- Binding for alacritty, check which char `=vim.fn.getchar()`
 vim.keymap.set({ 'n', 't' }, '\u{f8ff}', '<cmd>FloatTerm<cr>', { desc = 'float term' })
-vim.keymap.set({ 'n', 't' }, ',r', '<cmd>:startinsert<cr><C-p><cr>', { desc = '[r]erun last command' })
+vim.keymap.set({ 'n', 't' }, ',.', '<cmd>:startinsert<cr><C-p><cr>', { desc = '[r]epeat last comamnd' })
 vim.keymap.set({ 'n', 't' }, ',f', '<cmd>FloatTerm<cr>', { desc = '[f]loat term' })
-vim.keymap.set({ 'n', 't' }, ',t', '<cmd>FloatTerm<cr>', { desc = 'float [t]erm' })
+vim.keymap.set({ 'n', 't' }, ',v', '<cmd>vsplit|term<cr>')
+vim.keymap.set({ 'n', 't' }, ',s', '<cmd>split|term<cr>')
 vim.keymap.set({ 'n', 't' }, ',b', toggle_bottomterm, { desc = '[b]ottom term' })
-vim.keymap.set({ 'n', 't' }, ',s', send_line_to_bottom_term, { desc = '[s]end line bottom term' })
-vim.keymap.set({ 'n', 't' }, ',w', '<C-w><C-w>', { desc = 'switch [w]indow' })
-vim.keymap.set({ 'n', 't' }, ',d', '<cmd>bd!<cr>', { desc = '[d]elete' })
+vim.keymap.set({ 'n', 't' }, ',b', win_stick_to_bottom, { desc = '[b]ottom term' })
+vim.keymap.set({ 'n', 't' }, ',.', send_line_to_bottom_term, { desc = '[s]end line bottom term' })
+vim.keymap.set({ 'n', 't' }, ',q', '<cmd>bd!<cr>')
 -- <C-r> doesn't work in terminal mode, it will perform `reverse search`
 -- vim.keymap.set('t','sr', "'<C-\\><C-N>\"'.nr2char(getchar()).'pi'", { desc = '<C-r> fellow' })
 
