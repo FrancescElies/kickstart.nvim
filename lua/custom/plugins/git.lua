@@ -16,12 +16,14 @@ vim.keymap.set('v', '<leader>gl', tele.git_bcommits_range, { desc = '[g]it [l]og
 -- stylua: ignore
 vim.keymap.set('n', '<leader>gz', tele.git_stash, { desc = '[g]it zstash' })
 
+local commit_group = vim.api.nvim_create_augroup('my-git-commit', {})
 vim.api.nvim_create_autocmd('BufEnter', {
-  group = 'markdown',
+  group = commit_group,
   pattern = '*COMMIT*',
   callback = function(_)
-    print 'gitcommit n-keymap [i]nsert [s]tory: is'
+    -- vim.notify 'gitcommit n-keymap:\n  - [i]nsert [s]tory\n  - [i]nsert [t]ask'
     vim.keymap.set('n', 'is', 'istoFya #$', { desc = '[i]nsert [s]tory' })
+    vim.keymap.set('n', 'it', 'itaskFka #$', { desc = '[i]nsert [t]ask' })
   end,
 })
 
