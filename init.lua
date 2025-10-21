@@ -1280,13 +1280,15 @@ require('lazy').setup({
             group = function(_, match)
               -- highlight words with certain colors
               local words = {
-                red = '#aa0000',
-                green = '#00aa00',
-                blue = '#0000aa',
-                delegated = '#771111',
+                red = '#c97c7c',
+                green = '#7baf7b',
+                blue = '#5b8db8',
+                delegated = '#a0c4ff',
+                todo = '#ffd6a5',
                 onhold = '#ddbe0b',
+                inprogress = '#fdffb6',
                 wont = '#ababab',
-                done = '#00a087',
+                done = '#caffbf',
               }
               local stripped = string.lower(match:gsub(':$', ''))
               local hex = words[stripped]
