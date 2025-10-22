@@ -117,8 +117,8 @@ map H ^
 map L $
 
 " QUICKLY NAVIGATE QUICKFIX LIST:
-nnoremap <M-k> :cprev<cr>zz
-nnoremap <M-j> :cnext<cr>zz
+nnoremap <C-k> :cprev<cr>zz
+nnoremap <C-j> :cnext<cr>zz
 
 
 " KEEP THINGS VERTICALLY CENTERED DURING SEARCHES:
