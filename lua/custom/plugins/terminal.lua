@@ -2,6 +2,7 @@
 
 -- Terminal Mappings
 vim.keymap.set('t', '<esc><esc>', '<c-\\><c-n>', { desc = 'Enter Normal Mode' })
+vim.keymap.set('t', 'jk', '<c-\\><c-n>', { desc = 'Enter Normal Mode' })
 vim.keymap.set('t', '<C-w><C-h>', '<cmd>wincmd h<cr>', { desc = 'go left window' })
 vim.keymap.set('t', '<C-w><C-j>', '<cmd>wincmd j<cr>', { desc = 'go lower window' })
 vim.keymap.set('t', '<C-w><C-k>', '<cmd>wincmd k<cr>', { desc = 'go upper window' })
