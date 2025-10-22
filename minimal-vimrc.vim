@@ -117,8 +117,6 @@ map H ^
 map L $
 
 " QUICKLY NAVIGATE QUICKFIX LIST:
-nnoremap <M-h> :colder<cr>
-nnoremap <M-l> :cnewer<cr>
 nnoremap <M-k> :cprev<cr>zz
 nnoremap <M-j> :cnext<cr>zz
 

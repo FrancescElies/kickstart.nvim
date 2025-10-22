@@ -48,9 +48,6 @@ local function is_quickfix_open()
   return vim.fn.getqflist({ winid = 0 }).winid ~= 0
 end
 
-vim.keymap.set('n', '<M-h>', ':colder<cr>', { desc = 'open older error list' })
-vim.keymap.set('n', '<M-l>', ':cnewer<cr>', { desc = 'open newer error list' })
-
 -- vim.keymap.set('n', '<M-k>', ':cprev<cr>zz', { desc = 'previous error' })
 vim.keymap.set('n', '<M-k>', function()
   if is_loclist_open() then
