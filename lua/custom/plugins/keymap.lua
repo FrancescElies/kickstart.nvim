@@ -48,11 +48,11 @@ local function is_quickfix_open()
   return vim.fn.getqflist({ winid = 0 }).winid ~= 0
 end
 
-vim.keymap.set('n', '<C-h>', ':colder<cr>', { desc = 'open older error list' })
-vim.keymap.set('n', '<C-l>', ':cnewer<cr>', { desc = 'open newer error list' })
+vim.keymap.set('n', '<M-h>', ':colder<cr>', { desc = 'open older error list' })
+vim.keymap.set('n', '<M-l>', ':cnewer<cr>', { desc = 'open newer error list' })
 
--- vim.keymap.set('n', '<C-k>', ':cprev<cr>zz', { desc = 'previous error' })
-vim.keymap.set('n', '<C-k>', function()
+-- vim.keymap.set('n', '<M-k>', ':cprev<cr>zz', { desc = 'previous error' })
+vim.keymap.set('n', '<M-k>', function()
   if is_loclist_open() then
     vim.cmd 'lprevious' -- previous quickfix item
     vim.cmd 'normal! zz'
@@ -64,8 +64,8 @@ vim.keymap.set('n', '<C-k>', function()
     -- jump_diagnostic_by_severity { count = -1 }
   end
 end)
--- vim.keymap.set('n', '<C-j>', ':cnext<cr>zz', { desc = 'next error' })
-vim.keymap.set('n', '<C-j>', function()
+-- vim.keymap.set('n', '<M-j>', ':cnext<cr>zz', { desc = 'next error' })
+vim.keymap.set('n', '<M-j>', function()
   if is_loclist_open() then
     vim.cmd 'lnext' -- next quickfix item
     vim.cmd 'normal! zz'
@@ -106,7 +106,8 @@ vim.keymap.set({ 'n', 'v', 'o' }, 'L', '$')
 -- quick scape
 vim.keymap.set('c', 'jk', '<Esc>')
 vim.keymap.set('i', 'jk', '<Esc>')
-vim.keymap.set('i', '<C-c>', '<Esc>')
+vim.keymap.set({ 'n', 'i' }, '<C-c>', '<Esc>')
+
 vim.keymap.set('n', 'ı', 'i')
 
 -- [s]witch commands

@@ -117,10 +117,10 @@ map H ^
 map L $
 
 " QUICKLY NAVIGATE QUICKFIX LIST:
-nnoremap <c-h> :colder<cr>
-nnoremap <c-l> :cnewer<cr>
-nnoremap <c-k> :cprev<cr>zz
-nnoremap <c-j> :cnext<cr>zz
+nnoremap <M-h> :colder<cr>
+nnoremap <M-l> :cnewer<cr>
+nnoremap <M-k> :cprev<cr>zz
+nnoremap <M-j> :cnext<cr>zz
 
 
 " KEEP THINGS VERTICALLY CENTERED DURING SEARCHES:
@@ -135,6 +135,8 @@ nnoremap g#    g#zzzv
 
 " QUICK ESCAPE:
 inoremap jk <Esc>
+inoremap <C-c> <Esc>
+nnoremap <C-c> <Esc>
 nnoremap Q <nop>
 
 " Turkish keyboard
