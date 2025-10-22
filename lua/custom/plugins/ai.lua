@@ -1,14 +1,13 @@
 local is_windows = string.lower(vim.loop.os_uname().sysname) == 'windows_nt'
 if is_windows then
-  vim.g.copilot_filetypes = { ['*'] = false, cpp = true, c = true, typescript = true, python = true }
+  vim.g.copilot_filetypes = { ['*'] = false, cpp = true, c = true, typescript = true, python = true, rust = true }
   vim.g.copilot_node_command = '~/AppData/Local/fnm_multishells/2760_1761048716755/node.exe'
   return {
     'github/copilot.vim',
-    cmd = 'Copilot',
-    event = 'InsertEnter',
-    opts = {
-      -- auto_activate = false,
-    },
+    event = 'VeryLazy',
+    -- opts = {
+    -- auto_activate = false,
+    -- },
   }
 else
   return {
