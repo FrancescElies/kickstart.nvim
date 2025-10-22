@@ -174,7 +174,7 @@ vim.keymap.set({ 'n', 't' }, ',v', '<cmd>vsplit|term<cr>')
 vim.keymap.set({ 'n', 't' }, ',s', '<cmd>split|term<cr>')
 vim.keymap.set({ 'n', 't' }, ',b', toggle_bottomterm, { desc = '[b]ottom term' })
 vim.keymap.set({ 'n', 't' }, ',b', win_stick_to_bottom, { desc = '[b]ottom term' })
-vim.keymap.set({ 'n', 't' }, ',.', send_line_to_bottom_term, { desc = '[s]end line bottom term' })
+vim.keymap.set({ 'n', 't' }, ',l', send_line_to_bottom_term, { desc = '[l]ine to bottom term' })
 vim.keymap.set({ 'n', 't' }, ',q', '<cmd>bd!<cr>')
 -- <C-r> doesn't work in terminal mode, it will perform `reverse search`
 -- vim.keymap.set('t','sr', "'<C-\\><C-N>\"'.nr2char(getchar()).'pi'", { desc = '<C-r> fellow' })
