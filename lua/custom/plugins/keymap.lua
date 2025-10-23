@@ -48,7 +48,13 @@ local function is_quickfix_open()
   return vim.fn.getqflist({ winid = 0 }).winid ~= 0
 end
 
--- vim.keymap.set('n', '<C-k>', ':cprev<cr>zz', { desc = 'previous error' })
+vim.g.diagnostic_visit_errors_first = true
+vim.api.nvim_create_user_command('ToggleDiagnosticVisitOrder', function()
+  _G.diagnostic_by_Severity_enabled = not _G.autosave_enabled
+  print('DiagnosticBySeverity ' .. (_G.autosave_enabled and 'enabled' or 'disabled'))
+end, {})
+vim.keymap.set('n', '<leader>vD', ':ToggleDiagnosticVisitOrder<cr>', { desc = '[d]iagnostic visit order' })
+
 vim.keymap.set('n', '<C-k>', function()
   if is_loclist_open() then
     vim.cmd 'lprevious' -- previous quickfix item
@@ -57,11 +63,14 @@ vim.keymap.set('n', '<C-k>', function()
     vim.cmd 'cprevious' -- previous quickfix item
     vim.cmd 'normal! zz'
   else
-    -- vim.diagnostic.jump { count = -1, float = true }
-    jump_diagnostic_by_severity { count = -1 }
+    if vim.g.diagnostic_visit_errors_first then
+      jump_diagnostic_by_severity { count = -1 }
+    else
+      vim.diagnostic.jump { count = -1, float = true }
+    end
   end
 end)
--- vim.keymap.set('n', '<C-j>', ':cnext<cr>zz', { desc = 'next error' })
+
 vim.keymap.set('n', '<C-j>', function()
   if is_loclist_open() then
     vim.cmd 'lnext' -- next quickfix item
@@ -70,8 +79,11 @@ vim.keymap.set('n', '<C-j>', function()
     vim.cmd 'cnext' -- next quickfix item
     vim.cmd 'normal! zz'
   else
-    -- vim.diagnostic.jump { count = 1, float = true }
-    jump_diagnostic_by_severity { count = 1 }
+    if vim.g.diagnostic_visit_errors_first then
+      jump_diagnostic_by_severity { count = 1 }
+    else
+      vim.diagnostic.jump { count = 1, float = true }
+    end
   end
 end)
 
