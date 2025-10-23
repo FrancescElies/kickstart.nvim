@@ -73,6 +73,17 @@ vim.opt.diffopt:append {
   'linematch:60', -- enables intraline (word-level) diff matching on similar lines (up to 60 chars difference allowed
 }
 
+vim.api.nvim_create_user_command('Dec2Hex', function()
+  local cword = vim.fn.expand '<cword>'
+  local num = tonumber(cword)
+  if num then
+    local hex = string.format('0x%X', num)
+    vim.cmd('normal! ciw' .. hex)
+  else
+    print 'Not a valid number under cursor'
+  end
+end, {})
+
 return {
   -- { 'm4xshen/hardtime.nvim', lazy = false, dependencies = { 'MunifTanjim/nui.nvim' }, opts = {} },
   -- { 'tris203/precognition.nvim', opts = {} },
