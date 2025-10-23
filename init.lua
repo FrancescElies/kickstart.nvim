@@ -414,6 +414,7 @@ require('lazy').setup({
           },
           mappings = {
             i = {
+              ['<M-/>'] = 'to_fuzzy_refine', -- <c-enter> not sent to nvim from alacritty
               ['<c-enter>'] = 'to_fuzzy_refine',
               ['<c-g>'] = switch_to_grep,
             },
