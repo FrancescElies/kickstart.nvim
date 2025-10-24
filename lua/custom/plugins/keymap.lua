@@ -137,8 +137,7 @@ vim.keymap.set({ 'n', 'v', 'o' }, 'H', '^')
 vim.keymap.set({ 'n', 'v', 'o' }, 'L', '$')
 
 -- quick scape
-vim.keymap.set('c', 'jk', '<Esc>')
-vim.keymap.set('i', 'jk', '<Esc>')
+vim.keymap.set({ 'i', 'c' }, 'jk', '<Esc>')
 vim.keymap.set({ 'n', 'i' }, '<C-c>', '<Esc>')
 
 vim.keymap.set('n', 'ı', 'i')
