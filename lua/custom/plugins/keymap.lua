@@ -55,6 +55,34 @@ vim.api.nvim_create_user_command('ToggleDiagnosticVisitOrder', function()
 end, {})
 vim.keymap.set('n', '<leader>vD', ':ToggleDiagnosticVisitOrder<cr>', { desc = '[d]iagnostic visit order' })
 
+local function diagnostic_jump(opts)
+  if vim.g.diagnostic_visit_errors_first then
+    jump_diagnostic_by_severity { count = opts.count }
+  else
+    vim.diagnostic.jump { count = opts.count, float = true }
+  end
+end
+
+vim.keymap.set('n', '<M-j>', function()
+  diagnostic_jump { count = 1 }
+end)
+
+vim.keymap.set('n', '<M-k>', function()
+  diagnostic_jump { count = -1 }
+end)
+
+vim.keymap.set('n', '<C-j>', function()
+  if is_loclist_open() then
+    vim.cmd 'lnext' -- next quickfix item
+    vim.cmd 'normal! zz'
+  elseif is_quickfix_open() then
+    vim.cmd 'cnext' -- next quickfix item
+    vim.cmd 'normal! zz'
+  else
+    diagnostic_jump { count = 1 }
+  end
+end)
+
 vim.keymap.set('n', '<C-k>', function()
   if is_loclist_open() then
     vim.cmd 'lprevious' -- previous quickfix item
@@ -63,11 +91,7 @@ vim.keymap.set('n', '<C-k>', function()
     vim.cmd 'cprevious' -- previous quickfix item
     vim.cmd 'normal! zz'
   else
-    if vim.g.diagnostic_visit_errors_first then
-      jump_diagnostic_by_severity { count = -1 }
-    else
-      vim.diagnostic.jump { count = -1, float = true }
-    end
+    diagnostic_jump { count = -1 }
   end
 end)
 
