@@ -144,6 +144,7 @@ vim.keymap.set('n', 'ı', 'i')
 
 -- [s]witch commands
 vim.keymap.set({ 'n', 'x', 'o' }, 's', '<Nop>') -- disables default behaviour
+vim.keymap.set({ 'n', 'x', 'o' }, 'S', '<Nop>') -- disables default behaviour
 vim.keymap.set('n', 'se', '<cmd>e #<cr>', { desc = '[s]witch to alternat[e]' })
 vim.keymap.set('n', 'so', '<cmd>so %<cr>', { desc = '[s]ouce current buffer' })
 
@@ -228,6 +229,7 @@ vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
 vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
 
 vim.keymap.set('n', 'su', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gIc<Left><Left><Left><Left>]], { desc = 'substitute current word' })
+vim.keymap.set('n', 'Su', [[:%S/\<<C-r><C-w>\>/<C-r><C-w>/gIc<Left><Left><Left><Left>]], { desc = 'substitute current word' })
 
 vim.keymap.set({ 'n', 'v' }, '<leader>x', vim.lsp.buf.references, { buffer = true })
 
