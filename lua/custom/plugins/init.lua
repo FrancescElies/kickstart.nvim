@@ -84,6 +84,35 @@ vim.api.nvim_create_user_command('Dec2Hex', function()
   end
 end, {})
 
+local is_windows = string.lower(vim.loop.os_uname().sysname) == 'windows_nt'
+if jit and is_windows then
+  vim.g.keep_screen_alive = false
+  vim.api.nvim_create_user_command('ToggleScreenAlive', function()
+    local ffi = require 'ffi'
+    ffi.cdef [[ uint32_t SetThreadExecutionState(uint32_t esFlags); ]]
+    local ES_CONTINUOUS = 0x80000000
+    local ES_SYSTEM_REQUIRED = 0x00000001
+    local ES_DISPLAY_REQUIRED = 0x00000002
+    local kernel32 = ffi.load 'kernel32'
+    if vim.g.keep_screen_alive then
+      local flags = bit.bor(ES_CONTINUOUS, ES_SYSTEM_REQUIRED, ES_DISPLAY_REQUIRED)
+      local old_flags = kernel32.SetThreadExecutionState(flags)
+      if old_flags == 0 then
+        error 'Failed to set thread execution state'
+      else
+        print('Keep screen alive ON - old flags: ' .. string.format('0x%X', old_flags))
+      end
+    else
+      local old_flags = kernel32.SetThreadExecutionState(bit.bor(ES_CONTINUOUS))
+      if old_flags == 0 then
+        error 'Failed to reset thread execution state'
+      else
+        print('Keep screen alive OFF - old flags: ' .. string.format('0x%X', old_flags))
+      end
+    end
+  end, {})
+end
+
 return {
   -- { 'm4xshen/hardtime.nvim', lazy = false, dependencies = { 'MunifTanjim/nui.nvim' }, opts = {} },
   -- { 'tris203/precognition.nvim', opts = {} },
