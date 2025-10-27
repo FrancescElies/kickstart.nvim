@@ -95,6 +95,13 @@ if jit and is_windows then
     local ES_DISPLAY_REQUIRED = 0x00000002
     local kernel32 = ffi.load 'kernel32'
     if vim.g.keep_screen_alive then
+      local old_flags = kernel32.SetThreadExecutionState(bit.bor(ES_CONTINUOUS))
+      if old_flags == 0 then
+        error 'Failed to reset thread execution state'
+      else
+        print('Keep screen alive OFF - old flags: ' .. string.format('0x%X', old_flags))
+      end
+    else
       local flags = bit.bor(ES_CONTINUOUS, ES_SYSTEM_REQUIRED, ES_DISPLAY_REQUIRED)
       local old_flags = kernel32.SetThreadExecutionState(flags)
       if old_flags == 0 then
@@ -102,14 +109,8 @@ if jit and is_windows then
       else
         print('Keep screen alive ON - old flags: ' .. string.format('0x%X', old_flags))
       end
-    else
-      local old_flags = kernel32.SetThreadExecutionState(bit.bor(ES_CONTINUOUS))
-      if old_flags == 0 then
-        error 'Failed to reset thread execution state'
-      else
-        print('Keep screen alive OFF - old flags: ' .. string.format('0x%X', old_flags))
-      end
     end
+    vim.g.keep_screen_alive = not vim.g.keep_screen_alive
   end, {})
 end
 
