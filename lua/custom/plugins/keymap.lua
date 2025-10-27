@@ -61,6 +61,7 @@ local function diagnostic_jump(opts)
   else
     vim.diagnostic.jump { count = opts.count, float = true }
   end
+  vim.cmd 'normal! zz'
 end
 
 vim.keymap.set('n', '<M-j>', function()
