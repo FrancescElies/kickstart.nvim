@@ -795,8 +795,8 @@ require('lazy').setup({
         -- biome = { filetypes = { 'typescript', 'json', 'maxpat', 'json' }, init_options = { provideFormatter = true } },
         -- sqls = {},
         -- gopls = {},
-        -- basedpyright = {}, -- pyright fork with inlay hints
-        pyright = {},
+        basedpyright = {}, -- pyright fork with inlay hints
+        -- pyright = {},
         -- jsonls = {
         --   filetypes = { 'maxpat', 'json' },
         --   init_options = { provideFormatter = true },
