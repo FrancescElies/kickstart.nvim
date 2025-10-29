@@ -112,6 +112,28 @@ if jit and is_windows then
   end, {})
 end
 
+vim.api.nvim_create_user_command('ExecuteAfterXMinutes', function(opts)
+  local minutes = tonumber(opts.fargs[1])
+  local command = table.concat(opts.fargs, ' ', 2)
+  local millis = minutes * 60 * 1000
+
+  vim.defer_fn(function()
+    vim.cmd(command)
+  end, millis)
+
+  -- local timer = vim.loop.new_timer()
+  -- timer:start(
+  --   millis,
+  --   0,
+  --   vim.schedule_wrap(function()
+  --     vim.cmd(command)
+  --   end)
+  -- )
+  -- -- to cancel: timer:stop() timer:close()
+
+  print(string.format('timmer: `%s` will run in %d minutes,', command, minutes))
+end, { nargs = '+', desc = 'execute command after X minutes' })
+
 return {
   -- { 'm4xshen/hardtime.nvim', lazy = false, dependencies = { 'MunifTanjim/nui.nvim' }, opts = {} },
   -- { 'tris203/precognition.nvim', opts = {} },
