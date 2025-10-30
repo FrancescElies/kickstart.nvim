@@ -72,6 +72,8 @@ vim.keymap.set('n', '<M-k>', function()
   diagnostic_jump { count = -1 }
 end)
 
+vim.keymap.set('n', '<c-h>', ':colder<cr>')
+vim.keymap.set('n', '<c-l>', ':cnewer<cr>')
 vim.keymap.set('n', '<C-j>', function()
   if is_loclist_open() then
     vim.cmd 'lnext' -- next quickfix item
