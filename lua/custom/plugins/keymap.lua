@@ -65,11 +65,15 @@ local function diagnostic_jump(opts)
 end
 
 vim.keymap.set('n', '<M-j>', function()
-  diagnostic_jump { count = 1 }
+  -- diagnostic_jump { count = 1 }
+  vim.cmd 'cnext'
+  vim.cmd 'normal! zz'
 end)
 
 vim.keymap.set('n', '<M-k>', function()
-  diagnostic_jump { count = -1 }
+  -- diagnostic_jump { count = -1 }
+  vim.cmd 'cprev'
+  vim.cmd 'normal! zz'
 end)
 
 vim.keymap.set('n', '<c-h>', ':colder<cr>')
