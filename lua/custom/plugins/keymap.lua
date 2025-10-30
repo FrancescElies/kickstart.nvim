@@ -64,21 +64,13 @@ local function diagnostic_jump(opts)
   vim.cmd 'normal! zz'
 end
 
-vim.keymap.set('n', '<M-j>', function()
-  -- diagnostic_jump { count = 1 }
-  vim.cmd 'cnext'
-  vim.cmd 'normal! zz'
-end)
-
-vim.keymap.set('n', '<M-k>', function()
-  -- diagnostic_jump { count = -1 }
-  vim.cmd 'cprev'
-  vim.cmd 'normal! zz'
-end)
+vim.keymap.set('n', '<M-h>', ':bprev')
+vim.keymap.set('n', '<M-l>', ':bnext')
+-- <M-j> and <M-k> jumps between git hunks
 
 vim.keymap.set('n', '<c-h>', ':colder<cr>')
 vim.keymap.set('n', '<c-l>', ':cnewer<cr>')
-vim.keymap.set('n', '<C-j>', function()
+vim.keymap.set('n', '<c-j>', function()
   if is_loclist_open() then
     vim.cmd 'lnext' -- next quickfix item
     vim.cmd 'normal! zz'
@@ -90,7 +82,7 @@ vim.keymap.set('n', '<C-j>', function()
   end
 end)
 
-vim.keymap.set('n', '<C-k>', function()
+vim.keymap.set('n', '<c-k>', function()
   if is_loclist_open() then
     vim.cmd 'lprevious' -- previous quickfix item
     vim.cmd 'normal! zz'
