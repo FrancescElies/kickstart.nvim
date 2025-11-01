@@ -84,34 +84,6 @@ vim.api.nvim_create_user_command('Dec2Hex', function()
   end
 end, {})
 
-local is_windows = string.lower(vim.loop.os_uname().sysname) == 'windows_nt'
-if jit and is_windows then
-  local ffi = require 'ffi'
-  ffi.cdef [[ uint32_t SetThreadExecutionState(uint32_t esFlags); ]]
-  local ES_CONTINUOUS = 0x80000000
-  local ES_SYSTEM_REQUIRED = 0x00000001
-  local ES_DISPLAY_REQUIRED = 0x00000002
-  local kernel32 = ffi.load 'kernel32'
-
-  vim.api.nvim_create_user_command('ScreenAliveOff', function()
-    local ret = kernel32.SetThreadExecutionState(bit.bor(ES_CONTINUOUS))
-    if ret == 0 then
-      error 'Failed to reset thread execution state'
-    else
-      print 'Keep screen alive OFF'
-    end
-  end, {})
-
-  vim.api.nvim_create_user_command('ScreenAliveOn', function()
-    local ret = kernel32.SetThreadExecutionState(bit.bor(ES_CONTINUOUS, ES_SYSTEM_REQUIRED, ES_DISPLAY_REQUIRED))
-    if ret == 0 then
-      error 'Failed to set thread execution state'
-    else
-      print 'Keep screen alive ON '
-    end
-  end, {})
-end
-
 vim.api.nvim_create_user_command('ExecuteAfterXMinutes', function(opts)
   local minutes = tonumber(opts.fargs[1])
   local command = table.concat(opts.fargs, ' ', 2)
@@ -120,19 +92,26 @@ vim.api.nvim_create_user_command('ExecuteAfterXMinutes', function(opts)
   vim.defer_fn(function()
     vim.cmd(command)
   end, millis)
+end, {})
 
-  -- local timer = vim.loop.new_timer()
-  -- timer:start(
-  --   millis,
-  --   0,
-  --   vim.schedule_wrap(function()
-  --     vim.cmd(command)
-  --   end)
-  -- )
-  -- -- to cancel: timer:stop() timer:close()
+---@type table<string, uv.uv_timer_t|nil>
+local timers = {
+  every_x_min = nil,
+}
 
-  print(string.format('timmer: `%s` will run in %d minutes,', command, minutes))
-end, { nargs = '+', desc = 'execute command after X minutes' })
+vim.api.nvim_create_user_command('ExecuteEveryXMinutes', function(opts)
+  local minutes = tonumber(opts.fargs[1])
+  local millis = minutes * 60 * 1000
+  local command = table.concat(opts.fargs, ' ', 2)
+  timers.every_x_min = vim.loop.new_timer()
+  timers.every_x_min:start(millis, 0, wiggle_mouse)
+end, {})
+
+vim.api.nvim_create_user_command('ExecuteEveryXMinutesCancel', function(opts)
+  if timers.every_x_min ~= nil then
+    timers.every_x_min:stop()
+  end
+end, {})
 
 return {
   -- { 'm4xshen/hardtime.nvim', lazy = false, dependencies = { 'MunifTanjim/nui.nvim' }, opts = {} },
