@@ -107,12 +107,15 @@ return {
     keys = {
       -- :h diff-mode
       -- :h copy-diffs
-      { '<leader>db', ':DiffviewFileHistory<cr>', desc = '[d]iff History [b]ranch' },
-      { '<leader>df', '<cmd>DiffviewFileHistory %', desc = '[d]iff history [f]ile' },
-      { '<leader>d.', '<cmd>DiffviewOpen<cr>', desc = '[d]iff (.) working tree' },
-      { '<leader>dl', ':DiffviewFileHistory', desc = '[d]iff history ([l]ine evolution)', mode = { 'v' } },
+      { '<leader>dhb', ':DiffviewFileHistory<cr>', desc = '[d]iff History [b]ranch' },
+      { '<leader>dhf', ':DiffviewFileHistory %<cr>', desc = '[d]iff history [f]ile' },
+      { '<leader>dhl', ':.DiffviewFileHistory', desc = '[d]iff history ([l]ine evolution)' },
+      { '<leader>dhl', ':DiffviewFileHistory', desc = '[d]iff history ([l]ine evolution)', mode = { 'v' } },
+      { '<leader>d.', ':DiffviewOpen<cr>', desc = '[d]iff (.) working tree' },
+      { '<leader>dm', ':DiffviewOpen origin/main...HEAD', desc = '[d]iff with merge base' },
+      { '<leader>dq', ':DiffviewClose<cr>', desc = '[d]iff [q]uit' },
 
-      -- Examples
+      -- Examples:
       -- :DiffviewOpen
       -- :DiffviewOpen HEAD~2
       -- :DiffviewOpen HEAD~4..HEAD~2
@@ -121,29 +124,30 @@ return {
       -- :DiffviewOpen d4a7b0d..519b30e
       -- :DiffviewOpen origin/main...HEAD
       --
-      -- Additional commands for convenience
-      -- :DiffviewClose: Close the current diffview. You can also use :tabclose.
-      -- :DiffviewToggleFiles: Toggle the file panel.
-      -- :DiffviewFocusFiles: Bring focus to the file panel.
-      -- :DiffviewRefresh: Update stats and entries in the file list of the current Diffview.
-      --
+      -- Tips:
+      -- Hide untracked files: DiffviewOpen -uno
+      -- Exclude certain paths: DiffviewOpen -- :!exclude/this :!and/this
+      -- Run as if git was started in a specific directory: DiffviewOpen -C/foo/bar/baz
+      -- Diff the index against a git rev: DiffviewOpen HEAD~2 --cached
+      -- Q: How do I get the diagonal lines in place of deleted lines in diff-mode? (Lua): vim.opt.fillchars:append { diff = "╱" }
+      -- Q: How do I jump between hunks in the diff? A: Use [c and ]c :h jumpto-diffs
     },
   },
-  {
-    'aaronhallaert/advanced-git-search.nvim',
-    diff_plugin = 'diffview',
-    config = function()
-      -- NOTE: optionally setup telescope before loading the extension, don't do here see docs
-      require('telescope').load_extension 'advanced_git_search'
-    end,
-    keys = {
-      { '<leader>g//', ':AdvancedGitSearch<CR>', desc = '[g]it [s]earch' },
-      { '<leader>g/l', ':AdvancedGitSearch diff_commit_line<cr>', mode = { 'n', 'v' }, desc = '[g]it [d]iff [l]ine' },
-      { '<leader>g/r', ':AdvancedGitSearch checkout_reflog<cr>', desc = '[g]it [r]eflog' },
-    },
-    dependencies = {
-      'nvim-telescope/telescope.nvim',
-      'sindrets/diffview.nvim',
-    },
-  },
+  -- {
+  --   'aaronhallaert/advanced-git-search.nvim',
+  --   diff_plugin = 'diffview',
+  --   config = function()
+  --     -- NOTE: optionally setup telescope before loading the extension, don't do here see docs
+  --     require('telescope').load_extension 'advanced_git_search'
+  --   end,
+  --   keys = {
+  --     { '<leader>g//', ':AdvancedGitSearch<CR>', desc = '[g]it [s]earch' },
+  --     { '<leader>g/l', ':AdvancedGitSearch diff_commit_line<cr>', mode = { 'n', 'v' }, desc = '[g]it [d]iff [l]ine' },
+  --     { '<leader>g/r', ':AdvancedGitSearch checkout_reflog<cr>', desc = '[g]it [r]eflog' },
+  --   },
+  --   dependencies = {
+  --     'nvim-telescope/telescope.nvim',
+  --     'sindrets/diffview.nvim',
+  --   },
+  -- },
 }
