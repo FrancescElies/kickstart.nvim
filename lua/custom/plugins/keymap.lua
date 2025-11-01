@@ -156,9 +156,13 @@ vim.keymap.set('n', '#', '#zzzv')
 vim.keymap.set('n', 'g*', 'g*zzzv')
 vim.keymap.set('n', 'g#', 'g#zzzv')
 
--- Mstep by # step editing, repeat with single-repat `.`
-vim.keymap.set('n', '<C-n>', '*Ncgn')
-vim.keymap.set('x', '<C-n>', [[y/\V<C-R>=escape(@", '/\')<CR><CR>Ncgn]])
+-- easier step by step replace, repeat with single-repat `.`
+vim.keymap.set('x', 'c*', [[y/\V<C-R>=escape(@", '/\')<CR><CR>Ncgn]])
+vim.keymap.set('n', 'c*', '*Ncgn')
+vim.keymap.set('n', 'c#', '#Ncgn')
+vim.keymap.set('n', 'cg*', 'g*Ncgn')
+vim.keymap.set('n', 'cg#', 'g#Ncgn')
+vim.keymap.set('n', 'dg*', '*Ndgn')
 
 -- Keep cursor in place when joining lines
 -- vim.keymap.set('n', 'J', 'mzJ`z')
