@@ -225,7 +225,7 @@ vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
 vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
 
 vim.keymap.set('n', 'su', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gIc<Left><Left><Left><Left>]], { desc = 'substitute current word' })
-vim.keymap.set('n', 'Su', [[:%S/\<<C-r><C-w>\>/<C-r><C-w>/gIc<Left><Left><Left><Left>]], { desc = 'substitute current word' })
+vim.keymap.set('n', 'sb', [[:%S/\<<C-r><C-w>\>/<C-r><C-w>/gIc<Left><Left><Left><Left>]], { desc = 'substitute current word' })
 
 vim.keymap.set({ 'n', 'v' }, '<leader>x', vim.lsp.buf.references, { buffer = true })
 
