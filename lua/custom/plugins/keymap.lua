@@ -66,7 +66,12 @@ end
 
 vim.keymap.set('n', '<M-h>', ':bprev')
 vim.keymap.set('n', '<M-l>', ':bnext')
--- <M-j> and <M-k> jumps between git hunks
+vim.keymap.set('n', '<M-k>', function()
+  diagnostic_jump { count = -1 }
+end)
+vim.keymap.set('n', '<M-j>', function()
+  diagnostic_jump { count = 1 }
+end)
 
 vim.keymap.set('n', '<c-h>', ':colder<cr>')
 vim.keymap.set('n', '<c-l>', ':cnewer<cr>')
