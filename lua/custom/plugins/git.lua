@@ -92,15 +92,33 @@ return {
       end,
     },
   },
+  -- {
+  --   'NeogitOrg/neogit',
+  --   dependencies = {
+  --     'nvim-lua/plenary.nvim', -- required
+  --     'sindrets/diffview.nvim', -- optional - Diff integration
+  --     'nvim-telescope/telescope.nvim', -- optional
+  --   },
+  --   keys = { { '<leader>gs', vim.cmd.Neogit, desc = '[g]it [s]status' } },
+  -- },
   {
-    'NeogitOrg/neogit',
-    dependencies = {
-      'nvim-lua/plenary.nvim', -- required
-      'sindrets/diffview.nvim', -- optional - Diff integration
-      'nvim-telescope/telescope.nvim', -- optional
+    'tpope/vim-fugitive',
+    -- opts = {},
+    cmd = { 'G', 'Git', 'Gdiffsplit', 'Gread', 'Gwrite', 'Ggrep', 'GMove', 'GDelete', 'GBrowse', 'GRemove', 'GRename', 'Glgrep', 'Gedit' },
+    ft = { 'fugitive' },
+    keys = {
+      { '<leader>gB', '<cmd>Git blame<cr>', desc = 'Git blame' },
+      -- { '<leader>ga', '<cmd>Gwrite<cr>', desc = 'Git add current file' },
+      -- { '<leader>gr', '<cmd>Gread<cr>', desc = 'Git restore current file' },
+      { '<leader>gs', vim.cmd.Git, desc = '[g]it [s]tatus (fugitive)' },
+      { '<leader>gf', '<cmd>Git fetch<cr>', desc = 'Git fetch' },
+      { '<leader>gp', ':Git! push --force-with-lease -u origin <cr>', desc = '[g]it [p]ush force with lease' },
+      { '<leader>gP', ':Git! pull --rebase origin/', desc = '[g]it [p]ull rebase' },
+      { '<leader>gc', '<cmd>Git commit<cr>', desc = '[g]it [c]ommit' },
+      { '<leader>gu', '<cmd>Git reset HEAD~1', desc = '[g]it [u]ndo commit (reset HEAD~1)' },
     },
-    keys = { { '<leader>gs', vim.cmd.Neogit, desc = '[g]it [s]status' } },
   },
+
   {
     'sindrets/diffview.nvim',
     opts = {},
