@@ -172,8 +172,9 @@ vim.keymap.set('n', 'dg*', '*Ndgn')
 -- Keep cursor in place when joining lines
 -- vim.keymap.set('n', 'J', 'mzJ`z')
 
-vim.keymap.set({ 'n', 'v' }, '<leader>r\\', ':s/\\\\/\\//g<cr>', { desc = 'Replace \\ -> /' })
-vim.keymap.set({ 'n', 'v' }, '<leader>r/', ':s/\\//\\\\/g<cr>', { desc = 'Replace / -> [\\]' })
+-- how to choose bindings for commands that modify text: http://vimcasts.org/blog/2014/02/follow-my-leader/
+vim.keymap.set({ 'n', 'v' }, 'ysS', ':s/\\\\/\\//g<cr>', { desc = '[y]ou [s]ubstitute back[S]lash \\ -> /' })
+vim.keymap.set({ 'n', 'v' }, 'yss', ':s/\\//\\\\/g<cr>', { desc = '[y]ou [s]ubstitute [s]lash / -> [\\]' })
 
 -- https://github.com/nvim-telescope/telescope.nvim/issues/1923
 function vim.getVisualSelection()
