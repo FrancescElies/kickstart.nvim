@@ -349,7 +349,11 @@ require('lazy').setup({
 
         -- `build` is used to run some command when the plugin is installed/updated.
         -- This is only run then, not every time Neovim starts up.
-        build = 'make',
+        build = string.lower(vim.loop.os_uname().sysname) == 'windows_nt'
+            and 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release -DCMAKE_POLICY_VERSION_MINIMUM=3.5 ; cmake --build build --config Release'
+          or 'make',
+        -- cd ~/AppData/Local/nvim-data/lazy/telescope-fzf-native.nvim/
+        -- zig cc -shared -O3  -march=native -mtune=native -funroll-loops -fomit-frame-pointer -finline-functions -o build/libfzf.dll src\fzf.c
 
         -- `cond` is a condition used to determine whether this plugin should be
         -- installed and loaded.
@@ -462,6 +466,13 @@ require('lazy').setup({
               search_dirs = { vim.fn.expand '~/src' },
             },
           },
+          -- fzf = {
+          --   fuzzy = true, -- false will only do exact matching
+          --   override_generic_sorter = true, -- override the generic sorter
+          --   override_file_sorter = true, -- override the file sorter
+          --   case_mode = 'smart_case', -- or "ignore_case" or "respect_case"
+          --   -- the default case_mode is "smart_case"
+          -- },
         },
       }
 
