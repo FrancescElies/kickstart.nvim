@@ -410,7 +410,7 @@ require('lazy').setup({
         --  All the info you're looking for is in `:help telescope.setup()`
         --
         defaults = {
-          layout_strategy = 'vertical',
+          -- layout_strategy = 'vertical',
           path_display = {
             -- shorten = { len = 4, exclude = { -2, -1 } },
             filename_first = { reverse_directories = true },
