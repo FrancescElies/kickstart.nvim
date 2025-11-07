@@ -12,6 +12,7 @@ local function find(opts)
   opts.cwd = opts.cwd and vim.fn.expand(opts.cwd) or vim.loop.cwd()
   local default_shortcuts = {
     ['c'] = '*.{c,h,cpp,hpp}',
+    ['h'] = '*.{h,hpp}',
     ['go'] = '*.go',
     ['js'] = '*.{js,ts,tsx,svelte,json}',
     ['lua'] = '*.lua',
