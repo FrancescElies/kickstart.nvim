@@ -165,7 +165,7 @@ vim.api.nvim_create_user_command('SmallTermResetSize', win_stick_to_bottom, {}) 
 vim.keymap.set({ 'n', 't' }, '<C-,>', '<cmd>FloatTerm<cr>', { desc = 'float term' })
 -- Binding for alacritty, check which char `=vim.fn.getchar()`
 vim.keymap.set({ 'n', 't' }, '\u{f8ff}', '<cmd>FloatTerm<cr>', { desc = 'float term' })
-vim.keymap.set({ 'n', 't' }, ',.', '<cmd>:startinsert<cr><C-p><cr>', { desc = '[r]epeat last comamnd' })
+vim.keymap.set({ 'n', 't' }, ',.', '<cmd>:startinsert<cr><C-c><C-p><cr>', { desc = '[r]estart last comamnd' })
 vim.keymap.set({ 'n', 't' }, ',f', '<cmd>FloatTerm<cr>', { desc = '[f]loat term' })
 vim.keymap.set({ 'n', 't' }, ',v', '<cmd>vsplit|term<cr>')
 vim.keymap.set({ 'n', 't' }, ',s', '<cmd>split|term<cr>')
