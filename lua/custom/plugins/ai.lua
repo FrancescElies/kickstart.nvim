@@ -1,12 +1,68 @@
+-- https://github.com/neovim/neovim/pull/13896
+-- Usage:
+--   local r = vim.region(0, "'<", "'>", vim.fn.visualmode(), true)
+--   vim.print(visual_region_to_text(r))
+function visual_region_to_text(region)
+  local text = ''
+  local maxcol = vim.v.maxcol
+  for line, cols in vim.spairs(region) do
+    local endcol = cols[2] == maxcol and -1 or cols[2]
+    local chunk = vim.api.nvim_buf_get_text(0, line, cols[1], line, endcol, {})[1]
+    text = ('%s%s\n'):format(text, chunk)
+  end
+  return text
+end
+
 local is_windows = string.lower(vim.loop.os_uname().sysname) == 'windows_nt'
 if is_windows then
   vim.g.copilot_filetypes = { ['*'] = false, cpp = true, c = true, typescript = true, python = true, rust = true }
   vim.g.copilot_node_command = '~/AppData/Local/fnm_multishells/2760_1761048716755/node.exe'
   return {
-    'github/copilot.vim',
-    event = 'VeryLazy',
-    opts = {
-      auto_activate = false,
+    {
+      'github/copilot.vim',
+      event = 'VeryLazy',
+    },
+    {
+      'CopilotC-Nvim/CopilotChat.nvim',
+      dependencies = {
+        { 'nvim-lua/plenary.nvim', branch = 'master' },
+      },
+      build = 'make tiktoken',
+      opts = {
+        debug = false,
+        question_header = '## User ',
+        answer_header = '## Copilot ',
+        error_header = '## Error ',
+      },
+      config = function()
+        vim.g.copilot_no_tab_map = true
+        vim.keymap.set('i', '<S-Tab>', 'copilot#Accept("\\<S-Tab>")', { expr = true, replace_keycodes = false })
+      end,
+      keys = {
+        {
+          '<leader>Cc',
+          ':CopilotChat<cr>',
+          desc = 'CopilotChat - Quick chat',
+        },
+        {
+          '<leader>Cv',
+          function()
+            local input = visual_region_to_text()
+            if input ~= '' then
+              require('CopilotChat').ask(input, { selection = require('CopilotChat.select').buffer })
+            end
+          end,
+          desc = 'CopilotChat - Send visual lines',
+          mode = 'v',
+        },
+        { '<leader>Ce', ':CopilotChatExplain<cr>', desc = 'CopilotChat - Explain code' },
+        { '<leader>Ct', ':CopilotChatTests<cr>', desc = 'CopilotChat - Generate tests' },
+        { '<leader>CT', ':CopilotChatVsplitToggle<cr>', desc = 'CopilotChat - Toggle Vsplit' },
+        { '<leader>Cv', ':CopilotChatVisual', mode = 'x', desc = 'CopilotChat - Open in vertical split' },
+        { '<leader>Cx', ':CopilotChatInPlace<cr>', mode = 'x', desc = 'CopilotChat - Run in-place code' },
+        { '<leader>Cf', ':CopilotChatFixDiagnostic<cr>', desc = 'CopilotChat - Fix diagnostic' },
+        { '<leader>Cr', ':CopilotChatReset<cr>', desc = 'CopilotChat - Reset chat history and clear buffer' },
+      },
     },
   }
 else
