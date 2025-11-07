@@ -5,9 +5,9 @@ if is_windows then
   return {
     'github/copilot.vim',
     event = 'VeryLazy',
-    -- opts = {
-    -- auto_activate = false,
-    -- },
+    opts = {
+      auto_activate = false,
+    },
   }
 else
   return {
