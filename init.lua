@@ -476,32 +476,31 @@ require('lazy').setup({
               end,
             },
           },
-          -- fzf = {
-          --   fuzzy = true, -- false will only do exact matching
-          --   override_generic_sorter = true, -- override the generic sorter
-          --   override_file_sorter = true, -- override the file sorter
-          --   case_mode = 'smart_case', -- or "ignore_case" or "respect_case"
-          --   -- the default case_mode is "smart_case"
-          -- },
+          fzf = {
+            fuzzy = true, -- false will only do exact matching
+            override_generic_sorter = true,
+            override_file_sorter = true,
+            case_mode = 'smart_case', -- or "ignore_case" or "respect_case"
+          },
         },
       }
 
+      --- Safely load telescope extension
+      ---@param name string
+      local function telescope_load_extension(name)
+        if not pcall(require('telescope').load_extension, name) then
+          vim.notify(name .. 'telescope extension loading failed', vim.log.levels.WARN)
+        else
+          vim.notify(name .. ' telescope extension loaded', vim.log.levels.INFO, { duration = 200 })
+        end
+      end
+
       -- Enable Telescope extensions if they are installed
-      if not pcall(require('telescope').load_extension, 'fzf') then
-        vim.notify('fzf native not loaded', vim.log.levels.WARN)
-      end
-      -- if not pcall(require('telescope').load_extension, 'zf-native') then
-      --   vim.notify('zf-native native not loaded', vim.log.levels.WARN)
-      -- end
-      -- if not pcall(require('telescope').load_extension, 'fzy-native') then
-      --   vim.notify('fzy-native native not loaded', vim.log.levels.WARN)
-      -- end
-      if not pcall(require('telescope').load_extension, 'live-multi-grep') then
-        vim.notify('live-multi-grep native not loaded', vim.log.levels.WARN)
-      end
-      if not pcall(require('telescope').load_extension, 'ui-select') then
-        vim.notify('ui-select native not loaded', vim.log.levels.WARN)
-      end
+      telescope_load_extension 'fzf'
+      -- telescope_load_extension 'zf-native'
+      -- telescope_load_extension 'fzy-native'
+      telescope_load_extension 'live-multi-grep'
+      telescope_load_extension 'ui-select'
 
       -- See `:help telescope.builtin`
       local builtin = require 'telescope.builtin'
