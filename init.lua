@@ -344,7 +344,7 @@ require('lazy').setup({
     dependencies = {
       'nvim-lua/plenary.nvim',
       -- NOTE: remember to load telescope extensions
-      { 'FrancescElies/telescope-zf-native.nvim', build = 'zig build-lib zf/src/zf/clib.zig -O ReleaseSafe -dynamic' },
+      { 'FrancescElies/telescope-zf-native.nvim', build = 'just build' },
       -- { 'nvim-telescope/telescope-fzy-native.nvim' },
       {
         'nvim-telescope/telescope-fzf-native.nvim',
