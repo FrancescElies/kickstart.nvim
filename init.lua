@@ -343,26 +343,22 @@ require('lazy').setup({
     event = 'VimEnter',
     dependencies = {
       'nvim-lua/plenary.nvim',
-      { -- If encountering errors, see telescope-fzf-native README for installation instructions
+      { 'natecraddock/telescope-zf-native.nvim' }, -- needs to load_extension 'zf-native'
+      { 'nvim-telescope/telescope-fzy-native.nvim' }, -- needs load_extension 'fzy_native'
+      {
         'nvim-telescope/telescope-fzf-native.nvim',
-
-        -- `build` is used to run some command when the plugin is installed/updated.
-        -- This is only run then, not every time Neovim starts up.
+        -- build = string.lower(vim.loop.os_uname().sysname) == 'windows_nt'
+        --     and 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release -DCMAKE_POLICY_VERSION_MINIMUM=3.5 ; cmake --build build --config Release'
+        --   or 'make',
         build = string.lower(vim.loop.os_uname().sysname) == 'windows_nt'
-            and 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release -DCMAKE_POLICY_VERSION_MINIMUM=3.5 ; cmake --build build --config Release'
-          or 'make',
-        -- cd ~/AppData/Local/nvim-data/lazy/telescope-fzf-native.nvim/
-        -- zig cc -shared -O3  -march=native -mtune=native -funroll-loops -fomit-frame-pointer -finline-functions -o build/libfzf.dll src\fzf.c
-
-        -- `cond` is a condition used to determine whether this plugin should be
-        -- installed and loaded.
+            and 'zig cc -shared -O3  -march=native -mtune=native -funroll-loops -fomit-frame-pointer -finline-functions -o build/libfzf.dll src/fzf.c'
+          or 'zig cc -shared -O3  -march=native -mtune=native -funroll-loops -fomit-frame-pointer -finline-functions -o build/libfzf.so src/fzf.c',
         cond = function()
+          -- whether this plugin should be installed and loaded.
           return vim.fn.executable 'make' == 1
         end,
       },
       { 'nvim-telescope/telescope-ui-select.nvim' },
-
-      -- Useful for getting pretty icons, but requires a Nerd Font.
       { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
     },
     config = function()
@@ -465,6 +461,21 @@ require('lazy').setup({
               search_dirs = { vim.fn.expand '~/src' },
             },
           },
+          fzy_native = {
+            override_generic_sorter = false,
+            override_file_sorter = true,
+          },
+          ['zf-native'] = {
+            file = {
+              initial_sort = function(line)
+                -- prioritizes .lua files
+                if line:match '%.lua$' then
+                  return 0
+                end
+                return 1
+              end,
+            },
+          },
           -- fzf = {
           --   fuzzy = true, -- false will only do exact matching
           --   override_generic_sorter = true, -- override the generic sorter
@@ -476,9 +487,21 @@ require('lazy').setup({
       }
 
       -- Enable Telescope extensions if they are installed
-      pcall(require('telescope').load_extension, 'fzf')
-      pcall(require('telescope').load_extension, 'live-multi-grep')
-      pcall(require('telescope').load_extension, 'ui-select')
+      -- if not pcall(require('telescope').load_extension, 'fzf') then
+      --   vim.notify('fzf native not loaded', vim.log.levels.WARN)
+      -- end
+      if not pcall(require('telescope').load_extension, 'zf-native') then
+        vim.notify('zf-native native not loaded', vim.log.levels.WARN)
+      end
+      -- if not pcall(require('telescope').load_extension, 'fzy-native') then
+      --   vim.notify('fzy-native native not loaded', vim.log.levels.WARN)
+      -- end
+      if not pcall(require('telescope').load_extension, 'live-multi-grep') then
+        vim.notify('live-multi-grep native not loaded', vim.log.levels.WARN)
+      end
+      if not pcall(require('telescope').load_extension, 'ui-select') then
+        vim.notify('ui-select native not loaded', vim.log.levels.WARN)
+      end
 
       -- See `:help telescope.builtin`
       local builtin = require 'telescope.builtin'
