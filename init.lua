@@ -597,8 +597,34 @@ require('lazy').setup({
 
       -- Allows extra capabilities provided by blink.cmp
       'saghen/blink.cmp',
+
+      'b0o/schemastore.nvim',
     },
     config = function()
+      local lspconfig = require 'lspconfig'
+      local schemastore = require 'schemastore'
+      lspconfig.jsonls.setup {
+        settings = {
+          json = {
+            schemas = schemastore.json.schemas(),
+            validate = { enable = true },
+          },
+        },
+      }
+      lspconfig.yamlls.setup {
+        settings = {
+          yaml = {
+            schemaStore = {
+              -- You must disable built-in schemaStore support if you want to use
+              -- this plugin and its advanced options like `ignore`.
+              enable = false,
+              -- Avoid TypeError: Cannot read properties of undefined (reading 'length')
+              url = '',
+            },
+            schemas = schemastore.yaml.schemas(),
+          },
+        },
+      }
       -- If you're wondering about lsp vs treesitter, you can check out the wonderfully
       -- and elegantly composed help section, `:help lsp-vs-treesitter`
 
