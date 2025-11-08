@@ -343,8 +343,9 @@ require('lazy').setup({
     event = 'VimEnter',
     dependencies = {
       'nvim-lua/plenary.nvim',
-      -- { 'natecraddock/telescope-zf-native.nvim' }, -- needs to load_extension 'zf-native'
-      -- { 'nvim-telescope/telescope-fzy-native.nvim' }, -- needs load_extension 'fzy_native'
+      -- NOTE: remember to load telescope extensions
+      { 'FrancescElies/telescope-zf-native.nvim', build = 'zig build-lib zf/src/zf/clib.zig -O ReleaseSafe -dynamic' },
+      -- { 'nvim-telescope/telescope-fzy-native.nvim' },
       {
         'nvim-telescope/telescope-fzf-native.nvim',
         -- build = string.lower(vim.loop.os_uname().sysname) == 'windows_nt'
@@ -496,8 +497,8 @@ require('lazy').setup({
       end
 
       -- Enable Telescope extensions if they are installed
-      telescope_load_extension 'fzf'
-      -- telescope_load_extension 'zf-native'
+      -- telescope_load_extension 'fzf'
+      telescope_load_extension 'zf-native'
       -- telescope_load_extension 'fzy-native'
       telescope_load_extension 'live-multi-grep'
       telescope_load_extension 'ui-select'
