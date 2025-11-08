@@ -343,8 +343,8 @@ require('lazy').setup({
     event = 'VimEnter',
     dependencies = {
       'nvim-lua/plenary.nvim',
-      { 'natecraddock/telescope-zf-native.nvim' }, -- needs to load_extension 'zf-native'
-      { 'nvim-telescope/telescope-fzy-native.nvim' }, -- needs load_extension 'fzy_native'
+      -- { 'natecraddock/telescope-zf-native.nvim' }, -- needs to load_extension 'zf-native'
+      -- { 'nvim-telescope/telescope-fzy-native.nvim' }, -- needs load_extension 'fzy_native'
       {
         'nvim-telescope/telescope-fzf-native.nvim',
         -- build = string.lower(vim.loop.os_uname().sysname) == 'windows_nt'
@@ -487,12 +487,12 @@ require('lazy').setup({
       }
 
       -- Enable Telescope extensions if they are installed
-      -- if not pcall(require('telescope').load_extension, 'fzf') then
-      --   vim.notify('fzf native not loaded', vim.log.levels.WARN)
-      -- end
-      if not pcall(require('telescope').load_extension, 'zf-native') then
-        vim.notify('zf-native native not loaded', vim.log.levels.WARN)
+      if not pcall(require('telescope').load_extension, 'fzf') then
+        vim.notify('fzf native not loaded', vim.log.levels.WARN)
       end
+      -- if not pcall(require('telescope').load_extension, 'zf-native') then
+      --   vim.notify('zf-native native not loaded', vim.log.levels.WARN)
+      -- end
       -- if not pcall(require('telescope').load_extension, 'fzy-native') then
       --   vim.notify('fzy-native native not loaded', vim.log.levels.WARN)
       -- end
