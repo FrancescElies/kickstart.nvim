@@ -818,11 +818,12 @@ require('lazy').setup({
         -- gopls = {},
         basedpyright = {}, -- pyright fork with inlay hints
         -- pyright = {},
-        -- jsonls = {
-        --   filetypes = { 'maxpat', 'json' },
-        --   init_options = { provideFormatter = true },
-        --   capabilities = M.jsonls_capabilities,
-        -- },
+        yamlls = {},
+        jsonls = {
+          filetypes = { 'maxpat', 'json' },
+          init_options = { provideFormatter = true },
+          capabilities = M.jsonls_capabilities,
+        },
         --   capabilities = M.jsonls_capabilities,
         -- },
         ruff = {},
