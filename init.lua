@@ -492,7 +492,7 @@ require('lazy').setup({
         if not pcall(require('telescope').load_extension, name) then
           vim.notify(name .. 'telescope extension loading failed', vim.log.levels.WARN)
         else
-          vim.notify(name .. ' telescope extension loaded', vim.log.levels.INFO, { duration = 200 })
+          vim.notify(name .. ' telescope extension loaded')
         end
       end
 

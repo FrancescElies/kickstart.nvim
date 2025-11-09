@@ -114,6 +114,10 @@ vim.api.nvim_create_user_command('ExecuteEveryXMinutesCancel', function(opts)
 end, {})
 
 return {
+  {
+    'atiladefreitas/dooing',
+    opts = {},
+  },
   -- { 'm4xshen/hardtime.nvim', lazy = false, dependencies = { 'MunifTanjim/nui.nvim' }, opts = {} },
   -- { 'tris203/precognition.nvim', opts = {} },
   -- {
@@ -133,8 +137,6 @@ return {
   --
   -- connect to databases
   --  "tpope/vim-dadbod",
-  -- "kristijanhusak/vim-dadbod-completion",
-  -- "kristijanhusak/vim-dadbod-ui",
   -- guessindent
   -- octo.nvim
 }
