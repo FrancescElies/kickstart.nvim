@@ -822,7 +822,6 @@ require('lazy').setup({
         jsonls = {
           filetypes = { 'maxpat', 'json' },
           init_options = { provideFormatter = true },
-          capabilities = M.jsonls_capabilities,
         },
         --   capabilities = M.jsonls_capabilities,
         -- },
