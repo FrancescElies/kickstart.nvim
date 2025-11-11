@@ -199,6 +199,7 @@ vim.keymap.set('n', '<leader>lf', '<cmd>w|source %<cr>', { desc = 'load [L]ua [f
 vim.keymap.set('n', '<leader>ll', '<cmd>.lua<cr>', { desc = 'load [L]ua [l]ine' })
 vim.keymap.set('v', '<leader>l', ':lua<cr>', { desc = 'load [L]ua region' })
 
+vim.keymap.set('n', '<leader>vc', ':TSContext toggle', { desc = '[v]im treesitter-[c]ontext toggle' })
 vim.keymap.set('n', '<leader>ve', ':e $MYVIMRC', { desc = 'edit vimrc' })
 
 vim.keymap.set('n', '<leader>vm', ":new | put=execute('messages')<cr>", { desc = 'vim messages' })
