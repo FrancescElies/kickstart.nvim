@@ -23,6 +23,11 @@ if is_windows then
         vim.g.copilot_filetypes = { ['*'] = false, cpp = true, c = true, typescript = true, python = true, rust = true }
         vim.g.copilot_enabled = false
         vim.g.copilot_node_command = '~/AppData/Local/fnm_multishells/2760_1761048716755/node.exe'
+        vim.keymap.set('i', '<C-S-J>', 'copilot#Accept("\\<CR>")', {
+          expr = true,
+          replace_keycodes = false,
+        })
+        vim.g.copilot_no_tab_map = true
       end,
     },
     {
@@ -37,16 +42,8 @@ if is_windows then
         answer_header = '## Copilot ',
         error_header = '## Error ',
       },
-      config = function()
-        vim.g.copilot_no_tab_map = true
-        vim.keymap.set('i', '<S-Tab>', 'copilot#Accept("\\<S-Tab>")', { expr = true, replace_keycodes = false })
-      end,
       keys = {
-        {
-          '<leader>Cc',
-          ':CopilotChat<cr>',
-          desc = 'CopilotChat - Quick chat',
-        },
+        { '<leader>Cc', ':CopilotChat<cr>', desc = 'CopilotChat - Quick chat' },
         {
           '<leader>Cv',
           function()
