@@ -1178,6 +1178,14 @@ require('lazy').setup({
         styles = {
           comments = { italic = false }, -- Disable italics in comments
         },
+        on_colors = function(color)
+          color.comment = '#8292c4'
+        end,
+        on_highlights = function(hl, color)
+          hl.LineNrAbove = { fg = color.comment }
+          hl.LineNrBelow = { fg = color.comment }
+          hl.DiagnosticUnnecessary = { fg = color.comment }
+        end,
       }
 
       vim.o.background = 'dark' -- workaround for zellij, otherwise tokyonight selects light background
