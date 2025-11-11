@@ -1,4 +1,4 @@
 vim.cmd [[
-  iabbrev ,ala à la
+  iabbrev ala à la
 ]]
 return {}
