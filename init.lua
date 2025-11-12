@@ -1179,7 +1179,7 @@ require('lazy').setup({
           color.comment = '#82a2c4'
         end,
         on_highlights = function(hl, color)
-          hl.LineNr = { fg = color.orange  }
+          hl.LineNr = { fg = color.green }
           hl.LineNrAbove = { fg = color.comment }
           hl.LineNrBelow = { fg = color.comment }
           hl.DiagnosticUnnecessary = { fg = color.comment }
