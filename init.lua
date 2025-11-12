@@ -491,8 +491,6 @@ require('lazy').setup({
       local function telescope_load_extension(name)
         if not pcall(require('telescope').load_extension, name) then
           vim.notify(name .. 'telescope extension loading failed', vim.log.levels.WARN)
-        else
-          vim.notify(name .. ' telescope extension loaded')
         end
       end
 
@@ -601,9 +599,8 @@ require('lazy').setup({
       'b0o/schemastore.nvim',
     },
     config = function()
-      local lspconfig = require 'lspconfig'
       local schemastore = require 'schemastore'
-      lspconfig.jsonls.setup {
+      vim.lsp.config.jsonls = {
         settings = {
           json = {
             schemas = schemastore.json.schemas(),
@@ -611,7 +608,7 @@ require('lazy').setup({
           },
         },
       }
-      lspconfig.yamlls.setup {
+      vim.lsp.config.yamlls = {
         settings = {
           yaml = {
             schemaStore = {
@@ -988,7 +985,7 @@ require('lazy').setup({
             -- by the server configuration above. Useful when disabling
             -- certain features of an LSP (for example, turning off formatting for ts_ls)
             server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-            require('lspconfig')[server_name].setup(server)
+            vim.lsp.config[server_name].setup(server)
           end,
         },
       }
