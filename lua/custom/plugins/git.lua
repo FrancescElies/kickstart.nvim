@@ -32,7 +32,7 @@ return {
   {
     'lewis6991/gitsigns.nvim',
     opts = {
-      numhl = true, -- Toggle with `:Gitsigns toggle_numhl`
+      -- numhl = true, -- Toggle with `:Gitsigns toggle_numhl`
       linehl = false, -- Toggle with `:Gitsigns toggle_linehl`
       current_line_blame = false, -- Toggle with `:Gitsigns toggle_current_line_blame`
       on_attach = function(bufnr)
