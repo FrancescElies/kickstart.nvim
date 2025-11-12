@@ -16,20 +16,51 @@ end
 local is_windows = string.lower(vim.loop.os_uname().sysname) == 'windows_nt'
 if is_windows then
   return {
+    -- {
+    --   'github/copilot.vim',
+    --   event = 'VeryLazy',
+    --   init = function()
+    --     vim.g.copilot_filetypes = { ['*'] = false, cpp = true, c = true, typescript = true, python = true, rust = true }
+    --     vim.g.copilot_enabled = false
+    --     vim.g.copilot_node_command = '~/AppData/Local/fnm_multishells/2760_1761048716755/node.exe'
+    --     vim.keymap.set('i', '<S-Tab>', 'copilot#Accept("\\<CR>")', {
+    --       expr = true,
+    --       replace_keycodes = false,
+    --     })
+    --     vim.g.copilot_no_tab_map = true
+    --   end,
+    -- },
     {
-      'github/copilot.vim',
-      event = 'VeryLazy',
-      init = function()
-        vim.g.copilot_filetypes = { ['*'] = false, cpp = true, c = true, typescript = true, python = true, rust = true }
-        vim.g.copilot_enabled = false
-        vim.g.copilot_node_command = '~/AppData/Local/fnm_multishells/2760_1761048716755/node.exe'
-        vim.keymap.set('i', '<S-Tab>', 'copilot#Accept("\\<CR>")', {
-          expr = true,
-          replace_keycodes = false,
-        })
-        vim.g.copilot_no_tab_map = true
+      'zbirenbaum/copilot.lua',
+      cmd = 'Copilot',
+      event = 'InsertEnter',
+      config = function()
+        require('copilot').setup {
+          suggestion = {
+            enabled = true,
+            auto_trigger = true,
+            debounce = 75,
+            keymap = {
+              accept = '<C-y>',
+              accept_word = '<C-Right>',
+              accept_line = false,
+              next = '<M-]>',
+              prev = '<M-[>',
+              dismiss = '<C-]>',
+            },
+          },
+          filetypes = {
+            yaml = false,
+            markdown = false,
+            help = false,
+            gitcommit = false,
+            gitrebase = false,
+            ['.'] = false,
+          },
+        }
       end,
     },
+
     {
       'CopilotC-Nvim/CopilotChat.nvim',
       dependencies = {
@@ -55,13 +86,14 @@ if is_windows then
           desc = 'CopilotChat - Send visual lines',
           mode = 'v',
         },
-        { '<leader>Ce', ':CopilotChatExplain<cr>', desc = 'CopilotChat - Explain code' },
-        { '<leader>Ct', ':CopilotChatTests<cr>', desc = 'CopilotChat - Generate tests' },
-        { '<leader>CT', ':CopilotChatVsplitToggle<cr>', desc = 'CopilotChat - Toggle Vsplit' },
-        { '<leader>Cv', ':CopilotChatVisual', mode = 'x', desc = 'CopilotChat - Open in vertical split' },
-        { '<leader>Cx', ':CopilotChatInPlace<cr>', mode = 'x', desc = 'CopilotChat - Run in-place code' },
-        { '<leader>Cf', ':CopilotChatFixDiagnostic<cr>', desc = 'CopilotChat - Fix diagnostic' },
-        { '<leader>Cr', ':CopilotChatReset<cr>', desc = 'CopilotChat - Reset chat history and clear buffer' },
+        { '<leader>Cc', '<cmd>CopilotChatToggle<cr>', desc = 'Toggle Copilot Chat' },
+        { '<leader>Cf', '<cmd>CopilotChatFix<cr>', desc = 'Fix code' },
+        { '<leader>Ce', ':CopilotChatExplain<cr>', desc = 'Explain code' },
+        { '<leader>Ct', ':CopilotChatTests<cr>', desc = 'Generate tests' },
+        { '<leader>Cv', ':CopilotChatVisual', mode = 'x', desc = 'Open in vertical split' },
+        { '<leader>Cx', ':CopilotChatInPlace<cr>', mode = 'x', desc = 'Run in-place code' },
+        { '<leader>Cf', ':CopilotChatFixDiagnostic<cr>', desc = 'Fix diagnostic' },
+        { '<leader>Cr', ':CopilotChatReset<cr>', desc = 'Reset chat history and clear buffer' },
       },
     },
   }
