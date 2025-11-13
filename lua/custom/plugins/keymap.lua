@@ -129,8 +129,21 @@ end
 vim.o.spell = true
 
 -- File
-vim.keymap.set('n', '<leader>by', ":call setreg('+', expand('%:.') .. ':' .. line('.'))<CR>", { desc = '[b]uffer [y]ank path' })
-vim.keymap.set('n', '<leader>bY', ":call setreg('+', expand('%:p'))<CR>", { desc = '[b]uffer [Y]ank abs. path' })
+
+vim.keymap.set('n', '<leader>by', function()
+  local name = vim.api.nvim_buf_get_name(0)
+  if vim.fn.has 'win32' then
+    name = name:gsub('/', '\\')
+  end
+  vim.fn.setreg('+', name)
+end, { desc = '[b]uffer [y]ank path' })
+vim.keymap.set('n', '<leader>bY', function()
+  local abs_path = vim.fn.expand("%:p")
+  if vim.fn.has 'win32' then
+    abs_path = abs_path:gsub('/', '\\')
+  end
+  vim.fn.setreg('+', abs_path)
+end, { desc = '[b]uffer [Y]ank abs. path' })
 vim.keymap.set('n', '<leader>bo', ':e <C-r>+<CR>', { desc = '[b]uffer [o]pen from clipboard' })
 
 -- quick scape
