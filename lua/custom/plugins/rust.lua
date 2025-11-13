@@ -81,7 +81,7 @@ return {
               experimental = { enable = true },
             },
             -- checkOnSave = true,
-            checkOnSave = { command = 'clippy', enable = true },
+            checkOnSave = { command = 'clippy', enable = false },
           },
         },
       },
