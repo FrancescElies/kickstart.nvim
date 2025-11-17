@@ -642,6 +642,8 @@ require('lazy').setup({
 
           map('grn', vim.lsp.buf.rename, '[R]e[n]ame')
           map('gra', vim.lsp.buf.code_action, '[G]oto Code [A]ction', { 'n', 'x' })
+          map('gri', require('telescope.builtin').lsp_incoming_calls, '[G]oto [R]ef [I]ncoming calls')
+          map('gro', require('telescope.builtin').lsp_outgoing_calls, '[G]oto [R]e [O]utgoing calls')
           map('grr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
           -- Jump to the implementation of the word under your cursor.
           --  Useful when your language has ways of declaring types without an actual implementation.
