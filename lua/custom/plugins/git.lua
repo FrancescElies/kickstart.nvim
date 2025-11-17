@@ -8,7 +8,7 @@ local tele = require 'telescope.builtin'
 vim.keymap.set('n', 'gh', '<cmd>diffget //2<cr>', { desc = 'get left diff' })
 vim.keymap.set('n', 'gl', '<cmd>diffget //3<cr>', { desc = 'get right diff' })
 
-vim.keymap.set('n', '<leader>gb', tele.git_branches, { desc = '[g]it [b]ranches' })
+vim.keymap.set('n', '<leader>gB', tele.git_branches, { desc = '[g]it [b]ranches' })
 vim.keymap.set('n', '<leader>gl', tele.git_bcommits, { desc = '[g]it [l]og buffer' })
 vim.keymap.set('n', '<leader>gL', tele.git_commits, { desc = '[g]it [l]og (cwd)' })
 --- Lists commits for a range of lines in the current buffer with diff preview
@@ -107,15 +107,8 @@ return {
     cmd = { 'G', 'Git', 'Gdiffsplit', 'Gread', 'Gwrite', 'Ggrep', 'GMove', 'GDelete', 'GBrowse', 'GRemove', 'GRename', 'Glgrep', 'Gedit' },
     ft = { 'fugitive' },
     keys = {
-      { '<leader>gB', '<cmd>Git blame<cr>', desc = 'Git blame' },
-      -- { '<leader>ga', '<cmd>Gwrite<cr>', desc = 'Git add current file' },
-      -- { '<leader>gr', '<cmd>Gread<cr>', desc = 'Git restore current file' },
+      { '<leader>gb', '<cmd>Git blame<cr>', desc = 'Git blame' },
       { 'gs', vim.cmd.Git, desc = '[g]it [s]tatus (fugitive)' },
-      { '<leader>gf', '<cmd>Git fetch<cr>', desc = 'Git fetch' },
-      { '<leader>gp', ':Git! push --force-with-lease -u origin <cr>', desc = '[g]it [p]ush force with lease' },
-      { '<leader>gP', ':Git! pull --rebase origin/', desc = '[g]it [p]ull rebase' },
-      { '<leader>gc', '<cmd>Git commit<cr>', desc = '[g]it [c]ommit' },
-      { '<leader>gu', '<cmd>Git reset HEAD~1', desc = '[g]it [u]ndo commit (reset HEAD~1)' },
     },
   },
 
