@@ -191,6 +191,9 @@ nnoremap ]<space>  :<c-u>put =repeat(nr2char(10), v:count1)<cr>
 if exists("loaded_matchit") == 0
   packadd! matchit
 endif
+if exists("loaded_cfilter") == 0
+  packadd! cfilter
+endif
 " Since the documentation of matchit is pretty extensive, I suggest also doing the following once:
 " :!mkdir -p ~/.vim/doc
 " :!cp $VIMRUNTIME/macros/matchit.txt ~/.vim/doc
