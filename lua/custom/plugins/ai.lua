@@ -41,7 +41,7 @@ if is_windows then
             auto_trigger = true,
             debounce = 75,
             keymap = {
-              accept = '<C-y>',
+              accept = '<tab>',
               accept_word = '<C-Right>',
               accept_line = false,
               next = '<M-]>',
