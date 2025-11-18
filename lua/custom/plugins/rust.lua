@@ -97,10 +97,15 @@ return {
         end
 
         if vim.bo.filetype == 'rust' then
+          rust_keymap('<leader>cC', function()
+              vim.cmd.RustAnalyzer { 'config', "{ checkOnSave = { command = 'clippy', enable = true } }" }
+          end, '[c]lippy on save')
+          rust_keymap('<leader>cc', function()
+              vim.cmd.RustAnalyzer { 'config', '{ checkOnSave = true }' }
+          end, '[c]heck on save')
           -- rust_keymap('<leader>ca', ':RustLsp codeAction<cr>', 'code [a]ction')
           -- rust_keymap('<leader>ce', ':RustLsp explainError', '[e]xplain error')
           -- rust_keymap('<leader>cE', ':RustLsp expandMacro<cr>', '[e]xpand macros')
-          rust_keymap('<leader>cc', ':RustLsp flyCheck run<cr>', '[c]ode [c]lippy')
           -- rust_keymap('<leader>ch', ':RustLsp hover ', '[h]over actions|range')
           -- rust_keymap('<leader>cj', ':RustLsp joinLines<cr>', 'join lines')
           -- rust_keymap('<leader>cm', ':RustLsp moveItem ', '[m]ove up|down')
