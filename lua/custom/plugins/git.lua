@@ -13,7 +13,6 @@ vim.keymap.set('n', '<leader>gl', tele.git_bcommits, { desc = '[g]it [l]og buffe
 vim.keymap.set('n', '<leader>gL', tele.git_commits, { desc = '[g]it [l]og (cwd)' })
 --- Lists commits for a range of lines in the current buffer with diff preview
 vim.keymap.set('v', '<leader>gl', tele.git_bcommits_range, { desc = '[g]it [l]og (sel. lines)' })
--- stylua: ignore
 vim.keymap.set('n', '<leader>gz', tele.git_stash, { desc = '[g]it zstash' })
 
 local commit_group = vim.api.nvim_create_augroup('my-git-commit', {})
@@ -62,30 +61,30 @@ return {
         end, { desc = 'Jump to previous git [c]hange' })
 
         -- Actions
-        -- visual mode
-        map('v', '<leader>hs', function()
-          gitsigns.stage_hunk { vim.fn.line '.', vim.fn.line 'v' }
-        end, { desc = '[h]unk [s]tage' })
-        map('v', '<leader>hr', function()
-          gitsigns.reset_hunk { vim.fn.line '.', vim.fn.line 'v' }
-        end, { desc = '[h]unk [r]eset' })
+        -- stylua: ignore
+        map('v', '<leader>hs', function() gitsigns.stage_hunk { vim.fn.line '.', vim.fn.line 'v' } end, { desc = '[h]unk [s]tage' })
+        -- stylua: ignore
+        map('v', '<leader>hr', function() gitsigns.reset_hunk { vim.fn.line '.', vim.fn.line 'v' } end, { desc = '[h]unk [r]eset' })
 
         -- normal mode
-        map('n', '<leader>hb', gitsigns.blame, { desc = '[h]unk [b]lame [b]uffer' })
+        map('n', '<leader>hB', gitsigns.blame, { desc = '[h]unk [b]lame [b]uffer' })
         map('n', '<leader>hl', gitsigns.blame_line, { desc = '[h]unk blame [l]ine' })
-        map('n', '<leader>hq', function()
-          gitsigns.setqflist 'all'
-        end, { desc = '[h]unk [q]uickfix ' })
+        map('n', '<leader>hq', gitsigns.setqflist, { desc = '[h]unk [q]uickfix ' })
+        -- stylua: ignore
+        map('n', '<leader>hQ', function() gitsigns.setqflist 'all' end, { desc = '[h]unk [q]uickfix Project' })
         map('n', '<leader>hs', gitsigns.stage_hunk, { desc = '[h]unk [s]tage' })
         map('n', '<leader>hS', gitsigns.stage_buffer, { desc = '[h]unk [S]tage buffer' })
         map('n', '<leader>hr', gitsigns.reset_hunk, { desc = '[h]unk [r]eset' })
         map('n', '<leader>hR', gitsigns.reset_buffer, { desc = '[h]unk [R]eset buffer' })
         map('n', '<leader>hu', gitsigns.stage_hunk, { desc = '[h]unk [u]ndo stage' })
         map('n', '<leader>hp', gitsigns.preview_hunk, { desc = '[h]unk [p]review' })
-        map('n', '<leader>hdi', gitsigns.diffthis, { desc = '[h]unk [d]iff against index' })
-        map('n', '<leader>hdh', function()
-          gitsigns.diffthis '@'
-        end, { desc = '[h]unk [d]iff with [H]EAD' })
+        -- stylua: ignore
+        map('n', '<leader>hdi', gitsigns.diffthis, { desc = '[h]unk [d]iff..index' })
+        -- stylua: ignore
+        map('n', '<leader>hdh', function() gitsigns.diffthis '@' end, { desc = '[h]unk [d]iff..HEAD' })
+
+        map('n', '<leader>hb', gitsigns.toggle_current_line_blame, { desc = '[h]unk toggle [b]lame' })
+        map('n', '<leader>hw', gitsigns.toggle_word_diff, { desc = '[h]unk toggle [w]ord diff' })
 
         -- [h]unk as a vim text object
         vim.keymap.set({ 'o', 'x' }, 'ih', '<Cmd>Gitsigns select_hunk<CR>')
