@@ -174,13 +174,14 @@ vim.o.confirm = true
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Diagnostic keymaps
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setqflist, { desc = '[q]uickfix diag.' })
-vim.keymap.set('n', '<leader>w', function()
-  vim.diagnostic.setqflist { severity = 'WARN' }
-end, { desc = 'quickfix diag. [w]arnings' })
-vim.keymap.set('n', '<leader>e', function()
-  vim.diagnostic.setqflist { severity = 'ERROR' }
-end, { desc = 'quickfix diag. [e]rrors' })
+vim.keymap.set('n', '<leader>qb', vim.diagnostic.setloclist, { desc = '[q]uickfix [b]uffer diag.' })
+vim.keymap.set('n', '<leader>qd', vim.diagnostic.setqflist, { desc = '[q]uickfix all [d]iag.' })
+vim.keymap.set('n', '<leader>qw', function()
+  vim.diagnostic.setqflist { severity = vim.diagnostic.severity.WARN }
+end, { desc = '[q]uickfix diag. [w]arnings' })
+vim.keymap.set('n', '<leader>qe', function()
+  vim.diagnostic.setqflist { severity = vim.diagnostic.severity.ERROR }
+end, { desc = '[q]uickfix diag. [e]rrors' })
 
 -- local set_qflist_for_buf = function(opts)
 --   opts = {} or opts
@@ -331,6 +332,7 @@ require('lazy').setup({
         { '<leader>s', group = '[S]earch' },
         { '<leader>t', group = '[T]erminal' },
         { '<leader>t', group = '[t]est' },
+        { '<leader>q', group = '[q]uickfix' },
         { '<leader>v', group = '[v]im' },
         { 's', group = '[s]urround' },
       },
