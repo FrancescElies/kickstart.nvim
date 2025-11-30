@@ -183,23 +183,6 @@ vim.keymap.set('n', '<leader>qe', function()
   vim.diagnostic.setqflist { severity = vim.diagnostic.severity.ERROR }
 end, { desc = '[q]uickfix diag. [e]rrors' })
 
--- local set_qflist_for_buf = function(opts)
---   opts = {} or opts
---   opts.buf = opts.buf or 0
---
---   local diagnostics = nil
---   diagnostics = vim.diagnostic.get(opts.buf, { severity = opts.severity })
---
---   local qf_items = vim.diagnostic.toqflist(diagnostics)
---   local bufname = vim.api.nvim_buf_get_name(opts.buf)
---   vim.fn.setqflist({}, ' ', { title = 'Diagnostics' .. ' (' .. bufname .. ')', items = qf_items })
---
---   vim.cmd [[copen]]
--- end
--- vim.keymap.set('n', '<leader>Q', function()
---   set_qflist_for_buf { buf = 0 }
--- end, { desc = '[q]uickfix diagnostics current buf' })
-
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
 -- is not what someone will guess without a bit more experience.

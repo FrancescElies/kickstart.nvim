@@ -18,102 +18,8 @@ vim.opt.splitbelow = true
 -- NOTE: breaks <c-x><c-n> as it doesn't find inner words
 -- vim.opt.iskeyword:append '-' -- helps vim-abolish to convert from kebab-case
 
---
--- quickfix
---
-
-local function jump_diagnostic_by_severity(opts)
-  local count = opts.count or 1
-  local severities = {
-    vim.diagnostic.severity.ERROR,
-    vim.diagnostic.severity.WARN,
-    vim.diagnostic.severity.INFO,
-    vim.diagnostic.severity.HINT,
-  }
-  for _, severity in ipairs(severities) do
-    local diagnostics = vim.diagnostic.get(0, { severity = severity })
-    if #diagnostics > 0 then
-      -- vim.diagnostic.goto_next { severity = severity }
-      vim.diagnostic.jump { count = count, float = true, severity = severity }
-      return
-    end
-  end
-end
-
-local function is_loclist_open()
-  return #vim.fn.getloclist(0) ~= 0
-end
-
-local function is_quickfix_open()
-  return vim.fn.getqflist({ winid = 0 }).winid ~= 0
-end
-
-vim.g.diagnostic_visit_errors_first = true
-vim.api.nvim_create_user_command('ToggleDiagnosticVisitOrder', function()
-  _G.diagnostic_by_Severity_enabled = not _G.autosave_enabled
-  print('DiagnosticBySeverity ' .. (_G.autosave_enabled and 'enabled' or 'disabled'))
-end, {})
-vim.keymap.set('n', '<leader>vD', ':ToggleDiagnosticVisitOrder<cr>', { desc = '[d]iagnostic visit order' })
-
-local function diagnostic_jump(opts)
-  if vim.g.diagnostic_visit_errors_first then
-    jump_diagnostic_by_severity { count = opts.count }
-  else
-    vim.diagnostic.jump { count = opts.count, float = true }
-  end
-  vim.cmd 'normal! zz'
-end
-
 vim.keymap.set('n', '<M-h>', ':bprev')
 vim.keymap.set('n', '<M-l>', ':bnext')
-vim.keymap.set('n', '<M-k>', function()
-  diagnostic_jump { count = -1 }
-end)
-vim.keymap.set('n', '<M-j>', function()
-  diagnostic_jump { count = 1 }
-end)
-
-vim.keymap.set('n', '<c-h>', ':colder<cr>')
-vim.keymap.set('n', '<c-l>', ':cnewer<cr>')
-vim.keymap.set('n', '<c-j>', function()
-  if is_loclist_open() then
-    vim.cmd 'lnext' -- next quickfix item
-    vim.cmd 'normal! zz'
-  elseif is_quickfix_open() then
-    vim.cmd 'cnext' -- next quickfix item
-    vim.cmd 'normal! zz'
-  else
-    diagnostic_jump { count = 1 }
-  end
-end)
-
-vim.keymap.set('n', '<c-k>', function()
-  if is_loclist_open() then
-    vim.cmd 'lprevious' -- previous quickfix item
-    vim.cmd 'normal! zz'
-  elseif is_quickfix_open() then
-    vim.cmd 'cprevious' -- previous quickfix item
-    vim.cmd 'normal! zz'
-  else
-    diagnostic_jump { count = -1 }
-  end
-end)
-
-vim.keymap.set('n', '<C-j>', function()
-  if is_loclist_open() then
-    vim.cmd 'lnext' -- next quickfix item
-    vim.cmd 'normal! zz'
-  elseif is_quickfix_open() then
-    vim.cmd 'cnext' -- next quickfix item
-    vim.cmd 'normal! zz'
-  else
-    if vim.g.diagnostic_visit_errors_first then
-      jump_diagnostic_by_severity { count = 1 }
-    else
-      vim.diagnostic.jump { count = 1, float = true }
-    end
-  end
-end)
 
 -- cycle entries showing only the ones starting with current input
 vim.keymap.set('c', '<C-k>', '<t_ku>', { desc = 'previous similar entry' })
@@ -156,7 +62,9 @@ vim.keymap.set('n', 'ı', 'i')
 vim.keymap.set({ 'n', 'x', 'o' }, 's', '<Nop>') -- disables default behaviour
 vim.keymap.set({ 'n', 'x', 'o' }, 'S', '<Nop>') -- disables default behaviour
 vim.keymap.set('n', 'se', '<cmd>e #<cr>', { desc = '[s]witch to alternat[e]' })
-vim.keymap.set('n', 'so', '<cmd>so %<cr>', { desc = '[s]ouce current buffer' })
+
+vim.keymap.set('n', 'so', '<cmd>so %<cr>', { desc = '[s]ource current buffer' })
+vim.keymap.set('n', 's.', '<cmd>.lua<cr>', { desc = '[s]ource current [l]ine' })
 
 -- execute as shell command from cursor to EOL
 vim.keymap.set('n', ',x', '"ey$:!<c-r>e<cr>', { desc = 'e[x]ecute line as shell command' })
@@ -206,11 +114,6 @@ function vim.getVisualSelection()
     return ''
   end
 end
-
--- Reload configuration
-vim.keymap.set('n', '<leader>lf', '<cmd>w|source %<cr>', { desc = 'load [L]ua [f]ile' })
-vim.keymap.set('n', '<leader>ll', '<cmd>.lua<cr>', { desc = 'load [L]ua [l]ine' })
-vim.keymap.set('v', '<leader>l', ':lua<cr>', { desc = 'load [L]ua region' })
 
 vim.keymap.set('n', '<leader>ve', ':e $MYVIMRC', { desc = 'edit vimrc' })
 
