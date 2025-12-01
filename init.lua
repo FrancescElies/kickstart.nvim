@@ -175,7 +175,7 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>qb', vim.diagnostic.setloclist, { desc = '[q]uickfix [b]uffer diag.' })
-vim.keymap.set('n', '<leader>qd', vim.diagnostic.setqflist, { desc = '[q]uickfix all [d]iag.' })
+vim.keymap.set('n', '<leader>qq', vim.diagnostic.setqflist, { desc = '[q]uickfix all [d]iag.' })
 vim.keymap.set('n', '<leader>qw', function()
   vim.diagnostic.setqflist { severity = vim.diagnostic.severity.WARN }
 end, { desc = '[q]uickfix diag. [w]arnings' })
@@ -310,11 +310,10 @@ require('lazy').setup({
         { '<leader>d', group = 'git [D]iff', mode = { 'n', 'v' } },
         { '<leader>dh', group = 'git [D]iff [H]istory', mode = { 'n', 'v' } },
         { '<leader>h', group = 'git [H]unk', mode = { 'n', 'v' } },
-        { '<leader>l', group = '[L]ua' },
-        { '<leader>n', group = '[N]otes' },
-        { '<leader>s', group = '[S]earch' },
-        { '<leader>t', group = '[T]erminal' },
-        { '<leader>t', group = '[t]est' },
+        { '<leader>l', group = '[l]oclist' },
+        { '<leader>n', group = '[n]otes' },
+        { '<leader>s', group = '[s]earch' },
+        { '<leader>t', group = '[t]odo' },
         { '<leader>q', group = '[q]uickfix' },
         { '<leader>v', group = '[v]im' },
         { 's', group = '[s]urround' },

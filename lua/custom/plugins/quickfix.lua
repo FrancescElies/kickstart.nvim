@@ -4,7 +4,7 @@
 -- stylua: ignore end
 
 -- Toggle quickfix (global)
-vim.keymap.set('n', '<leader>q', function()
+vim.keymap.set('n', '<leader>qt', function()
   local qf_winid = vim.fn.getqflist({ winid = 0 }).winid
   if qf_winid > 0 then
     vim.cmd('cclose')
@@ -14,7 +14,7 @@ vim.keymap.set('n', '<leader>q', function()
 end, { silent = true })
 
 -- Toggle loclist (per-window)
-vim.keymap.set('n', '<leader>l', function()
+vim.keymap.set('n', '<leader>lt', function()
   local loc_winid = vim.fn.getloclist(vim.api.nvim_get_current_win(), { winid = 0 }).winid
   if loc_winid > 0 then
     vim.cmd('lclose')
