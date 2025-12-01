@@ -1,4 +1,7 @@
 -- https://github.com/ThoNohT/NohBoard
+-- https://github.com/justDeeevin/NuhxBoard
+-- carnac
+-- keyviz
 return {
   'NStefan002/screenkey.nvim',
   lazy = false,
