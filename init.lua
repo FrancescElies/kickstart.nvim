@@ -1302,6 +1302,7 @@ require('lazy').setup({
                 green = '#7baf7b',
                 blue = '#5b8db8',
                 delegated = '#a0c4ff',
+                waiting = '#a0a4dd',
                 todo = '#ffd6a5',
                 onhold = '#ddbe0b',
                 inprogress = '#fdffb6',
