@@ -24,6 +24,8 @@ if (not jit) or not is_windows then
   return {}
 end
 
+local mouse_timer = vim.uv.new_timer()
+
 local ffi = require 'ffi'
 
 ffi.cdef [[
@@ -67,15 +69,9 @@ vim.api.nvim_create_user_command('ScreenAliveOff', function()
   else
     print 'Keep screen alive OFF'
   end
-end, {})
-
-vim.api.nvim_create_user_command('ScreenAliveOn', function()
-  local kernel32 = ffi.load 'kernel32'
-  local ret = kernel32.SetThreadExecutionState(bit.bor(ES_CONTINUOUS, ES_SYSTEM_REQUIRED, ES_DISPLAY_REQUIRED))
-  if ret == 0 then
-    error 'Failed to set thread execution state'
-  else
-    print 'Keep screen alive ON '
+  if mouse_timer and mouse_timer:is_active() then
+    mouse_timer:stop()
+    mouse_timer:close()
   end
 end, {})
 
@@ -94,6 +90,22 @@ end
 vim.api.nvim_create_user_command('WiggleMouse', function()
   move_mouse_relative(1, 1)
   move_mouse_relative(-1, -1)
+end, {})
+
+vim.api.nvim_create_user_command('ScreenAliveOn', function()
+  local kernel32 = ffi.load 'kernel32'
+  local ret = kernel32.SetThreadExecutionState(bit.bor(ES_CONTINUOUS, ES_SYSTEM_REQUIRED, ES_DISPLAY_REQUIRED))
+  if ret == 0 then
+    error 'Failed to set thread execution state'
+  else
+    print 'Keep screen alive ON '
+  end
+  if mouse_timer then
+    mouse_timer:start(0, 100, function()
+      move_mouse_relative(1, 1)
+      move_mouse_relative(-1, -1)
+    end)
+  end
 end, {})
 
 return {}
