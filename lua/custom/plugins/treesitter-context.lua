@@ -8,6 +8,22 @@ return {
     },
     keys = {
       { '<leader>vc', ':TSContext toggle<cr>', desc = '[v]im treesitter-[c]ontext toggle' },
+      {
+        '[c',
+        function()
+          require('treesitter-context').go_to_context(vim.v.count1)
+        end,
+        silent = true,
+        desc = 'Go to context',
+      },
+      {
+        ']c',
+        function()
+          require('treesitter-context').go_to_context(-vim.v.count1)
+        end,
+        silent = true,
+        desc = 'Go to context',
+      },
     },
   },
 }
