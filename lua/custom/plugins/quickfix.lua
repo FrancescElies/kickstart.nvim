@@ -51,8 +51,8 @@ end
 
 vim.g.diagnostic_visit_errors_first = true
 vim.api.nvim_create_user_command('ToggleDiagnosticVisitOrder', function()
-  _G.diagnostic_by_Severity_enabled = not _G.autosave_enabled
-  print('DiagnosticBySeverity ' .. (_G.autosave_enabled and 'enabled' or 'disabled'))
+  vim.g.diagnostic_visit_errors_first = not vim.g.diagnostic_visit_errors_first
+  print('DiagnosticBySeverity ' .. (vim.g.diagnostic_visit_errors_first and 'enabled' or 'disabled'))
 end, {})
 vim.keymap.set('n', '<leader>vD', ':ToggleDiagnosticVisitOrder<cr>', { desc = '[d]iagnostic visit order' })
 
