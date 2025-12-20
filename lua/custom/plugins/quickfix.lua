@@ -95,7 +95,11 @@ vim.keymap.set('n', '<c-k>', function()
     vim.cmd 'cprevious' -- previous quickfix item
     vim.cmd 'normal! zz'
   else
-    diagnostic_jump { count = -1 }
+    if vim.g.diagnostic_visit_errors_first then
+      jump_diagnostic_by_severity { count = -1 }
+    else
+      vim.diagnostic.jump { count = -1, float = true }
+    end
   end
 end)
 
