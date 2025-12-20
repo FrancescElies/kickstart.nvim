@@ -986,6 +986,7 @@ require('lazy').setup({
       -- end,
       formatters_by_ft = {
         xml = { 'xmlformatter' },
+        sh = { 'shfmt' },
         lua = { 'stylua' },
         -- Conform can also run multiple formatters sequentially
         go = { 'goimports', 'gofmt' },

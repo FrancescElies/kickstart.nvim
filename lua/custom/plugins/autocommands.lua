@@ -37,8 +37,8 @@ vim.api.nvim_create_autocmd('BufReadPost', {
   pattern = '*.md',
   -- command = 'setlocal wrap | setlocal spell',
   callback = function(_)
-    vim.diagnostic.enable(false, { bufnr = 0 })
-    vim.wo.wrap = true
+    -- vim.diagnostic.enable(false, { bufnr = 0 })
+    vim.wo.wrap = false
     vim.wo.spell = true
   end,
 })
