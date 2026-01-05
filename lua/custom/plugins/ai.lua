@@ -61,41 +61,41 @@ if is_windows then
       end,
     },
 
-    {
-      'CopilotC-Nvim/CopilotChat.nvim',
-      dependencies = {
-        { 'nvim-lua/plenary.nvim', branch = 'master' },
-      },
-      build = 'make tiktoken',
-      opts = {
-        debug = false,
-        question_header = '## User ',
-        answer_header = '## Copilot ',
-        error_header = '## Error ',
-      },
-      keys = {
-        { '<leader>Cc', ':CopilotChat<cr>', desc = 'CopilotChat - Quick chat' },
-        {
-          '<leader>Cv',
-          function()
-            local input = visual_region_to_text()
-            if input ~= '' then
-              require('CopilotChat').ask(input, { selection = require('CopilotChat.select').buffer })
-            end
-          end,
-          desc = 'CopilotChat - Send visual lines',
-          mode = 'v',
-        },
-        { '<leader>Cc', '<cmd>CopilotChatToggle<cr>', desc = 'Toggle Copilot Chat' },
-        { '<leader>Cf', '<cmd>CopilotChatFix<cr>', desc = 'Fix code' },
-        { '<leader>Ce', ':CopilotChatExplain<cr>', desc = 'Explain code' },
-        { '<leader>Ct', ':CopilotChatTests<cr>', desc = 'Generate tests' },
-        { '<leader>Cv', ':CopilotChatVisual', mode = 'x', desc = 'Open in vertical split' },
-        { '<leader>Cx', ':CopilotChatInPlace<cr>', mode = 'x', desc = 'Run in-place code' },
-        { '<leader>Cf', ':CopilotChatFixDiagnostic<cr>', desc = 'Fix diagnostic' },
-        { '<leader>Cr', ':CopilotChatReset<cr>', desc = 'Reset chat history and clear buffer' },
-      },
-    },
+    -- {
+    --   'CopilotC-Nvim/CopilotChat.nvim',
+    --   dependencies = {
+    --     { 'nvim-lua/plenary.nvim', branch = 'master' },
+    --   },
+    --   build = 'make tiktoken',
+    --   opts = {
+    --     debug = false,
+    --     question_header = '## User ',
+    --     answer_header = '## Copilot ',
+    --     error_header = '## Error ',
+    --   },
+    --   keys = {
+    --     { '<leader>Cc', ':CopilotChat<cr>', desc = 'CopilotChat - Quick chat' },
+    --     {
+    --       '<leader>Cv',
+    --       function()
+    --         local input = visual_region_to_text()
+    --         if input ~= '' then
+    --           require('CopilotChat').ask(input, { selection = require('CopilotChat.select').buffer })
+    --         end
+    --       end,
+    --       desc = 'CopilotChat - Send visual lines',
+    --       mode = 'v',
+    --     },
+    --     { '<leader>Cc', '<cmd>CopilotChatToggle<cr>', desc = 'Toggle Copilot Chat' },
+    --     { '<leader>Cf', '<cmd>CopilotChatFix<cr>', desc = 'Fix code' },
+    --     { '<leader>Ce', ':CopilotChatExplain<cr>', desc = 'Explain code' },
+    --     { '<leader>Ct', ':CopilotChatTests<cr>', desc = 'Generate tests' },
+    --     { '<leader>Cv', ':CopilotChatVisual', mode = 'x', desc = 'Open in vertical split' },
+    --     { '<leader>Cx', ':CopilotChatInPlace<cr>', mode = 'x', desc = 'Run in-place code' },
+    --     { '<leader>Cf', ':CopilotChatFixDiagnostic<cr>', desc = 'Fix diagnostic' },
+    --     { '<leader>Cr', ':CopilotChatReset<cr>', desc = 'Reset chat history and clear buffer' },
+    --   },
+    -- },
   }
 else
   return {
