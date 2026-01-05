@@ -67,7 +67,7 @@ vim.api.nvim_create_user_command('ScreenAliveOff', function()
   if ret == 0 then
     error 'Failed to reset thread execution state'
   else
-    print 'Keep screen alive OFF'
+    print 'Not taking notes anymore'
   end
   if mouse_timer and mouse_timer:is_active() then
     mouse_timer:stop()
@@ -98,7 +98,7 @@ vim.api.nvim_create_user_command('ScreenAliveOn', function()
   if ret == 0 then
     error 'Failed to set thread execution state'
   else
-    print 'Keep screen alive ON '
+    print 'Ready to take quick notes anytime!'
   end
   if mouse_timer then
     mouse_timer:start(0, 100, function()
