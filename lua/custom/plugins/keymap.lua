@@ -33,6 +33,7 @@ local function toggle_inline_diagnostic()
 end
 
 vim.o.spell = true
+-- vim.o.spelllang = 'de_de,en_us' 
 
 -- File
 
