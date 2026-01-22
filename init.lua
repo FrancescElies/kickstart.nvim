@@ -376,7 +376,9 @@ require('lazy').setup({
               ['<M-?>'] = 'which_key', -- alacritty on Windows doesn't send <c-/>
               ['<M-/>'] = 'to_fuzzy_refine', -- alacritty on Windows doesn't send <c-enter>
               ['<c-enter>'] = 'to_fuzzy_refine',
+              ['<c-space>'] = 'to_fuzzy_refine',
               ['<c-g>'] = switch_to_grep,
+              ['<c-s-g>'] = switch_to_grep,
             },
             n = {
               -- <h,l> to cycle previewer for git commits to show full message
@@ -1003,6 +1005,7 @@ require('lazy').setup({
         go = { 'goimports', 'gofmt' },
         -- You can also customize some of the format options for the filetype
         rust = { 'rustfmt', lsp_format = 'fallback' },
+        toml = { 'taplo', lsp_format = 'fallback' },
         -- You can use a function here to determine the formatters dynamically
         python = function(bufnr)
           vim.api.nvim_get_current_buf()

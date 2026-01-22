@@ -10,8 +10,9 @@ function _G.p(v)
   print(vim.inspect(v))
 end
 
+-- Ask nvim where variables last set:
+-- :verbose setlocal ts? sts? et? sw?
 vim.opt.grepprg = 'rg --vimgrep --smart-case --follow'
-vim.opt.tabstop = 4
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 
@@ -33,7 +34,7 @@ local function toggle_inline_diagnostic()
 end
 
 vim.o.spell = true
--- vim.o.spelllang = 'de_de,en_us' 
+-- vim.o.spelllang = 'de_de,en_us'
 
 -- File
 
@@ -45,7 +46,7 @@ vim.keymap.set('n', '<leader>by', function()
   vim.fn.setreg('+', name)
 end, { desc = '[b]uffer [y]ank path' })
 vim.keymap.set('n', '<leader>bY', function()
-  local abs_path = vim.fn.expand("%:p")
+  local abs_path = vim.fn.expand '%:p'
   if vim.fn.has 'win32' then
     abs_path = abs_path:gsub('/', '\\')
   end
@@ -149,10 +150,8 @@ vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
 
 vim.keymap.set({ 'n', 'v' }, 's/', [[:s,/,\\,g<cr>]], { desc = 'substitute / with \\' })
 vim.keymap.set({ 'n', 'v' }, 's\\', [[:s,\\,/,g<cr>]], { desc = 'substitute \\ with /' })
-vim.keymap.set('n', 'su', [[:s/\<<C-r><C-w>\>/<C-r><C-w>/gIc<Left><Left><Left><Left>]],
-  { desc = 'substitute current word' })
-vim.keymap.set('n', 'sU', [[:S/\<<C-r><C-w>\>/<C-r><C-w>/gIc<Left><Left><Left><Left>]],
-  { desc = 'substitute current word' })
+vim.keymap.set('n', 'su', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gIc<Left><Left><Left><Left>]], { desc = 'substitute current word' })
+vim.keymap.set('n', 'sU', [[:%S/\<<C-r><C-w>\>/<C-r><C-w>/gIc<Left><Left><Left><Left>]], { desc = 'substitute current word' })
 
 vim.keymap.set({ 'n', 'v' }, '<leader>x', vim.lsp.buf.references, { buffer = true })
 
