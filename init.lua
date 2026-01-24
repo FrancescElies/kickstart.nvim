@@ -496,7 +496,7 @@ require('lazy').setup({
         require('telescope.builtin').find_files { cwd = vim.fs.joinpath(vim.fn.stdpath 'data') }
       end, { desc = '[S]earch [l]ua packages' })
 
-      vim.keymap.set('n', 'z=', builtin.spell_suggest, { desc = 'Spell suggest (Telescope)' })
+      vim.keymap.set('n', '<leader>sz', builtin.spell_suggest, { desc = 'Spell suggest (Telescope)' })
 
       -- Slightly advanced example of overriding default behavior and theme
       vim.keymap.set('n', '<leader>/', function()

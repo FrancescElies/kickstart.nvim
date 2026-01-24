@@ -35,6 +35,10 @@ end
 
 vim.o.spell = true
 -- vim.o.spelllang = 'de_de,en_us'
+--
+
+-- for faster spelling corrections
+vim.keymap.set('n', 'gz', ':silent! normal! ]sz=1<CR>[s', { desc = "Fix previous spelling with first suggestion" })
 
 -- File
 
