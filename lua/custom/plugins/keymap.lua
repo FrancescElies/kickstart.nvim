@@ -38,7 +38,7 @@ vim.o.spell = true
 --
 
 -- for faster spelling corrections
-vim.keymap.set('n', 'gz', ':silent! norm! ]s1z=<cr>', { desc = "Fix previous spelling with first suggestion" })
+vim.keymap.set('n', 'gz', ':silent! normal! [s1z=<cr>]s', { desc = "Fix previous spelling with first suggestion" })
 vim.keymap.set('n', 'gzz', ':silent! norm! 1z=<cr>', { desc = "Exchange current word with first suggestion" })
 
 -- File
