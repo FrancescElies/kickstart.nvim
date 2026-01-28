@@ -101,8 +101,8 @@ vim.keymap.set('n', 'dg*', '*Ndgn')
 -- vim.keymap.set('n', 'J', 'mzJ`z')
 
 -- how to choose bindings for commands that modify text: http://vimcasts.org/blog/2014/02/follow-my-leader/
-vim.keymap.set({ 'n', 'v' }, 'ysS', ':s/\\\\/\\//g<cr>', { desc = '[y]ou [s]ubstitute back[S]lash \\ -> /' })
-vim.keymap.set({ 'n', 'v' }, 'yss', ':s/\\//\\\\/g<cr>', { desc = '[y]ou [s]ubstitute [s]lash / -> [\\]' })
+vim.keymap.set({ 'n', 'v' }, 'ys\\', ':s/\\\\/\\//g<cr>', { desc = '[y]ou [s]ubstitute back[S]lash \\ -> /' })
+vim.keymap.set({ 'n', 'v' }, 'ys/', ':s/\\//\\\\/g<cr>', { desc = '[y]ou [s]ubstitute [s]lash / -> [\\]' })
 
 -- https://github.com/nvim-telescope/telescope.nvim/issues/1923
 function vim.getVisualSelection()
@@ -155,8 +155,8 @@ vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
 
 vim.keymap.set({ 'n', 'v' }, 's/', [[:s,/,\\,g<cr>]], { desc = 'substitute / with \\' })
 vim.keymap.set({ 'n', 'v' }, 's\\', [[:s,\\,/,g<cr>]], { desc = 'substitute \\ with /' })
-vim.keymap.set('n', 'su', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gIc<Left><Left><Left><Left>]], { desc = 'substitute current word' })
-vim.keymap.set('n', 'sU', [[:%S/\<<C-r><C-w>\>/<C-r><C-w>/gIc<Left><Left><Left><Left>]], { desc = 'substitute current word' })
+vim.keymap.set('n', 'ysu', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gIc<Left><Left><Left><Left>]], { desc = 'substitute current word' })
+vim.keymap.set('n', 'ySu', [[:%S/\<<C-r><C-w>\>/<C-r><C-w>/gIc<Left><Left><Left><Left>]], { desc = 'substitute current word' })
 
 vim.keymap.set({ 'n', 'v' }, '<leader>x', vim.lsp.buf.references, { buffer = true })
 
