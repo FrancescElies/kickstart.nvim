@@ -367,8 +367,8 @@ require('lazy').setup({
         defaults = {
           layout_strategy = 'vertical',
           path_display = {
-            -- shorten = { len = 4, exclude = { -2, -1 } },
-            filename_first = { reverse_directories = true },
+            shorten = { len = 5, exclude = { -2, -1 } },
+            -- filename_first = { reverse_directories = true },
             -- truncate = 1,
           },
           mappings = {
