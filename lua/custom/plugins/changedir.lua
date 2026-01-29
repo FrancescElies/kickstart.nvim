@@ -12,8 +12,10 @@ local function cdroot_of(opts)
         if path == nil then
           return
         end
-        print('cwd: ' .. path)
-        vim.api.nvim_set_current_dir(path)
+        -- Wish there was a vim.api.nvim_tabpage_set_current_dir ask Neovim
+        -- mailing list
+        vim.cmd('tcd ' .. path)
+        print('tab cwd: ' .. path)
       end)
     end,
   }):start()
@@ -21,8 +23,8 @@ end
 
 vim.api.nvim_create_user_command('CdBufDir', function()
   local path = vim.fn.expand '%:p:h'
-  print('cwd: ' .. path)
-  vim.api.nvim_set_current_dir(path)
+  vim.cmd('tcd ' .. path)
+  print('tab cwd: ' .. path)
   -- vim.fn.chdir() maybe?
 end, { desc = 'changes directory to current buffer dir' })
 
