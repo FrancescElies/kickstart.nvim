@@ -88,6 +88,7 @@ vim.keymap.set('n', '*', '*zzzv')
 vim.keymap.set('n', '#', '#zzzv')
 vim.keymap.set('n', 'g*', 'g*zzzv')
 vim.keymap.set('n', 'g#', 'g#zzzv')
+vim.keymap.set('n', 'grr', 'grrzzzv')  -- center after going to reference
 
 -- easier step by step replace, repeat with single-repat `.`
 vim.keymap.set('x', 'c*', [[y/\V<C-R>=escape(@", '/\')<CR><CR>Ncgn]])
