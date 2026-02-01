@@ -1,8 +1,8 @@
-local lisp_file_types = { 'clojure', 'fennel', 'janet' }
+-- local lisp_file_types = { 'clojure', 'fennel', 'janet' }
 return {
-  { 'guns/vim-sexp', ft = lisp_file_types },
-  { 'janet-lang/janet.vim', ft = { 'janet' } },
-  { 'eraserhd/parinfer-rust', build = 'cargo build --release', ft = lisp_file_types },
+  -- { 'guns/vim-sexp', ft = lisp_file_types },
+  -- { 'janet-lang/janet.vim', ft = { 'janet' } },
+  -- { 'eraserhd/parinfer-rust', build = 'cargo build --release', ft = lisp_file_types },
   -- {
   --   'Olical/conjure',
   --   ft = vim.tbl_extend('keep', { 'python' }),
