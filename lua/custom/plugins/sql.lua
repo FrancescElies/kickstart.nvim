@@ -14,6 +14,14 @@ return {
     init = function()
       -- Your DBUI configuration
       vim.g.db_ui_use_nerd_fonts = 1
+
+      -- So that K on a word runs :DB EXPLAIN
+      vim.api.nvim_create_autocmd('FileType', {
+        pattern = 'sql',
+        callback = function()
+          vim.bo.keywordprg = ':DB'
+        end,
+      })
     end,
   },
   {
@@ -32,11 +40,3 @@ return {
     },
   },
 }
-
--- So that K on a word runs :DB EXPLAIN
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = "sql",
-  callback = function()
-    vim.bo.keywordprg = ":DB"
-  end,
-})
