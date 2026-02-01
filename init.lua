@@ -175,7 +175,7 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>qb', vim.diagnostic.setloclist, { desc = '[q]uickfix [b]uffer diag.' })
-vim.keymap.set('n', '<leader>qq', vim.diagnostic.setqflist, { desc = '[q]uickfix all [d]iag.' })
+vim.keymap.set('n', '<leader>qa', vim.diagnostic.setqflist, { desc = '[q]uickfix all [d]iag.' })
 vim.keymap.set('n', '<leader>qw', function()
   vim.diagnostic.setqflist { severity = vim.diagnostic.severity.WARN }
 end, { desc = '[q]uickfix diag. [w]arnings' })

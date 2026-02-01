@@ -4,7 +4,7 @@
 -- stylua: ignore end
 
 -- Toggle quickfix (global)
-vim.keymap.set('n', '<leader>qt', function()
+vim.keymap.set('n', '<leader>qq', function()
   local qf_winid = vim.fn.getqflist({ winid = 0 }).winid
   if qf_winid > 0 then
     vim.cmd('cclose')
