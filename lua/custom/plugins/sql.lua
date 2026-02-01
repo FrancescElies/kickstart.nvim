@@ -32,3 +32,11 @@ return {
     },
   },
 }
+
+-- So that K on a word runs :DB EXPLAIN
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = "sql",
+  callback = function()
+    vim.bo.keywordprg = ":DB"
+  end,
+})
