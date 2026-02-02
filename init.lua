@@ -1235,14 +1235,14 @@ require('lazy').setup({
       vim.keymap.set('n', 'pul', '<cmd>Git pull<cr>', { desc = 'pull' })
 
       -- using persistence instead
-      -- require('mini.sessions').setup {
-      --   autoread = true,
-      --   verbose = { read = true, write = true, delete = true },
-      -- }
-      -- vim.o.sessionoptions = 'blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions'
-      -- vim.keymap.set('n', '<leader>Sw', ':lua MiniSessions.write()<cr>', { desc = 'write session' })
-      -- vim.keymap.set('n', '<leader>Sd', ':lua MiniSessions.delete()<cr>', { desc = 'delete session' })
-      -- vim.keymap.set('n', '<leader>Ss', ':lua MiniSessions.select()<cr>', { desc = 'select session' })
+      require('mini.sessions').setup {
+        autoread = true,
+        verbose = { read = true, write = true, delete = true },
+      }
+      vim.o.sessionoptions = 'blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions'
+      vim.keymap.set('n', '<leader>pw', ':lua MiniSessions.write()<cr>', { desc = 'persist session' })
+      vim.keymap.set('n', '<leader>pd', ':lua MiniSessions.delete()<cr>', { desc = 'persist session delete' })
+      vim.keymap.set('n', '<leader>ps', ':lua MiniSessions.select()<cr>', { desc = 'persist session select' })
 
       -- -- Simple and easy statusline.
       -- --  You could remove this setup call if you don't like it,
