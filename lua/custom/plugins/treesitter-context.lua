@@ -2,9 +2,9 @@ return {
   {
     'nvim-treesitter/nvim-treesitter-context',
     opts = {
-      enable = false,
-      max_lines = '10%', -- How many lines the window should span. Values <= 0 mean no limit.
-      multiwindow = true,
+      enable = true,
+      max_lines = '20%', -- How many lines the window should span. Values <= 0 mean no limit.
+      separator = '-',
     },
     keys = {
       { '<leader>vc', ':TSContext toggle<cr>', desc = '[v]im treesitter-[c]ontext toggle' },
