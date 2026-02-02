@@ -1165,6 +1165,8 @@ require('lazy').setup({
           hl.LineNr = { fg = color.green }
           hl.LineNrAbove = { fg = color.comment }
           hl.LineNrBelow = { fg = color.comment }
+          hl.StatusLineNC = { fg = color.comment }
+          hl.StatusLine = { fg = color.yellow }
           hl.DiagnosticUnnecessary = { fg = color.comment }
         end,
       }
