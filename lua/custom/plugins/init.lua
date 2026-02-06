@@ -23,7 +23,6 @@ vim.o.swapfile = false
 
 vim.o.inccommand = 'split'
 
-
 -- Don't have `o` add a comment
 vim.opt.formatoptions:remove 'o'
 
@@ -117,7 +116,14 @@ end, {})
 return {
   {
     'atiladefreitas/dooing',
-    opts = {},
+    opts = {
+      keymaps = {
+        toggle_window = '<leader>Td', -- Toggle global todos
+        open_project_todo = '<leader>TD', -- Toggle project-specific todos
+        show_due_notification = '<leader>TN', -- Show due items window
+        create_nested_task = '<leader>Tn', -- Create nested subtask under current todo
+      },
+    },
   },
   -- { 'm4xshen/hardtime.nvim', lazy = false, dependencies = { 'MunifTanjim/nui.nvim' }, opts = {} },
   -- { 'tris203/precognition.nvim', opts = {} },

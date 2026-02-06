@@ -288,7 +288,7 @@ require('lazy').setup({
         { '<leader>l', group = '[l]oclist' },
         { '<leader>n', group = '[n]otes' },
         { '<leader>s', group = '[s]earch' },
-        { '<leader>t', group = '[t]odo' },
+        { '<leader>t', group = '[t]est' },
         { '<leader>q', group = '[q]uickfix' },
         { '<leader>v', group = '[v]im' },
         { 's', group = '[s]urround' },
