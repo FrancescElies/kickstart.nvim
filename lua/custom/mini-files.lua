@@ -53,9 +53,21 @@ local yank_path = function()
   vim.fn.setreg(vim.v.register, path)
 end
 
+local function open_with_default(path)
+  local sysname = vim.loop.os_uname().sysname
+  if sysname == 'Windows_NT' then
+    os.execute(string.format('start "" "%s"', path))
+  elseif sysname == 'Darwin' then
+    os.execute(string.format('open "%s"', path))
+  else
+    os.execute(string.format('xdg-open "%s"', path))
+  end
+end
+
 -- Open path with system default handler (useful for non-text files)
 local ui_open = function()
-  vim.ui.open(MiniFiles.get_fs_entry().path)
+  -- vim.ui.open(MiniFiles.get_fs_entry().path)
+  open_with_default(MiniFiles.get_fs_entry().path)
 end
 
 vim.api.nvim_create_autocmd('User', {
