@@ -38,8 +38,8 @@ vim.o.spell = true
 --
 
 -- for faster spelling corrections
-vim.keymap.set('n', 'gz', ':silent! normal! [s1z=<cr>', { desc = "Fix previous spelling with first suggestion" })
-vim.keymap.set('n', 'gzz', ':silent! norm! 1z=<cr>', { desc = "Exchange current word with first suggestion" })
+vim.keymap.set('n', 'gz', ':silent! normal! [s1z=<cr>', { desc = 'Fix previous spelling with first suggestion' })
+vim.keymap.set('n', 'gzz', ':silent! norm! 1z=<cr>', { desc = 'Exchange current word with first suggestion' })
 
 -- File
 
@@ -88,7 +88,7 @@ vim.keymap.set('n', '*', '*zzzv')
 vim.keymap.set('n', '#', '#zzzv')
 vim.keymap.set('n', 'g*', 'g*zzzv')
 vim.keymap.set('n', 'g#', 'g#zzzv')
-vim.keymap.set('n', 'grr', 'grrzzzv')  -- center after going to reference
+vim.keymap.set('n', 'grr', 'grrzzzv') -- center after going to reference
 
 -- easier step by step replace, repeat with single-repat `.`
 vim.keymap.set('x', 'c*', [[y/\V<C-R>=escape(@", '/\')<CR><CR>Ncgn]])
@@ -156,8 +156,8 @@ vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
 
 vim.keymap.set({ 'n', 'v' }, 's/', [[:s,/,\\,g<cr>]], { desc = 'substitute / with \\' })
 vim.keymap.set({ 'n', 'v' }, 's\\', [[:s,\\,/,g<cr>]], { desc = 'substitute \\ with /' })
-vim.keymap.set('n', 'ysu', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gIc<Left><Left><Left><Left>]], { desc = 'substitute current word' })
-vim.keymap.set('n', 'ySu', [[:%S/\<<C-r><C-w>\>/<C-r><C-w>/gIc<Left><Left><Left><Left>]], { desc = 'substitute current word' })
+vim.keymap.set({ 'n', 'v' }, 'ysu', [[:s/\<<C-r><C-w>\>/<C-r><C-w>/gIc<Left><Left><Left><Left>]], { desc = 'substitute current word' })
+vim.keymap.set({ 'n', 'v' }, 'ySu', [[:S/\<<C-r><C-w>\>/<C-r><C-w>/gIc<Left><Left><Left><Left>]], { desc = 'substitute current word' })
 
 vim.keymap.set({ 'n', 'v' }, '<leader>x', vim.lsp.buf.references, { buffer = true })
 
