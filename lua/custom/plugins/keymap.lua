@@ -159,7 +159,7 @@ vim.keymap.set({ 'n', 'v' }, 's\\', [[:s,\\,/,g<cr>]], { desc = 'substitute \\ w
 vim.keymap.set({ 'n', 'v' }, 'ysu', [[:s/\<<C-r><C-w>\>/<C-r><C-w>/gIc<Left><Left><Left><Left>]], { desc = '[y]ou [s]ubstitute cur. word' })
 vim.keymap.set({ 'n', 'v' }, 'ySu', [[:S/\<<C-r><C-w>\>/<C-r><C-w>/gIc<Left><Left><Left><Left>]], { desc = '[y]ou [s]ubstitute cur. word' })
 
-vim.keymap.set({ 'n', 'v' }, '<leader>x', vim.lsp.buf.references, { buffer = true })
+vim.keymap.set({ 'n', 'v' }, '<leader>x', vim.lsp.buf.references, { buffer = true }, { desc = 'references to quickfix' })
 
 -- QUICKLY EDIT YOUR MACROS: https://github.com/mhinz/vim-galore?tab=readme-ov-file#quickly-edit-your-macros
 -- Also:

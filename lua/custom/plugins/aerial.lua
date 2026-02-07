@@ -1,7 +1,7 @@
 return {
   'stevearc/aerial.nvim',
   keys = {
-    { '<leader>a', '<cmd>AerialToggle!<CR>', 'aerial' },
+    { '<leader>a', '<cmd>AerialToggle!<CR>', 'aerial' , desc= 'aerial'},
   },
   opts = {
     on_attach = function(bufnr)
