@@ -143,21 +143,21 @@ return {
       -- Q: How do I jump between hunks in the diff? A: Use [c and ]c :h jumpto-diffs
     },
   },
-  -- {
-  --   'aaronhallaert/advanced-git-search.nvim',
-  --   diff_plugin = 'diffview',
-  --   config = function()
-  --     -- NOTE: optionally setup telescope before loading the extension, don't do here see docs
-  --     require('telescope').load_extension 'advanced_git_search'
-  --   end,
-  --   keys = {
-  --     { '<leader>g//', ':AdvancedGitSearch<CR>', desc = '[g]it [s]earch' },
-  --     { '<leader>g/l', ':AdvancedGitSearch diff_commit_line<cr>', mode = { 'n', 'v' }, desc = '[g]it [d]iff [l]ine' },
-  --     { '<leader>g/r', ':AdvancedGitSearch checkout_reflog<cr>', desc = '[g]it [r]eflog' },
-  --   },
-  --   dependencies = {
-  --     'nvim-telescope/telescope.nvim',
-  --     'sindrets/diffview.nvim',
-  --   },
-  -- },
+  {
+    'aaronhallaert/advanced-git-search.nvim',
+    diff_plugin = 'diffview',
+    config = function()
+      -- NOTE: optionally setup telescope before loading the extension, don't do here see docs
+      require('telescope').load_extension 'advanced_git_search'
+    end,
+    keys = {
+      { '<leader>g//', ':AdvancedGitSearch<CR>', desc = '[g]it [s]earch' },
+      { '<leader>g/l', ':AdvancedGitSearch diff_commit_line<cr>', mode = { 'n', 'v' }, desc = '[g]it [d]iff [l]ine' },
+      { '<leader>g/r', ':AdvancedGitSearch checkout_reflog<cr>', desc = '[g]it [r]eflog' },
+    },
+    dependencies = {
+      'nvim-telescope/telescope.nvim',
+      'sindrets/diffview.nvim',
+    },
+  },
 }
