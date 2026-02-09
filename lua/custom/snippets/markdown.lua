@@ -21,23 +21,31 @@ local conds = require 'luasnip.extras.conditions'
 local conds_expand = require 'luasnip.extras.conditions.expand'
 local types = require 'luasnip.util.types'
 
-ls.add_snippets('lua', {
-  s(
-    'mfn',
-    c(1, {
-      fmt('function {}.{}({})\n  {}\nend', {
-        f(get_returned_mod_name, {}),
-        i(1),
-        i(2),
-        i(3),
-      }),
-      fmt('function {}:{}({})\n  {}\nend', {
-        f(get_returned_mod_name, {}),
-        i(1),
-        i(2),
-        i(3),
-      }),
-    })
-  ),
-})
+ls.add_snippets('markdown', {
+  s('details', {
+    t {
+      '<details>',
+      '  <summary>',
+    },
+    i(1, 'title'),
+    t {
+      '(Click me)👈</summary>',
+      '',
+      '  ',
+    },
+    i(2, '*Markdown allowed*'),
+    t {
+      '',
+      '',
+      '</details>',
+    },
+  }),
 
+  s('video', {
+    t '<video src="',
+    i(1, 'https://website.com/video.mp4'),
+    t '" width=',
+    i(2, '400'),
+    t ' controls></video>',
+  }),
+})
