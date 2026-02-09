@@ -107,7 +107,7 @@ return {
     ft = { 'fugitive' },
     keys = {
       { '<leader>gb', '<cmd>Git blame<cr>', desc = 'Git blame' },
-      { 'gs', vim.cmd.Git, desc = '[g]it [s]tatus (fugitive)' },
+      { '<leader>fu', vim.cmd.Git, desc = 'fugitive' },
     },
   },
 
