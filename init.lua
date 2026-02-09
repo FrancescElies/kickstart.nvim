@@ -1074,8 +1074,10 @@ require('lazy').setup({
         },
         opts = {},
         config = function()
-          require 'custom.snippets'
           local ls = require 'luasnip'
+          -- in a cpp file: search c-snippets, then all-snippets only (no cpp-snippets!!).
+          ls.filetype_set('cpp', { 'c' })
+
           vim.keymap.set({ 'i' }, '<c-s>', function()
             ls.expand {}
           end, { silent = true })
@@ -1091,6 +1093,13 @@ require('lazy').setup({
               ls.change_choice(1)
             end
           end, { silent = true })
+
+          -- see `nvim/lazy/LuaSnip/Examples/snippets.lua`
+
+          for _, ft_path in ipairs(vim.api.nvim_get_runtime_file('lua/custom/snippets/*.lua', true)) do
+            loadfile(ft_path)()
+          end
+          require('luasnip.loaders.from_lua').lazy_load { include = { 'all', 'cpp', 'c' } }
         end,
       },
       'folke/lazydev.nvim',
