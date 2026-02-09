@@ -84,6 +84,30 @@ vim.api.nvim_create_user_command('Dec2Hex', function()
   end
 end, {})
 
+vim.api.nvim_create_user_command('SwapHexEndianness', function()
+  local word = vim.fn.expand '<cword>'
+
+  if not word:match '^0x[0-9A-Fa-f]+$' or #word % 2 ~= 0 then
+    print('Not a hex word: ' .. word)
+    return
+  end
+
+  local bytes = {}
+  for i = 3, #word, 2 do
+    table.insert(bytes, word:sub(i, i + 1))
+  end
+
+  local reversed_bytes = { '0x' }
+  for _, value in ipairs(vim.fn.reverse(bytes)) do
+    table.insert(reversed_bytes, value)
+  end
+
+  local swapped = table.concat(reversed_bytes)
+
+  vim.cmd('normal! ciw' .. swapped)
+end, {})
+
+
 vim.api.nvim_create_user_command('ExecuteAfterXMinutes', function(opts)
   local minutes = tonumber(opts.fargs[1])
   local command = table.concat(opts.fargs, ' ', 2)
