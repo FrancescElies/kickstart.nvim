@@ -108,6 +108,7 @@ return {
     keys = {
       { '<leader>gb', ':Git blame<cr>', desc = 'Git blame' },
       { '<leader>gc', ':Git commit', desc = 'Git commit' },
+      { '<leader>gp', ':Git push<cr>', desc = 'Git commit' },
       { '<leader>g.', ':Git status<cr>', desc = 'Git status' },
 
       { '<leader>fu', vim.cmd.Git, desc = 'fugitive' },
