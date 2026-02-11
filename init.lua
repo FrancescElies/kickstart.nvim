@@ -174,8 +174,8 @@ vim.o.confirm = true
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Diagnostic keymaps
-vim.keymap.set({ 'n', 'v' }, '<leader>qx', vim.lsp.buf.references, { buffer = true }, { desc = 'references to quickfix' })
-vim.keymap.set({ 'n', 'v' }, 'yr', vim.lsp.buf.references, { buffer = true }, { desc = 'you references to quickfix' })
+vim.keymap.set({ 'n', 'v' }, '<leader>qx', vim.lsp.buf.references, { buffer = true, desc = 'references to quickfix' })
+vim.keymap.set({ 'n', 'v' }, 'yr', vim.lsp.buf.references, { buffer = true, desc = 'you references to quickfix' })
 
 vim.keymap.set('n', '<leader>qb', vim.diagnostic.setloclist, { desc = '[q]uickfix [b]uffer diag.' })
 vim.keymap.set('n', '<leader>qa', vim.diagnostic.setqflist, { desc = '[q]uickfix all [d]iag.' })
