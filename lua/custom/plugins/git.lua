@@ -107,6 +107,8 @@ return {
     ft = { 'fugitive' },
     keys = {
       { '<leader>gb', '<cmd>Git blame<cr>', desc = 'Git blame' },
+      { '<leader>gc', '<cmd>Git commit', desc = 'Git commit' },
+      { '<leader>g.', '<cmd>Git status<cr>', desc = 'Git status' },
       { '<leader>fu', vim.cmd.Git, desc = 'fugitive' },
     },
   },
