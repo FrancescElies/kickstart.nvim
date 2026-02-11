@@ -1288,15 +1288,16 @@ require('lazy').setup({
       local mini_align = require 'mini.align'
       mini_align.setup()
 
+      local hipatterns = require 'mini.hipatterns'
+
       local words = { red = '#aa0000', green = '#00aa00', blue = '#0000aa' }
       local word_color_group = function(_, match)
         local hex = words[match]
         if hex == nil then
           return nil
         end
-        return MiniHipatterns.compute_hex_color_group(hex, 'bg')
+        return hipatterns.compute_hex_color_group(hex, 'bg')
       end
-      local hipatterns = require 'mini.hipatterns'
       hipatterns.setup {
         highlighters = {
           fixme = { pattern = 'FIXME', group = 'MiniHipatternsFixme' },
@@ -1325,7 +1326,7 @@ require('lazy').setup({
               if hex == nil then
                 return nil
               end
-              return MiniHipatterns.compute_hex_color_group(hex, 'bg')
+              return hipatterns.compute_hex_color_group(hex, 'bg')
             end,
           },
           censor = {
