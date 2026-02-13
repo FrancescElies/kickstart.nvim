@@ -30,36 +30,36 @@ if is_windows then
     --     vim.g.copilot_no_tab_map = true
     --   end,
     -- },
-    {
-      'zbirenbaum/copilot.lua',
-      cmd = 'Copilot',
-      event = 'InsertEnter',
-      config = function()
-        require('copilot').setup {
-          suggestion = {
-            enabled = true,
-            auto_trigger = false,
-            debounce = 75,
-            keymap = {
-              accept = '<tab>',
-              accept_word = '<C-Right>',
-              accept_line = false,
-              next = '<M-]>',
-              prev = '<M-[>',
-              dismiss = '<C-]>',
-            },
-          },
-          filetypes = {
-            yaml = false,
-            markdown = false,
-            help = false,
-            gitcommit = false,
-            gitrebase = false,
-            ['.'] = false,
-          },
-        }
-      end,
-    },
+    -- {
+    --   'zbirenbaum/copilot.lua',
+    --   cmd = 'Copilot',
+    --   event = 'InsertEnter',
+    --   config = function()
+    --     require('copilot').setup {
+    --       suggestion = {
+    --         enabled = true,
+    --         auto_trigger = false,
+    --         debounce = 75,
+    --         keymap = {
+    --           accept = '<tab>',
+    --           accept_word = '<C-Right>',
+    --           accept_line = false,
+    --           next = '<M-]>',
+    --           prev = '<M-[>',
+    --           dismiss = '<C-]>',
+    --         },
+    --       },
+    --       filetypes = {
+    --         yaml = false,
+    --         markdown = false,
+    --         help = false,
+    --         gitcommit = false,
+    --         gitrebase = false,
+    --         ['.'] = false,
+    --       },
+    --     }
+    --   end,
+    -- },
 
     -- {
     --   'CopilotC-Nvim/CopilotChat.nvim',
