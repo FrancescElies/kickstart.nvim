@@ -134,6 +134,15 @@ vim.api.nvim_create_user_command('ExecuteEveryXMinutesCancel', function(opts)
   end
 end, {})
 
+vim.keymap.set('v', '<leader>cs', ':!codesort', { desc = 'codesort' })
+vim.keymap.set('n', '<leader>cs', function()
+  local cursor_pos = vim.api.nvim_win_get_cursor(0)
+  local line = cursor_pos[1]
+  local cmd = string.format('%%!codesort --around %d --detect %s', line, vim.fn.shellescape(vim.fn.expand '%:t'))
+  vim.cmd(cmd)
+  vim.api.nvim_win_set_cursor(0, cursor_pos) -- restore cursor
+end, { desc = 'codesort optimal range around the current line', silent = true })
+
 return {
   {
     'atiladefreitas/dooing',
