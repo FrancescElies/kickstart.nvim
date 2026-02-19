@@ -143,6 +143,12 @@ vim.keymap.set('n', '<leader>cs', function()
   vim.api.nvim_win_set_cursor(0, cursor_pos) -- restore cursor
 end, { desc = 'codesort optimal range around the current line', silent = true })
 
+
+-- lua quick execution
+vim.keymap.set('n', 'yxf', ':source %<CR>', { desc = '[y]ou [s]ource [f]ile' })
+vim.keymap.set('n', 'yx.', '<cmd>.lua<CR>', { desc = '[y]ou e[x]ecute [l]ua line' })
+vim.keymap.set('v', 'yxl', ":'<,'>lua<CR>", { desc = '[y]ou e[x]ecute [l]ua selection' })
+
 vim.api.nvim_create_user_command('SetIndentationConfig', function(opts)
   local use_tabs = opts.fargs[1]
   local width = tonumber(opts.fargs[2])
