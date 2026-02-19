@@ -150,9 +150,9 @@ vim.keymap.set('n', 'yx.', '<cmd>.lua<CR>', { desc = '[y]ou e[x]ecute [l]ua line
 vim.keymap.set('v', 'yxl', ":'<,'>lua<CR>", { desc = '[y]ou e[x]ecute [l]ua selection' })
 
 vim.api.nvim_create_user_command('SetIndentationConfig', function(opts)
-  local use_tabs = opts.fargs[1]
+  local mode = opts.fargs[1]
   local width = tonumber(opts.fargs[2])
-  if use_tabs then
+  if mode == 'tabs' then
     vim.opt.expandtab = false
     vim.opt.shiftwidth = 0
     vim.opt.softtabstop = width
