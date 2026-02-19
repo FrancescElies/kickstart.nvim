@@ -143,6 +143,38 @@ vim.keymap.set('n', '<leader>cs', function()
   vim.api.nvim_win_set_cursor(0, cursor_pos) -- restore cursor
 end, { desc = 'codesort optimal range around the current line', silent = true })
 
+vim.api.nvim_create_user_command('SetIndentationConfig', function(opts)
+  local use_tabs = opts.fargs[1]
+  local width = tonumber(opts.fargs[2])
+  if use_tabs then
+    vim.opt.expandtab = false
+    vim.opt.shiftwidth = 0
+    vim.opt.softtabstop = width
+    vim.opt.tabstop = width
+  else
+    vim.opt.expandtab = true
+    vim.opt.shiftwidth = width
+    vim.opt.tabstop = width
+  end
+end, {
+  nargs = '*',
+  desc = 'configure tab/space behavior',
+  complete = function(arg_lead, full_line, pos)
+    local args_so_far = vim.split(full_line, '%s+', { trimempty = true })
+    table.remove(args_so_far, 1) -- remove the command name
+
+    if #args_so_far == 0 then
+      return { 'tabs', 'spaces' }
+    end
+
+    if #args_so_far == 1 then
+      return { '2', '4', '8' }
+    end
+
+    return {}
+  end,
+})
+
 return {
   {
     'atiladefreitas/dooing',
