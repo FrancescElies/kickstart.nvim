@@ -60,30 +60,27 @@ return {
           end
         end, { desc = 'Jump to previous git [c]hange' })
 
-        -- Actions
         -- stylua: ignore
         map('v', '<leader>hs', function() gitsigns.stage_hunk { vim.fn.line '.', vim.fn.line 'v' } end, { desc = '[h]unk [s]tage' })
         -- stylua: ignore
         map('v', '<leader>hr', function() gitsigns.reset_hunk { vim.fn.line '.', vim.fn.line 'v' } end, { desc = '[h]unk [r]eset' })
 
-        -- normal mode
         map('n', '<leader>hB', gitsigns.blame, { desc = '[h]unk [b]lame [b]uffer' })
-        map('n', '<leader>hl', gitsigns.blame_line, { desc = '[h]unk blame [l]ine' })
-        map('n', '<leader>hq', gitsigns.setqflist, { desc = '[h]unk [q]uickfix ' })
-        -- stylua: ignore
-        map('n', '<leader>hQ', function() gitsigns.setqflist 'all' end, { desc = '[h]unk [q]uickfix Project' })
-        map('n', '<leader>hs', gitsigns.stage_hunk, { desc = '[h]unk [s]tage' })
-        map('n', '<leader>hS', gitsigns.stage_buffer, { desc = '[h]unk [S]tage buffer' })
-        map('n', '<leader>hr', gitsigns.reset_hunk, { desc = '[h]unk [r]eset' })
-        map('n', '<leader>hR', gitsigns.reset_buffer, { desc = '[h]unk [R]eset buffer' })
-        map('n', '<leader>hu', gitsigns.stage_hunk, { desc = '[h]unk [u]ndo stage' })
-        map('n', '<leader>hp', gitsigns.preview_hunk, { desc = '[h]unk [p]review' })
-        -- stylua: ignore
-        map('n', '<leader>hdi', gitsigns.diffthis, { desc = '[h]unk [d]iff..index' })
+        map('n', '<leader>hb', gitsigns.toggle_current_line_blame, { desc = '[h]unk toggle [b]lame' })
+        map('n', '<leader>hd', gitsigns.preview_hunk_inline, { desc = '[h]unk toggle [d]eleted' })
         -- stylua: ignore
         map('n', '<leader>hdh', function() gitsigns.diffthis '@' end, { desc = '[h]unk [d]iff..HEAD' })
-
-        map('n', '<leader>hb', gitsigns.toggle_current_line_blame, { desc = '[h]unk toggle [b]lame' })
+        map('n', '<leader>hdi', gitsigns.diffthis, { desc = '[h]unk [d]iff..index' })
+        map('n', '<leader>hl', gitsigns.blame_line, { desc = '[h]unk blame [l]ine' })
+        map('n', '<leader>hp', gitsigns.preview_hunk, { desc = '[h]unk [p]review' })
+        -- stylua: ignore
+        map('n', '<leader>hQ', function() gitsigns.setqflist 'all' end, { desc = '[h]unk [q]uickfix Project' })
+        map('n', '<leader>hq', gitsigns.setqflist, { desc = '[h]unk [q]uickfix ' })
+        map('n', '<leader>hR', gitsigns.reset_buffer, { desc = '[h]unk [R]eset buffer' })
+        map('n', '<leader>hr', gitsigns.reset_hunk, { desc = '[h]unk [r]eset' })
+        map('n', '<leader>hS', gitsigns.stage_buffer, { desc = '[h]unk [S]tage buffer' })
+        map('n', '<leader>hs', gitsigns.stage_hunk, { desc = '[h]unk [s]tage' })
+        map('n', '<leader>hu', gitsigns.stage_hunk, { desc = '[h]unk [u]ndo stage' })
         map('n', '<leader>hw', gitsigns.toggle_word_diff, { desc = '[h]unk toggle [w]ord diff' })
 
         -- [h]unk as a vim text object
