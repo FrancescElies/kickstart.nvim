@@ -1,10 +1,11 @@
 -- good for getting lsp diagnostics accross the whole project
 local function open_similar_files()
-  local root = vim.fs.root(0, '.git')
+  -- local cwd = vim.fs.root(0, '.git')
+  local cwd = vim.fn.getcwd()
 
-  local files = vim.fn.split(vim.system({ 'git', 'ls-files' }, { text = true, cwd = root }):wait().stdout, '\n')
+  local files = vim.fn.split(vim.system({ 'git', 'ls-files' }, { text = true, cwd = cwd }):wait().stdout, '\n')
   for i, file in ipairs(files) do
-    files[i] = vim.fs.joinpath(root, file)
+    files[i] = vim.fs.joinpath(cwd, file)
   end
 
   local buf = vim.api.nvim_get_current_buf()
