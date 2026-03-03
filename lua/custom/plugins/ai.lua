@@ -74,9 +74,9 @@ if is_windows then
         error_header = '## Error ',
       },
       keys = {
-        { '<leader>Cc', ':CopilotChat<cr>', desc = 'CopilotChat - Quick chat' },
+        { '<localleader>c', ':CopilotChat<cr>', desc = 'CopilotChat - Quick chat' },
         {
-          '<leader>Cv',
+          '<localleader>v',
           function()
             local input = visual_region_to_text()
             if input ~= '' then
@@ -86,14 +86,14 @@ if is_windows then
           desc = 'CopilotChat - Send visual lines',
           mode = 'v',
         },
-        { '<leader>Cc', '<cmd>CopilotChatToggle<cr>', desc = 'Toggle Copilot Chat' },
-        { '<leader>Cf', '<cmd>CopilotChatFix<cr>', desc = 'Fix code' },
-        { '<leader>Ce', ':CopilotChatExplain<cr>', desc = 'Explain code' },
-        { '<leader>Ct', ':CopilotChatTests<cr>', desc = 'Generate tests' },
-        { '<leader>Cv', ':CopilotChatVisual', mode = 'x', desc = 'Open in vertical split' },
-        { '<leader>Cx', ':CopilotChatInPlace<cr>', mode = 'x', desc = 'Run in-place code' },
-        { '<leader>Cf', ':CopilotChatFixDiagnostic<cr>', desc = 'Fix diagnostic' },
-        { '<leader>Cr', ':CopilotChatReset<cr>', desc = 'Reset chat history and clear buffer' },
+        { '<localleader>c', '<cmd>CopilotChatToggle<cr>', desc = 'Toggle Copilot Chat' },
+        { '<localleader>f', '<cmd>CopilotChatFix<cr>', desc = 'Fix code' },
+        { '<localleader>e', ':CopilotChatExplain<cr>', desc = 'Explain code' },
+        { '<localleader>t', ':CopilotChatTests<cr>', desc = 'Generate tests' },
+        { '<localleader>v', ':CopilotChatVisual', mode = 'x', desc = 'Open in vertical split' },
+        { '<localleader>x', ':CopilotChatInPlace<cr>', mode = 'x', desc = 'Run in-place code' },
+        { '<localleader>f', ':CopilotChatFixDiagnostic<cr>', desc = 'Fix diagnostic' },
+        { '<localleader>r', ':CopilotChatReset<cr>', desc = 'Reset chat history and clear buffer' },
       },
     },
   }
