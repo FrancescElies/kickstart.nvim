@@ -2,6 +2,7 @@ return {
   'andrewferrier/debugprint.nvim',
   opts = {
     keymaps = {
+      -- `yd` mnemonic: [y]ou [d]ebug
       normal = {
         plain_below = 'ydp',
         plain_above = 'ydP',
