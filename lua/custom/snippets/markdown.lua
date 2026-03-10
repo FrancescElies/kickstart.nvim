@@ -22,7 +22,7 @@ local conds_expand = require 'luasnip.extras.conditions.expand'
 local types = require 'luasnip.util.types'
 
 ls.add_snippets('markdown', {
-  s('details', {
+  s('collapsible', {
     t {
       '<details>',
       '  <summary>',
