@@ -58,6 +58,7 @@ vim.keymap.set('n', '<leader>bY', function()
   vim.fn.setreg('+', abs_path)
 end, { desc = '[b]uffer [Y]ank abs. path' })
 vim.keymap.set('n', '<leader>bo', ':e <C-r>+<CR>', { desc = '[b]uffer [o]pen from clipboard' })
+vim.keymap.set('n', '<leader>bd', '<cmd>bd<cr>', { desc = '[b]uffer [d]elete' })
 
 -- quick scape
 vim.keymap.set({ 'i', 'c' }, 'jk', '<Esc>')
