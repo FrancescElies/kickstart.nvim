@@ -145,9 +145,9 @@ end, { desc = 'codesort optimal range around the current line', silent = true })
 
 
 -- lua quick execution
-vim.keymap.set('n', 'yxf', ':source %<CR>', { desc = '[y]ou [s]ource [f]ile' })
+vim.keymap.set('n', 'yxf', '<cmd>source %<CR>', { desc = '[y]ou [s]ource [f]ile' })
 vim.keymap.set('n', 'yx.', '<cmd>.lua<CR>', { desc = '[y]ou e[x]ecute [l]ua line' })
-vim.keymap.set('v', 'yxl', ":'<,'>lua<CR>", { desc = '[y]ou e[x]ecute [l]ua selection' })
+vim.keymap.set('v', 'yxl', "<cmd>'<,'>lua<CR>", { desc = '[y]ou e[x]ecute [l]ua selection' })
 
 vim.api.nvim_create_user_command('SetIndentationConfig', function(opts)
   local mode = opts.fargs[1]
