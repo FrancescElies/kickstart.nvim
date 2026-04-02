@@ -67,6 +67,12 @@ if is_windows then
         { 'nvim-lua/plenary.nvim', branch = 'master' },
       },
       build = 'make tiktoken',
+      -- make tiktoken will fail on windows, do the following manual stup instead
+      -- cd ~/AppData/Local/nvim-data/lazy/CopilotChat.nvim
+      -- mkdir build
+      -- cd build
+      -- http get https://github.com/gptlang/lua-tiktoken/releases/download/v0.2.6/tiktoken_core-windows-x86_64-luajit.dll | save tiktoken_core.dll
+      -- http get https://github.com/gptlang/lua-tiktoken/releases/download/v0.2.6/tiktoken_core-windows-x86_64-lua51.dll | save tiktoken_core-lua51.dll
       opts = {
         debug = false,
         question_header = '## User ',
