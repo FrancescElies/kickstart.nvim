@@ -127,62 +127,6 @@ vim.keymap.set('n', '<leader>vw', ':set invwrap<cr>', { desc = '[v]im [w]rap tog
 vim.keymap.set('n', '<leader>v/', ':set invhlsearch<cr>', { desc = '[v]im highlight [/]search toggle' })
 vim.keymap.set('n', '<leader>vs', ':set invspell<cr>', { desc = '[v]im [S]pell toggle' })
 
-vim.keymap.set('n', '<leader>vdt', function()
-  vim.diagnostic.enable(not vim.diagnostic.is_enabled())
-  -- vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = 0 }, { bufnr = 0 })
-end, { desc = '[v]im [D]iagnostic toggle' })
-vim.keymap.set('n', '<leader>vda', function()
-  vim.diagnostic.config {
-    severity_sort = true,
-    underline = {
-      severity = { min = vim.diagnostic.severity.HINT },
-    },
-    virtual_text = {
-      severity = { min = vim.diagnostic.severity.HINT },
-    },
-    signs = {
-      severity = { min = vim.diagnostic.severity.HINT },
-    },
-  }
-end, { desc = '[v]im [d]iagnostic show all'})
-vim.keymap.set('n', '<leader>vdw', function()
-  vim.diagnostic.config {
-    severity_sort = true,
-    underline = {
-      severity = { min = vim.diagnostic.severity.WARN },
-    },
-    virtual_text = {
-      severity = { min = vim.diagnostic.severity.WARN },
-    },
-    signs = {
-      severity = { min = vim.diagnostic.severity.WARN },
-    },
-  }
-end, { desc = '[v]im [d]iagnostic show warnings' })
-vim.keymap.set('n', '<leader>vde', function()
-  vim.diagnostic.config {
-    severity_sort = true,
-    underline = {
-      severity = { min = vim.diagnostic.severity.ERROR },
-    },
-    virtual_text = {
-      severity = { min = vim.diagnostic.severity.ERROR },
-    },
-    signs = {
-      severity = { min = vim.diagnostic.severity.ERROR },
-    },
-  }
-end, { desc = '[v]im [d]iagnostic show errors' })
-
-vim.keymap.set('', '<leader>vdv', function()
-  local config = vim.diagnostic.config() or {}
-  if config.virtual_text then
-    vim.diagnostic.config { virtual_text = false, virtual_lines = true }
-  else
-    vim.diagnostic.config { virtual_text = true, virtual_lines = false }
-  end
-end, { desc = '[v]im [d]iagnostic [v]irtual text toggle ' })
-
 -- control splits size  <>., are on the same two keys
 -- width
 
@@ -216,4 +160,42 @@ vim.keymap.set({ 'n', 'v' }, 'ySu', [[:.,$S/\<<C-r><C-w>\>/<C-r><C-w>/gIc<Left><
 --
 -- the end
 --
+
+--
+-- diagnostic
+--
+vim.keymap.set('n', '<leader>vdt', function()
+  vim.diagnostic.enable(not vim.diagnostic.is_enabled())
+  -- vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = 0 }, { bufnr = 0 })
+end, { desc = '[v]im [D]iagnostic toggle' })
+
+local function diagnostic_config_fn(level)
+  return function()
+    vim.diagnostic.config {
+      severity_sort = true,
+      underline = { severity = { min = level } },
+      virtual_text = { severity = { min = level } },
+      signs = { severity = { min = level } },
+    }
+  end
+end
+vim.keymap.set('n', '<leader>vda', diagnostic_config_fn(vim.diagnostic.severity.HINT), { desc = '[v]im [d]iag. show [a]ll' })
+vim.keymap.set('n', '<leader>vdw', diagnostic_config_fn(vim.diagnostic.severity.WARN), { desc = '[v]im [d]iag. show [w]arn' })
+vim.keymap.set('n', '<leader>vde', diagnostic_config_fn(vim.diagnostic.severity.ERROR), { desc = '[v]im [d]iag. show [e]rror' })
+
+vim.keymap.set('', '<leader>vdv', function()
+  local config = vim.diagnostic.config() or {}
+  if config.virtual_text then
+    local c = vim.diagnostic.config()
+    c.virtual_text = false
+    c.virtual_lines = true
+    vim.diagnostic.config(c)
+  else
+    local c = vim.diagnostic.config()
+    c.virtual_text = true
+    c.virtual_lines = false
+    vim.diagnostic.config(c)
+  end
+end, { desc = '[v]im [d]iagnostic [v]irtual text toggle ' })
+
 return {}
