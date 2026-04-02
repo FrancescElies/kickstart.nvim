@@ -26,8 +26,6 @@ vim.keymap.set('n', '<M-l>', ':bnext')
 vim.keymap.set('c', '<C-k>', '<t_ku>', { desc = 'previous similar entry' })
 vim.keymap.set('c', '<C-j>', '<t_kd>', { desc = 'next similar entry' })
 
-vim.diagnostic.config { virtual_text = true, virtual_lines = false }
-
 vim.o.spell = true
 -- vim.o.spelllang = 'de_de,en_us'
 --
@@ -164,6 +162,15 @@ vim.keymap.set({ 'n', 'v' }, 'ySu', [[:.,$S/\<<C-r><C-w>\>/<C-r><C-w>/gIc<Left><
 --
 -- diagnostic
 --
+vim.diagnostic.config {
+  virtual_text = true,
+  virtual_lines = false,
+  severity_sort = true,
+  underline = { severity = { min = vim.diagnostic.severity.ERROR } },
+  virtual_text = { severity = { min = vim.diagnostic.severity.ERROR } },
+  signs = { severity = { min = vim.diagnostic.severity.ERROR } },
+}
+
 vim.keymap.set('n', '<leader>vdt', function()
   vim.diagnostic.enable(not vim.diagnostic.is_enabled())
   -- vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = 0 }, { bufnr = 0 })
