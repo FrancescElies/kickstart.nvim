@@ -1,6 +1,7 @@
 return {
-  { 'tpope/vim-abolish' },
-  { 'tpope/vim-rsi' },
+
+  { 'tpope/vim-abolish' }, -- :help abolish, :%S/box{,es}/bag{,s}/g   crc crs cr. cru crk
+  { 'tpope/vim-rsi' }, -- :help rsi
   -- { 'tpope/vim-unimpaired', event = 'VeryLazy' },
   -- { 'tpope/vim-repeat', event = 'VeryLazy' },
   -- { "wincent/loupe", event = "VeryLazy" },
