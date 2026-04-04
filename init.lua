@@ -1251,6 +1251,7 @@ require('lazy').setup({
       -- using persistence instead
       require('mini.sessions').setup {
         autoread = true,
+        autowrite = true,
         verbose = { read = true, write = true, delete = true },
       }
       vim.o.sessionoptions = 'blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions'
