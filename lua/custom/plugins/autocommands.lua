@@ -44,7 +44,7 @@ vim.api.nvim_create_autocmd('BufReadPost', {
 })
 --
 
-_G.autosave_enabled = true
+_G.autosave_enabled = false
 vim.api.nvim_create_augroup('autosave', { clear = true })
 -- Autosave
 vim.api.nvim_create_autocmd({ 'TextChanged', 'InsertLeave' }, {
