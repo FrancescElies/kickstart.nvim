@@ -68,9 +68,9 @@ vim.keymap.set('n', 'yso', '<cmd>so %<cr>', { desc = '[y]ou [s]ource current buf
 vim.keymap.set('n', 'ysol', '<cmd>.lua<cr>', { desc = '[y]ou [s]ource current [l]ine' })
 
 -- execute as shell command from cursor to EOL
-vim.keymap.set('n', ',x', '"ey$:!<c-r>e<cr>', { desc = 'e[x]ecute line as shell command' })
+vim.keymap.set('n', ',e', '"ey$:!<c-r>e<cr>', { desc = 'e[x]ecute line as shell command' })
 -- execute as : command from cursor to EOL
-vim.keymap.set('n', ',X', '"ey$:!<c-r>e<cr>', { desc = 'e[x]ecute line as vim command (:)' })
+vim.keymap.set('n', ',E', '"ey$:!<c-r>e<cr>', { desc = 'e[x]ecute line as vim command (:)' })
 
 -- Keep things vertically centered during search
 vim.keymap.set('n', '<C-d>', '<C-d>zz')
