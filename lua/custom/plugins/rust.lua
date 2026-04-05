@@ -24,9 +24,6 @@ return {
     config = function()
       -- You only need to specify the keys that you want to be changed, because defaults are applied for keys that are not provided.
       vim.g.rustaceanvim = {
-        tools = {
-          test_executor = 'background',
-        },
         -- Plugin configuration
         -- tools = {},
         -- LSP configuration
@@ -119,10 +116,10 @@ return {
             keymap('n','<leader>cm', ':RustLsp moveItem ', '[m]ove up|down')
             keymap('n','<leader>co', ':RustLsp openCargo<cr>', '[o]pen cargo')
             keymap('n','<leader>cp', ':RustLsp parentModule<cr>', '[p]arent module')
-            keymap('n','<leader>c.', ':RustLsp! testables<cr>', 'run previous [t]ests')
-            keymap('n','<leader>ct', ':RustLsp testables<cr>', 'run [t]ests')
+            -- keymap('n','<leader>c.', ':RustLsp! testables<cr>', 'run previous [t]ests')
+            -- keymap('n','<leader>ct', ':RustLsp testables<cr>', 'run [t]ests')
             -- rust_keymap('n','<leader>cw', ':RustLsp workspaceSymbol allSymbols ', '[w]orkspace symbol')
-            -- :RustLsp crateGraph {backend {output}}
+            keymap('n','<leader>cg', ':RustLsp crateGraph', 'crate [g]raph')
             -- :RustLsp syntaxTree
             -- :Rustc unpretty {hir|mir|...}
           end
