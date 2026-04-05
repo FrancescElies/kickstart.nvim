@@ -28,4 +28,7 @@ vim.keymap.set('n', '<leader>vde', function()
   set_diagnostic_config { level = vim.diagnostic.severity.ERROR }
 end, { desc = '[v]im [d]iag. show [e]rror' })
 
+-- default
+set_diagnostic_config { level = vim.diagnostic.severity.ERROR }
+
 return {}
