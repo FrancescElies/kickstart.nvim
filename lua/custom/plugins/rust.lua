@@ -18,7 +18,7 @@ return {
   {
     --   disable rust-analyzer in lsp-init.lua if this plugin enabled
     'mrcjkb/rustaceanvim',
-    version = '^6', -- Recommended
+    version = '^9',
     lazy = false, -- This plugin is already lazy
 
     config = function()

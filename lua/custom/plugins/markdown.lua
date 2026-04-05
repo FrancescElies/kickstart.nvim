@@ -26,7 +26,7 @@ vim.keymap.set('n', 'gX', open_azure_devops_link_under_cursor, { desc = 'Open Az
 return {
   "iamcco/markdown-preview.nvim",
   cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-  build = "cd app ; yarn install",
+  build = "cd app ; npm install",
   init = function()
     vim.g.mkdp_filetypes = { "markdown" }
   end,
