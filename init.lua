@@ -700,6 +700,7 @@ require('lazy').setup({
           },
         } or {},
         virtual_text = {
+          severity = { min = vim.diagnostic.severity.ERROR },
           source = 'if_many',
           spacing = 2,
           format = function(diagnostic)
