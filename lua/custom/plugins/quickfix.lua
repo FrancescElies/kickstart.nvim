@@ -7,9 +7,9 @@
 vim.keymap.set('n', '<leader>qq', function()
   local qf_winid = vim.fn.getqflist({ winid = 0 }).winid
   if qf_winid > 0 then
-    vim.cmd('cclose')
+    vim.cmd 'cclose'
   else
-    vim.cmd('botright copen')
+    vim.cmd 'botright copen'
   end
 end, { silent = true })
 
@@ -17,9 +17,9 @@ end, { silent = true })
 vim.keymap.set('n', '<leader>lt', function()
   local loc_winid = vim.fn.getloclist(vim.api.nvim_get_current_win(), { winid = 0 }).winid
   if loc_winid > 0 then
-    vim.cmd('lclose')
+    vim.cmd 'lclose'
   else
-    vim.cmd('lopen')
+    vim.cmd 'lopen'
   end
 end, { silent = true })
 
@@ -65,13 +65,12 @@ local function diagnostic_jump(opts)
   vim.cmd 'normal! zz'
 end
 
-vim.keymap.set('n', '<M-k>', function()
-  diagnostic_jump { count = -1 }
-end)
-
-vim.keymap.set('n', '<M-j>', function()
-  diagnostic_jump { count = 1 }
-end)
+-- vim.keymap.set('n', '<M-k>', function()
+--   diagnostic_jump { count = -1 }
+-- end)
+-- vim.keymap.set('n', '<M-j>', function()
+--   diagnostic_jump { count = 1 }
+-- end)
 
 vim.keymap.set('n', '<c-h>', ':colder<cr>')
 vim.keymap.set('n', '<c-l>', ':cnewer<cr>')
@@ -137,7 +136,7 @@ vim.api.nvim_create_autocmd('FileType', {
 return {
   {
     'stevearc/quicker.nvim',
-    event = 'FileType qf',
+    ft = 'qf',
     ---@module "quicker"
     ---@type quicker.SetupOptions
     opts = {},
