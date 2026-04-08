@@ -5,7 +5,7 @@ return {
     {'nvim-telescope/telescope.nvim'},
   },
   keys = {
-    { '<leader>st', ':Telescope AST_grep<cr>', desc = 'search by as[t] grep' },
+    { '<leader>sT', ':Telescope AST_grep<cr>', desc = 'search by as[t] grep' },
     { '<leader>sj', ':Telescope dumb_jump<cr>', desc = 'ast [j]ump definition' },
   },
 }
