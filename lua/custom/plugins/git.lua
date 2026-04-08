@@ -106,7 +106,7 @@ return {
       { '<leader>gb', '<cmd>G blame<cr>', desc = 'Git blame' },
       { '<leader>gc', '<cmd>G commit<cr>', desc = 'Git commit' },
       { '<leader>gp', '<cmd>G push<cr>', desc = 'Git commit' },
-      { '<leader>gs', '<cmd>G<cr>', desc = 'Git status' },
+      { '<leader>gs', '<cmd>tab Git<cr>', desc = 'Git status' },
 
       { '<leader>fu', vim.cmd.Git, desc = 'fugitive' },
     },
