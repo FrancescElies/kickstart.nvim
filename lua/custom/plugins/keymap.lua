@@ -64,13 +64,16 @@ vim.keymap.set({ 'n', 'x', 'o' }, 's', '<Nop>') -- disables default behaviour
 vim.keymap.set({ 'n', 'x', 'o' }, 'S', '<Nop>') -- disables default behaviour
 vim.keymap.set('n', 'se', '<cmd>e #<cr>', { desc = '[s]witch to alternat[e]' })
 
-vim.keymap.set('n', 'yso', '<cmd>so %<cr>', { desc = '[y]ou [s]ource current buffer' })
-vim.keymap.set('n', 'ysol', '<cmd>.lua<cr>', { desc = '[y]ou [s]ource current [l]ine' })
 
--- execute as shell command from cursor to EOL
-vim.keymap.set('n', ',e', '"ey$:!<c-r>e<cr>', { desc = 'e[x]ecute line as shell command' })
--- execute as : command from cursor to EOL
-vim.keymap.set('n', ',E', '"ey$:!<c-r>e<cr>', { desc = 'e[x]ecute line as vim command (:)' })
+-- Commands Quick Execution
+-- lua
+vim.keymap.set('n', 'yxf', '<cmd>source %<CR>', { desc = '[y]ou [s]ource [f]ile' })
+vim.keymap.set('n', 'yso', '<cmd>so %<cr>', { desc = '[y]ou [s]ource current buffer' })
+vim.keymap.set('v', 'yso', "<cmd>'<,'>lua<CR>", { desc = '[y]ou [s]ource selection' })
+vim.keymap.set('n', 'ysol', '<cmd>.lua<cr>', { desc = '[y]ou [s]ource current [l]ine' })
+-- :
+vim.keymap.set('n', 'ysv', '"ey$:!<c-r>e<cr>', { desc = '[y]ou [s]ource [v]im command (:) from cursor to EOL' })
+
 
 -- Keep things vertically centered during search
 vim.keymap.set('n', '<C-d>', '<C-d>zz')
