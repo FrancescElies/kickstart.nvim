@@ -80,9 +80,9 @@ if is_windows then
         error_header = '## Error ',
       },
       keys = {
-        { '<localleader>c', ':CopilotChat<cr>', desc = 'CopilotChat - Quick chat' },
+        { '<localleader>co', ':CopilotChat<cr>',              desc = 'CopilotChat - Quick chat' },
         {
-          '<localleader>v',
+          '<localleader>cv',
           function()
             local input = visual_region_to_text()
             if input ~= '' then
@@ -92,14 +92,14 @@ if is_windows then
           desc = 'CopilotChat - Send visual lines',
           mode = 'v',
         },
-        { '<localleader>c', '<cmd>CopilotChatToggle<cr>', desc = 'Toggle Copilot Chat' },
-        { '<localleader>f', '<cmd>CopilotChatFix<cr>', desc = 'Fix code' },
-        { '<localleader>e', ':CopilotChatExplain<cr>', desc = 'Explain code' },
-        { '<localleader>t', ':CopilotChatTests<cr>', desc = 'Generate tests' },
-        { '<localleader>v', ':CopilotChatVisual', mode = 'x', desc = 'Open in vertical split' },
-        { '<localleader>x', ':CopilotChatInPlace<cr>', mode = 'x', desc = 'Run in-place code' },
-        { '<localleader>f', ':CopilotChatFixDiagnostic<cr>', desc = 'Fix diagnostic' },
-        { '<localleader>r', ':CopilotChatReset<cr>', desc = 'Reset chat history and clear buffer' },
+        { '<localleader>cc', '<cmd>CopilotChatToggle<cr>',    desc = 'Toggle Copilot Chat' },
+        { '<localleader>cf', '<cmd>CopilotChatFix<cr>',       desc = 'Fix code' },
+        { '<localleader>ce', ':CopilotChatExplain<cr>',       desc = 'Explain code' },
+        { '<localleader>ct', ':CopilotChatTests<cr>',         desc = 'Generate tests' },
+        { '<localleader>cv', ':CopilotChatVisual',            mode = 'x',                                  desc = 'Open in vertical split' },
+        { '<localleader>cx', ':CopilotChatInPlace<cr>',       mode = 'x',                                  desc = 'Run in-place code' },
+        { '<localleader>cf', ':CopilotChatFixDiagnostic<cr>', desc = 'Fix diagnostic' },
+        { '<localleader>cr', ':CopilotChatReset<cr>',         desc = 'Reset chat history and clear buffer' },
       },
     },
   }

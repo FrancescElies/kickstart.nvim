@@ -158,20 +158,20 @@ local function toggle_bottomterm()
   end
 end
 
-vim.api.nvim_create_user_command('FloatTerm', toggle_terminal, {}) -- Create a floating window with default dimensions
+vim.api.nvim_create_user_command('FloatTerm', toggle_terminal, {})              -- Create a floating window with default dimensions
 vim.api.nvim_create_user_command('SmallTermResetSize', win_stick_to_bottom, {}) -- Create a floating window with default dimensions
 
 -- <C-,><C-p><C-m> feels right <open floaterm> then get <previous command> and <enter> without releasing CTRL
 vim.keymap.set({ 'n', 't' }, '<C-,>', '<cmd>FloatTerm<cr>', { desc = 'float term' })
 -- Binding for alacritty, check which char `=vim.fn.getchar()`
 vim.keymap.set({ 'n', 't' }, '\u{f8ff}', '<cmd>FloatTerm<cr>', { desc = 'float term' })
-vim.keymap.set({ 'n', 't' }, ',.', '<cmd>:startinsert<cr><C-c><C-p><cr>', { desc = '[r]estart last comamnd' })
-vim.keymap.set({ 'n', 't' }, ',f', '<cmd>FloatTerm<cr>', { desc = '[f]loat term' })
-vim.keymap.set({ 'n', 't' }, ',t', ':term<cr>')
-vim.keymap.set({ 'n', 't' }, ',b', toggle_bottomterm, { desc = '[b]ottom term' })
-vim.keymap.set({ 'n', 't' }, ',B', win_stick_to_bottom, { desc = '[b]ottom term' })
-vim.keymap.set({ 'n', 't' }, ',l', send_line_to_bottom_term, { desc = '[l]ine to bottom term' })
-vim.keymap.set({ 'n', 't' }, ',x', '<cmd>bd!<cr>') -- alt x closes zellij pane, this keeps it similar and easy to remember
+vim.keymap.set({ 'n', 't' }, '<localleader>.', '<cmd>:startinsert<cr><C-c><C-p><cr>', { desc = '[r]estart last comamnd' })
+vim.keymap.set({ 'n', 't' }, '<localleader>f', '<cmd>FloatTerm<cr>', { desc = '[f]loat term' })
+vim.keymap.set({ 'n', 't' }, '<localleader>t', ':term<cr>')
+vim.keymap.set({ 'n', 't' }, '<localleader>b', toggle_bottomterm, { desc = '[b]ottom term' })
+vim.keymap.set({ 'n', 't' }, '<localleader>B', win_stick_to_bottom, { desc = '[b]ottom term' })
+vim.keymap.set({ 'n', 't' }, '<localleader>l', send_line_to_bottom_term, { desc = '[l]ine to bottom term' })
+vim.keymap.set({ 'n', 't' }, '<localleader>x', '<cmd>bd!<cr>') -- alt x closes zellij pane, this keeps it similar and easy to remember
 -- <C-r> doesn't work in terminal mode, it will perform `reverse search`
 -- vim.keymap.set('t','sr', "'<C-\\><C-N>\"'.nr2char(getchar()).'pi'", { desc = '<C-r> fellow' })
 

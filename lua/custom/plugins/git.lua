@@ -44,21 +44,13 @@ return {
         end
 
         -- Navigation
-        map('n', '<M-n>', function()
-          if vim.wo.diff then
-            vim.cmd.normal { ']c', bang = true }
-          else
-            gitsigns.nav_hunk 'next'
-          end
-        end, { desc = 'Jump to next git [c]hange' })
-
-        map('n', '<M-p>', function()
-          if vim.wo.diff then
-            vim.cmd.normal { '[c', bang = true }
-          else
-            gitsigns.nav_hunk 'prev'
-          end
-        end, { desc = 'Jump to previous git [c]hange' })
+        if vim.wo.diff then
+          map('n', '<c-j>', function() vim.cmd.normal { ']c', bang = true } end, { desc = 'Jump to next hunk' })
+          map('n', '<c-k>', function() vim.cmd.normal { '[c', bang = true } end, { desc = 'Jump to previous hunk' })
+        else
+          map('n', ']h', function() gitsigns.nav_hunk 'next' end, { desc = 'Jump to next [h]unk' })
+          map('n', '[h', function() gitsigns.nav_hunk 'prev' end, { desc = 'Jump to previous [h]unk' })
+        end
 
         -- stylua: ignore
         map('v', '<leader>hs', function() gitsigns.stage_hunk { vim.fn.line '.', vim.fn.line 'v' } end, { desc = '[h]unk [s]tage' })

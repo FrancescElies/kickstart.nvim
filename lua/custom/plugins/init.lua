@@ -176,6 +176,8 @@ end, {
   end,
 })
 
+---@module 'lazy'
+---@type LazySpec
 return {
   {
     'atiladefreitas/dooing',

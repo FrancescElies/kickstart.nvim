@@ -6,24 +6,8 @@
 -- be extended to other languages as well. That's why it's called
 -- kickstart.nvim and not kitchen-sink.nvim ;)
 
----@param config {type?:string, args?:string[]|fun():string[]?}
-local function get_args(config)
-  local args = type(config.args) == 'function' and (config.args() or {}) or config.args or {} --[[@as string[] | string ]]
-  local args_str = type(args) == 'table' and table.concat(args, ' ') or args --[[@as string]]
-
-  config = vim.deepcopy(config)
-  ---@cast args string[]
-  config.args = function()
-    local new_args = vim.fn.expand(vim.fn.input('Run with args: ', args_str)) --[[@as string]]
-    if config.type and config.type == 'java' then
-      ---@diagnostic disable-next-line: return-type-mismatch
-      return new_args
-    end
-    return require('dap.utils').splitstr(new_args)
-  end
-  return config
-end
-
+---@module 'lazy'
+---@type LazySpec
 return {
   -- NOTE: Yes, you can install new plugins here!
   'mfussenegger/nvim-dap',
@@ -41,39 +25,17 @@ return {
 
     -- Add your own debuggers here
     'leoluz/nvim-dap-go',
-    'mfussenegger/nvim-dap-python',
-    'theHamsta/nvim-dap-virtual-text',
   },
-  -- stylua: ignore
   keys = {
     -- Basic debugging keymaps, feel free to change to your liking!
-    { "<F5>", function()  require("dap").continue() end, desc = "Debug: Start/Continue" },
-    { "<F11>", function() require("dap").step_into() end, desc = "Debug: Step Into" },
-    { "<F10>", function() require("dap").step_over() end, desc = "Debug: Step Over" },
-    { "<F2>", function() require("dap").step_out() end, desc = "Debug: Step Out" },
-    { "<localleader>b", function() require("dap").toggle_breakpoint() end, desc = "Debug: Toggle [B]reakpoint" },
-    { "<localleader>B", function() require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: ")) end, desc = "Debug: Set [B]reakpoint cond" },
+    { '<F5>', function() require('dap').continue() end, desc = 'Debug: Start/Continue' },
+    { '<F1>', function() require('dap').step_into() end, desc = 'Debug: Step Into' },
+    { '<F2>', function() require('dap').step_over() end, desc = 'Debug: Step Over' },
+    { '<F3>', function() require('dap').step_out() end, desc = 'Debug: Step Out' },
+    { '<leader>b', function() require('dap').toggle_breakpoint() end, desc = 'Debug: Toggle Breakpoint' },
+    { '<leader>B', function() require('dap').set_breakpoint(vim.fn.input 'Breakpoint condition: ') end, desc = 'Debug: Set Breakpoint' },
     -- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
-    { "<localleader>dB", function() require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: ")) end, desc = "Breakpoint Condition" },
-    { "<localleader>dC", function() require("dap").run_to_cursor() end, desc = "Run to Cursor" },
-    { "<localleader>dO", function() require("dap").step_over() end, desc = "Step Over" },
-    { "<localleader>dP", function() require("dap").pause() end, desc = "Pause" },
-    { "<localleader>dPc", function() require("dap-python").test_class() end, desc = "Debug Class", ft = "python" },
-    { "<localleader>dPs", function() require("dap-python").debug_selection() end, desc = "Debug Selection", ft = "python" },
-    { "<localleader>dPt", function() require("dap-python").test_method() end, desc = "Debug Method", ft = "python" },
-    { "<localleader>da", function() require("dap").continue({ before = get_args }) end, desc = "Run with Args" },
-    { "<localleader>db", function() require("dap").toggle_breakpoint() end, desc = "Toggle Breakpoint" },
-    { "<localleader>dc", function() require("dap").continue() end, desc = "🐞Run/Continue" },
-    { "<localleader>dg", function() require("dap").goto_() end, desc = "Go to Line (No Execute)" },
-    { "<localleader>di", function() require("dap").step_into() end, desc = "Step Into" },
-    { "<localleader>dj", function() require("dap").down() end, desc = "Down" },
-    { "<localleader>dk", function() require("dap").up() end, desc = "Up" },
-    { "<localleader>dl", function() require("dap").run_last() end, desc = "Run Last" },
-    { "<localleader>do", function() require("dap").step_out() end, desc = "Step Out" },
-    { "<localleader>dr", function() require("dap").repl.toggle() end, desc = "Toggle REPL" },
-    { "<localleader>ds", function() require("dap").session() end, desc = "Session" },
-    { "<localleader>dt", function() require("dap").terminate() end, desc = "Terminate" },
-    { "<localleader>dw", function() require("dap.ui.widgets").hover() end, desc = "Widgets" },
+    { '<F7>', function() require('dapui').toggle() end, desc = 'Debug: See last session result.' },
   },
   config = function()
     local dap = require 'dap'
@@ -93,19 +55,18 @@ return {
       ensure_installed = {
         -- Update this to ensure that you have the debuggers for the langs you want
         'delve',
-        'js-debug-adapter',
-        'debugpy',
-        'codelldb',
       },
     }
 
     -- Dap UI setup
     -- For more information, see |:help nvim-dap-ui|
+    ---@diagnostic disable-next-line: missing-fields
     dapui.setup {
       -- Set icons to characters that are more likely to work in every terminal.
       --    Feel free to remove or use ones that you like more! :)
       --    Don't feel like these are good choices.
       icons = { expanded = '▾', collapsed = '▸', current_frame = '*' },
+      ---@diagnostic disable-next-line: missing-fields
       controls = {
         icons = {
           pause = '⏸',
@@ -143,62 +104,6 @@ return {
         -- On Windows delve must be run attached or it crashes.
         -- See https://github.com/leoluz/nvim-dap-go/blob/main/README.md#configuring
         detached = vim.fn.has 'win32' == 0,
-      },
-    }
-
-    -- Install python specific config
-    require('dap-python').setup 'uv'
-    require('dap-python').test_runner = 'pytest'
-
-    -- The python adapter is deprecated, see nvim-dap-python#129
-
-    -- Install javascript specific config
-    -- https://codeberg.org/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation#javascript
-    -- https://github.com/igorlfs/dotfiles/tree/main/nvim/.config/nvim/lua/plugins/dap
-    for _, adapter in pairs { 'pwa-node', 'pwa-chrome' } do
-      dap.adapters[adapter] = {
-        type = 'server',
-        host = 'localhost',
-        port = '${port}',
-        executable = {
-          command = 'js-debug-adapter',
-          args = { '${port}' },
-        },
-      }
-    end
-    local js_filetypes = { 'typescript', 'javascript', 'typescriptreact', 'javascriptreact' }
-
-    local vscode = require 'dap.ext.vscode'
-    vscode.type_to_filetypes['node'] = js_filetypes
-    vscode.type_to_filetypes['pwa-node'] = js_filetypes
-
-    for _, language in ipairs(js_filetypes) do
-      if not dap.configurations[language] then
-        dap.configurations[language] = {
-          {
-            type = 'pwa-node',
-            request = 'launch',
-            name = 'Launch file',
-            program = '${file}',
-            cwd = '${workspaceFolder}',
-          },
-          {
-            type = 'pwa-node',
-            request = 'attach',
-            name = 'Attach',
-            processId = require('dap.utils').pick_process,
-            cwd = '${workspaceFolder}',
-          },
-        }
-      end
-    end
-
-    dap.adapters.codelldb = {
-      type = 'server',
-      port = '${port}',
-      executable = {
-        command = 'codelldb',
-        args = { '--port', '${port}' },
       },
     }
   end,

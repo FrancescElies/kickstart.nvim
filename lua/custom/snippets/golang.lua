@@ -10,15 +10,13 @@ local d = ls.dynamic_node
 local c = ls.choice_node
 local snippet_from_nodes = ls.sn
 
-local ts_locals = require 'nvim-treesitter.locals'
-local ts_utils = require 'nvim-treesitter.ts_utils'
+-- local ts_locals = require 'nvim-treesitter.locals' -- TODO: broken
+-- local ts_utils = require 'nvim-treesitter.ts_utils' -- TODO: broken
 local get_node_text = vim.treesitter.get_node_text
 
 -- Adapted from https://github.com/tjdevries/config_manager/blob/1a93f03dfe254b5332b176ae8ec926e69a5d9805/xdg_config/nvim/lua/tj/snips/ft/go.lua
 local function same(index)
-  return f(function(args)
-    return args[1]
-  end, { index })
+  return f(function(args) return args[1] end, { index })
 end
 
 -- Adapted from https://github.com/tjdevries/config_manager/blob/1a93f03dfe254b5332b176ae8ec926e69a5d9805/xdg_config/nvim/lua/tj/snips/ft/go.lua
@@ -71,9 +69,7 @@ local handlers = {
     local count = node:named_child_count()
     for idx = 0, count - 1 do
       table.insert(result, transform(get_node_text(node:named_child(idx), 0), info))
-      if idx ~= count - 1 then
-        table.insert(result, t { ', ' })
-      end
+      if idx ~= count - 1 then table.insert(result, t { ', ' }) end
     end
 
     return result
@@ -100,9 +96,7 @@ local function go_result_type(info)
 
   local query = vim.treesitter.query.get('go', 'LuaSnip_Result')
   for _, node in query:iter_captures(function_node, 0) do
-    if handlers[node:type()] then
-      return handlers[node:type()](node, info)
-    end
+    if handlers[node:type()] then return handlers[node:type()](node, info) end
   end
 
   return { t 'nil' }
