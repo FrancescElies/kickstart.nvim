@@ -963,15 +963,15 @@ require('lazy').setup {
         styles = {
           comments = { italic = false }, -- Disable italics in comments
         },
-        -- on_colors = function(color) color.comment = '#82a2c4' end,
-        -- on_highlights = function(hl, color)
-        --   hl.LineNr = { fg = color.green }
-        --   hl.LineNrAbove = { fg = color.comment }
-        --   hl.LineNrBelow = { fg = color.comment }
-        --   hl.StatusLineNC = { fg = color.comment }
-        --   hl.StatusLine = { fg = color.yellow }
-        --   hl.DiagnosticUnnecessary = { fg = color.comment }
-        -- end,
+        on_colors = function(color) color.comment = '#82a2c4' end,
+        on_highlights = function(hl, color)
+          hl.LineNr = { fg = color.green }
+          hl.LineNrAbove = { fg = color.comment }
+          hl.LineNrBelow = { fg = color.comment }
+          hl.StatusLineNC = { fg = color.comment }
+          hl.StatusLine = { fg = color.yellow }
+          hl.DiagnosticUnnecessary = { fg = color.comment }
+        end,
       }
 
       vim.o.background = 'dark' -- workaround for zellij, otherwise tokyonight selects light background
