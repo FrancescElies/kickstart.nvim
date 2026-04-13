@@ -413,8 +413,7 @@ require('lazy').setup {
               ['<M-/>'] = 'to_fuzzy_refine', -- alacritty on Windows doesn't send <c-enter>
               ['<c-enter>'] = 'to_fuzzy_refine',
               ['<c-space>'] = 'to_fuzzy_refine',
-              ['<c-g>'] = switch_to_grep,
-              ['<c-s-g>'] = switch_to_grep,
+              ['<c-s>'] = switch_to_grep,
             },
             n = {
               -- <h,l> to cycle previewer for git commits to show full message
