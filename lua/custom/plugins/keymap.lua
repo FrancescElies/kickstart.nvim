@@ -137,6 +137,8 @@ vim.keymap.set('n', '<leader>vs', ':set invspell<cr>', { desc = '[v]im [S]pell t
 -- vim.keymap.set('n', '<M-.>', '<C-W>+')
 -- vim.keymap.set('n', '<M-,>', '<C-W>-')
 
+vim.keymap.set('n', '<leader>bc', '<cmd>vsplit<CR><C-w>w<C-f>:windo set scrollbind<CR>', { desc = '[b]urffer [c]ontinue view' })
+
 -- Move lines in visual mode
 vim.keymap.set('v', 'H', ":m '>+1<CR>gv=gv")
 vim.keymap.set('v', 'L', ":m '<-2<CR>gv=gv")
