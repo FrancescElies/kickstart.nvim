@@ -143,7 +143,7 @@ vim.keymap.set('n', '<leader>bc', '<cmd>vsplit<CR><C-f>:windo set scrollbind<CR>
 vim.keymap.set('v', 'H', ":m '>+1<CR>gv=gv")
 vim.keymap.set('v', 'L', ":m '<-2<CR>gv=gv")
 vim.keymap.set('n', 'H', ":m .-2<CR>==")
-vim.keymap.set('n', 'L', ":m ':m .+1<CR>==")
+vim.keymap.set('n', 'L', ":m .+1<CR>==")
 
 vim.keymap.set({ 'n', 'v' }, 's/', [[:s,/,\\,g<cr>]], { desc = 'substitute / with \\' })
 vim.keymap.set({ 'n', 'v' }, 's\\', [[:s,\\,/,g<cr>]], { desc = 'substitute \\ with /' })
