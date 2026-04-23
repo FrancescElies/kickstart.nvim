@@ -40,6 +40,8 @@ local function reset_shell_defaults()
 end
 
 local function nu_shell_options()
+  vim.o.shell = bin_nu
+  vim.o.shellslash = true
   -- flags for nu:
   -- * `--stdin`       redirect all input to -c
   -- * `--no-newline`  do not append `\n` to stdout
@@ -69,9 +71,7 @@ end
 
 -- path to the Nushell executable
 -- set default
-vim.o.shell = bin_nu
-vim.o.shellslash = true
-nu_shell_options()
+-- nu_shell_options() -- TODO: this breaks neotest
 
 -- -- listen for changes to the shell option
 -- vim.api.nvim_create_autocmd('OptionSet', {
