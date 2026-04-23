@@ -1,3 +1,11 @@
+-- vim.api.nvim_create_user_command("CargoTest", function()
+--   vim.fn.setqflist({}, ' ', {
+--     title = 'cargo test',
+--     lines = vim.fn.systemlist('cargo test --message-format=short'),
+--   })
+--   vim.cmd('copen')
+-- end, {})
+
 return {
   {
     'Canop/nvim-bacon',
