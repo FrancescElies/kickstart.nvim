@@ -7,8 +7,11 @@ local function zen_mode()
 end
 
 return {
-  'folke/zen-mode.nvim',
-  keys = {
-    { '<leader>vz', zen_mode },
-  },
+  { 'nvim-focus/focus.nvim', version = '*' },
+  {
+    'folke/zen-mode.nvim',
+    keys = {
+      { '<leader>vz', zen_mode },
+    },
+  }
 }
