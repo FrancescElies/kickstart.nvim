@@ -437,6 +437,13 @@ require('lazy').setup {
               },
             },
           },
+          git_status = {
+            mappings = {
+              n = {
+                ['c'] = {"<cmd>G commit<cr>", type = "command"}
+              },
+            },
+          },
           live_multi_grep = {
             attach_mappings = open_with_default_os_app,
           },
