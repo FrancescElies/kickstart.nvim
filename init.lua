@@ -303,7 +303,7 @@ require('lazy').setup {
         { '<leader>d',  group = 'git [D]iff',           mode = { 'n', 'v' } },
         { '<leader>dh', group = 'git [D]iff [H]istory', mode = { 'n', 'v' } },
         { '<leader>h',  group = 'git [H]unk',           mode = { 'n', 'v' } },
-        { '<leader>l',  group = '[l]oclist' },
+        { '<leader>l',  group = '[l]ua' },
         { '<leader>n',  group = '[n]otes' },
         { '<leader>s',  group = '[s]earch' },
         { '<leader>t',  group = '[t]est' },

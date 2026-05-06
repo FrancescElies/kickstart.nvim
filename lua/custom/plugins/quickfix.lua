@@ -13,16 +13,6 @@ vim.keymap.set('n', '<leader>qq', function()
   end
 end, { silent = true })
 
--- Toggle loclist (per-window)
-vim.keymap.set('n', '<leader>lt', function()
-  local loc_winid = vim.fn.getloclist(vim.api.nvim_get_current_win(), { winid = 0 }).winid
-  if loc_winid > 0 then
-    vim.cmd 'lclose'
-  else
-    vim.cmd 'lopen'
-  end
-end, { silent = true })
-
 local function jump_diagnostic_by_severity(opts)
   local count = opts.count or 1
   local severities = {
