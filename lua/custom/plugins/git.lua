@@ -107,6 +107,7 @@ return {
   {
     'sindrets/diffview.nvim',
     opts = {},
+    cmd = { 'DiffviewFileHistory', 'DiffviewOpen' },
     keys = {
       -- :h diff-mode
       -- :h copy-diffs
