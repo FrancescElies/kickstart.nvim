@@ -36,7 +36,7 @@ local function rust_functions_and_reflection_calls(arg)
     (call_expression
     function: (identifier)
     arguments: (arguments (string_literal (string_content) @name))
-                (#eq? @name "TARGET")) @expression
+                (#match? @name "TARGET")) @expression
   ]]):gsub("TARGET", target)
   local query = vim.treesitter.query.parse("rust", scm)
 
