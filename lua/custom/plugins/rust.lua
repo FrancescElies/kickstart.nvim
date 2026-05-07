@@ -1,3 +1,5 @@
+-- https://tree-sitter.github.io/tree-sitter/using-parsers/queries/1-syntax.html
+
 -- vim.api.nvim_create_user_command("CargoTest", function()
 --   vim.fn.setqflist({}, ' ', {
 --     title = 'cargo test',
@@ -7,7 +9,7 @@
 -- end, {})
 
 
-vim.api.nvim_create_user_command("RustFnsNamedAndStringBasedCalls", function(opts)
+vim.api.nvim_create_user_command("RustFunctionAndReflectionCallsByName", function(opts)
   local target = opts.args
   if target == "" then
     print("Usage: :RustFnsNamed function_name")
@@ -15,22 +17,23 @@ vim.api.nvim_create_user_command("RustFnsNamedAndStringBasedCalls", function(opt
   end
 
   local qf = {}
-  local files = vim.fn.systemlist("rg --files -g '*.rs'")
 
-  local query = vim.treesitter.query.parse("rust", ([[
-    (function_item
-      name: (identifier) @name) @function
+  local scm = ([[
+  (function_item
+      (visibility_modifier)?
+      (function_modifiers
+        (extern_modifier (_))?)?
+      name: (identifier) @name
+      (#match? @name "TARGET")) @function
 
-    ; ; (macro_definition
-    ; ;   name: (identifier) @name) @macro
-    ;
     (call_expression
     function: (identifier)
     arguments: (arguments (string_literal (string_content) @name))
-                (#eq? @name "%s")) @expression
-  ]]):format(target))
+                (#eq? @name "TARGET")) @expression
+  ]]):gsub("TARGET", target)
+  local query = vim.treesitter.query.parse("rust", scm)
 
-  for _, file in ipairs(files) do
+  for _, file in ipairs(vim.fn.systemlist("fd -e rs")) do
     local bufnr = vim.fn.bufadd(file)
     vim.fn.bufload(bufnr)
 
@@ -40,25 +43,21 @@ vim.api.nvim_create_user_command("RustFnsNamedAndStringBasedCalls", function(opt
       local root = tree:root()
 
       for _, match in query:iter_matches(root, bufnr, 0, -1) do
-        local name_node = match[1]
+        -- local name_node = match[1]
+        -- if type(name_node) == "table" then name_node = name_node[1] end
+        -- local name = vim.treesitter.get_node_text(name_node, bufnr)
+
         local item_node = match[2] or match[3]
-
-        if type(name_node) == "table" then name_node = name_node[1] end
         if type(item_node) == "table" then item_node = item_node[1] end
+        local row, col = item_node:start()
+        local line = vim.api.nvim_buf_get_lines(bufnr, row, row + 1, false)[1]
 
-        local name = vim.treesitter.get_node_text(name_node, bufnr)
-
-        if name == target then
-          local row, col = item_node:start()
-          local line = vim.api.nvim_buf_get_lines(bufnr, row, row + 1, false)[1]
-
-          table.insert(qf, {
-            filename = file,
-            lnum = row + 1,
-            col = col + 1,
-            text = line,
-          })
-        end
+        table.insert(qf, {
+          filename = file,
+          lnum = row + 1,
+          col = col + 1,
+          text = line,
+        })
       end
     end
   end
@@ -66,7 +65,7 @@ vim.api.nvim_create_user_command("RustFnsNamedAndStringBasedCalls", function(opt
   vim.fn.setqflist(qf, "r")
   vim.cmd("copen")
 end, {
-  nargs = 1,
+  nargs = 1
 })
 
 return {
