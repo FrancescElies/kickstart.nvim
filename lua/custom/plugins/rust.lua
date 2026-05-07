@@ -18,6 +18,7 @@ local function rust_functions_and_reflection_calls(arg)
   local qf = {}
 
   local scm = ([[
+  ; fn TARGET(&self, ...) -> _ {}
   (function_item
       (visibility_modifier)?
       (function_modifiers
@@ -25,6 +26,13 @@ local function rust_functions_and_reflection_calls(arg)
       name: (identifier) @name
       (#match? @name "TARGET")) @function
 
+  ; self._.TARGET(_);
+  (call_expression
+    function: (field_expression
+      field: (field_identifier) @name)
+    (#match? @name "TARGET")) @function
+
+    ; a_function("TARGET")
     (call_expression
     function: (identifier)
     arguments: (arguments (string_literal (string_content) @name))
