@@ -295,21 +295,21 @@ require('lazy').setup {
 
       -- Document existing key chains
       spec = {
-        { '<leader>C',  group = '[C]hat' },
-        { '<leader>b',  group = '[B]uffer' },
-        { '<leader>c',  group = '[c]ode' },
-        { '<leader>g',  group = 'git',                  mode = { 'n', 'v' } },
-        { '<leader>g/', group = '[g]it [/]search',      mode = { 'n', 'v' } },
-        { '<leader>gd',  group = '[g]it [D]iff',           mode = { 'n', 'v' } },
+        { '<leader>C',   group = '[C]hat' },
+        { '<leader>b',   group = '[B]uffer' },
+        { '<leader>c',   group = '[c]ode' },
+        { '<leader>g',   group = 'git',                  mode = { 'n', 'v' } },
+        { '<leader>g/',  group = '[g]it [/]search',      mode = { 'n', 'v' } },
+        { '<leader>gd',  group = '[g]it [D]iff',         mode = { 'n', 'v' } },
         { '<leader>gdh', group = 'git [D]iff [H]istory', mode = { 'n', 'v' } },
-        { '<leader>h',  group = 'git [H]unk',           mode = { 'n', 'v' } },
-        { '<leader>l',  group = '[l]ua' },
-        { '<leader>n',  group = '[n]otes' },
-        { '<leader>s',  group = '[s]earch' },
-        { '<leader>t',  group = '[t]est' },
-        { '<leader>q',  group = '[q]uickfix' },
-        { '<leader>v',  group = '[v]im' },
-        { 's',          group = '[s]urround' },
+        { '<leader>h',   group = 'git [H]unk',           mode = { 'n', 'v' } },
+        { '<leader>l',   group = '[l]ua' },
+        { '<leader>n',   group = '[n]otes' },
+        { '<leader>s',   group = '[s]earch' },
+        { '<leader>t',   group = '[t]est' },
+        { '<leader>q',   group = '[q]uickfix' },
+        { '<leader>v',   group = '[v]im' },
+        { 's',           group = '[s]urround' },
       },
     },
   },
@@ -440,7 +440,7 @@ require('lazy').setup {
           git_status = {
             mappings = {
               n = {
-                ['c'] = {"<cmd>G commit<cr>", type = "command"}
+                ['c'] = { "<cmd>G commit<cr>", type = "command" }
               },
             },
           },
