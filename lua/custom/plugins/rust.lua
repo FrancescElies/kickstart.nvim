@@ -43,12 +43,12 @@ vim.api.nvim_create_user_command("RustFunctionsAndReflectionCalls", function(opt
       local root = tree:root()
 
       for _, match in query:iter_matches(root, bufnr, 0, -1) do
-        local name_node = match[1]
-        if type(name_node) == "table" then name_node = name_node[1] end
+        -- local name_node = match[1]
+        -- if type(name_node) == "table" then name_node = name_node[1] end
         -- local name = vim.treesitter.get_node_text(name_node, bufnr)
 
-        if type(item_node) == "table" then item_node = item_node[1] end
         local item_node = match[2] or match[3]
+        if type(item_node) == "table" then item_node = item_node[1] end
         local row, col = item_node:start()
         local line = vim.api.nvim_buf_get_lines(bufnr, row, row + 1, false)[1]
 
