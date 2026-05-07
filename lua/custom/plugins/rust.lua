@@ -8,9 +8,8 @@
 --   vim.cmd('copen')
 -- end, {})
 
-
-vim.api.nvim_create_user_command("RustFunctionsAndReflectionCalls", function(opts)
-  local target = opts.args
+local function rust_functions_and_reflection_calls(arg)
+  local target = arg ~= "" and arg or vim.fn.expand("<cword>")
   if target == "" then
     print("Usage: :RustFunctionsAndReflectionCalls function_name")
     return
@@ -64,9 +63,39 @@ vim.api.nvim_create_user_command("RustFunctionsAndReflectionCalls", function(opt
 
   vim.fn.setqflist(qf, "r")
   vim.cmd("copen")
+end
+
+vim.api.nvim_create_user_command("RustFunctionsAndReflectionCalls", function(opts)
+  rust_functions_and_reflection_calls(opts.args)
 end, {
-  nargs = 1,
+  nargs = "?",
 })
+
+local pickers = require("telescope.pickers")
+local finders = require("telescope.finders")
+local actions = require("telescope.actions")
+local action_state = require("telescope.actions.state")
+local conf = require("telescope.config").values
+
+-- WIP: TODO
+local function mycmd_picker()
+  local items = vim.fn.getcompletion("", "word")
+
+  pickers.new({}, {
+    prompt_title = "RustFunctionsAndReflectionCalls",
+    finder = finders.new_table({ results = items }),
+    sorter = conf.generic_sorter({}),
+    attach_mappings = function(bufnr)
+      actions.select_default:replace(function()
+        actions.close(bufnr)
+        local selection = action_state.get_selected_entry()
+        rust_functions_and_reflection_calls(selection[1])
+      end)
+      return true
+    end,
+  }):find()
+end
+vim.keymap.set("n", "<leader>cC", mycmd_picker, {desc= "[c]ode definition and reflection [c]alls"})
 
 return {
   {
