@@ -110,13 +110,13 @@ return {
     keys = {
       -- :h diff-mode
       -- :h copy-diffs
-      { '<leader>dhb', ':DiffviewFileHistory<cr>', desc = '[d]iff History [b]ranch' },
-      { '<leader>dhf', ':DiffviewFileHistory %<cr>', desc = '[d]iff history [f]ile' },
-      { '<leader>dhl', ':.DiffviewFileHistory', desc = '[d]iff history ([l]ine evolution)' },
-      { '<leader>dhl', ':DiffviewFileHistory', desc = '[d]iff history ([l]ine evolution)', mode = { 'v' } },
-      { '<leader>d.', ':DiffviewOpen<cr>', desc = '[d]iff (.) working tree' },
-      { '<leader>dm', ':DiffviewOpen origin/main...HEAD', desc = '[d]iff with merge base' },
-      { '<leader>dq', ':DiffviewClose<cr>', desc = '[d]iff [q]uit' },
+      { '<leader>gdhb', ':DiffviewFileHistory<cr>', desc = '[d]iff History [b]ranch' },
+      { '<leader>gdhf', ':DiffviewFileHistory %<cr>', desc = '[d]iff history [f]ile' },
+      { '<leader>gdhl', ':.DiffviewFileHistory', desc = '[d]iff history ([l]ine evolution)' },
+      { '<leader>gdhl', ':DiffviewFileHistory', desc = '[d]iff history ([l]ine evolution)', mode = { 'v' } },
+      { '<leader>gd.', ':DiffviewOpen<cr>', desc = '[d]iff (.) working tree' },
+      { '<leader>gdm', ':DiffviewOpen origin/main...HEAD', desc = '[d]iff with merge base' },
+      { '<leader>gdq', ':DiffviewClose<cr>', desc = '[d]iff [q]uit' },
 
       -- Examples:
       -- :DiffviewOpen
