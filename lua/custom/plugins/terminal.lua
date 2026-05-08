@@ -165,13 +165,14 @@ vim.api.nvim_create_user_command('SmallTermResetSize', win_stick_to_bottom, {}) 
 vim.keymap.set({ 'n', 't' }, '<C-,>', '<cmd>FloatTerm<cr>', { desc = 'float term' })
 -- Binding for alacritty, check which char `=vim.fn.getchar()`
 vim.keymap.set({ 'n', 't' }, '\u{f8ff}', '<cmd>FloatTerm<cr>', { desc = 'float term' })
-vim.keymap.set({ 'n', 't' }, '<localleader>.', '<cmd>:startinsert<cr><C-c><C-p><cr>', { desc = '[r]estart last comamnd' })
-vim.keymap.set({ 'n', 't' }, '<localleader>f', '<cmd>FloatTerm<cr>', { desc = '[f]loat term' })
-vim.keymap.set({ 'n', 't' }, '<localleader>t', ':term<cr>')
-vim.keymap.set({ 'n', 't' }, '<localleader>b', toggle_bottomterm, { desc = '[b]ottom term' })
-vim.keymap.set({ 'n', 't' }, '<localleader>B', win_stick_to_bottom, { desc = '[b]ottom term' })
-vim.keymap.set({ 'n', 't' }, '<localleader>l', send_line_to_bottom_term, { desc = '[l]ine to bottom term' })
-vim.keymap.set({ 'n', 't' }, '<localleader>x', '<cmd>bd!<cr>') -- alt x closes zellij pane, this keeps it similar and easy to remember
+vim.keymap.set({ 'n', 't' }, 'yof', '<cmd>FloatTerm<cr>', { desc = 'yo, [f]loat term' })
+
+vim.keymap.set({ 'n', 't' }, 'yor', '<cmd>:startinsert<cr><C-c><C-p><cr>', { desc = 'yo, [r]estart last comamnd' })
+vim.keymap.set({ 'n', 't' }, 'yot', ':term<cr>')
+vim.keymap.set({ 'n', 't' }, 'yob', toggle_bottomterm, { desc = 'yo, [b]ottom term' })
+vim.keymap.set({ 'n', 't' }, 'yoB', win_stick_to_bottom, { desc = 'yo, [b]ottom term' })
+vim.keymap.set({ 'n', 't' }, 'yol', send_line_to_bottom_term, { desc = 'yo, send [l]ine to bottom term' })
+vim.keymap.set({ 'n', 't' }, 'yox', '<cmd>bd!<cr>') -- alt x closes zellij pane, this keeps it similar and easy to remember
 -- <C-r> doesn't work in terminal mode, it will perform `reverse search`
 -- vim.keymap.set('t','sr', "'<C-\\><C-N>\"'.nr2char(getchar()).'pi'", { desc = '<C-r> fellow' })
 
