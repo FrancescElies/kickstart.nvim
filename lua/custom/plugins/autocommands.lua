@@ -63,16 +63,16 @@ vim.api.nvim_create_user_command('ToggleAutosave', function()
 end, {})
 vim.keymap.set('n', '<leader>va', ':ToggleAutosave<cr>', { desc = '[a]utosave' })
 
--- Autosave when leaving window
-vim.api.nvim_create_autocmd({
-  'VimLeavePre',
-  'FocusLost',
-}, {
-  pattern = '*',
-  callback = function()
-    vim.cmd 'silent! wall'
-  end,
-})
+-- -- Autosave when leaving window
+-- vim.api.nvim_create_autocmd({
+--   'VimLeavePre',
+--   'FocusLost',
+-- }, {
+--   pattern = '*',
+--   callback = function()
+--     vim.cmd 'silent! wall'
+--   end,
+-- })
 
 local function find_typescript_for_javascript_file()
   local buffnr = vim.api.nvim_get_current_buf()
