@@ -68,21 +68,21 @@ local function unique_words(opts)
 
   if write_to_buf then
     -- Replace current buffer content (make it a scratch buffer)
-    vim.api.nvim_buf_set_option(0, 'modifiable', true)
+    vim.api.nvim_set_option_value('modifiable', true, { buf = 0 })
     vim.api.nvim_buf_set_lines(0, 0, -1, false, out)
     -- Optional: mark as nofile to avoid accidental writes
-    pcall(vim.api.nvim_buf_set_option, 0, 'buftype', 'nofile')
-    pcall(vim.api.nvim_buf_set_option, 0, 'bufhidden', 'wipe')
-    pcall(vim.api.nvim_buf_set_option, 0, 'swapfile', false)
+    vim.api.nvim_set_option_value('buftype', 'nofile', { buf = 0 })
+    vim.api.nvim_set_option_value('bufhidden', 'wipe', { buf = 0 })
+    vim.api.nvim_set_option_value('swapfile', false, { buf = 0 })
   else
     -- Open in a new scratch buffer (vertical split if you prefer: use 'vnew')
     vim.cmd 'new'
     local buf = vim.api.nvim_get_current_buf()
     vim.api.nvim_buf_set_lines(buf, 0, -1, false, out)
-    pcall(vim.api.nvim_buf_set_option, buf, 'buftype', 'nofile')
-    pcall(vim.api.nvim_buf_set_option, buf, 'bufhidden', 'wipe')
-    pcall(vim.api.nvim_buf_set_option, buf, 'swapfile', false)
-    vim.api.nvim_buf_set_option(buf, 'modifiable', true)
+    vim.api.nvim_set_option_value('buftype', 'nofile', { buf = 0 })
+    vim.api.nvim_set_option_value('bufhidden', 'wipe', { buf = 0 })
+    vim.api.nvim_set_option_value('swapfile', false, { buf = 0 })
+    vim.api.nvim_set_option_value('modifiable', true, { buf = 0 })
   end
 
   -- Optionally yank to a register (e.g. system clipboard)
