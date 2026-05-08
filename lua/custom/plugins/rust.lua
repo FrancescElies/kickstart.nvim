@@ -100,23 +100,27 @@ local function rust_functions_and_reflection_calls(arg)
       local tree = parser:parse()[1]
       local root = tree:root()
 
-      for _, match in query:iter_matches(root, bufnr, 0, -1) do
-        -- local name_node = match[1]
-        -- if type(name_node) == "table" then name_node = name_node[1] end
-        -- local name = vim.treesitter.get_node_text(name_node, bufnr)
-
-        local item_node = match[2] or match[3]
-        if type(item_node) == "table" then item_node = item_node[1] end
-        local row, col = item_node:start()
-        local line = vim.api.nvim_buf_get_lines(bufnr, row, row + 1, false)[1]
-
-        table.insert(qf, {
-          filename = file,
-          lnum = row + 1,
-          col = col + 1,
-          text = line,
-        })
+      for pattern, match, metadata in query:iter_matches(tree:root(), bufnr, 0, -1) do
+        for id, nodes in pairs(match) do
+          local name = query.captures[id]
+          if name == "name" then
+            for _, node in ipairs(nodes) do
+              -- `node` was captured by the `name` capture in the match
+              local node_data = metadata[id] -- Node level metadata
+              local row, col = node:range()
+              local line = vim.api.nvim_buf_get_lines(bufnr, row, row + 1, false)[1]
+              -- ... use the info here ...
+              table.insert(qf, {
+                filename = file,
+                lnum = row + 1,
+                col = col + 1,
+                text = line,
+              })
+            end
+          end
+        end
       end
+
     end
   end
 
