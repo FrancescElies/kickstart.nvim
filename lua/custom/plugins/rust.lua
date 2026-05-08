@@ -8,6 +8,57 @@
 --   vim.cmd('copen')
 -- end, {})
 
+---@param bufnr integer
+local function find_unwraps(bufnr)
+  local qf = {}
+  bufnr = bufnr or 0
+  local query = vim.treesitter.query.parse("rust", [[
+    ( field_expression field: (field_identifier) @name
+      (#eq? @name "unwrap"))
+   ]])
+
+  local ok, parser = pcall(vim.treesitter.get_parser, bufnr, "rust")
+  if ok and parser then
+    local tree = parser:parse()[1]
+
+    for _, node, _, _ in query:iter_captures(tree:root(), bufnr) do
+      local row, col = node:range()
+      local line = vim.api.nvim_buf_get_lines(bufnr, row, row + 1, false)[1]
+      local qf_entry = {
+        filename = vim.api.nvim_buf_get_name(bufnr),
+        lnum = row + 1,
+        col = col + 1,
+        text = line,
+      }
+      table.insert(qf, qf_entry)
+    end
+  end
+  return qf
+end
+
+local function unwraps_to_qf()
+  local qf = find_unwraps(0)
+  vim.fn.setqflist(qf)
+  vim.cmd("copen")
+end
+
+local function unwraps_in_project_to_qf()
+  local qf = {}
+  for _, file in ipairs(vim.fn.systemlist("fd -e rs")) do
+    local bufnr = vim.fn.bufadd(file)
+    vim.fn.bufload(bufnr)
+    local partial_qf = find_unwraps(bufnr)
+    for _, qf_entry in ipairs(partial_qf) do
+      table.insert(qf, qf_entry)
+    end
+  end
+  vim.fn.setqflist(qf)
+  vim.cmd "copen"
+end
+
+vim.keymap.set("n", "<leader>cu", unwraps_to_qf, { desc = "Find unwrap() calls" })
+vim.keymap.set("n", "<leader>cU", unwraps_in_project_to_qf, { desc = "Find unwrap() calls" })
+
 ---@return vim.quickfix.entry[]
 local function rust_functions_and_reflection_calls(arg)
   local target = arg ~= "" and arg or vim.fn.expand("<cword>")
