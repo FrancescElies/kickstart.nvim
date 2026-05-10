@@ -19,11 +19,8 @@ vim.opt.splitbelow = true
 -- NOTE: breaks <c-x><c-n> as it doesn't find inner words
 -- vim.opt.iskeyword:append '-' -- helps vim-abolish to convert from kebab-case
 
-vim.keymap.set('n', '<M-h>', ':bprev')
-vim.keymap.set('n', '<M-l>', ':bnext')
-
 -- cycle entries showing only the ones starting with current input
-vim.keymap.set('c', '<C-k>', '<t_ku>', { desc = 'previous similar entry' })
+vim.keymap.set('c', '<C-k>', '<t_ku>', { noremap = true, desc = 'previous similar entry' })
 vim.keymap.set('c', '<C-j>', '<t_kd>', { desc = 'next similar entry' })
 
 vim.o.spell = true
