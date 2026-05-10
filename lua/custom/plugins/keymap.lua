@@ -120,13 +120,12 @@ function vim.getVisualSelection()
   end
 end
 
-vim.keymap.set('n', '<leader>ve', ':e $MYVIMRC', { desc = 'edit vimrc' })
+vim.keymap.set('n', '<leader>ve', '<cmd>e $MYVIMRC<cr>', { desc = 'edit vimrc' })
 
-vim.keymap.set('n', '<leader>vm', ":new | put=execute('messages')<cr>", { desc = 'vim messages' })
-vim.keymap.set('n', '<leader>vf', ':FormatToggle<CR>', { desc = '[v]im [f]ormat toggle' })
-vim.keymap.set('n', '<leader>vw', ':set invwrap<cr>', { desc = '[v]im [w]rap toggle' })
-vim.keymap.set('n', '<leader>v/', ':set invhlsearch<cr>', { desc = '[v]im highlight [/]search toggle' })
-vim.keymap.set('n', '<leader>vs', ':set invspell<cr>', { desc = '[v]im [S]pell toggle' })
+vim.keymap.set('n', '<leader>vm', "<cmd>new | put=execute('messages')<cr>", { desc = 'vim messages' })
+vim.keymap.set('n', '<leader>vw', '<cmd>set invwrap<cr>', { desc = '[v]im [w]rap toggle' })
+vim.keymap.set('n', '<leader>v/', '<cmd>set invhlsearch<cr>', { desc = '[v]im highlight [/]search toggle' })
+vim.keymap.set('n', '<leader>vs', '<cmd>set invspell<cr>', { desc = '[v]im [S]pell toggle' })
 
 -- control splits size  <>., are on the same two keys
 -- width

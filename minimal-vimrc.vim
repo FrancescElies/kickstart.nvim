@@ -112,9 +112,11 @@ endif
 
 " WHICH KEYS TO MAP: :h map-which-keys
 
-"^/$ (start/end) of line is more common than H/L defaults top/bottom of buffer"
-map H ^
-map L $
+" H/L defaults top/bottom barely used, us them to move current or selected lines
+nmap H :m .-2<CR>==
+nmap L :m .+1<CR>==
+vmap H :m '>+1<CR>gv=gv
+vmap L :m '<-2<CR>gv=gv
 
 " QUICKLY NAVIGATE QUICKFIX LIST:
 nnoremap <C-k> :cprev<cr>zz
