@@ -56,10 +56,15 @@ vim.keymap.set({ 'n', 'i' }, '<C-c>', '<Esc>')
 
 vim.keymap.set('n', 'ı', 'i')
 
--- [s]witch commands
+-- [s] does the same as `cl`and is used by other plugins like mini surround, thus disabling it
+-- - Add surrounding with `sa` (in visual mode or on motion).
+-- - Delete surrounding with `sd`.
+-- - Replace surrounding with `sr`.
+-- - Find surrounding with `sf` or `sF` (move cursor right or left).
+-- - Highlight surrounding with `sh`.
 vim.keymap.set({ 'n', 'x', 'o' }, 's', '<Nop>') -- disables default behaviour
 vim.keymap.set({ 'n', 'x', 'o' }, 'S', '<Nop>') -- disables default behaviour
-vim.keymap.set('n', 'se', '<cmd>e #<cr>', { desc = '[s]witch to alternat[e]' })
+vim.keymap.set('n', 'ya', '<cmd>e #<cr>', { desc = '[y]ou [a]lternate' })
 
 
 -- Commands Quick Execution
