@@ -1025,7 +1025,9 @@ require('lazy').setup {
       -- - sdb   - [S]urround [D]elete [B]alanced, either ], ) or }
       -- - sdq   - [S]urround [D]elete [q]uotes, either ' or "
       -- - sr)'  - [S]urround [R]eplace [)] [']
-      require('mini.surround').setup()
+      require('mini.surround').setup {
+        search_method = 'cover_or_next',
+      }
 
       -- Simple and easy statusline.
       --  You could remove this setup call if you don't like it,
