@@ -120,7 +120,6 @@ local function rust_functions_and_reflection_calls(arg)
           end
         end
       end
-
     end
   end
 
@@ -135,6 +134,9 @@ end, {
   nargs = "?",
 })
 
+
+
+local clippy_on = false;
 
 return {
   {
@@ -241,12 +243,16 @@ return {
           end
 
           if vim.bo.filetype == 'rust' then
-            keymap('n', '<leader>cC', function()
-              vim.cmd.RustAnalyzer { 'config', "{ checkOnSave = { command = 'clippy', enable = true } }" }
-            end, '[c]lippy on save')
             keymap('n', '<leader>cc', function()
-              vim.cmd.RustAnalyzer { 'config', '{ checkOnSave = true }' }
-            end, '[c]heck on save')
+              if not clippy_on then
+                vim.notify('`cargo clippy` onsave', vim.log.levels.WARN)
+                vim.cmd.RustAnalyzer { 'config', "{ checkOnSave = { command = 'clippy', enable = true } }" }
+              else
+                vim.notify('`cargo check` onsave', vim.log.levels.INFO)
+                vim.cmd.RustAnalyzer { 'config', '{ checkOnSave = true }' }
+              end
+              clippy_on = not clippy_on
+            end, '[c]lippy or [c]heck')
             keymap('n', '<leader>cf', '<cmd>RustLsp flyCheck run<cr>', '[f]lycheck (check/clippy)')
             keymap('n', '<leader>ce', ':RustLsp explainError', '[e]xplain error')
             keymap('n', '<leader>cE', '<cmd>RustLsp expandMacro<cr>', '[e]xpand macros')
