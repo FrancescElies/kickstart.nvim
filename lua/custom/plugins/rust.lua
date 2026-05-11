@@ -193,7 +193,7 @@ return {
                 styleLints = { enable = true },
                 experimental = { enable = true },
               },
-              checkOnSave = true,
+              checkOnSave = false,
               assist = {
                 importGranularity = 'module',
                 importPrefix = 'by_self',
@@ -247,13 +247,14 @@ return {
             keymap('n', '<leader>cc', function()
               vim.cmd.RustAnalyzer { 'config', '{ checkOnSave = true }' }
             end, '[c]heck on save')
+            keymap('n', '<leader>cf', '<cmd>RustLsp flyCheck run<cr>', '[f]lycheck (check/clippy)')
             keymap('n', '<leader>ce', ':RustLsp explainError', '[e]xplain error')
-            keymap('n', '<leader>cE', ':RustLsp expandMacro<cr>', '[e]xpand macros')
+            keymap('n', '<leader>cE', '<cmd>RustLsp expandMacro<cr>', '[e]xpand macros')
             keymap('n', 'K', '<cmd>RustLsp hover actions<cr>', '[h]over actions')
             keymap('n', 'J', '<cmd>RustLsp joinLines<cr>', 'join lines')
             keymap('n', '<leader>cm', ':RustLsp moveItem ', '[m]ove up|down')
-            keymap('n', '<leader>co', ':RustLsp openCargo<cr>', '[o]pen cargo')
-            keymap('n', '<leader>cp', ':RustLsp parentModule<cr>', '[p]arent module')
+            keymap('n', '<leader>co', '<cmd>RustLsp openCargo<cr>', '[o]pen cargo')
+            keymap('n', '<leader>cp', '<cmd>RustLsp parentModule<cr>', '[p]arent module')
             -- keymap('n','<leader>c.', ':RustLsp! testables<cr>', 'run previous [t]ests')
             -- keymap('n','<leader>ct', ':RustLsp testables<cr>', 'run [t]ests')
             -- rust_keymap('n','<leader>cw', ':RustLsp workspaceSymbol allSymbols ', '[w]orkspace symbol')
