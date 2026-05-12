@@ -18,6 +18,7 @@ vim.api.nvim_create_user_command('Redir', function(ctx)
 end, { nargs = '+', complete = 'command' })
 
 vim.o.wrap = false
+vim.o.showbreak = '>> '
 
 vim.o.swapfile = false
 
