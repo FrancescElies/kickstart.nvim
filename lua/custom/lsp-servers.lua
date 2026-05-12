@@ -1,20 +1,32 @@
 return {
-  -- harper_ls = { -- typos
-  --   settings = {
-  --     ['harper-ls'] = {
-  --       userDictPath = vim.fn.expand '~/src/kickstart.nvim/dict.txt',
-  --       linters = {
-  --         SentenceCapitalization = false,
-  --         SpellCheck = false,
-  --       },
-  --     },
-  --   },
-  -- },
+  harper_ls = { -- typos
+    filetypes = { 'yaml', 'markdown', 'gitcommit', 'text', 'asciidoc' },
+    root_dir = require('lspconfig.util').root_pattern('.harper.toml', '.git'),
+    settings = {
+      ['harper-ls'] = {
+        diagnosticSeverity = 'hint',
+        dialect = 'American',
+        userDictPath = vim.fn.expand '~/src/kickstart.nvim/dict.txt',
+        linters = {
+          SpellCheck = true,
+          SentenceCapitalization = false,
+          LongSentences = true,
+          RepeatedWords = true,
+          Spaces = true,
+          AvoidCurses = true,
+        },
+      },
+    },
+  },
+  typos_lsp = {
+    init_options = { diagnosticSeverity = 'Warning' },
+    root_dir = require('lspconfig.util').root_pattern('.typos.toml', '_typos.toml', '.git'),
+  },
   clangd = {
     cmd = {
       'clangd',
-      '--background-index',       -- persist index on disk
-      '--clang-tidy',             -- enables tidy
+      '--background-index', -- persist index on disk
+      '--clang-tidy', -- enables tidy
       '--fallback-style="{BasedOnStyle: LLVM, IndentWidth: 4}"',
       '--log=verbose',
       '--enable-config',
@@ -72,7 +84,7 @@ return {
   -- biome = { filetypes = { 'typescript', 'json', 'maxpat', 'json' }, init_options = { provideFormatter = true } },
   -- sqls = {},
   -- gopls = {},
-  basedpyright = {},       -- pyright fork with inlay hints
+  basedpyright = {}, -- pyright fork with inlay hints
   -- pyright = {},
   yamlls = {},
   jsonls = {
