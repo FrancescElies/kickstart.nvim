@@ -1,27 +1,27 @@
 return {
-  harper_ls = { -- typos
-    filetypes = { 'yaml', 'markdown', 'gitcommit', 'text', 'asciidoc' },
-    root_dir = require('lspconfig.util').root_pattern('.harper.toml', '.git'),
-    settings = {
-      ['harper-ls'] = {
-        diagnosticSeverity = 'hint',
-        dialect = 'American',
-        userDictPath = vim.fn.expand '~/src/kickstart.nvim/dict.txt',
-        linters = {
-          SpellCheck = true,
-          SentenceCapitalization = false,
-          LongSentences = true,
-          RepeatedWords = true,
-          Spaces = true,
-          AvoidCurses = true,
-        },
-      },
-    },
-  },
-  typos_lsp = {
-    init_options = { diagnosticSeverity = 'Warning' },
-    root_dir = require('lspconfig.util').root_pattern('.typos.toml', '_typos.toml', '.git'),
-  },
+  -- harper_ls = { -- typos
+  --   filetypes = { 'yaml', 'markdown', 'gitcommit', 'text', 'asciidoc' },
+  --   root_dir = require('lspconfig.util').root_pattern('.harper.toml', '.git'),
+  --   settings = {
+  --     ['harper-ls'] = {
+  --       diagnosticSeverity = 'hint',
+  --       dialect = 'American',
+  --       userDictPath = vim.fn.expand '~/src/kickstart.nvim/dict.txt',
+  --       linters = {
+  --         SpellCheck = true,
+  --         SentenceCapitalization = false,
+  --         LongSentences = true,
+  --         RepeatedWords = true,
+  --         Spaces = true,
+  --         AvoidCurses = true,
+  --       },
+  --     },
+  --   },
+  -- },
+  -- typos_lsp = {
+  --   init_options = { diagnosticSeverity = 'Warning' },
+  --   root_dir = require('lspconfig.util').root_pattern('.typos.toml', '_typos.toml', '.git'),
+  -- },
   clangd = {
     cmd = {
       'clangd',
@@ -86,7 +86,7 @@ return {
   -- gopls = {},
   basedpyright = {}, -- pyright fork with inlay hints
   -- pyright = {},
-  yamlls = {},
+  -- yamlls = {},
   jsonls = {
     filetypes = { 'maxpat', 'json' },
     init_options = { provideFormatter = true },
