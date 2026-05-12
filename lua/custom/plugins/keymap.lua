@@ -28,8 +28,8 @@ vim.o.spell = true
 --
 
 -- for faster spelling corrections
-vim.keymap.set('n', 'cs', ':silent! normal! [s1z=<cr>', { desc = '[c]orrect [s]pelling previous word' })
-vim.keymap.set('n', 'cs.', ':silent! norm! 1z=<cr>', { desc = '[c]orrect [s]pelling [.] current word' })
+vim.keymap.set('n', 'cp', ':silent! normal! [s1z=<cr>', { desc = '[c]orrect spell [p]revious' })
+vim.keymap.set('n', 'cc', ':silent! norm! 1z=<cr>', { desc = '[c]orrect spell [c]urrent' })
 
 -- File
 local is_windows = vim.uv.os_uname().sysname == "Windows_NT"
