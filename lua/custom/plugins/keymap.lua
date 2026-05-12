@@ -32,22 +32,24 @@ vim.keymap.set('n', 'cs', ':silent! normal! [s1z=<cr>', { desc = '[c]orrect [s]p
 vim.keymap.set('n', 'cs.', ':silent! norm! 1z=<cr>', { desc = '[c]orrect [s]pelling [.] current word' })
 
 -- File
-
-vim.keymap.set('n', '<leader>by', function()
+local is_windows = vim.uv.os_uname().sysname == "Windows_NT"
+local function yank_path()
   local name = vim.api.nvim_buf_get_name(0)
-  if vim.fn.has 'win32' then
+  if is_windows  then
     name = name:gsub('/', '\\')
   end
   vim.fn.setreg('+', name)
-end, { desc = '[b]uffer [y]ank path' })
-vim.keymap.set('n', '<leader>bY', function()
+end
+local function yank_abs_path()
   local abs_path = vim.fn.expand '%:p'
-  if vim.fn.has 'win32' then
+  if is_windows then
     abs_path = abs_path:gsub('/', '\\')
   end
   vim.fn.setreg('+', abs_path)
-end, { desc = '[b]uffer [Y]ank abs. path' })
-vim.keymap.set('n', '<leader>bo', ':e <C-r>+<CR>', { desc = '[b]uffer [o]pen from clipboard' })
+end
+
+vim.keymap.set('n', '<leader>by', yank_path, { desc = '[b]uffer [y]ank path' })
+vim.keymap.set('n', '<leader>bY', yank_abs_path, { desc = '[b]uffer [Y]ank abs. path' })
 vim.keymap.set('n', '<leader>bd', '<cmd>bd<cr>', { desc = '[b]uffer [d]elete' })
 
 -- quick scape
