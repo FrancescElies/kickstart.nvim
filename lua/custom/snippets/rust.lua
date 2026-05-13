@@ -8,10 +8,16 @@ local c = ls.choice_node
 local snippet_from_nodes = ls.sn
 
 local function inside_impl()
-   local node = vim.treesitter.get_node()
-   while node do
-     if node:type() == "impl_item" then return true end
-     node = node:parent()
-   end
-   return false
- end
+  local node = vim.treesitter.get_node()
+  while node do
+    if node:type() == "impl_item" then return true end
+    node = node:parent()
+  end
+  return false
+end
+
+ls.add_snippets('rust', {
+  s('backtrace', {
+    t { 'eprintln!("BACKTRACE: {}:{}\\n{}", file!(), line!(), std::backtrace::Backtrace::capture());' },
+  }),
+})
