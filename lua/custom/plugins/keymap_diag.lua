@@ -10,7 +10,7 @@ vim.keymap.set('n', '<leader>qa', vim.diagnostic.setqflist, { desc = '[q]uickfix
 vim.keymap.set('n', '<leader>qw', function() vim.diagnostic.setqflist { severity = vim.diagnostic.severity.WARN } end, { desc = '[q]uickfix diag. [w]arnings' })
 vim.keymap.set('n', '<leader>qe', function() vim.diagnostic.setqflist { severity = vim.diagnostic.severity.ERROR } end, { desc = '[q]uickfix diag. [e]rrors' })
 
-vim.keymap.set('n', '<leader>vdt', function()
+vim.keymap.set('n', '<leader>vdd', function()
   vim.diagnostic.enable(not vim.diagnostic.is_enabled())
   -- vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = 0 }, { bufnr = 0 })
 end, { desc = '[v]im [D]iagnostic toggle' })
