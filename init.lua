@@ -968,9 +968,10 @@ require('lazy').setup {
         styles = {
           comments = { italic = false }, -- Disable italics in comments
         },
-        on_colors = function(color) color.comment = '#82a2c4' end,
+        on_colors = function(color) color.comment = '#92b2d4' end,
         on_highlights = function(hl, color)
           hl.LineNr = { fg = color.green }
+          hl.Comment = { fg = color.comment }
           hl.LineNrAbove = { fg = color.comment }
           hl.LineNrBelow = { fg = color.comment }
           hl.StatusLineNC = { fg = color.comment }
