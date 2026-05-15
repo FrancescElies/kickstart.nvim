@@ -489,7 +489,7 @@ require('lazy').setup {
       local function telescope_load_extension(name)
         if not pcall(require('telescope').load_extension, name) then
           vim.notify(
-            name .. 'telescope extension loading failed', vim.log.levels.WARN)
+            'telescope extension loading failed: ' .. name, vim.log.levels.WARN)
         end
       end
 
@@ -499,6 +499,7 @@ require('lazy').setup {
       -- telescope_load_extension 'fzy-native'
       telescope_load_extension 'live-multi-grep'
       telescope_load_extension 'ui-select'
+      telescope_load_extension "luasnip"
 
       -- See `:help telescope.builtin`
       local builtin = require 'telescope.builtin'
