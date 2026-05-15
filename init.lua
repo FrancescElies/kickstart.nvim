@@ -1045,15 +1045,12 @@ require('lazy').setup {
       -- ... and there is more!
       --  Check out: https://github.com/nvim-mini/mini.nvim
       -- using persistence instead
-      require('mini.sessions').setup {
-        autoread = true,
-        autowrite = true,
-        verbose = { read = true, write = true, delete = true },
-      }
+      require('mini.sessions').setup {}
       vim.o.sessionoptions = 'blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions'
-      vim.keymap.set('n', '<leader>pw', ':lua MiniSessions.write()<cr>', { desc = 'persist session' })
-      vim.keymap.set('n', '<leader>pd', ':lua MiniSessions.delete()<cr>', { desc = 'persist session delete' })
-      vim.keymap.set('n', '<leader>ps', ':lua MiniSessions.select()<cr>', { desc = 'persist session select' })
+      vim.keymap.set('n', '<leader>Sw', ':lua MiniSessions.write()<cr>', { desc = '[s]ession [w]rite' })
+      vim.keymap.set('n', '<leader>Sd', ':lua MiniSessions.delete()<cr>', { desc = '[s]ession [d]elete' })
+      vim.keymap.set('n', '<leader>Ss', ':lua MiniSessions.select()<cr>', { desc = '[s]ession [s]elect' })
+      vim.keymap.set('n', '<leader>Sr', ':lua MiniSessions.restart()<cr>', { desc = '[s]ession [r]estart' })
 
       require 'custom.mini-files'
 
