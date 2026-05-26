@@ -99,4 +99,44 @@ vim.api.nvim_create_user_command('UniqueWords', function(opts)
   unique_words(opts)
 end, { nargs = '*', desc = 'Extract unique words from current buffer' })
 
+local function delete_duplicate_words()
+  local bufnr = 0
+
+  -- detect visual selection
+  local mode = vim.fn.mode()
+  local start_line, end_line
+
+  if mode:match("[vV]") then
+    start_line = vim.fn.line("'<") - 1
+    end_line   = vim.fn.line("'>")
+  else
+    start_line = vim.api.nvim_win_get_cursor(0)[1] - 1
+    end_line   = start_line + 1
+  end
+
+  local lines = vim.api.nvim_buf_get_lines(bufnr, start_line, end_line, false)
+
+  for i, line in ipairs(lines) do
+    local seen = {}
+    local result = {}
+
+    for word in line:gmatch("%S+") do
+      -- local key = word -- change to word:lower() for case-insensitive
+      local key = word:gsub("[%p]", ""):lower()
+      if not seen[key] then
+        seen[key] = true
+        table.insert(result, word)
+      end
+    end
+
+    lines[i] = table.concat(result, " ")
+  end
+
+  vim.api.nvim_buf_set_lines(bufnr, start_line, end_line, false, lines)
+end
+
+vim.api.nvim_create_user_command('DeleteDuplicateWords', delete_duplicate_words,
+  { desc = 'Delete duplicate words' })
+
+
 return {}
