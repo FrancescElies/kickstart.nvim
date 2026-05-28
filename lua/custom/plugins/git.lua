@@ -32,7 +32,7 @@ return {
     'lewis6991/gitsigns.nvim',
     opts = {
       -- numhl = true, -- Toggle with `:Gitsigns toggle_numhl`
-      linehl = false, -- Toggle with `:Gitsigns toggle_linehl`
+      linehl = false,             -- Toggle with `:Gitsigns toggle_linehl`
       current_line_blame = false, -- Toggle with `:Gitsigns toggle_current_line_blame`
       on_attach = function(bufnr)
         local gitsigns = require 'gitsigns'
@@ -53,9 +53,11 @@ return {
         end
 
         -- stylua: ignore
-        map('v', '<leader>hs', function() gitsigns.stage_hunk { vim.fn.line '.', vim.fn.line 'v' } end, { desc = '[h]unk [s]tage' })
+        map('v', '<leader>hs', function() gitsigns.stage_hunk { vim.fn.line '.', vim.fn.line 'v' } end,
+          { desc = '[h]unk [s]tage' })
         -- stylua: ignore
-        map('v', '<leader>hr', function() gitsigns.reset_hunk { vim.fn.line '.', vim.fn.line 'v' } end, { desc = '[h]unk [r]eset' })
+        map('v', '<leader>hr', function() gitsigns.reset_hunk { vim.fn.line '.', vim.fn.line 'v' } end,
+          { desc = '[h]unk [r]eset' })
 
         map('n', '<leader>hB', gitsigns.blame, { desc = '[h]unk [b]lame [b]uffer' })
         map('n', '<leader>hb', gitsigns.toggle_current_line_blame, { desc = '[h]unk toggle [b]lame' })
@@ -95,10 +97,10 @@ return {
     cmd = { 'G', 'Git', 'Gdiffsplit', 'Gread', 'Gwrite', 'Ggrep', 'GMove', 'GDelete', 'GBrowse', 'GRemove', 'GRename', 'Glgrep', 'Gedit' },
     ft = { 'fugitive' },
     keys = {
-      { '<leader>gb', '<cmd>G blame<cr>', desc = 'Git blame' },
+      { '<leader>gb', '<cmd>G blame<cr>',  desc = 'Git blame' },
       { '<leader>gc', '<cmd>G commit<cr>', desc = 'Git commit' },
-      { '<leader>gp', '<cmd>G push<cr>', desc = 'Git commit' },
-      { '<leader>gs', vim.cmd.Git, desc = 'Git status' },
+      { '<leader>gp', '<cmd>G push<cr>',   desc = 'Git commit' },
+      { '<leader>gs', vim.cmd.Git,         desc = 'Git status' },
     },
   },
 
@@ -109,13 +111,13 @@ return {
     keys = {
       -- :h diff-mode
       -- :h copy-diffs
-      { '<leader>gdhb', ':DiffviewFileHistory<cr>', desc = '[d]iff History [b]ranch' },
-      { '<leader>gdhf', ':DiffviewFileHistory %<cr>', desc = '[d]iff history [f]ile' },
-      { '<leader>gdhl', ':.DiffviewFileHistory', desc = '[d]iff history ([l]ine evolution)' },
-      { '<leader>gdhl', ':DiffviewFileHistory', desc = '[d]iff history ([l]ine evolution)', mode = { 'v' } },
-      { '<leader>gd.', ':DiffviewOpen<cr>', desc = '[d]iff (.) working tree' },
-      { '<leader>gdm', ':DiffviewOpen origin/main...HEAD', desc = '[d]iff with merge base' },
-      { '<leader>gdq', ':DiffviewClose<cr>', desc = '[d]iff [q]uit' },
+      { '<leader>gdhb', ':DiffviewFileHistory<cr>',         desc = '[d]iff History [b]ranch' },
+      { '<leader>gdhf', ':DiffviewFileHistory %<cr>',       desc = '[d]iff history [f]ile' },
+      { '<leader>gdhl', ':.DiffviewFileHistory',            desc = '[d]iff history ([l]ine evolution)' },
+      { '<leader>gdhl', ':DiffviewFileHistory',             desc = '[d]iff history ([l]ine evolution)', mode = { 'v' } },
+      { '<leader>gd.',  ':DiffviewOpen<cr>',                desc = '[d]iff (.) working tree' },
+      { '<leader>gdm',  ':DiffviewOpen origin/main...HEAD', desc = '[d]iff with merge base' },
+      { '<leader>gdq',  ':DiffviewClose<cr>',               desc = '[d]iff [q]uit' },
 
       -- Examples:
       -- :DiffviewOpen
@@ -143,9 +145,9 @@ return {
       require('telescope').load_extension 'advanced_git_search'
     end,
     keys = {
-      { '<leader>g//', ':AdvancedGitSearch<CR>', desc = '[g]it [s]earch' },
-      { '<leader>g/l', ':AdvancedGitSearch diff_commit_line<cr>', mode = { 'n', 'v' }, desc = '[g]it [d]iff [l]ine' },
-      { '<leader>g/r', ':AdvancedGitSearch checkout_reflog<cr>', desc = '[g]it [r]eflog' },
+      { '<leader>g//', ':AdvancedGitSearch<CR>',                  desc = '[g]it [s]earch' },
+      { '<leader>g/l', ':AdvancedGitSearch diff_commit_line<cr>', mode = { 'n', 'v' },    desc = '[g]it [d]iff [l]ine' },
+      { '<leader>g/r', ':AdvancedGitSearch checkout_reflog<cr>',  desc = '[g]it [r]eflog' },
     },
     dependencies = {
       'nvim-telescope/telescope.nvim',
