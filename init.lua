@@ -301,7 +301,7 @@ require('lazy').setup {
         { '<leader>g/',  group = '[G]it [/]search',        mode = { 'n', 'v' } },
         { '<leader>gd',  group = '[G]it [D]iff',           mode = { 'n', 'v' } },
         { '<leader>gdh', group = '[G]it [D]iff [H]istory', mode = { 'n', 'v' } },
-        { '<leader>gdh', group = '[G]it [P]ortal',         mode = { 'n', 'v' } },
+        { '<leader>gw', group = '[G]it bro[w]se',         mode = { 'n', 'v' } },
         { '<leader>h',   group = '[H]unk (git)',           mode = { 'n', 'v' } },
         { '<leader>l',   group = '[L]ua' },
         { '<leader>n',   group = '[N]otes' },
