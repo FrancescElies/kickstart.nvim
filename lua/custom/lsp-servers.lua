@@ -139,21 +139,21 @@ return {
   --   analyze_open_documents_only = false,
   -- },
 
-  -- zls = {
-  --   -- https://zigtools.org/zls/editors/vim/nvim-lspconfig/
-  --   -- Whether to enable build-on-save diagnostics
-  --   --
-  --   -- Further information about build-on save:
-  --   -- https://zigtools.org/zls/guides/build-on-save/
-  --   enable_build_on_save = true,
-  --
-  --   -- Neovim already provides basic syntax highlighting
-  --   semantic_tokens = 'partial',
-  --
-  --   -- omit the following line if `zig` is in your PATH
-  --   zig_exe_path = vim.fn.exepath 'zig',
-  --   enable_snippets = true,
-  --   enable_autofix = true,
-  --   enable_ast_check_diagnostics = true,
-  -- },
+  zls = {
+    -- https://zigtools.org/zls/editors/vim/nvim-lspconfig/
+    -- Whether to enable build-on-save diagnostics
+    --
+    -- Further information about build-on save:
+    -- https://zigtools.org/zls/guides/build-on-save/
+    enable_build_on_save = true,
+
+    -- Neovim already provides basic syntax highlighting
+    semantic_tokens = 'partial',
+
+    -- omit the following line if `zig` is in your PATH
+    -- zig_exe_path = vim.fn.exepath 'zig',
+    enable_snippets = true,
+    enable_autofix = true,
+    enable_ast_check_diagnostics = true,
+  },
 }
