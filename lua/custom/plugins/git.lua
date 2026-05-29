@@ -99,7 +99,6 @@ return {
     keys = {
       { '<leader>gb', '<cmd>G blame<cr>',  desc = 'Git blame' },
       { '<leader>gc', '<cmd>G commit<cr>', desc = 'Git commit' },
-      { '<leader>gp', '<cmd>G push<cr>',   desc = 'Git commit' },
       { '<leader>gs', vim.cmd.Git,         desc = 'Git status' },
     },
   },
@@ -154,4 +153,15 @@ return {
       'sindrets/diffview.nvim',
     },
   },
+  {
+    url = 'https://codeberg.org/trevorhauter/gitportal.nvim',
+    opts = {
+      always_include_current_line = true,
+    },
+    keys = {
+      { "<leader>gpr", function() require('gitportal').to_remote() end,   desc = "opens current file in browser",                 mode = { "n", "v" } },
+      { "<leader>gpf", function() require('gitportal').from_remote() end, desc = "opens url in nvim (switches to branch/commit)", mode = { "n", "v" } },
+      { "<leader>gpc", function() require('gitportal').clip_remote() end, desc = "copies remote url to clipboard",                mode = { "n", "v" } }
+    }
+  }
 }
