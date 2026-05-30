@@ -111,9 +111,7 @@ vim.api.nvim_create_user_command('ExecuteAfterXMinutes', function(opts)
   local command = table.concat(opts.fargs, ' ', 2)
   local millis = minutes * 60 * 1000
 
-  vim.defer_fn(function()
-    vim.cmd(command)
-  end, millis)
+  vim.defer_fn(function() vim.cmd(command) end, millis)
 end, {})
 
 ---@type table<string, uv.uv_timer_t|nil>
@@ -130,9 +128,7 @@ vim.api.nvim_create_user_command('ExecuteEveryXMinutes', function(opts)
 end, {})
 
 vim.api.nvim_create_user_command('ExecuteEveryXMinutesCancel', function(opts)
-  if timers.every_x_min ~= nil then
-    timers.every_x_min:stop()
-  end
+  if timers.every_x_min ~= nil then timers.every_x_min:stop() end
 end, {})
 
 vim.keymap.set('v', '<leader>cs', ':!codesort', { desc = 'codesort' })
@@ -143,7 +139,6 @@ vim.keymap.set('n', '<leader>cs', function()
   vim.cmd(cmd)
   vim.api.nvim_win_set_cursor(0, cursor_pos) -- restore cursor
 end, { desc = 'codesort optimal range around the current line', silent = true })
-
 
 vim.api.nvim_create_user_command('SetIndentationConfig', function(opts)
   local mode = opts.fargs[1]
@@ -165,16 +160,33 @@ end, {
     local args_so_far = vim.split(full_line, '%s+', { trimempty = true })
     table.remove(args_so_far, 1) -- remove the command name
 
-    if #args_so_far == 0 then
-      return { 'tabs', 'spaces' }
-    end
+    if #args_so_far == 0 then return { 'tabs', 'spaces' } end
 
-    if #args_so_far == 1 then
-      return { '2', '4', '8' }
-    end
+    if #args_so_far == 1 then return { '2', '4', '8' } end
 
     return {}
   end,
+})
+
+local function async_make(opts)
+  local cmd = opts.args ~= '' and opts.args or 'zig build'
+
+  vim.fn.jobstart(cmd, {
+    on_exit = function(job_id, code, event)
+      if code == 0 then
+        vim.notify('Build successful!', vim.log.levels.INFO)
+      else
+        vim.notify('Build failed!', vim.log.levels.ERROR)
+      end
+      vim.cmd 'copen'
+    end,
+    stdout_buffered = true,
+  })
+end
+
+vim.api.nvim_create_user_command('AsyncMake', async_make, {
+  nargs = '?',
+  complete = 'shellcmd',
 })
 
 ---@module 'lazy'
