@@ -172,7 +172,7 @@ local function async_make(opts)
   local cmd = opts.args ~= '' and opts.args or 'zig build'
   local tmpfile = vim.fn.tempname()
 
-  vim.fn.jobstart({ cmd }, {
+  vim.fn.jobstart(cmd, {
     on_exit = function(job_id, code, event)
       vim.schedule(function()
         vim.cmd('cfile ' .. tmpfile)
@@ -186,12 +186,8 @@ local function async_make(opts)
     end,
     stdout_buffered = true,
     stderr_buffered = true,
-    on_stdout = function(job_id, data, event)
-      vim.fn.writefile(data, tmpfile, 'a')
-    end,
-    on_stderr = function(job_id, data, event)
-      vim.fn.writefile(data, tmpfile, 'a')
-    end,
+    on_stdout = function(job_id, data, event) vim.fn.writefile(data, tmpfile, 'a') end,
+    on_stderr = function(job_id, data, event) vim.fn.writefile(data, tmpfile, 'a') end,
   })
 end
 vim.api.nvim_create_user_command('AsyncMake', async_make, {
