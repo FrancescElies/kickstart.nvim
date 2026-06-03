@@ -47,4 +47,3 @@ vim.keymap.set('n', 'cd', ':CdBufRootDir<cr>', { desc = '[cd] buf root dir' })
 --   end,
 -- })
 
-return {}

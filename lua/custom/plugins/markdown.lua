@@ -1,3 +1,5 @@
+local fn = require 'custom.fn'
+
 local azure_org = vim.env.ADO_ORGANIZATION
 local azure_project = vim.env.ADO_PROJECT
 
@@ -14,19 +16,7 @@ end
 vim.api.nvim_create_user_command('AzureDevOpsOpen', open_azure_devops_link_under_cursor, {})
 vim.keymap.set('n', 'gX', open_azure_devops_link_under_cursor, { desc = 'Open Azure DevOps link' })
 
-return {
-  {
-    'MeanderingProgrammer/render-markdown.nvim',
-    dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' },
-    ---@module 'render-markdown'
-    ---@type render.md.UserConfig
-    opts = {},
-  },
-  {
-    'iamcco/markdown-preview.nvim',
-    cmd = { 'MarkdownPreviewToggle', 'MarkdownPreview', 'MarkdownPreviewStop' },
-    build = 'cd app ; npm install',
-    init = function() vim.g.mkdp_filetypes = { 'markdown' } end,
-    ft = { 'markdown' },
-  },
+vim.pack.add {
+  fn.gh 'MeanderingProgrammer/render-markdown.nvim',
+  fn.gh 'iamcco/markdown-preview.nvim',
 }

@@ -48,5 +48,3 @@ if vim.g.neovide then
   vim.api.nvim_set_keymap('t', paste_key, '<C-R>+', { noremap = true, silent = true })
   vim.api.nvim_set_keymap('v', paste_key, '<C-R>+', { noremap = true, silent = true })
 end
-
-return {}

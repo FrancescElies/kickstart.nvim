@@ -173,4 +173,3 @@ vim.keymap.set({ 'n', 'v' }, 'ySu', [[:.,$S/\<<C-r><C-w>\>/<C-r><C-w>/gIc<Left><
 -- the end
 --
 
-return {}

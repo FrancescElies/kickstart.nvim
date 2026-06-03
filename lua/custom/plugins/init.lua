@@ -1,8 +1,4 @@
--- You can add your own plugins here or in other files in this directory!
---  I promise not to create any merge conflicts in this directory :)
---
--- See the kickstart.nvim README for more information
--- local Util = require 'lazy.core.util'
+local fn = require 'custom.fn'
 
 vim.lsp.inlay_hint.enable(false)
 
@@ -16,6 +12,16 @@ vim.api.nvim_create_user_command('Redir', function(ctx)
   vim.api.nvim_buf_set_lines(0, 0, -1, false, lines)
   vim.opt_local.modified = false
 end, { nargs = '+', complete = 'command' })
+
+local list_snips = function()
+  local ft_list = require('luasnip').available()[vim.o.filetype]
+  local ft_snips = {}
+  for _, item in pairs(ft_list) do
+    ft_snips[item.trigger] = item.name
+  end
+  print(vim.inspect(ft_snips))
+end
+vim.api.nvim_create_user_command('SnipList', list_snips, {})
 
 vim.o.wrap = false
 vim.o.showbreak = '>> '
@@ -172,7 +178,7 @@ local function async_make(opts)
   local cmd = opts.args ~= '' and opts.args or 'zig build'
   local tmpfile = vim.fn.tempname()
 
-  vim.fn.jobstart(cmd, {
+  vim.fn.jobstart({ cmd }, {
     on_exit = function(job_id, code, event)
       vim.schedule(function()
         vim.cmd('cfile ' .. tmpfile)
@@ -186,27 +192,70 @@ local function async_make(opts)
     end,
     stdout_buffered = true,
     stderr_buffered = true,
-    on_stdout = function(job_id, data, event) vim.fn.writefile(data, tmpfile, 'a') end,
-    on_stderr = function(job_id, data, event) vim.fn.writefile(data, tmpfile, 'a') end,
+    on_stdout = function(job_id, data, event)
+      -- Write stdout to file
+      vim.fn.writefile(data, tmpfile, 'a')
+    end,
+    on_stderr = function(job_id, data, event)
+      -- Write stderr to file
+      vim.fn.writefile(data, tmpfile, 'a')
+    end,
   })
 end
+
 vim.api.nvim_create_user_command('AsyncMake', async_make, {
   nargs = '?',
   complete = 'shellcmd',
 })
 
----@module 'lazy'
----@type LazySpec
-return {
-  -- { 'monaqa/dial.nvim', }
-  -- hover.nvim
-  -- spaceless.nvim
-  -- unimpaired.nvim
-  --
-  -- connect to databases
-  --  "tpope/vim-dadbod",
-  -- guessindent
-  -- octo.nvim
+require 'custom.plugins.aerial'
+require 'custom.plugins.abbrev'
+require 'custom.plugins.ai'
+-- require 'custom.plugins.annotations'
+-- require 'custom.plugins.ast-grep'
+require 'custom.plugins.autocommands'
+require 'custom.plugins.autopairs'
+require 'custom.plugins.call-hierarchy'
+require 'custom.plugins.changedir'
+require 'custom.plugins.debugprint'
+require 'custom.plugins.git'
+-- require 'custom.plugins.grapple'
+require 'custom.plugins.indent_line'
+-- require 'custom.plugins.janet'
+require 'custom.plugins.keymap'
+require 'custom.plugins.keymap_diag'
+require 'custom.plugins.kill'
+-- require 'custom.plugins.lint'
+-- require 'custom.plugins.lisp'
+-- require 'custom.plugins.lsp'
+require 'custom.plugins.markdown'
+-- require 'custom.plugins.neotest'
+require 'custom.plugins.neovide'
+-- require 'custom.plugins.notes'
+-- require 'custom.plugins.quickfix'
+require 'custom.plugins.rust'
+-- require 'custom.plugins.screenkey'
+-- require 'custom.plugins.shell'
+-- require 'custom.plugins.sql'
+-- require 'custom.plugins.terminal'
+-- require 'custom.plugins.treesitter'
+-- require 'custom.plugins.typescript'
+-- require 'custom.plugins.unique-words'
+vim.pack.add {
+  fn.gh 'tpope/vim-abolish', -- :help abolish, :%S/box{,es}/bag{,s}/g   crc crs cr. cru crk
 }
+require 'custom.plugins.windows-os-corporate-keep-taking-notes-fast'
+-- require 'custom.plugins.workspace_diagnostic'
+-- require 'custom.plugins.zenmode'
+
+-- { 'monaqa/dial.nvim', }
+-- hover.nvim
+-- spaceless.nvim
+-- unimpaired.nvim
+--
+-- connect to databases
+--  "tpope/vim-dadbod",
+-- guessindent
+-- octo.nvim
 -- https://github.com/wezm/rsspls rrs please, make rss from website
 -- https://github.com/wezm/titlecase titlecase - is a small tool and library (crate) that capitalizes English text according to a style defined by John Gruber
