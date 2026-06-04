@@ -208,10 +208,37 @@ vim.api.nvim_create_user_command('AsyncMake', async_make, {
   complete = 'shellcmd',
 })
 
+vim.api.nvim_create_user_command('LspDetach', function(opts)
+  local name = opts.args
+  local clients = vim.lsp.get_clients { name = name }
+  for _, client in ipairs(clients) do
+    vim.lsp.buf_detach_client(0, client.id)
+  end
+end, {
+  nargs = 1,
+  desc = 'Detches lsp client from current buffer',
+  complete = function(arg_lead, _, _)
+    local unique_clients = {}
+    local clients = {}
+    for _, client in ipairs(vim.lsp.get_clients {}) do
+      if unique_clients[client.name] ~= nil then
+        table.insert(clients, client.name)
+      end
+      unique_clients[client.name] = true
+    end
+
+    if #arg_lead == 0 then
+      return clients
+    end
+
+    local match = vim.fn.matchfuzzy(clients, arg_lead) -- Fuzzy filter based on partial input
+    return match
+  end,
+})
+
 require 'custom.plugins.aerial'
 require 'custom.plugins.abbrev'
 require 'custom.plugins.ai'
--- require 'custom.plugins.annotations'
 -- require 'custom.plugins.ast-grep'
 require 'custom.plugins.autocommands'
 require 'custom.plugins.autopairs'
@@ -227,22 +254,29 @@ require 'custom.plugins.keymap_diag'
 require 'custom.plugins.kill'
 -- require 'custom.plugins.lint'
 -- require 'custom.plugins.lisp'
--- require 'custom.plugins.lsp'
 require 'custom.plugins.markdown'
 -- require 'custom.plugins.neotest'
 require 'custom.plugins.neovide'
--- require 'custom.plugins.notes'
+require 'custom.plugins.notes'
 -- require 'custom.plugins.quickfix'
 require 'custom.plugins.rust'
 -- require 'custom.plugins.screenkey'
--- require 'custom.plugins.shell'
+require 'custom.plugins.shell'
 -- require 'custom.plugins.sql'
--- require 'custom.plugins.terminal'
+require 'custom.plugins.terminal'
 -- require 'custom.plugins.treesitter'
 -- require 'custom.plugins.typescript'
--- require 'custom.plugins.unique-words'
+require 'custom.plugins.unique-words'
+--
 vim.pack.add {
+  fn.gh 'danymat/neogen',
   fn.gh 'tpope/vim-abolish', -- :help abolish, :%S/box{,es}/bag{,s}/g   crc crs cr. cru crk
+  fn.gh 'tpope/vim-rsi' , -- :help rsi
+  -- fn.gh 'tpope/vim-unimpaired'
+  -- fn.gh 'tpope/vim-repeat'
+  -- fn.gh 'wincent/loupe'
+  -- fn.gh 'kevinhwang91/nvim-hlslens'
+  -- fn.gh 'godlygeek/tabular'
 }
 require 'custom.plugins.windows-os-corporate-keep-taking-notes-fast'
 -- require 'custom.plugins.workspace_diagnostic'

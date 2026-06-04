@@ -177,5 +177,3 @@ vim.keymap.set({ 'n', 't' }, 'yox', '<cmd>bd!<cr>') -- alt x closes zellij pane,
 -- vim.keymap.set('t','sr', "'<C-\\><C-N>\"'.nr2char(getchar()).'pi'", { desc = '<C-r> fellow' })
 
 vim.keymap.set({ 'n', 't' }, ',c', toggle_tgpt, { desc = 'c[h]atgpt' })
-
-return {}

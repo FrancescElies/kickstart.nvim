@@ -138,5 +138,3 @@ end
 vim.api.nvim_create_user_command('DeleteDuplicateWords', delete_duplicate_words,
   { desc = 'Delete duplicate words' })
 
-
-return {}
