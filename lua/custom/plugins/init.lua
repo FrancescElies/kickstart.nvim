@@ -236,38 +236,6 @@ end, {
   end,
 })
 
-require 'custom.plugins.aerial'
-require 'custom.plugins.abbrev'
-require 'custom.plugins.ai'
--- require 'custom.plugins.ast-grep'
-require 'custom.plugins.autocommands'
-require 'custom.plugins.autopairs'
-require 'custom.plugins.call-hierarchy'
-require 'custom.plugins.changedir'
-require 'custom.plugins.debugprint'
-require 'custom.plugins.git'
--- require 'custom.plugins.grapple'
-require 'custom.plugins.indent_line'
--- require 'custom.plugins.janet'
-require 'custom.plugins.keymap'
-require 'custom.plugins.keymap_diag'
-require 'custom.plugins.kill'
--- require 'custom.plugins.lint'
--- require 'custom.plugins.lisp'
-require 'custom.plugins.markdown'
--- require 'custom.plugins.neotest'
-require 'custom.plugins.neovide'
-require 'custom.plugins.notes'
-require 'custom.plugins.quickfix'
-require 'custom.plugins.rust'
--- require 'custom.plugins.screenkey'
-require 'custom.plugins.shell'
--- require 'custom.plugins.sql'
-require 'custom.plugins.terminal'
--- require 'custom.plugins.treesitter'
--- require 'custom.plugins.typescript'
-require 'custom.plugins.unique-words'
---
 vim.pack.add {
   fn.gh 'danymat/neogen',
   fn.gh 'tpope/vim-abolish', -- :help abolish, :%S/box{,es}/bag{,s}/g   crc crs cr. cru crk
@@ -278,9 +246,26 @@ vim.pack.add {
   -- fn.gh 'kevinhwang91/nvim-hlslens'
   -- fn.gh 'godlygeek/tabular'
 }
-require 'custom.plugins.windows-os-corporate-keep-taking-notes-fast'
--- require 'custom.plugins.workspace_diagnostic'
--- require 'custom.plugins.zenmode'
+
+
+-- Iterate over all Lua files in the plugins directory and load them
+local plugins_dir = vim.fs.joinpath(vim.fn.stdpath 'config', 'lua', 'custom', 'plugins')
+for file_name, type in vim.fs.dir(plugins_dir) do
+  if type == 'file' and file_name:match '%.lua$' and file_name ~= 'init.lua' then
+    local module = file_name:gsub('%.lua$', '')
+    require('custom.plugins.' .. module)
+  end
+end
+
+-- TODO:
+-- require 'custom.plugins.ast-grep'
+-- require 'custom.plugins.grapple'
+-- require 'custom.plugins.janet'
+-- require 'custom.plugins.lisp'
+-- require 'custom.plugins.neotest'
+-- require 'custom.plugins.screenkey'
+-- require 'custom.plugins.sql'
+-- require 'custom.plugins.typescript'
 
 -- { 'monaqa/dial.nvim', }
 -- hover.nvim
