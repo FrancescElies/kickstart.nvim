@@ -1,5 +1,7 @@
 -- Linting
-vim.pack.add { 'mfussenegger/nvim-lint' }
+local fn = require('custom.fn')
+
+vim.pack.add { fn.gh 'mfussenegger/nvim-lint' }
 
 local lint = require 'lint'
 lint.linters_by_ft = {
