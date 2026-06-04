@@ -2,8 +2,16 @@
 -- vim.keymap.set('n', '<leader>vq', function() require('quicker').toggle() end, { desc = '[v]im Toggle [q]uickfix', })
 -- vim.keymap.set('n', '<leader>vl', function() require('quicker').toggle { loclist = true } end, { desc = '[v]im Toggle [l]oclist' })
 -- stylua: ignore end
+local fn = require 'custom.fn'
 
--- Toggle quickfix (global)
+vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+
+vim.keymap.set({ 'n', 'v' }, '<leader>qx', vim.lsp.buf.references, { buffer = true, desc = 'references to quickfix' })
+vim.keymap.set('n', '<leader>qb', vim.diagnostic.setloclist, { desc = '[q]uickfix [b]uffer diag.' })
+vim.keymap.set('n', '<leader>qa', vim.diagnostic.setqflist, { desc = '[q]uickfix all [d]iag.' })
+vim.keymap.set('n', '<leader>qw', function() vim.diagnostic.setqflist { severity = vim.diagnostic.severity.WARN } end, { desc = '[q]uickfix diag. [w]arnings' })
+vim.keymap.set('n', '<leader>qe', function() vim.diagnostic.setqflist { severity = vim.diagnostic.severity.ERROR } end, { desc = '[q]uickfix diag. [e]rrors' })
+
 vim.keymap.set('n', '<leader>qq', function()
   local qf_winid = vim.fn.getqflist({ winid = 0 }).winid
   if qf_winid > 0 then
@@ -11,7 +19,7 @@ vim.keymap.set('n', '<leader>qq', function()
   else
     vim.cmd 'botright copen'
   end
-end, { silent = true })
+end, { silent = true, desc = '' })
 
 local function jump_diagnostic_by_severity(opts)
   local count = opts.count or 1
@@ -31,13 +39,9 @@ local function jump_diagnostic_by_severity(opts)
   end
 end
 
-local function is_loclist_open()
-  return vim.fn.getloclist(vim.api.nvim_get_current_win(), { winid = 0 }).winid > 0
-end
+local function is_loclist_open() return vim.fn.getloclist(vim.api.nvim_get_current_win(), { winid = 0 }).winid > 0 end
 
-local function is_quickfix_open()
-  return vim.fn.getqflist({ winid = 0 }).winid > 0
-end
+local function is_quickfix_open() return vim.fn.getqflist({ winid = 0 }).winid > 0 end
 
 vim.g.diagnostic_visit_errors_first = true
 vim.api.nvim_create_user_command('ToggleDiagnosticVisitOrder', function()
@@ -108,6 +112,12 @@ vim.keymap.set('n', '<C-j>', function()
   end
 end)
 
+vim.pack.add {
+  fn.gh 'stevearc/quicker.nvim',
+}
+quicker = require 'quicker'
+quicker.setup {}
+
 vim.api.nvim_create_autocmd('FileType', {
   pattern = 'qf',
   callback = function()
@@ -115,31 +125,8 @@ vim.api.nvim_create_autocmd('FileType', {
     vim.keymap.set('n', 'J', ':cnext<CR>zz<C-w>p', opts)
     vim.keymap.set('n', 'K', ':cprev<CR>zz<C-w>p', opts)
 
-    vim.keymap.set('n', '+', function()
-      require('quicker').expand { before = 2, after = 2, add_to_existing = true }
-    end, opts)
+    vim.keymap.set('n', '+', function() quicker.expand { before = 2, after = 2, add_to_existing = true } end, opts)
 
-    vim.keymap.set('n', '-', require('quicker').collapse, opts)
+    vim.keymap.set('n', '-', quicker.collapse, opts)
   end,
 })
-
-return {
-  {
-    'stevearc/quicker.nvim',
-    ft = 'qf',
-    ---@module "quicker"
-    ---@type quicker.SetupOptions
-    opts = {},
-  },
-  -- {
-  --   'kevinhwang91/nvim-bqf',
-  --   enabled = false,
-  --   config = function()
-  --     require('bqf').setup()
-  --   end,
-  -- },
-  -- {
-  --   'stevearc/qf_helper.nvim',
-  --   opts = {},
-  -- },
-}

@@ -2,13 +2,8 @@
 -- diagnostic
 --
 
-vim.keymap.set({ 'n', 'v' }, '<leader>qx', vim.lsp.buf.references, { buffer = true, desc = 'references to quickfix' })
 vim.keymap.set({ 'n', 'v' }, 'yr', vim.lsp.buf.references, { buffer = true, desc = 'you references to quickfix' })
 
-vim.keymap.set('n', '<leader>qb', vim.diagnostic.setloclist, { desc = '[q]uickfix [b]uffer diag.' })
-vim.keymap.set('n', '<leader>qa', vim.diagnostic.setqflist, { desc = '[q]uickfix all [d]iag.' })
-vim.keymap.set('n', '<leader>qw', function() vim.diagnostic.setqflist { severity = vim.diagnostic.severity.WARN } end, { desc = '[q]uickfix diag. [w]arnings' })
-vim.keymap.set('n', '<leader>qe', function() vim.diagnostic.setqflist { severity = vim.diagnostic.severity.ERROR } end, { desc = '[q]uickfix diag. [e]rrors' })
 
 vim.keymap.set('n', '<leader>vdd', function()
   vim.diagnostic.enable(not vim.diagnostic.is_enabled())
