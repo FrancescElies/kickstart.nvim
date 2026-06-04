@@ -481,6 +481,9 @@ do
   local telescope_plugins = {
     gh 'nvim-lua/plenary.nvim',
     gh 'nvim-telescope/telescope.nvim',
+    -- It sets vim.ui.select to telescope. 
+    -- That means for example that neovim core stuff can fill the telescope picker. 
+    -- Example would be lua vim.lsp.buf.code_action().
     gh 'nvim-telescope/telescope-ui-select.nvim',
   }
   if vim.fn.executable 'make' == 1 then table.insert(telescope_plugins, gh 'nvim-telescope/telescope-fzf-native.nvim') end
@@ -609,7 +612,6 @@ do
   -- telescope_load_extension 'fzy-native'
   telescope_load_extension 'live-multi-grep'
   telescope_load_extension 'ui-select'
-  telescope_load_extension 'luasnip'
 
   -- See `:help telescope.builtin`
   local builtin = require 'telescope.builtin'
