@@ -73,7 +73,6 @@ vim.keymap.set('n', '<leader>ll', '<cmd>.lua<cr>', { desc = '[l]ua source curren
 -- :
 vim.keymap.set('n', '<leader>le', '"ey$:!<c-r>e<cr>', { desc = '[l]ua source vim command (:) to [e]nd of line' })
 
-
 -- Keep things vertically centered during search
 vim.keymap.set('n', '<C-d>', '<C-d>zz')
 vim.keymap.set('n', '<C-u>', '<C-u>zz')
@@ -119,8 +118,11 @@ function vim.getVisualSelection()
   end
 end
 
-vim.keymap.set('n', '<leader>ve', '<cmd>e $MYVIMRC<cr>', { desc = 'edit vimrc' })
+local function open_vim_pack_dir() vim.cmd('e ' .. vim.fs.joinpath(vim.fn.stdpath 'data', 'site', 'pack', 'core', 'opt')) end
+vim.api.nvim_create_user_command('OpenVimPackDir', open_vim_pack_dir, {})
 
+vim.keymap.set('n', '<leader>ve', '<cmd>e $MYVIMRC<cr>', { desc = 'edit vimrc' })
+vim.keymap.set('n', '<leader>vp', open_vim_pack_dir, { desc = 'edit vimrc' })
 vim.keymap.set('n', '<leader>vm', "<cmd>new | put=execute('messages')<cr>", { desc = 'vim messages' })
 vim.keymap.set('n', '<leader>vw', '<cmd>set invwrap<cr>', { desc = '[v]im [w]rap toggle' })
 vim.keymap.set('n', '<leader>v/', '<cmd>set invhlsearch<cr>', { desc = '[v]im highlight [/]search toggle' })
