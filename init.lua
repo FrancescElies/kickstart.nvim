@@ -953,9 +953,9 @@ do
   vim.pack.add { { src = gh 'L3MON4D3/LuaSnip', version = vim.version.range '2.*' } }
   require('luasnip').setup {}
 
-  -- local ls = require 'luasnip'
+  local ls = require 'luasnip'
   -- -- in a cpp file: search c-snippets, then all-snippets only (no cpp-snippets!!).
-  -- ls.filetype_set('cpp', { 'c' })
+  ls.filetype_set('cpp', { 'c' })
   --
   -- vim.keymap.set({ 'i' }, '<c-s>', function() ls.expand {} end, { silent = true })
   -- vim.keymap.set({ 'i', 's' }, '<c-s>;', function() ls.jump(1) end, { silent = true })
@@ -976,8 +976,8 @@ do
   --    See the README about individual language/framework/plugin snippets:
   --    https://github.com/rafamadriz/friendly-snippets
   --
-  -- vim.pack.add { gh 'rafamadriz/friendly-snippets' }
-  -- require('luasnip.loaders.from_vscode').lazy_load()
+  vim.pack.add { gh 'rafamadriz/friendly-snippets' }
+  require('luasnip.loaders.from_vscode').lazy_load()
 
   -- [[ Autocomplete Engine ]]
   vim.pack.add { { src = gh 'saghen/blink.cmp', version = vim.version.range '1.*' } }
