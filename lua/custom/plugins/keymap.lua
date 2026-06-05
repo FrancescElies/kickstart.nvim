@@ -6,9 +6,7 @@
 --
 
 -- Commodity function to print stuff
-function _G.p(v)
-  print(vim.inspect(v))
-end
+function _G.p(v) print(vim.inspect(v)) end
 
 -- Ask nvim where variables last set:
 -- :verbose setlocal ts? sts? et? sw?
@@ -32,27 +30,21 @@ vim.keymap.set('n', 'cp', ':silent! normal! [s1z=<cr>', { desc = '[c]orrect spel
 vim.keymap.set('n', 'c.', ':silent! norm! 1z=<cr>', { desc = '[c]orrect spell [.]current' })
 
 -- File
-local is_windows = vim.uv.os_uname().sysname == "Windows_NT"
+local is_windows = vim.uv.os_uname().sysname == 'Windows_NT'
 local function yank_path()
   local path = vim.api.nvim_buf_get_name(0)
-  if is_windows  then
-    path = path:gsub('/', '\\')
-  end
+  if is_windows then path = path:gsub('/', '\\') end
   vim.fn.setreg('+', path)
 end
 local function yank_abs_path()
   local path = vim.fn.expand '%:p'
-  if is_windows then
-    path = path:gsub('/', '\\')
-  end
+  if is_windows then path = path:gsub('/', '\\') end
   vim.fn.setreg('+', path)
 end
 local function yank_just_name()
   local path = vim.fn.expand '%:t'
-  if is_windows then
-    path = path:gsub('/', '\\')
-  end
-  vim.fn.setreg("+", path)
+  if is_windows then path = path:gsub('/', '\\') end
+  vim.fn.setreg('+', path)
 end
 
 vim.keymap.set('n', '<leader>byp', yank_path, { desc = '[b]uffer [y]ank [p]ath' })
@@ -71,7 +63,6 @@ vim.keymap.set('n', 'ı', 'i')
 vim.keymap.set({ 'n', 'x', 'o' }, 's', '<Nop>') -- disables default behaviour
 vim.keymap.set({ 'n', 'x', 'o' }, 'S', '<Nop>') -- disables default behaviour
 vim.keymap.set('n', 'se', '<cmd>e #<cr>', { desc = '[s]witch to alternat[e]' })
-
 
 -- Commands Quick Execution
 -- lua
@@ -144,7 +135,7 @@ vim.keymap.set('n', '<leader>vs', '<cmd>set invspell<cr>', { desc = '[v]im [S]pe
 -- vim.keymap.set('n', '<M-.>', '<C-W>+')
 -- vim.keymap.set('n', '<M-,>', '<C-W>-')
 
-vim.keymap.set('n', '<leader>bc', '<cmd>vs<cr><c-f>:set scb<cr><c-w>h<cmd>set scb<cr>', { desc = '[b]uf split & [c]ontinue view, (undo `:set noscb`)'  })
+vim.keymap.set('n', '<leader>bc', '<cmd>vs<cr><c-f>:set scb<cr><c-w>h<cmd>set scb<cr>', { desc = '[b]uf split & [c]ontinue view, (undo `:set noscb`)' })
 
 -- Move lines in visual mode
 vim.keymap.set('n', 'L', ':m .+1<CR>==')
@@ -172,4 +163,3 @@ vim.keymap.set({ 'n', 'v' }, 'ySu', [[:.,$S/\<<C-r><C-w>\>/<C-r><C-w>/gIc<Left><
 --
 -- the end
 --
-

@@ -1,6 +1,20 @@
 local fn = require 'custom.fn'
 
+-- vim
+-- ├── api        (core engine)
+-- ├── fn         (vimscript bridge)
+-- ├── cmd        (command layer)
+-- ├── fs         (filesystem)
+-- ├── loop       (OS + async)
+-- ├── opt        (options)
+-- ├── keymap     (mappings)
+-- ├── lsp        (language server)
+-- ├── diagnostic (errors/warnings)
+-- ├── treesitter (syntax)
+-- └── ui         (user interaction)
+
 vim.lsp.inlay_hint.enable(false)
+
 
 -- https://www.reddit.com/r/neovim/comments/zhweuc/whats_a_fast_way_to_load_the_output_of_a_command/
 -- Example:
@@ -221,15 +235,11 @@ end, {
     local unique_clients = {}
     local clients = {}
     for _, client in ipairs(vim.lsp.get_clients {}) do
-      if unique_clients[client.name] ~= nil then
-        table.insert(clients, client.name)
-      end
+      if unique_clients[client.name] ~= nil then table.insert(clients, client.name) end
       unique_clients[client.name] = true
     end
 
-    if #arg_lead == 0 then
-      return clients
-    end
+    if #arg_lead == 0 then return clients end
 
     local match = vim.fn.matchfuzzy(clients, arg_lead) -- Fuzzy filter based on partial input
     return match
@@ -239,14 +249,13 @@ end, {
 vim.pack.add {
   fn.gh 'danymat/neogen',
   fn.gh 'tpope/vim-abolish', -- :help abolish, :%S/box{,es}/bag{,s}/g   crc crs cr. cru crk
-  fn.gh 'tpope/vim-rsi' , -- :help rsi
+  fn.gh 'tpope/vim-rsi', -- :help rsi
   -- fn.gh 'tpope/vim-unimpaired'
   -- fn.gh 'tpope/vim-repeat'
   -- fn.gh 'wincent/loupe'
   -- fn.gh 'kevinhwang91/nvim-hlslens'
   -- fn.gh 'godlygeek/tabular'
 }
-
 
 -- Iterate over all Lua files in the plugins directory and load them
 local plugins_dir = vim.fs.joinpath(vim.fn.stdpath 'config', 'lua', 'custom', 'plugins')
