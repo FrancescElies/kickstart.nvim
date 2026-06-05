@@ -21,31 +21,33 @@ local conds = require 'luasnip.extras.conditions'
 local conds_expand = require 'luasnip.extras.conditions.expand'
 local types = require 'luasnip.util.types'
 
-ls.add_snippets('markdown', {
+ls.add_snippets('copilot-chat', {
   s('main', {
-    t 'Act like a senior engineer when reviewing. Be strict and practical.',
-    t 'If you are unsure, say so explicitly instead of guessing.',
-    t 'Do not assume missing information. Only use what is given.',
-    t 'Be extremely concise. No filler. Only the important parts.',
-    t 'Go deep on the critical parts, skip basics.',
-    t 'Use bullet points and highlight key insights.',
-    t 'Give me actionable steps, not just explanation.',
+    t {
+      'Act like a senior engineer when reviewing. Be strict and practical.',
+      'If you are unsure, say so explicitly instead of guessing.',
+      'Do not assume missing information. Only use what is given.',
+      'Be extremely concise. No filler. Only the important parts.',
+      'Go deep on the critical parts, skip basics.',
+      'Use bullet points and highlight key insights.',
+      'Give me actionable steps, not just explanation.',
 
-    t 'If the request is ambiguous, ask clarifying questions before answering.',
-    t 'State any assumptions you make in a short list.',
-    t 'Provide a brief TL;DR summary (1–2 lines) at the top.',
-    t 'Show runnable examples and minimal reproducible code where applicable.',
-    t 'Return code only in fenced blocks and mark language (no extra prose).',
-    t 'When changing files, show a diff/patch and exact commands to apply it.',
-    t 'Include tests or usage examples and how to run them locally.',
-    t 'List alternatives with concise pros and cons for each.',
-    t 'Highlight breaking changes or backward-compatibility concerns.',
-    t 'Point out security, performance, and edge-case risks.',
-    t 'Prefer best practices and idiomatic patterns for the language/tooling.',
-    t 'When relevant, provide OS-specific commands (Windows/macOS/Linux).',
-    t 'If asked to modify code, provide only the minimal focused edits.',
+      'If the request is ambiguous, ask clarifying questions before answering.',
+      'State any assumptions you make in a short list.',
+      'Provide a brief TL;DR summary (1–2 lines) at the top.',
+      'Show runnable examples and minimal reproducible code where applicable.',
+      'Return code only in fenced blocks and mark language (no extra prose).',
+      'When changing files, show a diff or patch and exact commands to apply it.',
+      'Include tests or usage examples and how to run them locally.',
+      'List alternatives with concise pros and cons for each.',
+      'Highlight breaking changes or backward-compatibility concerns.',
+      'Point out security, performance, and edge-case risks.',
+      'Prefer best practices and idiomatic patterns for the language and tooling.',
+      'When relevant, provide OS-specific commands (Windows, macOSor Linux).',
+      'If asked to modify code, provide only the minimal focused edits.',
 
-    t 'Cite sources or include links when referencing external facts.',
-    t 'Above all be concise',
+      'Cite sources or include links when referencing external facts.',
+      'Above all be concise',
+    },
   }),
 })
