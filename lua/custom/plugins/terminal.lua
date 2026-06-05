@@ -176,4 +176,4 @@ vim.keymap.set({ 'n', 't' }, 'yox', '<cmd>bd!<cr>') -- alt x closes zellij pane,
 -- <C-r> doesn't work in terminal mode, it will perform `reverse search`
 -- vim.keymap.set('t','sr', "'<C-\\><C-N>\"'.nr2char(getchar()).'pi'", { desc = '<C-r> fellow' })
 
-vim.keymap.set({ 'n', 't' }, ',c', toggle_tgpt, { desc = 'c[h]atgpt' })
+-- vim.keymap.set({ 'n', 't' }, ',c', toggle_tgpt, { desc = 'c[h]atgpt' })

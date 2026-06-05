@@ -13,6 +13,11 @@ function visual_region_to_text(region)
   return text
 end
 
+function ask_region()
+  local input = visual_region_to_text()
+  if input ~= '' then require('CopilotChat').ask(input, { selection = require('CopilotChat.select').buffer }) end
+end
+
 if vim.fn.has 'win32' then
   vim.pack.add { 'https://github.com/CopilotC-Nvim/CopilotChat.nvim' }
   -- build = 'make tiktoken',
@@ -22,32 +27,15 @@ if vim.fn.has 'win32' then
   -- cd build
   -- http get https://github.com/gptlang/lua-tiktoken/releases/download/v0.2.6/tiktoken_core-windows-x86_64-luajit.dll | save tiktoken_core.dll
   -- http get https://github.com/gptlang/lua-tiktoken/releases/download/v0.2.6/tiktoken_core-windows-x86_64-lua51.dll | save tiktoken_core-lua51.dll
+
   require('CopilotChat').setup {
     debug = false,
-    question_header = '## User ',
-    answer_header = '## Copilot ',
-    error_header = '## Error ',
+    window = {
+      layout = 'float', -- 'vertical', 'horizontal', 'float'
+      width = 0.5, -- 50% of screen width
+    },
   }
-  -- keys = {
-  --   { '<localleader>co', ':CopilotChat<cr>',              desc = 'CopilotChat - Quick chat' },
-  --   {
-  --     '<localleader>cv',
-  --     function()
-  --       local input = visual_region_to_text()
-  --       if input ~= '' then
-  --         require('CopilotChat').ask(input, { selection = require('CopilotChat.select').buffer })
-  --       end
-  --     end,
-  --     desc = 'CopilotChat - Send visual lines',
-  --     mode = 'v',
-  --   },
-  --   { '<localleader>cc', '<cmd>CopilotChatToggle<cr>',    desc = 'Toggle Copilot Chat' },
-  --   { '<localleader>cf', '<cmd>CopilotChatFix<cr>',       desc = 'Fix code' },
-  --   { '<localleader>ce', ':CopilotChatExplain<cr>',       desc = 'Explain code' },
-  --   { '<localleader>ct', ':CopilotChatTests<cr>',         desc = 'Generate tests' },
-  --   { '<localleader>cv', ':CopilotChatVisual',            mode = 'x',                                  desc = 'Open in vertical split' },
-  --   { '<localleader>cx', ':CopilotChatInPlace<cr>',       mode = 'x',                                  desc = 'Run in-place code' },
-  --   { '<localleader>cf', ':CopilotChatFixDiagnostic<cr>', desc = 'Fix diagnostic' },
-  --   { '<localleader>cr', ':CopilotChatReset<cr>',         desc = 'Reset chat history and clear buffer' },
-  -- },
+
+  vim.keymap.set('n', '<localleader>c', '<cmd>CopilotChatToggle<cr>', { desc = 'Toggle Copilot Chat' })
+  vim.keymap.set('v', '<localleader>c', ask_region, { desc = 'CopilotChat - Send visual lines' })
 end
