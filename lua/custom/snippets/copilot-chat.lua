@@ -22,6 +22,10 @@ local conds_expand = require 'luasnip.extras.conditions.expand'
 local types = require 'luasnip.util.types'
 
 ls.add_snippets('copilot-chat', {
+  s('concise', { t { 'Be extremely concise. No filler. Only the important parts.' } }),
+  s('read-context', { t { 'Read AGENT_CONTEXT.md before doing anything else' } }),
+  s('save-session', { t { 'Summarize the current state, open tasks, decisions mad, and next steps into SESSION_HANDOFF.md' } }),
+  s('read-session', { t { 'Read SESSION_HANDOFF.md and continue where we left off' } }),
   s('main', {
     t {
       'Act like a senior engineer when reviewing. Be strict and practical.',
