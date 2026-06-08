@@ -21,12 +21,52 @@ local conds = require 'luasnip.extras.conditions'
 local conds_expand = require 'luasnip.extras.conditions.expand'
 local types = require 'luasnip.util.types'
 
+---@param path string
+local function safe_read_file(path)
+  return function()
+    path = vim.uv.fs_stat(path:lower()) and path:lower() or path
+    local file = io.open(path, 'r')
+    if not file then return sn(nil, { t('cannot open file: ' .. path) }) end
+
+    local lines = {}
+    while true do
+      local line = file:read '*l'
+      if not line then break end
+      lines[#lines + 1] = t(line)
+    end
+    file:close()
+    return sn(nil, lines)
+  end
+end
+
 ls.add_snippets('copilot-chat', {
-  s('concise', { t { 'Be extremely concise. No filler. Only the important parts.' } }),
-  s('read-context', { t { 'Read AGENT_CONTEXT.md before doing anything else' } }),
-  s('save-session', { t { 'Summarize the current state, open tasks, decisions mad, and next steps into SESSION_HANDOFF.md' } }),
-  s('read-session', { t { 'Read SESSION_HANDOFF.md and continue where we left off' } }),
-  s('main', {
+  s('senior', { t { 'Act like a senior engineer when reviewing. Be strict and practical' } }),
+  s('cite', { t { 'Cite sources or include links when referencing external facts.' } }),
+  s('scientific', { t { 'check scientific journals and cite papers when finding relevant information' } }),
+  s('be-concise', { t { 'Be extremely concise. No filler. Only the important parts.' } }),
+  s(
+    'context-read',
+    fmt(
+      [[
+        Read the following AGENT_CONTEXT.md below before doing anything else:
+
+        {}
+    ]],
+      { d(1, safe_read_file 'AGENT_CONTEXT.md', {}) }
+    )
+  ),
+  s('session-save', { t { 'Summarize the current state, open tasks, decisions mad, and next steps into SESSION_HANDOFF.md' } }),
+  s('session-read', {
+    fmt(
+      [[
+        Read the following SESSION_HANDOFF.md and continue where we left off:
+
+        {}
+    ]],
+      { d(1, safe_read_file 'SESSION_HANDOFF.md', {}) }
+    ),
+  }),
+  s('all', {
     t {
       'Act like a senior engineer when reviewing. Be strict and practical.',
       'If you are unsure, say so explicitly instead of guessing.',
