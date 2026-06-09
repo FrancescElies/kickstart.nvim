@@ -39,7 +39,7 @@ local function safe_read_file(path)
   end
 end
 
-ls.add_snippets('copilot-chat', {
+local prompts = {
   s('senior', { t { 'Act like a senior engineer when reviewing. Be strict and practical' } }),
   s('cite', { t { 'Cite sources or include links when referencing external facts.' } }),
   s('scientific', { t { 'check scientific journals and cite papers when finding relevant information' } }),
@@ -94,4 +94,7 @@ ls.add_snippets('copilot-chat', {
       'Above all be concise',
     },
   }),
-})
+}
+
+ls.add_snippets('copilot-chat', prompts)
+ls.add_snippets('codecompanion', prompts)
