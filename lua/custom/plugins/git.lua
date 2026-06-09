@@ -74,6 +74,7 @@ gitsigns.setup {
   end,
 }
 vim.pack.add { 'https://github.com/tpope/vim-fugitive' }
+vim.keymap.set('n', 'ZG', '<cmd>tabnew|G<cr><c-w>o', { desc = 'git status' })
 
 vim.pack.add { 'https://github.com/sindrets/diffview.nvim' }
 vim.keymap.set('n', '<leader>gdhb', ':DiffviewFileHistory<cr>', { desc = '[d]iff History [b]ranch' })
