@@ -20,7 +20,7 @@ function ask_region()
   if input ~= '' then require('CopilotChat').ask(input, { selection = require('CopilotChat.select').buffer }) end
 end
 
-if vim.fn.has 'win32' then
+if vim.fn.has 'win32' == 1 then
   -- do
   --   vim.pack.add { 'https://github.com/CopilotC-Nvim/CopilotChat.nvim' }
   --   -- build = 'make tiktoken',
