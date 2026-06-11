@@ -92,4 +92,15 @@ if vim.fn.has 'win32' == 1 then
       },
     }
   end
+
+  -- pi install npm:pi-nvim
+  -- after install that package you get
+  -- Error: pi-nvim error: listen EACCES: permission denied \tmp\pi-nvim-sockets\dd573c3ce7b9-26636.sock
+  -- do
+  --   vim.pack.add { fn.gh 'carderne/pi-nvim' }
+  --   require('pi-nvim').setup {
+  --     socket_path = nil, -- auto-discover
+  --     set_default_keymaps = true, -- <leader>p
+  --   }
+  -- end
 end
