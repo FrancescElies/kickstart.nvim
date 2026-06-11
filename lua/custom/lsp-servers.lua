@@ -1,4 +1,8 @@
-return {
+-- Enable the following language servers
+--  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
+--  See `:help lsp-config` for information about keys and how to configure
+---@type table<string, vim.lsp.Config>
+local servers = {
   -- harper_ls = { -- typos
   --   filetypes = { 'yaml', 'markdown', 'gitcommit', 'text', 'asciidoc' },
   --   root_dir = require('lspconfig.util').root_pattern('.harper.toml', '.git'),
@@ -53,8 +57,11 @@ return {
   --     },
   --   },
   -- },
+  stylua = {}, -- Used to format Lua code
   lua_ls = {
     on_init = function(client)
+      client.server_capabilities.documentFormattingProvider = false -- Disable formatting (formatting is done by stylua)
+
       if client.workspace_folders then
         local path = client.workspace_folders[1].name
         if path ~= vim.fn.stdpath 'config' and (vim.uv.fs_stat(path .. '/.luarc.json') or vim.uv.fs_stat(path .. '/.luarc.jsonc')) then return end
@@ -76,16 +83,18 @@ return {
         },
       })
     end,
+    ---@type lspconfig.settings.lua_ls
     settings = {
-      Lua = {},
+      Lua = {
+        format = { enable = false }, -- Disable formatting (formatting is done by stylua)
+      },
     },
-    -- diagnostics = { disable = { 'missing-fields' } },
   },
   -- biome = { filetypes = { 'typescript', 'json', 'maxpat', 'json' }, init_options = { provideFormatter = true } },
   -- sqls = {},
   -- gopls = {},
-  basedpyright = {}, -- pyright fork with inlay hints
-  -- pyright = {},
+  -- basedpyright = {}, -- pyright fork with inlay hints
+  pyright = {},
   -- yamlls = {},
   jsonls = {
     filetypes = { 'maxpat', 'json' },
@@ -157,3 +166,5 @@ return {
     enable_ast_check_diagnostics = true,
   },
 }
+
+return servers
