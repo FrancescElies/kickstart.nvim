@@ -53,8 +53,8 @@ gitsigns.setup {
     map('v', '<leader>hs', function() gitsigns.stage_hunk { vim.fn.line '.', vim.fn.line 'v' } end, { desc = '[h]unk [s]tage' })
     map('v', '<leader>hr', function() gitsigns.reset_hunk { vim.fn.line '.', vim.fn.line 'v' } end, { desc = '[h]unk [r]eset' })
 
-    map('n', '<leader>hB', gitsigns.blame, { desc = '[h]unk [b]lame [b]uffer' })
-    map('n', '<leader>hb', gitsigns.toggle_current_line_blame, { desc = '[h]unk toggle [b]lame' })
+    map('n', '<leader>hb', gitsigns.blame, { desc = '[h]unk [b]lame [b]uffer' })
+    map('n', '<leader>hi', gitsigns.toggle_current_line_blame, { desc = '[h]unk toggle [i]nline blame' })
     map('n', '<leader>hd', gitsigns.preview_hunk_inline, { desc = '[h]unk toggle [d]eleted' })
     map('n', '<leader>hdh', function() gitsigns.diffthis '@' end, { desc = '[h]unk [d]iff..HEAD' })
     map('n', '<leader>hdi', gitsigns.diffthis, { desc = '[h]unk [d]iff..index' })
