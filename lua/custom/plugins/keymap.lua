@@ -47,10 +47,13 @@ local function yank_just_name()
   vim.fn.setreg('+', path)
 end
 
+local function diff_orig() vim.cmd [[vert new | set buftype=nofile | read ++edit # | 0d_  | diffthis | wincmd p | diffthis]] end
+vim.api.nvim_create_user_command('DiffOrig', diff_orig, {})
+
 vim.keymap.set('n', '<leader>byp', yank_path, { desc = '[b]uffer [y]ank [p]ath' })
 vim.keymap.set('n', '<leader>bya', yank_abs_path, { desc = '[b]uffer [y]ank [a]bsolute path' })
 vim.keymap.set('n', '<leader>byn', yank_just_name, { desc = '[b]uffer [y]ank [n]ame' })
-vim.keymap.set('n', '<leader>bd', '<cmd>bd<cr>', { desc = '[b]uffer [d]elete' })
+vim.keymap.set('n', '<leader>bd', diff_orig, { desc = '[b]uffer [d]iff against disk' })
 
 -- quick scape
 vim.keymap.set({ 'i', 'c' }, 'jk', '<Esc>')
