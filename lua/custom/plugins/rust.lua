@@ -110,10 +110,10 @@ vim.api.nvim_create_autocmd('LspAttach', {
       keymap('n', 'J', '<cmd>RustLsp joinLines<cr>', 'join lines')
       keymap('n', '<leader>cm', ':RustLsp moveItem ', '[m]ove up|down')
       keymap('n', '<leader>co', '<cmd>RustLsp openCargo<cr>', '[o]pen cargo')
-      keymap('n', '<leader>cp', '<cmd>RustLsp parentModule<cr>', '[p]arent module')
-      -- keymap('n','<leader>c.', ':RustLsp! testables<cr>', 'run previous [t]ests')
-      -- keymap('n','<leader>ct', ':RustLsp testables<cr>', 'run [t]ests')
-      -- rust_keymap('n','<leader>cw', ':RustLsp workspaceSymbol allSymbols ', '[w]orkspace symbol')
+      keymap('n', '<leader>cP', '<cmd>RustLsp parentModule<cr>', '[p]arent module')
+      keymap('n','<leader>cp', ':RustLsp! testables<cr>', 'run [p]revious tests')
+      keymap('n','<leader>ct', ':RustLsp testables<cr>', 'run [t]ests')
+      keymap('n','<leader>cw', ':RustLsp workspaceSymbol allSymbols ', '[w]orkspace symbol')
       keymap('n', '<leader>cg', ':RustLsp crateGraph', 'crate [g]raph')
       -- :RustLsp syntaxTree
       -- :Rustc unpretty {hir|mir|...}
