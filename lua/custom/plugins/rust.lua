@@ -13,6 +13,18 @@ require('bacon').setup {
   },
 }
 
+vim.keymap.set("n", "<localleader>c", function()
+  -- vim.lsp.buf.execute_command({ command = "bacon_ls.run" })
+  -- TODO: repalce code below with a fixed version of:
+  -- vim.lsp.get_clients({name = "bacon_ls"})[1].exec_cmd('run') 
+  local command_params = {
+    command = "bacon_ls.run",
+    arguments = nil,
+    workDoneToken = nil,
+  }
+  vim.lsp.buf_request(0, 'workspace/executeCommand', command_params)
+end, { desc = "bacon-ls: run check" })
+
 vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufRead' }, {
   pattern = { '*.rs', '*.toml' },
   group = vim.api.nvim_create_augroup('my-rust-bacon', { clear = true }),

@@ -42,7 +42,22 @@ local servers = {
       --- NOTE: see .clang-tidy in repo for example
     },
   },
-  bacon_ls = {},
+  bacon_ls = {
+    init_options = {
+      cargo = { updateOnInsert = true },
+    },
+    settings = {
+      bacon_ls = {
+        backend = 'cargo',
+        cargo = {
+          command = 'clippy',
+          -- updateOnInsert lives in init_options above; only the
+          -- runtime knob lives here:
+          updateOnInsertDebounceMillis = 500,
+        },
+      },
+    },
+  },
   -- gopls = {},
   -- pyright = {},
 
