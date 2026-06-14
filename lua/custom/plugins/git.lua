@@ -9,11 +9,13 @@ vim.keymap.set('n', 'gh', '<cmd>diffget //2<cr>', { desc = 'get left diff' })
 vim.keymap.set('n', 'gl', '<cmd>diffget //3<cr>', { desc = 'get right diff' })
 
 vim.keymap.set('n', '<leader>gB', tele.git_branches, { desc = '[g]it [b]ranches' })
-vim.keymap.set('n', '<leader>gl', tele.git_bcommits, { desc = '[g]it [l]og buffer' })
 vim.keymap.set('n', '<leader>gL', tele.git_commits, { desc = '[g]it [l]og (cwd)' })
+vim.keymap.set('n', '<leader>gl', tele.git_bcommits, { desc = '[g]it [l]og buffer' })
+vim.keymap.set('n', '<leader>gs', tele.git_status, { desc = '[g]it zstash' })
+vim.keymap.set('n', '<leader>gz', tele.git_stash, { desc = '[g]it zstash' })
+
 --- Lists commits for a range of lines in the current buffer with diff preview
 vim.keymap.set('v', '<leader>gl', tele.git_bcommits_range, { desc = '[g]it [l]og (sel. lines)' })
-vim.keymap.set('n', '<leader>gz', tele.git_stash, { desc = '[g]it zstash' })
 
 local commit_group = vim.api.nvim_create_augroup('my-git-commit', {})
 vim.api.nvim_create_autocmd('BufEnter', {
