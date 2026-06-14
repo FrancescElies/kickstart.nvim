@@ -1,4 +1,5 @@
--- :lua vim.lsp.log.set_level("debug")
+vim.lsp.log.set_level 'debug'
+
 -- :LspLog
 -- Search for workspace/didChangeConfiguration or initializationOptions in the log to see what was sent.
 
@@ -55,51 +56,55 @@ local servers = {
   -- https://github.com/BurntSushi/dotfiles/blob/a6c516e6c4c7f7afae4f3171be4c5404d367ffbe/.config/ag/nvim/default#L16
   -- see `lsp-init.lua` too
   rust_analyzer = {
-    check = { command = 'check' },
-    checkOnSave = false, -- bacon-ls will provide
-    diagnostics = {
-      enable = false, -- bacon-ls will provide
-      disabled = {
-        'inactive-code',
-        'incorrect-ident-case',
-        'unlinked-file',
-        'unresolved-macro-call',
-        'unresolved-proc-macro',
+    settings = {
+      ['rust-analyzer'] = {
+        check = { command = 'check' },
+        checkOnSave = false, -- bacon-ls will provide
+        diagnostics = {
+          enable = false, -- bacon-ls will provide
+          disabled = {
+            'inactive-code',
+            'incorrect-ident-case',
+            'unlinked-file',
+            'unresolved-macro-call',
+            'unresolved-proc-macro',
+          },
+          styleLints = { enable = true },
+          experimental = { enable = true },
+        },
+        assist = {
+          importGranularity = 'module',
+          importPrefix = 'by_self',
+        },
+        inlayHints = {
+          enabled = true,
+          chainingHints = { enable = false },
+          closingBraceHints = { enable = false },
+          bindingModeHints = { enable = true },
+          closureCaptureHints = { enable = true },
+          closureReturnTypeHints = { enable = 'always' },
+          expressionAdjustmentHints = { enable = 'always' },
+          lifetimeElisionHints = { enable = 'always', useParameterNames = true },
+          reborrowHints = { enable = 'always' },
+          typeHints = {
+            hideClosureInitialization = true,
+            hideNamedConstructor = true,
+          },
+        },
+        lens = {
+          enable = true,
+          references = {
+            adt = { enable = true }, -- structs/enums/unions
+            enumVariant = { enable = true },
+            method = { enable = true }, -- method-level specifically
+            trait = { enable = true },
+          },
+          updateTest = { enable = true },
+          implementations = { enable = true },
+          run = { enable = true }, --  ▶ Run button
+          debug = { enable = true }, -- ▶ Debug button
+        },
       },
-      styleLints = { enable = true },
-      experimental = { enable = true },
-    },
-    assist = {
-      importGranularity = 'module',
-      importPrefix = 'by_self',
-    },
-    inlayHints = {
-      enabled = true,
-      chainingHints = { enable = false },
-      closingBraceHints = { enable = false },
-      bindingModeHints = { enable = true },
-      closureCaptureHints = { enable = true },
-      closureReturnTypeHints = { enable = 'always' },
-      expressionAdjustmentHints = { enable = 'always' },
-      lifetimeElisionHints = { enable = 'always', useParameterNames = true },
-      reborrowHints = { enable = 'always' },
-      typeHints = {
-        hideClosureInitialization = true,
-        hideNamedConstructor = true,
-      },
-    },
-    lens = {
-      enable = true,
-      references = {
-        adt = { enable = true }, -- structs/enums/unions
-        enumVariant = { enable = true },
-        method = { enable = true }, -- method-level specifically
-        trait = { enable = true },
-      },
-      updateTest = { enable = true },
-      implementations = { enable = true },
-      run = { enable = true }, --  ▶ Run button
-      debug = { enable = true }, -- ▶ Debug button
     },
   },
   -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
