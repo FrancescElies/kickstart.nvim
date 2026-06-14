@@ -1,3 +1,7 @@
+-- :lua vim.lsp.log.set_level("debug")
+-- :LspLog
+-- Search for workspace/didChangeConfiguration or initializationOptions in the log to see what was sent.
+
 -- Enable the following language servers
 --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
 --  See `:help lsp-config` for information about keys and how to configure
@@ -37,17 +41,21 @@ local servers = {
       --- NOTE: see .clang-tidy in repo for example
     },
   },
-  bacon_ls = {
-    default_config = {
-      cmd = { 'bacon-ls' },
-      -- root_dir = require('lspconfig.util').root_pattern '.git',
-      filetypes = { 'rust' },
-    },
-  },
+  bacon_ls = {},
   -- gopls = {},
   -- pyright = {},
+
+  -- := vim.lsp.get_active_clients({name = "rust_analyzer"})[1].config.settings
+  -- :lua vim.lsp.buf.execute_command({command = "rust_analyzer.serverStatus"})
+  -- := vim.inspect(vim.lsp.get_active_clients({name = "rust_analyzer"})[1])
+  --
+  -- https://rust-analyzer.github.io/manual.html
+  -- rust-analyzer --print-config-schema
+  -- https://rust-analyzer.github.io/book/configuration.html
+  -- https://github.com/BurntSushi/dotfiles/blob/a6c516e6c4c7f7afae4f3171be4c5404d367ffbe/.config/ag/nvim/default#L16
+  -- see `lsp-init.lua` too
   rust_analyzer = {
-    check = { command = 'checkk' },
+    check = { command = 'check' },
     checkOnSave = false, -- bacon-ls will provide
     diagnostics = {
       enable = false, -- bacon-ls will provide
