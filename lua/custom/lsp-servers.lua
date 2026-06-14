@@ -37,9 +37,63 @@ local servers = {
       --- NOTE: see .clang-tidy in repo for example
     },
   },
+  bacon_ls = {
+    default_config = {
+      cmd = { 'bacon-ls' },
+      -- root_dir = require('lspconfig.util').root_pattern '.git',
+      filetypes = { 'rust' },
+    },
+  },
   -- gopls = {},
   -- pyright = {},
-  -- rust_analyzer = {},
+  rust_analyzer = {
+    check = { command = 'checkk' },
+    checkOnSave = false, -- bacon-ls will provide
+    diagnostics = {
+      enable = false, -- bacon-ls will provide
+      disabled = {
+        'inactive-code',
+        'incorrect-ident-case',
+        'unlinked-file',
+        'unresolved-macro-call',
+        'unresolved-proc-macro',
+      },
+      styleLints = { enable = true },
+      experimental = { enable = true },
+    },
+    assist = {
+      importGranularity = 'module',
+      importPrefix = 'by_self',
+    },
+    inlayHints = {
+      enabled = true,
+      chainingHints = { enable = false },
+      closingBraceHints = { enable = false },
+      bindingModeHints = { enable = true },
+      closureCaptureHints = { enable = true },
+      closureReturnTypeHints = { enable = 'always' },
+      expressionAdjustmentHints = { enable = 'always' },
+      lifetimeElisionHints = { enable = 'always', useParameterNames = true },
+      reborrowHints = { enable = 'always' },
+      typeHints = {
+        hideClosureInitialization = true,
+        hideNamedConstructor = true,
+      },
+    },
+    lens = {
+      enable = true,
+      references = {
+        adt = { enable = true }, -- structs/enums/unions
+        enumVariant = { enable = true },
+        method = { enable = true }, -- method-level specifically
+        trait = { enable = true },
+      },
+      updateTest = { enable = true },
+      implementations = { enable = true },
+      run = { enable = true }, --  ▶ Run button
+      debug = { enable = true }, -- ▶ Debug button
+    },
+  },
   -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
   --
   -- Some languages (like typescript) have entire language plugins that can be useful:
