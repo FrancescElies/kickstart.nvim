@@ -4,7 +4,6 @@ local fn = require 'custom.fn'
 
 vim.pack.add {
   fn.gh 'Canop/nvim-bacon',
-  -- { src = fn.gh 'mrcjkb/rustaceanvim', version = 'v9.0.4' },
 }
 require('bacon').setup {
   quickfix = {
@@ -45,50 +44,6 @@ vim.api.nvim_create_user_command(
   {}
 )
 vim.api.nvim_create_user_command('RustLspCheckOnSaveDisabled', function() vim.cmd.RustAnalyzer { 'config', '{ checkOnSave = false }' } end, {})
-
--- vim.g.rustaceanvim = {
---   -- Plugin configuration
---   -- tools = {},
---   -- LSP configuration
---   server = {
---     -- on_attach = function(client, bufnr)
---     --   -- you can also put keymaps in here
---     -- end,
---     default_settings = {
---       -- https://rust-analyzer.github.io/manual.html
---       -- rust-analyzer --print-config-schema
---       -- https://rust-analyzer.github.io/book/configuration.html
---       -- https://github.com/BurntSushi/dotfiles/blob/a6c516e6c4c7f7afae4f3171be4c5404d367ffbe/.config/ag/nvim/default#L16
---       -- see `lsp-init.lua` too
---       ['rust-analyzer'] = {},
---     },
---   },
---   -- DAP configuration
---   -- dap = {},
--- }
-
--- vim.api.nvim_create_autocmd('LspAttach', {
---   group = vim.api.nvim_create_augroup('my-rustaceanvim-lsp-attach', { clear = true }),
---   callback = function(event)
---     if vim.bo.filetype == 'rust' then
---       local keymap = function(mode, keys, func, desc) vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = 'rust: ' .. desc }) end
---       keymap('n', '<leader>cf', '<cmd>RustLsp flyCheck run<cr>', '[f]lycheck (check/clippy)')
---       keymap('n', '<leader>ce', ':RustLsp explainError', '[e]xplain error')
---       keymap('n', '<leader>cE', '<cmd>RustLsp expandMacro<cr>', '[e]xpand macros')
---       keymap('n', 'K', '<cmd>RustLsp hover actions<cr>', '[h]over actions')
---       keymap('n', 'J', '<cmd>RustLsp joinLines<cr>', 'join lines')
---       keymap('n', '<leader>cm', ':RustLsp moveItem ', '[m]ove up|down')
---       keymap('n', '<leader>co', '<cmd>RustLsp openCargo<cr>', '[o]pen cargo')
---       keymap('n', '<leader>cP', '<cmd>RustLsp parentModule<cr>', '[p]arent module')
---       keymap('n', '<leader>cp', ':RustLsp! testables<cr>', 'run [p]revious tests')
---       keymap('n', '<leader>ct', ':RustLsp testables<cr>', 'run [t]ests')
---       keymap('n', '<leader>cw', ':RustLsp workspaceSymbol allSymbols ', '[w]orkspace symbol')
---       keymap('n', '<leader>cg', ':RustLsp crateGraph', 'crate [g]raph')
---       -- :RustLsp syntaxTree
---       -- :Rustc unpretty {hir|mir|...}
---     end
---   end,
--- })
 
 -- https://tree-sitter.github.io/tree-sitter/using-parsers/queries/1-syntax.html
 
