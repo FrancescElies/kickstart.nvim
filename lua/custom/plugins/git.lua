@@ -11,8 +11,8 @@ vim.keymap.set('n', 'gl', '<cmd>diffget //3<cr>', { desc = 'get right diff' })
 vim.keymap.set('n', '<leader>gB', tele.git_branches, { desc = '[g]it [b]ranches' })
 vim.keymap.set('n', '<leader>gL', tele.git_commits, { desc = '[g]it [l]og (cwd)' })
 vim.keymap.set('n', '<leader>gl', tele.git_bcommits, { desc = '[g]it [l]og buffer' })
-vim.keymap.set('n', '<leader>gs', tele.git_status, { desc = '[g]it zstash' })
-vim.keymap.set('n', '<leader>gz', tele.git_stash, { desc = '[g]it zstash' })
+vim.keymap.set('n', '<leader>gs', tele.git_status, { desc = '[g]it [s]tatus' })
+vim.keymap.set('n', '<leader>gz', tele.git_stash, { desc = '[g]it [z]stash' })
 
 --- Lists commits for a range of lines in the current buffer with diff preview
 vim.keymap.set('v', '<leader>gl', tele.git_bcommits_range, { desc = '[g]it [l]og (sel. lines)' })
