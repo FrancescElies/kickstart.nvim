@@ -37,8 +37,8 @@ if vim.fn.has 'win32' == 1 then
   --       width = 0.5, -- 50% of screen width
   --     },
   --   }
-  --   vim.keymap.set('n', '<localleader>c', '<cmd>CopilotChatToggle<cr>', { desc = 'Toggle Copilot Chat' })
-  --   vim.keymap.set('v', '<localleader>c', ask_region, { desc = 'CopilotChat - Send visual lines' })
+  --   vim.keymap.set('n', '<leader>ca', '<cmd>CopilotChatToggle<cr>', { desc = 'Toggle Copilot Chat' })
+  --   vim.keymap.set('v', '<leader>cc', ask_region, { desc = 'CopilotChat - Send visual lines' })
   -- end
 
   do
@@ -72,9 +72,9 @@ if vim.fn.has 'win32' == 1 then
       },
     }
     local opts = { noremap = true, silent = true }
-    vim.keymap.set({ 'n', 'v' }, '<localleader>a', '<cmd>CodeCompanionActions<cr>', opts)
-    vim.keymap.set({ 'n', 'v' }, '<localleader>c', '<cmd>CodeCompanionChat Toggle<cr>', opts)
-    vim.keymap.set('v', '<localleader>A', '<cmd>CodeCompanionChat Add<cr>', opts)
+    vim.keymap.set({ 'n', 'v' }, '<leader>ca', '<cmd>CodeCompanionActions<cr>', opts)
+    vim.keymap.set({ 'n', 'v' }, '<leader>cc', '<cmd>CodeCompanionChat Toggle<cr>', opts)
+    vim.keymap.set('v', '<leader>cA', '<cmd>CodeCompanionChat Add<cr>', opts)
 
     -- Expand 'cc' into 'CodeCompanion' in the command line
     vim.cmd [[cab cc CodeCompanion]]

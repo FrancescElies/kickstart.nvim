@@ -1,27 +1,29 @@
--- stylua: ignore start
--- vim.keymap.set('n', '<leader>vq', function() require('quicker').toggle() end, { desc = '[v]im Toggle [q]uickfix', })
--- vim.keymap.set('n', '<leader>vl', function() require('quicker').toggle { loclist = true } end, { desc = '[v]im Toggle [l]oclist' })
--- stylua: ignore end
 local fn = require 'custom.fn'
 
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+vim.keymap.set('n', '<leader>tq', function() require('quicker').toggle() end, { desc = '[T]oggle [q]uickfix' })
+vim.keymap.set('n', '<leader>tl', function() require('quicker').toggle { loclist = true } end, { desc = '[T]oggle [l]oclist' })
+
+vim.keymap.set('n', '<leader>qb', vim.diagnostic.setloclist, { desc = '[q]uickfix [b]uffer diag.' })
 
 vim.keymap.set({ 'n', 'v' }, '<leader>qr', vim.lsp.buf.references, { buffer = true, desc = '[q]uickfix [r]references' })
-vim.keymap.set('n', '<leader>qx', vim.cmd [[cclose]], { desc = '[q]uickfix [x]close' })
-vim.keymap.set('n', '<leader>qo', vim.cmd [[copen]], { desc = '[q]uickfix [o]pen' })
-vim.keymap.set('n', '<leader>qb', vim.diagnostic.setloclist, { desc = '[q]uickfix [b]uffer diag.' })
 vim.keymap.set('n', '<leader>qa', vim.diagnostic.setqflist, { desc = '[q]uickfix all [d]iag.' })
-vim.keymap.set('n', '<leader>qw', function() vim.diagnostic.setqflist { severity = vim.diagnostic.severity.WARN } end, { desc = '[q]uickfix diag. [w]arnings' })
-vim.keymap.set('n', '<leader>qe', function() vim.diagnostic.setqflist { severity = vim.diagnostic.severity.ERROR } end, { desc = '[q]uickfix diag. [e]rrors' })
+vim.keymap.set('n', '<leader>qw', function()
+  vim.diagnostic.setqflist { severity = vim.diagnostic.severity.WARN }
+  vim.diagnostic.setloclist { severity = vim.diagnostic.severity.WARN }
+end, { desc = '[q]uickfix diag. [w]arnings' })
+vim.keymap.set('n', '<leader>qe', function()
+  vim.diagnostic.setqflist { severity = vim.diagnostic.severity.ERROR }
+  vim.diagnostic.setloclist { severity = vim.diagnostic.severity.ERROR }
+end, { desc = '[q]uickfix diag. [e]rrors' })
 
-vim.keymap.set('n', '<leader>qq', function()
-  local qf_winid = vim.fn.getqflist({ winid = 0 }).winid
-  if qf_winid > 0 then
-    vim.cmd 'cclose'
-  else
-    vim.cmd 'botright copen'
-  end
-end, { silent = true, desc = '' })
+-- vim.keymap.set('n', '<leader>qq', function()
+--   local qf_winid = vim.fn.getqflist({ winid = 0 }).winid
+--   if qf_winid > 0 then
+--     vim.cmd 'cclose'
+--   else
+--     vim.cmd 'botright copen'
+--   end
+-- end, { silent = true, desc = '' })
 
 local function jump_diagnostic_by_severity(opts)
   local count = opts.count or 1
@@ -117,7 +119,7 @@ end)
 vim.pack.add {
   fn.gh 'stevearc/quicker.nvim',
 }
-quicker = require 'quicker'
+local quicker = require 'quicker'
 quicker.setup {}
 
 vim.api.nvim_create_autocmd('FileType', {

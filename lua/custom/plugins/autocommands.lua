@@ -61,7 +61,7 @@ vim.api.nvim_create_user_command('ToggleAutosave', function()
   _G.autosave_enabled = not _G.autosave_enabled
   print('Autosave ' .. (_G.autosave_enabled and 'enabled' or 'disabled'))
 end, {})
-vim.keymap.set('n', '<leader>va', ':ToggleAutosave<cr>', { desc = '[a]utosave' })
+vim.keymap.set('n', '<leader>ta', ':ToggleAutosave<cr>', { desc = '[t]oggle [a]utosave' })
 
 -- -- Autosave when leaving window
 -- vim.api.nvim_create_autocmd({

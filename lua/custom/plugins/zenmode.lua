@@ -11,7 +11,7 @@ return {
   {
     'folke/zen-mode.nvim',
     keys = {
-      { '<leader>vz', zen_mode },
+      { '<leader>tz', zen_mode },
     },
   }
 }

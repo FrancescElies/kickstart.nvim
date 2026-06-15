@@ -12,25 +12,33 @@ require('bacon').setup {
   },
 }
 
-vim.keymap.set('n', '<localleader>c', function()
-  -- vim.lsp.buf.execute_command({ command = "bacon_ls.run" })
-  -- TODO: repalce code below with a fixed version of:
-  -- vim.lsp.get_clients({name = "bacon_ls"})[1]:exec_cmd {title = 'run', command= 'run'}
-  local command_params = {
-    command = 'bacon_ls.run',
-    arguments = nil,
-    workDoneToken = nil,
-  }
-  vim.lsp.buf_request(0, 'workspace/executeCommand', command_params)
-end, { desc = 'bacon-ls: run check' })
-
 vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufRead' }, {
-  pattern = { '*.rs', '*.toml' },
+  pattern = { '*.rs', '*.toml', 'rust' },
   group = vim.api.nvim_create_augroup('my-rust-bacon', { clear = true }),
   callback = function(event)
     local nkeymap = function(keys, func, desc) vim.keymap.set('n', keys, func, { buffer = event.buf, desc = 'bacon: ' .. desc }) end
     nkeymap('!', ':BaconLoad<CR>:w<CR>:BaconNext<CR>', 'next bacon issue')
     nkeymap(',,', ':BaconList<CR>', 'bacon load then show')
+    nkeymap('<localleader>b', function()
+      -- vim.lsp.buf.execute_command({ command = "bacon_ls.run" })
+      -- TODO: repalce code below with a fixed version of:
+      -- vim.lsp.get_clients({name = "bacon_ls"})[1]:exec_cmd {title = 'run', command= 'run'}
+      local command_params = {
+        command = 'bacon_ls.run',
+        arguments = nil,
+        workDoneToken = nil,
+      }
+      vim.lsp.buf_request(0, 'workspace/executeCommand', command_params)
+    ('n', '<localleader>u', unwraps_to_qf, { desc = 'Find unwrap() calls', buffer = true })
+    vim.keymap.set('n', '<localleader>U', unwraps_in_project_to_qf, { desc = 'Find unwrap() calls', buffer = true })
+    end, { desc = 'bacon-ls: run check' })
+
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'rust',
+  callback = function()
+  end,
+})
+
   end,
 })
 vim.api.nvim_create_user_command(
@@ -105,9 +113,6 @@ local function unwraps_in_project_to_qf()
   vim.fn.setqflist(qf)
   vim.cmd 'copen'
 end
-
-vim.keymap.set('n', '<leader>cu', unwraps_to_qf, { desc = 'Find unwrap() calls' })
-vim.keymap.set('n', '<leader>cU', unwraps_in_project_to_qf, { desc = 'Find unwrap() calls' })
 
 ---@return vim.quickfix.entry[]
 local function rust_functions_and_reflection_calls(arg)

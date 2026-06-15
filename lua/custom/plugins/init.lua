@@ -151,8 +151,8 @@ vim.api.nvim_create_user_command('ExecuteEveryXMinutesCancel', function(opts)
   if timers.every_x_min ~= nil then timers.every_x_min:stop() end
 end, {})
 
-vim.keymap.set('v', '<leader>cs', ':!codesort', { desc = 'codesort' })
-vim.keymap.set('n', '<leader>cs', function()
+vim.keymap.set('v', '<localleader>s', ':!codesort', { desc = 'codesort' })
+vim.keymap.set('n', '<localleader>s', function()
   local cursor_pos = vim.api.nvim_win_get_cursor(0)
   local line = cursor_pos[1]
   local cmd = string.format('%%!codesort --around %d --detect %s', line, vim.fn.shellescape(vim.fn.expand '%:t'))
