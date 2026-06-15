@@ -12,35 +12,6 @@ require('bacon').setup {
   },
 }
 
-vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufRead' }, {
-  pattern = { '*.rs', '*.toml', 'rust' },
-  group = vim.api.nvim_create_augroup('my-rust-bacon', { clear = true }),
-  callback = function(event)
-    local nkeymap = function(keys, func, desc) vim.keymap.set('n', keys, func, { buffer = event.buf, desc = 'bacon: ' .. desc }) end
-    nkeymap('!', ':BaconLoad<CR>:w<CR>:BaconNext<CR>', 'next bacon issue')
-    nkeymap(',,', ':BaconList<CR>', 'bacon load then show')
-    nkeymap('<localleader>b', function()
-      -- vim.lsp.buf.execute_command({ command = "bacon_ls.run" })
-      -- TODO: repalce code below with a fixed version of:
-      -- vim.lsp.get_clients({name = "bacon_ls"})[1]:exec_cmd {title = 'run', command= 'run'}
-      local command_params = {
-        command = 'bacon_ls.run',
-        arguments = nil,
-        workDoneToken = nil,
-      }
-      vim.lsp.buf_request(0, 'workspace/executeCommand', command_params)
-    ('n', '<localleader>u', unwraps_to_qf, { desc = 'Find unwrap() calls', buffer = true })
-    vim.keymap.set('n', '<localleader>U', unwraps_in_project_to_qf, { desc = 'Find unwrap() calls', buffer = true })
-    end, { desc = 'bacon-ls: run check' })
-
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = 'rust',
-  callback = function()
-  end,
-})
-
-  end,
-})
 vim.api.nvim_create_user_command(
   'RustLspCheckOnSaveClippy',
   function() vim.cmd.RustAnalyzer { 'config', "{ checkOnSave = true, check = { command = 'clippy' }  }" } end,
@@ -185,4 +156,27 @@ vim.api.nvim_create_user_command('RustFunctionsAndReflectionCalls', function(opt
   vim.cmd 'copen'
 end, {
   nargs = '?',
+})
+
+vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufRead' }, {
+  pattern = { '*.rs', '*.toml' },
+  group = vim.api.nvim_create_augroup('my-rust-bacon', { clear = true }),
+  callback = function(event)
+    local nkeymap = function(keys, func, desc) vim.keymap.set('n', keys, func, { buffer = event.buf, desc = desc }) end
+    nkeymap('!', ':BaconLoad<CR>:w<CR>:BaconNext<CR>', 'bacon: next issue')
+    nkeymap(',,', '<cmd>BaconList<cr>', 'bacon: load then show')
+    nkeymap('<localleader>b', function()
+      -- vim.lsp.buf.execute_command({ command = "bacon_ls.run" })
+      -- TODO: repalce code below with a fixed version of:
+      -- vim.lsp.get_clients({name = "bacon_ls"})[1]:exec_cmd {title = 'run', command= 'run'}
+      local command_params = {
+        command = 'bacon_ls.run',
+        arguments = nil,
+        workDoneToken = nil,
+      }
+      vim.lsp.buf_request(0, 'workspace/executeCommand', command_params)
+    end, 'bacon-ls: run check')
+    nkeymap('<localleader>u', unwraps_to_qf, 'Find unwrap() calls')
+    nkeymap('<localleader>U', unwraps_in_project_to_qf, 'Find unwrap() calls')
+  end,
 })
