@@ -249,8 +249,8 @@ end, {
 vim.pack.add {
   fn.gh 'danymat/neogen',
   fn.gh 'tpope/vim-abolish', -- :help abolish, :%S/box{,es}/bag{,s}/g   crc crs cr. cru crk
-  fn.gh 'tpope/vim-rsi', -- :help rsi
-  -- fn.gh 'tpope/vim-unimpaired'
+  -- fn.gh 'tpope/vim-rsi', -- :help rsi, provides Readline (Emacs) mappings for insert and command line
+  fn.gh 'tpope/vim-unimpaired'
   -- fn.gh 'tpope/vim-repeat'
   -- fn.gh 'wincent/loupe'
   -- fn.gh 'kevinhwang91/nvim-hlslens'
