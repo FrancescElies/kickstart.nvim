@@ -40,7 +40,15 @@ ls.add_snippets('markdown', {
       '</details>',
     },
   }),
-
+  s('img-width', {
+    t '<img src="',
+    i(1, 'image.png'),
+    t '" alt="',
+    i(2, 'alt text'),
+    t '" width="',
+    i(3, '300'),
+    t '">"',
+  }),
   s('video', {
     t '<video src="',
     i(1, 'https://website.com/video.mp4'),
