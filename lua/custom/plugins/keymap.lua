@@ -129,9 +129,12 @@ vim.keymap.set('n', '<leader>vp', open_vim_pack_dir, { desc = 'edit vimrc' })
 vim.keymap.set('n', '<leader>vm', "<cmd>new | put=execute('messages')<cr>", { desc = 'vim messages' })
 
 vim.keymap.set('n', '<leader>tr', '<cmd>set invrelativenumber<cr>', { desc = '[t]oggle [r]elativenumber' })
+vim.keymap.set('n', '<leader>tw', '<cmd>set invwrapscan<cr>', { desc = '[t]oggle search [w]rap-around' })
 vim.keymap.set('n', '<leader>tw', '<cmd>set invwrap<cr>', { desc = '[t]oggle [w]rap' })
 vim.keymap.set('n', '<leader>ts', '<cmd>set invhlsearch<cr>', { desc = '[t]oggle highlight [s]earch' })
 vim.keymap.set('n', '<leader>tS', '<cmd>set invspell<cr>', { desc = '[t]oggle [S]pell' })
+vim.keymap.set('n', '<leader>ti', '<cmd>set invignorecase<cr>', { desc = '[t]oggle [i]gnorecase' })
+vim.keymap.set('n', '<leader>tL', '<cmd>set invlist<cr>', { desc = '[t]oggle [l]ist (show invisible chars)' })
 
 -- control splits size  <>., are on the same two keys
 -- width
