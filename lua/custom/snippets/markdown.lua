@@ -22,38 +22,30 @@ local conds_expand = require 'luasnip.extras.conditions.expand'
 local types = require 'luasnip.util.types'
 
 ls.add_snippets('markdown', {
-  s('collapsible', {
-    t {
-      '<details>',
-      '  <summary>',
-    },
-    i(1, 'title'),
-    t {
-      '(Click me)👈</summary>',
-      '',
-      '  ',
-    },
-    i(2, '*Markdown allowed*'),
-    t {
-      '',
-      '',
-      '</details>',
-    },
-  }),
-  s('img-width', {
-    t '<img src="',
-    i(1, 'image.png'),
-    t '" alt="',
-    i(2, 'alt text'),
-    t '" width="',
-    i(3, '300'),
-    t '">"',
-  }),
-  s('video', {
-    t '<video src="',
-    i(1, 'https://website.com/video.mp4'),
-    t '" width=',
-    i(2, '400'),
-    t ' controls></video>',
-  }),
+  s('details', fmt('<details>\n<summary>{} (Click me)👈</summary>\n\n{}\n\n</details>', { i(1, 'Summary'), i(2, '*markdown content*') })),
+
+  s(
+    'img-width',
+    fmt('<img src="{}" alt="{}" width={}>', {
+      i(1, './image.png'),
+      i(2, 'alt text'),
+      i(3, '300'),
+    })
+  ),
+
+  s(
+    'video',
+    fmt('<video src="{}" width={} controls></video> ', {
+      i(1, 'https://website.com/video.mp4'),
+      i(2, '300'),
+    })
+  ),
+
+  s(
+    'code',
+    fmt('```{}\n{}\n```', {
+      i(1, 'lang'),
+      i(2, 'code'),
+    })
+  ),
 })
