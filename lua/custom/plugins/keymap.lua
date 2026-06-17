@@ -127,9 +127,11 @@ vim.api.nvim_create_user_command('OpenVimPackDir', open_vim_pack_dir, {})
 vim.keymap.set('n', '<leader>ve', '<cmd>e $MYVIMRC<cr>', { desc = 'edit vimrc' })
 vim.keymap.set('n', '<leader>vp', open_vim_pack_dir, { desc = 'edit vimrc' })
 vim.keymap.set('n', '<leader>vm', "<cmd>new | put=execute('messages')<cr>", { desc = 'vim messages' })
-vim.keymap.set('n', '<leader>vw', '<cmd>set invwrap<cr>', { desc = '[v]im [w]rap toggle' })
-vim.keymap.set('n', '<leader>v/', '<cmd>set invhlsearch<cr>', { desc = '[v]im highlight [/]search toggle' })
-vim.keymap.set('n', '<leader>vs', '<cmd>set invspell<cr>', { desc = '[v]im [S]pell toggle' })
+
+vim.keymap.set('n', '<leader>tr', '<cmd>set invrelativenumber<cr>', { desc = '[t]oggle [r]elativenumber' })
+vim.keymap.set('n', '<leader>tw', '<cmd>set invwrap<cr>', { desc = '[t]oggle [w]rap' })
+vim.keymap.set('n', '<leader>ts', '<cmd>set invhlsearch<cr>', { desc = '[t]oggle highlight [s]earch' })
+vim.keymap.set('n', '<leader>tS', '<cmd>set invspell<cr>', { desc = '[t]oggle [S]pell' })
 
 -- control splits size  <>., are on the same two keys
 -- width
