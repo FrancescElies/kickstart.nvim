@@ -76,6 +76,9 @@ vim.keymap.set('n', '<leader>ll', '<cmd>.lua<cr>', { desc = '[l]ua source curren
 -- :
 vim.keymap.set('n', '<leader>le', '"ey$:!<c-r>e<cr>', { desc = '[l]ua source vim command (:) to [e]nd of line' })
 
+vim.keymap.set('n', '<c-h>', '<cmd>bprevious<cr>')
+vim.keymap.set('n', '<c-l>', '<cmd>bnext<cr>')
+
 -- Keep things vertically centered during search
 vim.keymap.set('n', '<C-d>', '<C-d>zz')
 vim.keymap.set('n', '<C-u>', '<C-u>zz')

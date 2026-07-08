@@ -2,7 +2,6 @@
 -- diagnostic
 --
 
-vim.keymap.set({ 'n', 'v' }, 'yr', vim.lsp.buf.references, { buffer = true, desc = 'you references to quickfix' })
 
 
 vim.keymap.set('n', '<leader>vdd', function()
