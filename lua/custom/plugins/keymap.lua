@@ -57,6 +57,7 @@ vim.keymap.set('n', '<leader>bd', diff_orig, { desc = '[b]uffer [d]iff against d
 
 -- quick scape
 vim.keymap.set({ 'i', 'c' }, 'jk', '<Esc>')
+vim.keymap.set({ 'i', 'c' }, ',.', '<Enter>')
 vim.keymap.set({ 'n', 'i' }, '<C-c>', '<Esc>')
 
 vim.keymap.set('n', 'ı', 'i')
