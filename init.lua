@@ -970,9 +970,8 @@ do
     },
 
     sources = {
-      default = { 'lsp', 'path', 'snippets' },
+      default = { 'lsp', 'path', 'snippets', 'buffer' },
     },
-
     snippets = { preset = 'luasnip' },
 
     -- Blink.cmp includes an optional, recommended rust fuzzy matcher,

@@ -15,7 +15,6 @@ local fn = require 'custom.fn'
 
 vim.lsp.inlay_hint.enable(false)
 
-
 -- https://www.reddit.com/r/neovim/comments/zhweuc/whats_a_fast_way_to_load_the_output_of_a_command/
 -- Example:
 -- :Redir =vim.lsp.get_active_clients()
@@ -49,9 +48,12 @@ vim.o.linebreak = true -- don't break words when wrapping
 -- Don't have `o` add a comment
 vim.opt.formatoptions:remove 'o'
 
--- `gf` path shenaningan
--- vim.opt.isfname:append "'" -- allow single quotes
--- vim.opt.isfname:append '32' -- allow spaces in paths
+local is_win32 = vim.fn.has 'win32' == 1
+-- `gf` path shenaningans
+if is_win32 then
+  vim.opt.isfname:append "'" -- allow single quotes
+  vim.opt.isfname:append '32' -- allow spaces in paths
+end
 vim.opt.isfname:append '@'
 
 vim.o.complete = '.,w,b,u,t,i,kspell'
@@ -250,7 +252,7 @@ vim.pack.add {
   fn.gh 'danymat/neogen',
   fn.gh 'tpope/vim-abolish', -- :help abolish, :%S/box{,es}/bag{,s}/g   crc crs cr. cru crk
   -- fn.gh 'tpope/vim-rsi', -- :help rsi, provides Readline (Emacs) mappings for insert and command line
-  fn.gh 'tpope/vim-unimpaired'
+  fn.gh 'tpope/vim-unimpaired',
   -- fn.gh 'tpope/vim-repeat'
   -- fn.gh 'wincent/loupe'
   -- fn.gh 'kevinhwang91/nvim-hlslens'
