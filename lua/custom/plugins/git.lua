@@ -76,16 +76,21 @@ gitsigns.setup {
   end,
 }
 vim.pack.add { 'https://github.com/tpope/vim-fugitive' }
-vim.keymap.set('n', 'ZG', '<cmd>tabnew|G<cr><c-w>o', { desc = 'git status' })
+vim.keymap.set('n', ',g', '<cmd>tabnew|G<cr><c-w>o', { desc = 'git status' })
 
 vim.pack.add { 'https://github.com/sindrets/diffview.nvim' }
-vim.keymap.set('n', '<leader>gdhb', ':DiffviewFileHistory<cr>', { desc = '[d]iff History [b]ranch' })
-vim.keymap.set('n', '<leader>gdhf', ':DiffviewFileHistory %<cr>', { desc = '[d]iff history [f]ile' })
-vim.keymap.set('n', '<leader>gdhl', ':.DiffviewFileHistory', { desc = '[d]iff history ([l]ine evolution)' })
-vim.keymap.set('v', '<leader>gdhl', ':DiffviewFileHistory', { desc = '[d]iff history ([l]ine evolution)' })
-vim.keymap.set('n', '<leader>gd.', ':DiffviewOpen<cr>', { desc = '[d]iff (.) working tree' })
-vim.keymap.set('n', '<leader>gdm', ':DiffviewOpen origin/main...HEAD', { desc = '[d]iff with merge base' })
-vim.keymap.set('n', '<leader>gdq', ':DiffviewClose<cr>', { desc = '[d]iff [q]uit' })
+vim.keymap.set('n', '<leader>db', '<cmd>DiffviewFileHistory<cr>', { desc = '[d]iff history [b]ranch' })
+vim.keymap.set('n', '<leader>df', '<cmd>DiffviewFileHistory %<cr>', { desc = '[d]iff history [f]ile' })
+vim.keymap.set('n', '<leader>dl', '<cmd>.DiffviewFileHistory<cr>', { desc = '[d]iff history ([l]ine evolution)' })
+vim.keymap.set('v', '<leader>dl', '<cmd>DiffviewFileHistory<cr>', { desc = '[d]iff history ([l]ine evolution)' })
+vim.keymap.set('n', '<leader>dw', '<cmd>DiffviewOpen<cr>', { desc = '[d]iff [w]orking tree' })
+vim.keymap.set('n', '<leader>dm', '<cmd>DiffviewOpen origin/main...HEAD', { desc = '[d]iff [m]erge-base' })
+vim.keymap.set('n', '<leader>dc', '<cmd>DiffviewClose<cr>', { desc = '[d]iff [c]lose' })
+
+local function diff_orig() vim.cmd [[vert new | set buftype=nofile | read ++edit # | 0d_  | diffthis | wincmd p | diffthis]] end
+vim.keymap.set('n', '<leader>do', diff_orig, { desc = '[d]iff [o]riginal (disk-file)' })
+vim.api.nvim_create_user_command('DiffOrig', diff_orig, {})
+
 
 -- return {
 --
