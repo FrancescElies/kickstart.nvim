@@ -48,6 +48,9 @@ vim.o.linebreak = true -- don't break words when wrapping
 -- Don't have `o` add a comment
 vim.opt.formatoptions:remove 'o'
 
+-- Add a border to all floating windows (hover docs, signature help, diagnostics)
+vim.o.winborder = 'rounded'
+
 local is_win32 = vim.fn.has 'win32' == 1
 -- `gf` path shenaningans
 if is_win32 then
