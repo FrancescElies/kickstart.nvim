@@ -91,10 +91,11 @@ vim.keymap.set('n', '<leader>dc', '<cmd>DiffviewClose<cr>', { desc = '[d]iff [c]
 
 -- Open current file+line in Azure DevOps (PR diff if PR exists, else file view)
 local function open_in_azdo()
+  local cwd = vim.fn.expand '%:p:h'
   local file = vim.fn.expand '%:p'
   local line = vim.fn.line '.'
 
-  local git_root = vim.fn.systemlist('git rev-parse --show-toplevel')[1]
+  local git_root = vim.trim(vim.system({ 'git', 'rev-parse', '--show-toplevel' }, { cwd = cwd, text = true }):wait().stdout)
   if not git_root or git_root == '' then
     vim.notify('Not inside a git repo', vim.log.levels.WARN)
     return
@@ -106,19 +107,23 @@ local function open_in_azdo()
   local org = os.getenv 'ORG'
   local project = os.getenv 'PROJECT'
   local repo = os.getenv 'REPO'
+  if org == nil or project == nil or repo == nil then
+    vim.notify('cwd=' .. vim.fn.getcwd() ' org=' .. org or '<nil>' .. ' project=' .. project or '<nil>' .. ' repo=' .. repo or '<nil>', vim.log.levels.ERROR)
+    return
+  end
 
   -- strip trailing .git if present
   repo = repo:gsub('%.git$', ''):gsub('%s+$', '')
 
   -- find open PR for this branch
-  local branch = vim.fn.systemlist('git branch --show-current')[1]
-  local result = vim.fn.system('az repos pr list --source-branch ' .. branch .. ' --query "[0].pullRequestId" -o tsv')
-  local pr_id = vim.split(result, '\n', { trimempty = true })[1]
+  local branch = vim.trim(vim.system({ 'git', 'branch', '--show-current' }, { cwd = cwd, text = true }):wait().stdout)
+  local pr_id = vim.trim(vim.system({ 'az', 'repos', 'pr', 'list', '--source-branch', branch, '--query', '[0].pullRequestId', '-o', 'tsv' }):wait().stdout)
 
   local url
   if pr_id and pr_id:match '^%d+$' then
     url = string.format('https://dev.azure.com/%s/%s/_git/%s/pullrequest/%s?_a=files&path=%s', org, project, repo, pr_id, rel_path)
   else
+  vim.notify('No PR found ', vim.log.levels.WARN)
     url = string.format(
       'https://dev.azure.com/%s/%s/_git/%s?path=%s&version=GB%s&line=%d&lineEnd=%d&lineStartColumn=1&_a=contents',
       org,
