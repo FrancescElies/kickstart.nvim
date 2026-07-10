@@ -89,10 +89,57 @@ vim.keymap.set('n', '<leader>dw', '<cmd>DiffviewOpen<cr>', { desc = '[d]iff [w]o
 vim.keymap.set('n', '<leader>dm', '<cmd>DiffviewOpen origin/main...HEAD', { desc = '[d]iff [m]erge-base' })
 vim.keymap.set('n', '<leader>dc', '<cmd>DiffviewClose<cr>', { desc = '[d]iff [c]lose' })
 
+-- Open current file+line in Azure DevOps (PR diff if PR exists, else file view)
+local function open_in_azdo()
+  local file = vim.fn.expand '%:p'
+  local line = vim.fn.line '.'
+
+  local git_root = vim.fn.systemlist('git rev-parse --show-toplevel')[1]
+  if not git_root or git_root == '' then
+    vim.notify('Not inside a git repo', vim.log.levels.WARN)
+    return
+  end
+
+  -- Normalise path and make relative
+  local rel_path = '/' .. file:sub(#git_root + 2):gsub('\\', '/')
+
+  local org = os.getenv 'ORG'
+  local project = os.getenv 'PROJECT'
+  local repo = os.getenv 'REPO'
+
+  -- strip trailing .git if present
+  repo = repo:gsub('%.git$', ''):gsub('%s+$', '')
+
+  -- find open PR for this branch
+  local branch = vim.fn.systemlist('git branch --show-current')[1]
+  local result = vim.fn.system('az repos pr list --source-branch ' .. branch .. ' --query "[0].pullRequestId" -o tsv')
+  local pr_id = vim.split(result, '\n', { trimempty = true })[1]
+
+  local url
+  if pr_id and pr_id:match '^%d+$' then
+    url = string.format('https://dev.azure.com/%s/%s/_git/%s/pullrequest/%s?_a=files&path=%s', org, project, repo, pr_id, rel_path)
+  else
+    url = string.format(
+      'https://dev.azure.com/%s/%s/_git/%s?path=%s&version=GB%s&line=%d&lineEnd=%d&lineStartColumn=1&_a=contents',
+      org,
+      project,
+      repo,
+      rel_path,
+      branch,
+      line,
+      line
+    )
+  end
+
+  if vim.fn.has 'win32' == 1 then url = url:gsub('&', '^&') end
+  vim.ui.open(url)
+  vim.notify('Opened in browser: ' .. url)
+end
+vim.keymap.set('n', '<leader>go', open_in_azdo, { desc = '[g]it [o]pen in browser (az devops)' })
+
 local function diff_orig() vim.cmd [[vert new | set buftype=nofile | read ++edit # | 0d_  | diffthis | wincmd p | diffthis]] end
 vim.keymap.set('n', '<leader>do', diff_orig, { desc = '[d]iff [o]riginal (disk-file)' })
 vim.api.nvim_create_user_command('DiffOrig', diff_orig, {})
-
 
 -- return {
 --
