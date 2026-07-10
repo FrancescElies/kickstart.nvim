@@ -2,15 +2,15 @@ local fn = require 'custom.fn'
 
 -- :MasonInstall bacon bacon-ls
 
-vim.pack.add {
-  fn.gh 'Canop/nvim-bacon',
-}
-require('bacon').setup {
-  quickfix = {
-    enabled = true, -- populate the quickfix list with bacon errors
-    event_trigger = true, -- triggers the QuickFixCmdPost event after populating the quickfix list
-  },
-}
+-- vim.pack.add {
+--   fn.gh 'Canop/nvim-bacon',
+-- }
+-- require('bacon').setup {
+--   quickfix = {
+--     enabled = true, -- populate the quickfix list with bacon errors
+--     event_trigger = true, -- triggers the QuickFixCmdPost event after populating the quickfix list
+--   },
+-- }
 
 vim.api.nvim_create_user_command(
   'RustLspCheckOnSaveClippy',
@@ -162,19 +162,19 @@ vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufRead' }, {
   group = vim.api.nvim_create_augroup('my-rust-bacon', { clear = true }),
   callback = function(event)
     local nkeymap = function(keys, func, desc) vim.keymap.set('n', keys, func, { buffer = event.buf, desc = desc }) end
-    nkeymap('!', ':BaconLoad<CR>:w<CR>:BaconNext<CR>', 'bacon: next issue')
-    nkeymap(',,', '<cmd>BaconList<cr>', 'bacon: load then show')
-    nkeymap('<localleader>b', function()
-      -- vim.lsp.buf.execute_command({ command = "bacon_ls.run" })
-      -- TODO: repalce code below with a fixed version of:
-      -- vim.lsp.get_clients({name = "bacon_ls"})[1]:exec_cmd {title = 'run', command= 'run'}
-      local command_params = {
-        command = 'bacon_ls.run',
-        arguments = nil,
-        workDoneToken = nil,
-      }
-      vim.lsp.buf_request(0, 'workspace/executeCommand', command_params)
-    end, 'bacon-ls: run check')
+    -- nkeymap('!', ':BaconLoad<CR>:w<CR>:BaconNext<CR>', 'bacon: next issue')
+    -- nkeymap(',,', '<cmd>BaconList<cr>', 'bacon: load then show')
+    -- nkeymap('<localleader>b', function()
+    --   -- vim.lsp.buf.execute_command({ command = "bacon_ls.run" })
+    --   -- TODO: repalce code below with a fixed version of:
+    --   -- vim.lsp.get_clients({name = "bacon_ls"})[1]:exec_cmd {title = 'run', command= 'run'}
+    --   local command_params = {
+    --     command = 'bacon_ls.run',
+    --     arguments = nil,
+    --     workDoneToken = nil,
+    --   }
+    --   vim.lsp.buf_request(0, 'workspace/executeCommand', command_params)
+    -- end, 'bacon-ls: run check')
     nkeymap('<localleader>u', unwraps_to_qf, 'Find unwrap() calls')
     nkeymap('<localleader>U', unwraps_in_project_to_qf, 'Find unwrap() calls')
   end,

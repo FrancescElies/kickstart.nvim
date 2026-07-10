@@ -42,22 +42,22 @@ local servers = {
       --- NOTE: see .clang-tidy in repo for example
     },
   },
-  bacon_ls = {
-    init_options = {
-      cargo = { updateOnInsert = true },
-    },
-    settings = {
-      bacon_ls = {
-        backend = 'cargo',
-        cargo = {
-          command = 'clippy',
-          -- updateOnInsert lives in init_options above; only the
-          -- runtime knob lives here:
-          updateOnInsertDebounceMillis = 500,
-        },
-      },
-    },
-  },
+  -- bacon_ls = {
+  --   init_options = {
+  --     cargo = { updateOnInsert = true },
+  --   },
+  --   settings = {
+  --     bacon_ls = {
+  --       backend = 'cargo',
+  --       cargo = {
+  --         command = 'clippy',
+  --         -- updateOnInsert lives in init_options above; only the
+  --         -- runtime knob lives here:
+  --         updateOnInsertDebounceMillis = 500,
+  --       },
+  --     },
+  --   },
+  -- },
   -- gopls = {},
   -- pyright = {},
 
@@ -74,9 +74,11 @@ local servers = {
     settings = {
       ['rust-analyzer'] = {
         check = { command = 'check' },
-        checkOnSave = false, -- bacon-ls will provide
+        -- checkOnSave = false, -- bacon-ls will provide
+        checkOnSave = true,
         diagnostics = {
-          enable = false, -- bacon-ls will provide
+          -- enable = false, -- bacon-ls will provide
+          enable = true,
           disabled = {
             'inactive-code',
             'incorrect-ident-case',
