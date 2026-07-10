@@ -50,6 +50,8 @@ gitsigns.setup {
     else
       map('n', ']h', function() gitsigns.nav_hunk 'next' end, { desc = 'Jump to next [h]unk' })
       map('n', '[h', function() gitsigns.nav_hunk 'prev' end, { desc = 'Jump to previous [h]unk' })
+      vim.keymap.set('n', '<c-h>', '<cmd>Gitsigns prev_hunk<cr>')
+      vim.keymap.set('n', '<c-l>', '<cmd>Gitsigns next_hunk<cr>')
     end
 
     map('v', '<leader>hs', function() gitsigns.stage_hunk { vim.fn.line '.', vim.fn.line 'v' } end, { desc = '[h]unk [s]tage' })
