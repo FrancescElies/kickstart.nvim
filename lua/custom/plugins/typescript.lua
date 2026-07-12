@@ -1,5 +1,8 @@
-return {
-  'pmizio/typescript-tools.nvim',
-  dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
-  opts = {},
-}
+-- local fn = require('custom.fn')
+--
+-- vim.pack.add {
+--   fn.gh 'nvim-lua/plenary.nvim',
+--   fn.gh 'neovim/nvim-lspconfig',
+--   fn.gh 'pmizio/typescript-tools.nvim',
+-- }
+-- require('typescript-tools').setup {}
