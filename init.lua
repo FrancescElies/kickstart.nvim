@@ -551,9 +551,8 @@ do
       },
       git_status = {
         mappings = {
-          n = {
-            ['c'] = { '<cmd>G commit<cr>', type = 'command' },
-          },
+          i = { ['c-c'] = { '<cmd>Git commit<cr>', type = 'command' } },
+          n = { ['c'] = { '<cmd>Git commit<cr>', type = 'command' } },
         },
       },
       live_multi_grep = {
