@@ -149,30 +149,9 @@ local function diff_orig() vim.cmd [[vert new | set buftype=nofile | read ++edit
 vim.keymap.set('n', '<leader>Do', diff_orig, { desc = '[d]iff [o]riginal (disk-file)' })
 vim.api.nvim_create_user_command('DiffOrig', diff_orig, {})
 
--- return {
---
---   {
---     'aaronhallaert/advanced-git-search.nvim',
---     diff_plugin = 'diffview',
---     config = function()
---       -- NOTE: optionally setup telescope before loading the extension, don't do here see docs
---       require('telescope').load_extension 'advanced_git_search'
---     end,
---     keys = {
---       { '<leader>g//', ':AdvancedGitSearch<CR>', desc = '[g]it [s]earch' },
---       { '<leader>g/l', ':AdvancedGitSearch diff_commit_line<cr>', mode = { 'n', 'v' }, desc = '[g]it [d]iff [l]ine' },
---       { '<leader>g/r', ':AdvancedGitSearch checkout_reflog<cr>', desc = '[g]it [r]eflog' },
---     },
---   },
---   {
---     'folke/snacks.nvim',
---     ---@type snacks.Config
---     opts = {
---       gitbrowse = {},
---     },
---     keys = {
---       { '<leader>gwr', function() Snacks.gitbrowse() end, desc = 'opens current file in browser', mode = { 'n', 'v' } },
---       { '<leader>gwo', function() Snacks.gitbrowse.open() end, desc = 'opens url in nvim (switches to branch/commit)', mode = { 'n', 'v' } },
---     },
---   },
--- }
+-- vim.pack.add { 'https://github.com/aaronhallaert/advanced-git-search.nvim' }
+-- local ags = require 'advanced-git-search'
+-- ags.setup {}
+-- vim.keymap.set('n', '<leader>g//', '<cmd>AdvancedGitSearch<CR>', { desc = '' })
+-- vim.keymap.set('n', '<leader>g//', '<cmd>AdvancedGitSearch diff_commit_line<cr>', { desc = '' })
+-- vim.keymap.set('n', '<leader>g//', '<cmd>AdvancedGitSearch checkout_reflog<cr>', { desc = '' })
