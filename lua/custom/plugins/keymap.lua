@@ -123,7 +123,7 @@ end
 local function open_vim_pack_dir() vim.cmd('e ' .. vim.fs.joinpath(vim.fn.stdpath 'data', 'site', 'pack', 'core', 'opt')) end
 vim.api.nvim_create_user_command('OpenVimPackDir', open_vim_pack_dir, {})
 
-vim.keymap.set('n', '<leader>ve', '<cmd>e $MYVIMRC<cr>', { desc = 'edit vimrc' })
+vim.keymap.set('n', '<leader>ve', '<cmd>tabnew | e $MYVIMRC | CdBufRootDir <cr>', { desc = 'edit vimrc' })
 vim.keymap.set('n', '<leader>vp', open_vim_pack_dir, { desc = 'edit vimrc' })
 vim.keymap.set('n', '<leader>vm', "<cmd>new | put=execute('messages')<cr>", { desc = 'vim messages' })
 
