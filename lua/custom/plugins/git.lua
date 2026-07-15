@@ -48,13 +48,13 @@ gitsigns.setup {
 
     -- Navigation
     if vim.wo.diff then
-      map('n', '<c-j>', function() vim.cmd.normal { ']c', bang = true } end, { desc = 'Jump to next hunk' })
-      map('n', '<c-k>', function() vim.cmd.normal { '[c', bang = true } end, { desc = 'Jump to previous hunk' })
+      map('n', '(', function() vim.cmd.normal { ']c', bang = true } end, { desc = 'Jump to next hunk' })
+      map('n', ')', function() vim.cmd.normal { '[c', bang = true } end, { desc = 'Jump to previous hunk' })
     else
       map('n', ']h', function() gitsigns.nav_hunk 'next' end, { desc = 'Jump to next [h]unk' })
       map('n', '[h', function() gitsigns.nav_hunk 'prev' end, { desc = 'Jump to previous [h]unk' })
-      vim.keymap.set('n', '<c-s-k>', '<cmd>Gitsigns prev_hunk<cr>')
-      vim.keymap.set('n', '<c-s-j>', '<cmd>Gitsigns next_hunk<cr>')
+      vim.keymap.set('n', '(', '<cmd>Gitsigns prev_hunk<cr>')
+      vim.keymap.set('n', ')', '<cmd>Gitsigns next_hunk<cr>')
     end
 
     map('v', '<leader>hs', function() gitsigns.stage_hunk { vim.fn.line '.', vim.fn.line 'v' } end, { desc = '[h]unk [s]tage' })
@@ -84,13 +84,13 @@ vim.pack.add { 'https://github.com/tpope/vim-fugitive' }
 vim.keymap.set('n', ',g', '<cmd>tabnew|G<cr><c-w>o', { desc = 'git status' })
 
 vim.pack.add { 'https://github.com/sindrets/diffview.nvim' }
-vim.keymap.set('n', '<leader>db', '<cmd>DiffviewFileHistory<cr>', { desc = '[d]iff history [b]ranch' })
-vim.keymap.set('n', '<leader>df', '<cmd>DiffviewFileHistory %<cr>', { desc = '[d]iff history [f]ile' })
-vim.keymap.set('n', '<leader>dl', '<cmd>.DiffviewFileHistory<cr>', { desc = '[d]iff history ([l]ine evolution)' })
-vim.keymap.set('v', '<leader>dl', '<cmd>DiffviewFileHistory<cr>', { desc = '[d]iff history ([l]ine evolution)' })
-vim.keymap.set('n', '<leader>dw', '<cmd>DiffviewOpen<cr>', { desc = '[d]iff [w]orking tree' })
-vim.keymap.set('n', '<leader>dm', '<cmd>DiffviewOpen origin/main...HEAD', { desc = '[d]iff [m]erge-base' })
-vim.keymap.set('n', '<leader>dc', '<cmd>DiffviewClose<cr>', { desc = '[d]iff [c]lose' })
+vim.keymap.set('n', '<leader>Db', '<cmd>DiffviewFileHistory<cr>', { desc = '[d]iff history [b]ranch' })
+vim.keymap.set('n', '<leader>Df', '<cmd>DiffviewFileHistory %<cr>', { desc = '[d]iff history [f]ile' })
+vim.keymap.set('n', '<leader>Dl', '<cmd>.DiffviewFileHistory<cr>', { desc = '[d]iff history ([l]ine evolution)' })
+vim.keymap.set('v', '<leader>Dl', '<cmd>DiffviewFileHistory<cr>', { desc = '[d]iff history ([l]ine evolution)' })
+vim.keymap.set('n', '<leader>Dw', '<cmd>DiffviewOpen<cr>', { desc = '[d]iff [w]orking tree' })
+vim.keymap.set('n', '<leader>Dm', '<cmd>DiffviewOpen origin/main...HEAD', { desc = '[d]iff [m]erge-base' })
+vim.keymap.set('n', '<leader>Dc', '<cmd>DiffviewClose<cr>', { desc = '[d]iff [c]lose' })
 
 -- Open current file+line in Azure DevOps (PR diff if PR exists, else file view)
 local function open_in_azdo()
@@ -146,7 +146,7 @@ end
 vim.keymap.set('n', '<leader>go', open_in_azdo, { desc = '[g]it [o]pen in browser (az devops)' })
 
 local function diff_orig() vim.cmd [[vert new | set buftype=nofile | read ++edit # | 0d_  | diffthis | wincmd p | diffthis]] end
-vim.keymap.set('n', '<leader>do', diff_orig, { desc = '[d]iff [o]riginal (disk-file)' })
+vim.keymap.set('n', '<leader>Do', diff_orig, { desc = '[d]iff [o]riginal (disk-file)' })
 vim.api.nvim_create_user_command('DiffOrig', diff_orig, {})
 
 -- return {

@@ -123,6 +123,9 @@ end
 local function open_vim_pack_dir() vim.cmd('e ' .. vim.fs.joinpath(vim.fn.stdpath 'data', 'site', 'pack', 'core', 'opt')) end
 vim.api.nvim_create_user_command('OpenVimPackDir', open_vim_pack_dir, {})
 
+vim.keymap.set({ 'n', 'v' }, '<leader>d', '"_d', { desc = 'delete (no yank)' })
+-- vim.keymap.set({'n', 'v'}, '<leader>p', '"+p', { desc = 'paste from clipboard' })
+
 vim.keymap.set('n', '<leader>ve', '<cmd>tabnew | e $MYVIMRC | CdBufRootDir <cr>', { desc = 'edit vimrc' })
 vim.keymap.set('n', '<leader>vp', open_vim_pack_dir, { desc = 'edit vimrc' })
 vim.keymap.set('n', '<leader>vm', "<cmd>new | put=execute('messages')<cr>", { desc = 'vim messages' })
@@ -144,13 +147,13 @@ vim.keymap.set('n', '<leader>tL', '<cmd>set invlist<cr>', { desc = '[t]oggle [l]
 -- vim.keymap.set('n', '<M-.>', '<C-W>+')
 -- vim.keymap.set('n', '<M-,>', '<C-W>-')
 
+vim.keymap.set('n', 'H', '<cmd>bprevious<CR>', { desc = 'prev buffer' })
+vim.keymap.set('n', 'L', '<cmd>bnext<CR>', { desc = 'next buffer' })
 vim.keymap.set('n', '<leader>bc', '<cmd>vs<cr><c-f>:set scb<cr><c-w>h<cmd>set scb<cr>', { desc = '[b]uf split & [c]ontinue view, (undo `:set noscb`)' })
 
 -- Move lines in visual mode
-vim.keymap.set('n', 'L', ':m .+1<CR>==')
-vim.keymap.set('v', 'L', ":m '>+1<CR>gv=gv")
-vim.keymap.set('v', 'H', ":m '<-2<CR>gv=gv")
-vim.keymap.set('n', 'H', ':m .-2<CR>==')
+vim.keymap.set('v', 'H', ":m '<-2<CR>gv=gv", { desc = 'move line up' })
+vim.keymap.set('v', 'L', ":m '>+1<CR>gv=gv", { desc = 'move line down' })
 
 vim.keymap.set({ 'n', 'v' }, 's/', [[:s,/,\\,g<cr>]], { desc = 'substitute / with \\' })
 vim.keymap.set({ 'n', 'v' }, 's\\', [[:s,\\,/,g<cr>]], { desc = 'substitute \\ with /' })
