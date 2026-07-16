@@ -15,10 +15,10 @@ vim.g.fff = {
   debug = { enabled = false, show_scores = true },
 }
 
-vim.keymap.set('n', 'ff', function() require('fff').find_files() end, { desc = 'FFFind files' })
-vim.keymap.set('n', 'fg', function() require('fff').live_grep() end, { desc = 'LiFFFe grep files' })
-vim.keymap.set('n', 'fw', function() require('fff').live_grep_under_cursor() end, { desc = 'FFFind current word / selection' })
-vim.keymap.set('n', 'fR', function()
+vim.keymap.set('n', ',f', function() require('fff').find_files() end, { desc = 'FFFind files' })
+vim.keymap.set('n', ',g', function() require('fff').live_grep() end, { desc = 'LiFFFe grep files' })
+vim.keymap.set('n', ',w', function() require('fff').live_grep_under_cursor() end, { desc = 'FFFind current word / selection' })
+vim.keymap.set('n', ',r', function()
   local dir = vim.fn.expand '%:p:h'
   require('fff').change_indexing_directory(dir)
   vim.notify('fff uses now ' .. dir)
