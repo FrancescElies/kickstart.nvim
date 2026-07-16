@@ -508,6 +508,15 @@ do
     vim.cmd(string.format('silent lcd %s', dir))
   end
 
+  -- Custom action: insert selected file path into current buffer
+  local function insert_path(prompt_bufnr)
+    local entry = require('telescope.actions.state').get_selected_entry()
+    require('telescope.actions').close(prompt_bufnr)
+    local path = entry.path or entry.filename or entry[1] -- absolute path
+    path = vim.fn.fnamemodify(path, ':.') -- relative to cwd
+    vim.api.nvim_put({ path }, 'c', true, true)
+  end
+
   require('telescope').setup {
     -- You can put your default mappings / updates / etc. in here
     --  All the info you're looking for is in `:help telescope.setup()`
@@ -526,12 +535,14 @@ do
           ['<c-enter>'] = 'to_fuzzy_refine',
           ['<c-space>'] = 'to_fuzzy_refine',
           ['<c-s>'] = switch_to_grep,
+          ['<c-i>'] = insert_path,
         },
         n = {
           -- <h,l> to cycle previewer for git commits to show full message
           ['gh'] = require('telescope.actions').cycle_previewers_prev,
           ['gl'] = require('telescope.actions').cycle_previewers_next,
           ['gc'] = cd_buffer_dir,
+          ['gi'] = insert_path,
           ['gt'] = require('telescope.actions.layout').toggle_preview,
         },
       },
