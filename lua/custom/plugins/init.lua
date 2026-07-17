@@ -280,6 +280,8 @@ end
 -- require 'custom.plugins.screenkey'
 -- require 'custom.plugins.sql'
 -- require 'custom.plugins.typescript'
+vim.filetype.add { extension = { jsonl = 'json' } }
+vim.treesitter.language.register('json', 'jsonl')
 
 -- { 'monaqa/dial.nvim', }
 -- hover.nvim
