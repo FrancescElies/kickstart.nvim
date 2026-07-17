@@ -271,26 +271,20 @@ for file_name, type in vim.fs.dir(plugins_dir) do
   end
 end
 
--- TODO:
--- require 'custom.plugins.ast-grep'
--- require 'custom.plugins.grapple'
--- require 'custom.plugins.janet'
--- require 'custom.plugins.lisp'
--- require 'custom.plugins.neotest'
--- require 'custom.plugins.screenkey'
--- require 'custom.plugins.sql'
--- require 'custom.plugins.typescript'
 vim.filetype.add { extension = { jsonl = 'json' } }
 vim.treesitter.language.register('json', 'jsonl')
 
--- { 'monaqa/dial.nvim', }
--- hover.nvim
--- spaceless.nvim
--- unimpaired.nvim
---
--- connect to databases
---  "tpope/vim-dadbod",
--- guessindent
--- octo.nvim
+vim.pack.add { fn.gh 'monaqa/dial.nvim' }
+local dial = require 'dial.map'
+vim.keymap.set('n', '<C-a>', function() dial.manipulate('increment', 'normal') end)
+vim.keymap.set('n', '<C-x>', function() dial.manipulate('decrement', 'normal') end)
+vim.keymap.set('n', 'g<C-a>', function() dial.manipulate('increment', 'gnormal') end)
+vim.keymap.set('n', 'g<C-x>', function() dial.manipulate('decrement', 'gnormal') end)
+vim.keymap.set('x', '<C-a>', function() dial.manipulate('increment', 'visual') end)
+vim.keymap.set('x', '<C-x>', function() dial.manipulate('decrement', 'visual') end)
+vim.keymap.set('x', 'g<C-a>', function() dial.manipulate('increment', 'gvisual') end)
+vim.keymap.set('x', 'g<C-x>', function() dial.manipulate('decrement', 'gvisual') end)
+
+-- connect to databases "tpope/vim-dadbod",
 -- https://github.com/wezm/rsspls rrs please, make rss from website
 -- https://github.com/wezm/titlecase titlecase - is a small tool and library (crate) that capitalizes English text according to a style defined by John Gruber
