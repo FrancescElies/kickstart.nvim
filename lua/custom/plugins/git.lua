@@ -11,7 +11,7 @@ vim.keymap.set('n', 'gl', '<cmd>diffget //3<cr>', { desc = 'get right diff' })
 vim.keymap.set('n', '<leader>gB', tele.git_branches, { desc = '[g]it [b]ranches' })
 vim.keymap.set('n', '<leader>gL', tele.git_commits, { desc = '[g]it [l]og (cwd)' })
 vim.keymap.set('n', '<leader>gl', tele.git_bcommits, { desc = '[g]it [l]og buffer' })
-vim.keymap.set('n', '<leader>gs', tele.git_status, { desc = '[g]it [s]tatus' })
+vim.keymap.set('n', '<leader>gt', tele.git_status, { desc = '[g]it [t]elescope status ' })
 vim.keymap.set('n', '<leader>gz', tele.git_stash, { desc = '[g]it [z]stash' })
 vim.keymap.set('n', '<leader>gu', '<cmd>Git pull<cr>', { desc = '[g]it [p]ull' })
 vim.keymap.set('n', '<leader>gp', '<cmd>Git push<cr>', { desc = '[g]it [p]ush' })
@@ -81,7 +81,7 @@ gitsigns.setup {
   end,
 }
 vim.pack.add { 'https://github.com/tpope/vim-fugitive' }
-vim.keymap.set('n', ',g', '<cmd>tabnew|G<cr><c-w>o', { desc = 'git status' })
+vim.keymap.set('n', '<leader>gs', '<cmd>tabnew|G<cr><c-w>o', { desc = '[g]it status' })
 
 vim.pack.add { 'https://github.com/sindrets/diffview.nvim' }
 vim.keymap.set('n', '<leader>Db', '<cmd>DiffviewFileHistory<cr>', { desc = '[d]iff history [b]ranch' })
