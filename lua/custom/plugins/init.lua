@@ -255,7 +255,7 @@ vim.pack.add {
   fn.gh 'danymat/neogen',
   fn.gh 'tpope/vim-abolish', -- :help abolish, :%S/box{,es}/bag{,s}/g   crc crs cr. cru crk
   -- fn.gh 'tpope/vim-rsi', -- :help rsi, provides Readline (Emacs) mappings for insert and command line
-  fn.gh 'tpope/vim-unimpaired',
+  fn.gh 'nvim-mini/mini.bracketed', -- Configurable Lua functions to go forward/backward to a certain target
   -- fn.gh 'tpope/vim-repeat'
   -- fn.gh 'wincent/loupe'
   -- fn.gh 'kevinhwang91/nvim-hlslens'

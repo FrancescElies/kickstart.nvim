@@ -91,6 +91,10 @@
       "rev": "7cd5db330f41b7bae02b2d6202218a061c3ebc1f",
       "src": "https://github.com/ravitemer/mcphub.nvim"
     },
+    "mini.bracketed": {
+      "rev": "203eb35f386b4fc9abcff1518c84d5537d41c80a",
+      "src": "https://github.com/nvim-mini/mini.bracketed"
+    },
     "mini.nvim": {
       "rev": "f28b0294daf3bdbacfece1f6c3c4d21a1cc33655",
       "src": "https://github.com/nvim-mini/mini.nvim"
