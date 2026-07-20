@@ -5,6 +5,7 @@
 local tele = require 'telescope.builtin'
 
 -- vimdiff
+vim.opt.diffopt:append 'context:1000' -- show more context lines in hunks/commits
 vim.keymap.set('n', 'gh', '<cmd>diffget //2<cr>', { desc = 'get left diff' })
 vim.keymap.set('n', 'gl', '<cmd>diffget //3<cr>', { desc = 'get right diff' })
 
