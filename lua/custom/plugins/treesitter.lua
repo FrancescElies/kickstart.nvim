@@ -14,6 +14,6 @@ require('treesitter-context').setup {
 local function prev_context() require('treesitter-context').go_to_context(vim.v.count1) end
 local function next_context() require('treesitter-context').go_to_context(-vim.v.count1) end
 
-vim.keymap.set('n', '<leader>vc', ':TSContext toggle<cr>', { desc = '[v]im treesitter-[c]ontext toggle' })
+vim.keymap.set('n', '<leader>tc', ':TSContext toggle<cr>', { desc = '[v]im treesitter-[c]ontext toggle' })
 vim.keymap.set('n', '[c', prev_context, { silent = true, desc = 'Go to context' })
 vim.keymap.set('n', ']c', next_context, { silent = true, desc = 'Go to context' })
