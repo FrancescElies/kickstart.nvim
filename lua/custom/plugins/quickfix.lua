@@ -8,9 +8,7 @@ quicker.setup {}
 vim.keymap.set('n', '<leader>lt', function() quicker.toggle { loclist = true } end, { desc = '[t]oggle [l]oclist' })
 vim.keymap.set('n', '<leader>ld', vim.diagnostic.setloclist, { desc = '[l]oclist [d]iagnostic (buffer)' })
 
-vim.keymap.set('n', '<leader>qt', function() quicker.toggle() end, { desc = '[q]uickfix [t]oggle ' })
-vim.keymap.set({ 'n', 'v' }, '<leader>qr', vim.lsp.buf.references, { buffer = true, desc = '[q]uickfix [r]references' })
-vim.keymap.set('n', '<leader>qd', vim.diagnostic.setqflist, { desc = '[q]uickfix all [d]iag.' })
+vim.keymap.set('n', '<leader>q', function() quicker.toggle() end, { desc = '[q]uickfix' })
 
 local function quickfix_severity(severity)
   return function()

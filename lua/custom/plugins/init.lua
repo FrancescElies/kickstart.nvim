@@ -156,6 +156,9 @@ vim.api.nvim_create_user_command('ExecuteEveryXMinutesCancel', function(opts)
   if timers.every_x_min ~= nil then timers.every_x_min:stop() end
 end, {})
 
+vim.keymap.set('n', '<localleader>e', vim.diagnostic.open_float, { desc = '[e]rror show' })
+vim.keymap.set({ 'n', 'v' }, '<localleader>r', vim.lsp.buf.references, { desc = '[r]references' })
+vim.keymap.set('n', '<localleader>d', vim.diagnostic.setqflist, { desc = '[d]iagnostics' })
 vim.keymap.set('v', '<localleader>s', ':!codesort', { desc = 'codesort' })
 vim.keymap.set('n', '<localleader>s', function()
   local cursor_pos = vim.api.nvim_win_get_cursor(0)
