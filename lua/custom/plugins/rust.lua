@@ -149,13 +149,14 @@ local function rust_functions_and_reflection_calls(arg)
   return qf
 end
 
-vim.api.nvim_create_user_command('RustFunctionsAndReflectionCalls', function(opts)
+local function rust_functions_and_reflection_calls_qf(opts)
+  opts = opts or {}
   local qf = rust_functions_and_reflection_calls(opts.args)
   vim.fn.setqflist(qf, 'r')
   vim.cmd 'copen'
-end, {
-  nargs = '?',
-})
+end
+vim.api.nvim_create_user_command('RustFunctionsAndReflectionCalls', rust_functions_and_reflection_calls_qf, { nargs = '?' })
+vim.keymap.set('n', '<localleader>R', rust_functions_and_reflection_calls_qf, { desc = '[r]efernces & [r]eflection calls' })
 
 vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufRead' }, {
   pattern = { '*.rs', '*.toml' },
