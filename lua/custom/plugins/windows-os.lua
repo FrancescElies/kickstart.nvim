@@ -104,19 +104,50 @@ vim.api.nvim_create_user_command('ScreenAliveOn', function()
   end) end
 end, {})
 
-local function lock_screen()
-  -- rundll32 calls LockWorkStation() from user32.dll directly
-  vim.fn.jobstart({ 'rundll32.exe', 'user32.dll,LockWorkStation' }, {
-    detach = true,
-  })
-end
-vim.api.nvim_create_user_command('WinLockScreen', lock_screen, {})
+vim.api.nvim_create_user_command('WinLockScreen', function(opts)
+  local runit = function()
+    vim.fn.jobstart({ 'rundll32.exe', 'user32.dll,LockWorkStation' }, {
+      detach = true,
+    })
+  end
+  if opts.fargs[1] == nil then
+    runit()
+  else
+    local minutes = tonumber(opts.fargs[1])
+    local millis = minutes * 60 * 1000
+    vim.defer_fn(runit, millis)
+  end
+end, { nargs = 1 })
 
-local function restart() vim.fn.jobstart({ 'shutdown.exe', '/r', '/t', '0' }, { detach = true }) end
-vim.api.nvim_create_user_command('WinRestart', restart, {})
+vim.api.nvim_create_user_command('WinRestart', function(opts)
+  local runit = function() vim.fn.jobstart({ 'shutdown.exe', '/r', '/t', '0' }, { detach = true }) end
+  if opts.fargs[1] == nil then
+    runit()
+  else
+    local minutes = tonumber(opts.fargs[1])
+    local millis = minutes * 60 * 1000
+    vim.defer_fn(runit, millis)
+  end
+end, { nargs = 1 })
 
-local function hibernate() vim.fn.jobstart({ 'shutdown.exe', '/h' }, { detach = true }) end
-vim.api.nvim_create_user_command('WinHibernate', hibernate, {})
+vim.api.nvim_create_user_command('WinHibernate', function(opts)
+  local runit = function() vim.fn.jobstart({ 'shutdown.exe', '/h' }, { detach = true }) end
+  if opts.fargs[1] == nil then
+    runit()
+  else
+    local minutes = tonumber(opts.fargs[1])
+    local millis = minutes * 60 * 1000
+    vim.defer_fn(runit, millis)
+  end
+end, { nargs = 1 })
 
-local function sleep() vim.fn.jobstart({ 'rundll32.exe', 'powrprof.dll,SetSuspendState', '0', '1', '0' }, { detach = true }) end
-vim.api.nvim_create_user_command('WinSleep', sleep, {})
+vim.api.nvim_create_user_command('WinSleep', function(opts)
+  local runit = function() vim.fn.jobstart({ 'rundll32.exe', 'powrprof.dll,SetSuspendState', '0', '1', '0' }, { detach = true }) end
+  if opts.fargs[1] == nil then
+    runit()
+  else
+    local minutes = tonumber(opts.fargs[1])
+    local millis = minutes * 60 * 1000
+    vim.defer_fn(runit, millis)
+  end
+end, { nargs = 1 })
