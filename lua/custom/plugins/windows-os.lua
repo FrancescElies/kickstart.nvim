@@ -20,9 +20,7 @@
 --- Enjoy, taking fast notes
 
 local is_windows = string.lower(vim.loop.os_uname().sysname) == 'windows_nt'
-if (not jit) or not is_windows then
-  return {}
-end
+if (not jit) or not is_windows then return {} end
 
 local mouse_timer = vim.uv.new_timer()
 
@@ -100,11 +98,25 @@ vim.api.nvim_create_user_command('ScreenAliveOn', function()
   else
     print 'Ready to take quick notes anytime!'
   end
-  if mouse_timer then
-    mouse_timer:start(0, 100, function()
-      move_mouse_relative(1, 1)
-      move_mouse_relative(-1, -1)
-    end)
-  end
+  if mouse_timer then mouse_timer:start(0, 100, function()
+    move_mouse_relative(1, 1)
+    move_mouse_relative(-1, -1)
+  end) end
 end, {})
 
+local function lock_screen()
+  -- rundll32 calls LockWorkStation() from user32.dll directly
+  vim.fn.jobstart({ 'rundll32.exe', 'user32.dll,LockWorkStation' }, {
+    detach = true,
+  })
+end
+vim.api.nvim_create_user_command('WinLockScreen', lock_screen, {})
+
+local function restart() vim.fn.jobstart({ 'shutdown.exe', '/r', '/t', '0' }, { detach = true }) end
+vim.api.nvim_create_user_command('WinRestart', restart, {})
+
+local function hibernate() vim.fn.jobstart({ 'shutdown.exe', '/h' }, { detach = true }) end
+vim.api.nvim_create_user_command('WinHibernate', hibernate, {})
+
+local function sleep() vim.fn.jobstart({ 'rundll32.exe', 'powrprof.dll,SetSuspendState', '0', '1', '0' }, { detach = true }) end
+vim.api.nvim_create_user_command('WinSleep', sleep, {})
