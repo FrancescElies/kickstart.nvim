@@ -29,4 +29,4 @@ local function json_key_path()
   vim.notify('Yanked: ' .. path)
 end
 
-vim.keymap.set('n', '<localleader>p', json_key_path, { desc = 'key path' })
+vim.keymap.set('n', '<localleader>k', json_key_path, { desc = '[k]ey path' })
