@@ -82,7 +82,7 @@ gitsigns.setup {
   end,
 }
 vim.pack.add { 'https://github.com/tpope/vim-fugitive' }
-vim.keymap.set('n', '<leader>gs', '<cmd>tabnew|G<cr><c-w>o', { desc = '[g]it [s]tatus' })
+vim.keymap.set('n', '<leader>gs', '<cmd>G<cr>', { desc = '[g]it [s]tatus' })
 
 vim.pack.add { 'https://github.com/sindrets/diffview.nvim' }
 vim.keymap.set('n', '<leader>Db', '<cmd>DiffviewFileHistory<cr>', { desc = '[d]iff history [b]ranch' })
