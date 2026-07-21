@@ -51,7 +51,7 @@ end
 vim.keymap.set('n', '<leader>byp', yank_path, { desc = '[b]uffer [y]ank [p]ath' })
 vim.keymap.set('n', '<leader>bya', yank_abs_path, { desc = '[b]uffer [y]ank [a]bsolute path' })
 vim.keymap.set('n', '<leader>byn', yank_just_name, { desc = '[b]uffer [y]ank [n]ame' })
-vim.keymap.set('n', '<leader>bd', '<cmd>bd<cr>', { desc = '[b]uffer [y]ank [n]ame' })
+vim.keymap.set('n', '<localleader>x', '<cmd>bd<cr>', { desc = 'delete buffer' })
 
 -- quick scape
 vim.keymap.set({ 'i', 'c' }, 'jk', '<Esc>')
