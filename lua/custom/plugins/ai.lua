@@ -4,7 +4,7 @@ local fn = require 'custom.fn'
 -- Usage:
 --   local r = vim.region(0, "'<", "'>", vim.fn.visualmode(), true)
 --   vim.print(visual_region_to_text(r))
-function visual_region_to_text(region)
+local function visual_region_to_text(region)
   local text = ''
   local maxcol = vim.v.maxcol
   for line, cols in vim.spairs(region) do
@@ -15,7 +15,7 @@ function visual_region_to_text(region)
   return text
 end
 
-function ask_region()
+local function ask_region()
   local input = visual_region_to_text()
   if input ~= '' then require('CopilotChat').ask(input, { selection = require('CopilotChat.select').buffer }) end
 end
