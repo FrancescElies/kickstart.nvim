@@ -94,12 +94,11 @@ if vim.env.SSH_CONNECTION then
   }
 end
 
-vim.opt.diffopt:append {
-  'internal', -- built-in diff engine (faster, supports fine-grained diffs)
-  'algorithm:patience', -- better for readable diffs (especially for reordered blocks)
-  'indent-heuristic', -- improves diffs when indentation changes
-  'linematch:60', -- enables intraline (word-level) diff matching on similar lines (up to 60 chars difference allowed
-}
+ vim.opt.diffopt:append('algorithm:patience')  -- better for readable diffs (especially for reordered blocks)
+ vim.opt.diffopt:append('indent-heuristic')    -- improves diffs when indentation changes
+ vim.opt.diffopt:append('inline:word')         -- word-level inline diff highlight
+ vim.opt.diffopt:append('linematch:60')        -- enables intraline (word-level) diff matching on similar lines (up to 60 chars difference allowed
+
 
 vim.api.nvim_create_user_command('Dec2Hex', function()
   local cword = vim.fn.expand '<cword>'
