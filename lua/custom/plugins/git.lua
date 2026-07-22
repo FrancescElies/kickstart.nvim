@@ -52,8 +52,8 @@ gitsigns.setup {
       map('n', '(', function() vim.cmd.normal { ']c', bang = true } end, { desc = 'Jump to next hunk' })
       map('n', ')', function() vim.cmd.normal { '[c', bang = true } end, { desc = 'Jump to previous hunk' })
     else
-      map('n', ']h', function() gitsigns.nav_hunk 'next' end, { desc = 'Jump to next [h]unk' })
-      map('n', '[h', function() gitsigns.nav_hunk 'prev' end, { desc = 'Jump to previous [h]unk' })
+      map('n', ']c', function() gitsigns.nav_hunk 'next' end, { desc = 'Jump to next [h]unk' })
+      map('n', '[c', function() gitsigns.nav_hunk 'prev' end, { desc = 'Jump to previous [h]unk' })
       vim.keymap.set('n', '(', '<cmd>Gitsigns prev_hunk<cr>')
       vim.keymap.set('n', ')', '<cmd>Gitsigns next_hunk<cr>')
     end
@@ -85,13 +85,9 @@ vim.pack.add { 'https://github.com/tpope/vim-fugitive' }
 vim.keymap.set('n', '<leader>gs', '<cmd>G<cr>', { desc = '[g]it [s]tatus' })
 
 vim.pack.add { 'https://github.com/sindrets/diffview.nvim' }
-vim.keymap.set('n', '<leader>Db', '<cmd>DiffviewFileHistory<cr>', { desc = '[d]iff history [b]ranch' })
-vim.keymap.set('n', '<leader>Df', '<cmd>DiffviewFileHistory %<cr>', { desc = '[d]iff history [f]ile' })
-vim.keymap.set('n', '<leader>Dl', '<cmd>.DiffviewFileHistory<cr>', { desc = '[d]iff history ([l]ine evolution)' })
-vim.keymap.set('v', '<leader>Dl', '<cmd>DiffviewFileHistory<cr>', { desc = '[d]iff history ([l]ine evolution)' })
-vim.keymap.set('n', '<leader>Dw', '<cmd>DiffviewOpen<cr>', { desc = '[d]iff [w]orking tree' })
-vim.keymap.set('n', '<leader>Dm', '<cmd>DiffviewOpen origin/main...HEAD', { desc = '[d]iff [m]erge-base' })
-vim.keymap.set('n', '<leader>Dc', '<cmd>DiffviewClose<cr>', { desc = '[d]iff [c]lose' })
+vim.keymap.set('n', '<leader>gdh', '<cmd>DiffviewFileHistory ', { desc = '[d]iff history' })
+vim.keymap.set('n', '<leader>gdd', '<cmd>DiffviewOpen ', { desc = '[d]iff [o]open ' })
+vim.keymap.set('n', '<leader>gdc', '<cmd>DiffviewClose<cr>', { desc = '[d]iff [c]lose' })
 
 -- Open current file+line in Azure DevOps (PR diff if PR exists, else file view)
 local function open_in_azdo()
