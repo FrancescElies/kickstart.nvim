@@ -287,6 +287,11 @@ vim.keymap.set('x', '<C-x>', function() dial.manipulate('decrement', 'visual') e
 vim.keymap.set('x', 'g<C-a>', function() dial.manipulate('increment', 'gvisual') end)
 vim.keymap.set('x', 'g<C-x>', function() dial.manipulate('decrement', 'gvisual') end)
 
+vim.keymap.set('n', '<c-left>', '<cmd>vertical resize -5<cr>')
+vim.keymap.set('n', '<c-right>', '<cmd>vertical resize +5<cr>')
+vim.keymap.set('n', '<c-down>', '<cmd>resize -5<cr>')
+vim.keymap.set('n', '<c-up>', '<cmd>resize +5<cr>')
+
 -- connect to databases "tpope/vim-dadbod",
 -- https://github.com/wezm/rsspls rrs please, make rss from website
 -- https://github.com/wezm/titlecase titlecase - is a small tool and library (crate) that capitalizes English text according to a style defined by John Gruber
