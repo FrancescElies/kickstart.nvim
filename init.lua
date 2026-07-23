@@ -282,6 +282,8 @@ do
       { '<leader>n', group = '[N]otes' },
       { '<leader>s', group = '[S]earch' },
       { '<leader>t', group = '[T]oggle' },
+      { '<leader>v', group = '[v]im' },
+      { '<leader>d', group = '[v]im [d]iagnostic' },
       { '<leader>q', group = '[Q]uickfix' },
       { 'Z', group = 'Session', mode = { 'n' } },
       { 'gr', group = 'LSP Actions', mode = { 'n' } },
