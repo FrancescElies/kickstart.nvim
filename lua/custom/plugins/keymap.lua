@@ -152,8 +152,8 @@ vim.keymap.set('n', 'L', '<cmd>bnext<CR>', { desc = 'next buffer' })
 vim.keymap.set('n', '<leader>bc', '<cmd>vs<cr><c-f>:set scb<cr><c-w>h<cmd>set scb<cr>', { desc = '[b]uf split & [c]ontinue view, (undo `:set noscb`)' })
 
 -- Move lines in visual mode
-vim.keymap.set('v', 'H', ":m '<-2<CR>gv=gv", { desc = 'move line up' })
-vim.keymap.set('v', 'L', ":m '>+1<CR>gv=gv", { desc = 'move line down' })
+vim.keymap.set('x', 'K', ":m '<-2<CR>gv=gv", { desc = 'move line up' })
+vim.keymap.set('x', 'J', ":m '>+1<CR>gv=gv", { desc = 'move line down' })
 
 vim.keymap.set({ 'n', 'v' }, 's/', [[:s,/,\\,g<cr>]], { desc = 'substitute / with \\' })
 vim.keymap.set({ 'n', 'v' }, 's\\', [[:s,\\,/,g<cr>]], { desc = 'substitute \\ with /' })
