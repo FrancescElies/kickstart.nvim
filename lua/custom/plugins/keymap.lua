@@ -124,7 +124,9 @@ local function open_vim_pack_dir() vim.cmd('e ' .. vim.fs.joinpath(vim.fn.stdpat
 vim.api.nvim_create_user_command('OpenVimPackDir', open_vim_pack_dir, {})
 
 vim.keymap.set({ 'n', 'v' }, '<leader>d', '"_d', { desc = 'delete (no yank)' })
--- vim.keymap.set({'n', 'v'}, '<leader>p', '"+p', { desc = 'paste from clipboard' })
+vim.keymap.set({'n', 'v'}, '<leader>y', '"+y', { desc = 'yank to OS clipboard' })
+vim.keymap.set({'n', 'v'}, '<leader>p', '"+p', { desc = 'paste from OS clipboard' })
+
 
 vim.keymap.set('n', '<leader>ve', '<cmd>tabnew | e $MYVIMRC | CdBufRootDir <cr>', { desc = 'edit vimrc' })
 vim.keymap.set('n', '<leader>vp', open_vim_pack_dir, { desc = 'edit vimrc' })
