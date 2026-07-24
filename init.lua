@@ -274,7 +274,6 @@ do
       { '<leader>c', group = '[C]hat' },
       { '<leader>g', group = '[G]it', mode = { 'n', 'v' } },
       { '<leader>g/', group = '[G]it [/]search', mode = { 'n', 'v' } },
-      { '<leader>D', group = '[D]iff', mode = { 'n', 'v' } },
       { '<leader>gdh', group = '[G]it [D]iff [H]istory', mode = { 'n', 'v' } },
       { '<leader>gw', group = '[G]it bro[w]se', mode = { 'n', 'v' } },
       { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },

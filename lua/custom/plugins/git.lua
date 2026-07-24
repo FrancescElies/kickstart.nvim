@@ -143,7 +143,8 @@ end
 vim.keymap.set('n', '<leader>go', open_in_azdo, { desc = '[g]it [o]pen in browser (az devops)' })
 
 local function diff_orig() vim.cmd [[vert new | set buftype=nofile | read ++edit # | 0d_  | diffthis | wincmd p | diffthis]] end
-vim.keymap.set('n', '<leader>Do', diff_orig, { desc = '[d]iff [o]riginal (disk-file)' })
+
+vim.keymap.set('n', '<localleader>o', diff_orig, { desc = '[d]iff [o]riginal (disk-file)' })
 vim.api.nvim_create_user_command('DiffOrig', diff_orig, {})
 
 vim.pack.add { 'https://github.com/aaronhallaert/advanced-git-search.nvim' }

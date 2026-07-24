@@ -32,18 +32,6 @@ vim.api.nvim_create_autocmd({ 'FileReadPost', 'BufReadPost' }, {
   end,
 })
 
-vim.api.nvim_create_autocmd('BufReadPost', {
-  group = 'markdown',
-  pattern = '*.md',
-  -- command = 'setlocal wrap | setlocal spell',
-  callback = function(_)
-    -- vim.diagnostic.enable(false, { bufnr = 0 })
-    vim.wo.wrap = false
-    vim.wo.spell = true
-  end,
-})
---
-
 _G.autosave_enabled = false
 vim.api.nvim_create_augroup('autosave', { clear = true })
 -- Autosave
@@ -51,12 +39,17 @@ vim.api.nvim_create_autocmd({ 'TextChanged', 'InsertLeave' }, {
   group = 'autosave',
   pattern = '*',
   callback = function()
+    if not _G.autosave_enabled then
+      return
+    end
     local bufname = vim.api.nvim_buf_get_name(0)
     if vim.bo.modified and bufname ~= '' then
+      print('autosaved ' .. bufname)
       vim.cmd 'silent write'
     end
   end,
 })
+
 vim.api.nvim_create_user_command('ToggleAutosave', function()
   _G.autosave_enabled = not _G.autosave_enabled
   print('Autosave ' .. (_G.autosave_enabled and 'enabled' or 'disabled'))
