@@ -6,8 +6,11 @@ local quicker = require 'quicker'
 quicker.setup {}
 
 vim.keymap.set('n', '<localleader>l', function() quicker.toggle { loclist = true } end, { desc = '[l]oclist' })
-vim.keymap.set('n', '<localleader>q', quicker.toggle, { desc = '[q]uickfix' })
+
 vim.keymap.set('n', '<leader>q', quicker.toggle, { desc = '[q]uickfix' })
+vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = '[e]rror show' })
+vim.keymap.set('n', '<leader>D', vim.diagnostic.setqflist, { desc = '[d]iagnostics' })
+
 
 local function quickfix_severity(severity)
   return function()
@@ -16,8 +19,8 @@ local function quickfix_severity(severity)
   end
 end
 
-vim.keymap.set('n', '<leader>qw', quickfix_severity(vim.diagnostic.severity.WARN), { desc = '[q]uickfix [w]arnings' })
-vim.keymap.set('n', '<leader>qe', quickfix_severity(vim.diagnostic.severity.ERROR), { desc = '[q]uickfix [e]rrors' })
+vim.api.nvim_create_user_command('QuickLevelError', function() quickfix_severity(vim.diagnostic.severity.ERROR) end, {})
+vim.api.nvim_create_user_command('QuickLevelWarning', function() quickfix_severity(vim.diagnostic.severity.WARN) end, {})
 
 local function jump_diagnostic_by_severity(opts)
   local count = opts.count or 1
