@@ -14,8 +14,8 @@ vim.keymap.set('n', '<leader>gL', tele.git_commits, { desc = '[g]it [l]og (cwd)'
 vim.keymap.set('n', '<leader>gl', tele.git_bcommits, { desc = '[g]it [l]og buffer' })
 vim.keymap.set('n', '<leader>gt', tele.git_status, { desc = '[g]it [t]elescope status ' })
 vim.keymap.set('n', '<leader>gz', tele.git_stash, { desc = '[g]it [z]stash' })
-vim.keymap.set('n', '<leader>gu', '<cmd>Git pull<cr>', { desc = '[g]it [p]ull' })
-vim.keymap.set('n', '<leader>gp', '<cmd>Git push<cr>', { desc = '[g]it [p]ush' })
+vim.keymap.set('n', '<leader>gp', '<cmd>Git pull<cr>', { desc = '[g]it [p]ull' })
+vim.keymap.set('n', '<leader>gP', '<cmd>Git push<cr>', { desc = '[g]it [P]ush' })
 vim.keymap.set('n', '<leader>gc', '<cmd>Git commit<cr>', { desc = '[g]it [p]ush' })
 
 --- Lists commits for a range of lines in the current buffer with diff preview
