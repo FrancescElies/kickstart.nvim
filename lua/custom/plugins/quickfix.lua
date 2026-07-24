@@ -41,6 +41,7 @@ local function jump_diagnostic_by_severity(opts)
 end
 
 local function is_quickfix_open() return vim.fn.getqflist({ winid = 0 }).winid > 0 end
+local function is_loclist_open() return vim.fn.getloclist(vim.api.nvim_get_current_win(), { winid = 0 }).winid > 0 end
 
 vim.g.diagnostic_visit_errors_first = true
 vim.api.nvim_create_user_command('ToggleDiagnosticVisitOrder', function()

@@ -175,11 +175,19 @@ vim.api.nvim_create_autocmd('VimResized', {
   end,
 })
 
--- WARN: can't setqflist in callback
--- vim.api.nvim_create_user_command('QuickfixCmd', function(opts)
---   vim.system(vim.fn.split(opts.args), { text = true }, function(obj)
---     vim.fn.setqflist(vim.fn.split(obj.stdout))
---     vim.cmd 'copen'
---   end)
--- end, { nargs = 1 })
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = {"help", "man", "qf", "lspinfo", "checkhealth"},
+  callback = function(args)
+    vim.keymap.set('n', 'q', '<cmd>close<cr>', { buffer = args.buf, silent = true })
+  end,
+})
 
+vim.api.nvim_create_autocmd('BufWritePost', {
+  pattern = "*",
+  callback = function(args)
+    vim.cmd 'silent! lvimgrep /TODO/j %' -- flag j prevents jump to first match
+    if #vim.fn.getloclist(0) >0 then
+      vim.cmd 'lopen'
+    end
+  end,
+})
