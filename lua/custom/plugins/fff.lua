@@ -15,12 +15,12 @@ vim.g.fff = {
   debug = { enabled = false, show_scores = true },
 }
 
-vim.keymap.set('n', 'ff', function() require('fff').find_files() end, { desc = 'FFFind files' })
-vim.keymap.set('n', 'fg', function() require('fff').live_grep() end, { desc = 'LiFFFe grep files' })
-vim.keymap.set('n', 'fw', function() require('fff').live_grep_under_cursor() end, { desc = 'FFFind current word / selection' })
-vim.keymap.set('n', 'fr', function()
+vim.keymap.set('n', 'sf', function() require('fff').find_files() end, { desc = '[s]earch [f]iles' })
+vim.keymap.set('n', 'sg', function() require('fff').live_grep() end, { desc = '[s]earch by [g]rep' })
+vim.keymap.set('n', 'sw', function() require('fff').live_grep_under_cursor() end, { desc = '[s]earch [w]ord / selection' })
+vim.keymap.set('n', 'sr', function()
   local dir = vim.fn.expand '%:p:h'
   require('fff').change_indexing_directory(dir)
   vim.notify('fff uses now ' .. dir)
 end, { desc = 'FFFind change root' })
-vim.keymap.set('n', 'fs', function() require('fff').scan_files() end, { desc = 'FFFind rescan' })
+vim.keymap.set('n', 's.', function() require('fff').scan_files() end, { desc = 'FFFind rescan' })
