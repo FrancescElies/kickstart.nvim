@@ -86,7 +86,7 @@ vim.keymap.set('n', '<leader>gs', '<cmd>G<cr>', { desc = '[g]it [s]tatus' })
 
 vim.pack.add { 'https://github.com/sindrets/diffview.nvim' }
 vim.keymap.set('n', '<leader>gdh', '<cmd>DiffviewFileHistory ', { desc = '[d]iff history' })
-vim.keymap.set('n', '<leader>gdd', '<cmd>DiffviewOpen ', { desc = '[d]iff [o]open ' })
+vim.keymap.set('n', '<leader>gdo', '<cmd>DiffviewOpen ', { desc = '[d]iff [o]open ' })
 vim.keymap.set('n', '<leader>gdc', '<cmd>DiffviewClose<cr>', { desc = '[d]iff [c]lose' })
 
 -- Open current file+line in Azure DevOps (PR diff if PR exists, else file view)
@@ -140,7 +140,7 @@ local function open_in_azdo()
   vim.ui.open(url)
   vim.notify('Opened in browser: ' .. url)
 end
-vim.keymap.set('n', '<leader>go', open_in_azdo, { desc = '[g]it [o]pen in browser (az devops)' })
+vim.keymap.set('n', '<localleader>A', open_in_azdo, { desc = 'open [A]zure devops' })
 
 local function diff_orig() vim.cmd [[vert new | set buftype=nofile | read ++edit # | 0d_  | diffthis | wincmd p | diffthis]] end
 
