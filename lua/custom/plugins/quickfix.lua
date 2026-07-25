@@ -11,7 +11,6 @@ vim.keymap.set('n', '<leader>q', quicker.toggle, { desc = '[q]uickfix' })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = '[e]rror show' })
 vim.keymap.set('n', '<leader>D', vim.diagnostic.setqflist, { desc = '[d]iagnostics' })
 
-
 local function quickfix_severity(severity)
   return function()
     vim.diagnostic.setqflist { severity = severity }
@@ -24,6 +23,7 @@ vim.api.nvim_create_user_command('QuickLevelWarning', function() quickfix_severi
 
 local function jump_diagnostic_by_severity(opts)
   local count = opts.count or 1
+  local float = opts.float or 1
   local severities = {
     vim.diagnostic.severity.ERROR,
     vim.diagnostic.severity.WARN,
@@ -34,7 +34,7 @@ local function jump_diagnostic_by_severity(opts)
     local diagnostics = vim.diagnostic.get(0, { severity = severity })
     if #diagnostics > 0 then
       -- vim.diagnostic.goto_next { severity = severity }
-      vim.diagnostic.jump { count = count, float = true, severity = severity }
+      vim.diagnostic.jump { count = count, float = float, severity = severity }
       return
     end
   end
@@ -52,44 +52,29 @@ vim.keymap.set('n', '<leader>td', '<cmd>ToggleDiagnosticVisitOrder<cr>', { desc 
 
 local function diagnostic_jump(opts)
   if vim.g.diagnostic_visit_errors_first then
-    jump_diagnostic_by_severity { count = opts.count }
+    jump_diagnostic_by_severity { count = opts.count, float = true }
   else
     vim.diagnostic.jump { count = opts.count, float = true }
   end
-  vim.cmd 'normal! zz'
 end
 
 vim.keymap.set('n', '<c-k>', function()
-  if is_loclist_open() then
-    vim.cmd 'lprevious' -- previous quickfix item
-    vim.cmd 'normal! zz'
-  elseif is_quickfix_open() then
-    vim.cmd 'cprevious' -- previous quickfix item
-    vim.cmd 'normal! zz'
+  if is_quickfix_open() then
+    vim.cmd 'cprevious'
   else
-    if vim.g.diagnostic_visit_errors_first then
-      jump_diagnostic_by_severity { count = -1 }
-    else
-      vim.diagnostic.jump { count = -1, float = true }
-    end
+    diagnostic_jump { count = -1, float = true }
   end
-end)
+  vim.cmd 'normal! zz'
+end, { desc = 'previous quickfix item' })
 
 vim.keymap.set('n', '<C-j>', function()
-  if is_loclist_open() then
-    vim.cmd 'lnext' -- next quickfix item
-    vim.cmd 'normal! zz'
-  elseif is_quickfix_open() then
-    vim.cmd 'cnext' -- next quickfix item
-    vim.cmd 'normal! zz'
+  if is_quickfix_open() then
+    vim.cmd 'cnext' 
   else
-    if vim.g.diagnostic_visit_errors_first then
-      jump_diagnostic_by_severity { count = 1 }
-    else
-      vim.diagnostic.jump { count = 1, float = true }
-    end
+    diagnostic_jump { count = 1, float = true }
   end
-end)
+  vim.cmd 'normal! zz'
+end, {desc='quickfix next'})
 
 vim.api.nvim_create_autocmd('FileType', {
   pattern = 'qf',

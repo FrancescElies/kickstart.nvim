@@ -39,9 +39,7 @@ vim.api.nvim_create_autocmd({ 'TextChanged', 'InsertLeave' }, {
   group = 'autosave',
   pattern = '*',
   callback = function()
-    if not _G.autosave_enabled then
-      return
-    end
+    if not _G.autosave_enabled then return end
     local bufname = vim.api.nvim_buf_get_name(0)
     if vim.bo.modified and bufname ~= '' then
       print('autosaved ' .. bufname)
@@ -77,9 +75,7 @@ local function find_typescript_for_javascript_file()
       local bufpath = vim.fn.getcwd()
       local mapping_file_path = vim.fn.resolve(bufpath .. '/' .. map_file)
       local mapping_file = io.open(mapping_file_path)
-      if mapping_file == nil then
-        return
-      end
+      if mapping_file == nil then return end
       print('js file mapping found: ' .. mapping_file_path)
       local mapping_file_contents = mapping_file:read '*a'
       mapping_file:close()
@@ -107,9 +103,7 @@ local function get_buffer_by_name_or_scratch(name, clean)
   for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
     local buf_name = vim.fn.bufname(bufnr)
     if buf_name == name then
-      if clean then
-        vim.api.nvim_buf_set_lines(bufnr, -0, -1, false, {})
-      end
+      if clean then vim.api.nvim_buf_set_lines(bufnr, -0, -1, false, {}) end
       -- buffer found
       return bufnr
     end
@@ -137,9 +131,7 @@ local function attach_to_buffer(bufnr, pattern, command)
       -- clear contents
       vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, {})
       local function append(_, data)
-        if data then
-          vim.api.nvim_buf_set_lines(bufnr, -1, -1, false, data)
-        end
+        if data then vim.api.nvim_buf_set_lines(bufnr, -1, -1, false, data) end
       end
 
       vim.fn.jobstart(command, {
@@ -170,24 +162,11 @@ end, {})
 
 vim.api.nvim_create_autocmd('VimResized', {
   pattern = '*',
-  callback = function()
-    vim.cmd 'wincmd ='
-  end,
+  callback = function() vim.cmd 'wincmd =' end,
 })
 
 vim.api.nvim_create_autocmd('FileType', {
-  pattern = {"help", "man", "qf", "lspinfo", "checkhealth"},
-  callback = function(args)
-    vim.keymap.set('n', 'q', '<cmd>close<cr>', { buffer = args.buf, silent = true })
-  end,
+  pattern = { 'help', 'man', 'qf', 'lspinfo', 'checkhealth' },
+  callback = function(args) vim.keymap.set('n', 'q', '<cmd>close<cr>', { buffer = args.buf, silent = true }) end,
 })
 
-vim.api.nvim_create_autocmd('BufWritePost', {
-  pattern = "*",
-  callback = function(args)
-    vim.cmd 'silent! lvimgrep /TODO/j %' -- flag j prevents jump to first match
-    if #vim.fn.getloclist(0) >0 then
-      vim.cmd 'lopen'
-    end
-  end,
-})

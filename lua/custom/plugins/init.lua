@@ -94,11 +94,10 @@ if vim.env.SSH_CONNECTION then
   }
 end
 
- vim.opt.diffopt:append('algorithm:patience')  -- better for readable diffs (especially for reordered blocks)
- vim.opt.diffopt:append('indent-heuristic')    -- improves diffs when indentation changes
- vim.opt.diffopt:append('inline:word')         -- word-level inline diff highlight
- vim.opt.diffopt:append('linematch:60')        -- enables intraline (word-level) diff matching on similar lines (up to 60 chars difference allowed
-
+vim.opt.diffopt:append 'algorithm:patience' -- better for readable diffs (especially for reordered blocks)
+vim.opt.diffopt:append 'indent-heuristic' -- improves diffs when indentation changes
+vim.opt.diffopt:append 'inline:word' -- word-level inline diff highlight
+vim.opt.diffopt:append 'linematch:60' -- enables intraline (word-level) diff matching on similar lines (up to 60 chars difference allowed
 
 vim.api.nvim_create_user_command('Dec2Hex', function()
   local cword = vim.fn.expand '<cword>'
@@ -154,6 +153,11 @@ end, {})
 vim.api.nvim_create_user_command('ExecuteEveryXMinutesCancel', function(opts)
   if timers.every_x_min ~= nil then timers.every_x_min:stop() end
 end, {})
+
+vim.keymap.set('n', '<localleader>t', function(args)
+  vim.cmd 'silent! lvimgrep /TODO/j %' -- flag j prevents jump to first match
+  if #vim.fn.getloclist(0) > 0 then vim.cmd 'lopen  2' end
+end, { desc = 'buf. TODOs loclist' })
 
 vim.keymap.set('v', '<localleader>s', ':!codesort', { desc = 'codesort' })
 vim.keymap.set('n', '<localleader>s', function()
