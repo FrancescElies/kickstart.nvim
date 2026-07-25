@@ -563,8 +563,10 @@ do
       },
       git_status = {
         mappings = {
-          i = { ['c-c'] = { '<cmd>Git commit<cr>', type = 'command' } },
-          n = { ['c'] = { '<cmd>Git commit<cr>', type = 'command' } },
+          i = { ['c-c'] = { '<cmd>Neogit commit<cr>', type = 'command' } }, 
+          n = { ['c'] = { '<cmd>Neogit commit<cr>', type = 'command' } }, 
+          -- i = { ['c-c'] = { '<cmd>Git commit<cr>', type = 'command' } }, -- fugitive
+          -- n = { ['c'] = { '<cmd>Git commit<cr>', type = 'command' } }, -- fugitive
         },
       },
       live_multi_grep = {

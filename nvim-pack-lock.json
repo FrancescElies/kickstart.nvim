@@ -91,6 +91,10 @@
       "rev": "7cd5db330f41b7bae02b2d6202218a061c3ebc1f",
       "src": "https://github.com/ravitemer/mcphub.nvim"
     },
+    "mini-git": {
+      "rev": "62aa54f41c50181dceff90b55f989efe69ad198c",
+      "src": "https://github.com/nvim-mini/mini-git"
+    },
     "mini.bracketed": {
       "rev": "203eb35f386b4fc9abcff1518c84d5537d41c80a",
       "src": "https://github.com/nvim-mini/mini.bracketed"
@@ -102,6 +106,10 @@
     "neogen": {
       "rev": "23e7e9f883d01289ebd90e98025acc860ea26366",
       "src": "https://github.com/danymat/neogen"
+    },
+    "neogit": {
+      "rev": "57c9f8ee784bcd07141bf7fa958b5c5bb1420de8",
+      "src": "https://github.com/NeogitOrg/neogit"
     },
     "nvim-autopairs": {
       "rev": "7b9923abad60b903ece7c52940e1321d39eccc79",

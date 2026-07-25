@@ -14,9 +14,6 @@ vim.keymap.set('n', '<leader>gL', tele.git_commits, { desc = '[g]it [l]og (cwd)'
 vim.keymap.set('n', '<leader>gl', tele.git_bcommits, { desc = '[g]it [l]og buffer' })
 vim.keymap.set('n', '<leader>gt', tele.git_status, { desc = '[g]it [t]elescope status ' })
 vim.keymap.set('n', '<leader>gz', tele.git_stash, { desc = '[g]it [z]stash' })
-vim.keymap.set('n', '<leader>gp', '<cmd>Git pull<cr>', { desc = '[g]it [p]ull' })
-vim.keymap.set('n', '<leader>gP', '<cmd>Git push<cr>', { desc = '[g]it [P]ush' })
-vim.keymap.set('n', '<leader>gc', '<cmd>Git commit<cr>', { desc = '[g]it [p]ush' })
 
 --- Lists commits for a range of lines in the current buffer with diff preview
 vim.keymap.set('v', '<leader>gl', tele.git_bcommits_range, { desc = '[g]it [l]og (sel. lines)' })
@@ -81,8 +78,14 @@ gitsigns.setup {
     vim.keymap.set({ 'o', 'x' }, 'ih', '<Cmd>Gitsigns select_hunk<CR>')
   end,
 }
-vim.pack.add { 'https://github.com/tpope/vim-fugitive' }
-vim.keymap.set('n', '<leader>gs', '<cmd>G<cr>', { desc = '[g]it [s]tatus' })
+vim.pack.add { 'https://github.com/NeogitOrg/neogit' }
+vim.keymap.set('n', '<leader>gs', '<cmd>Neogit<cr>', { desc = '[g]it [s]tatus' })
+
+-- vim.pack.add { 'https://github.com/tpope/vim-fugitive' }
+-- vim.keymap.set('n', '<leader>gs', '<cmd>G<cr>', { desc = '[g]it [s]tatus' })
+-- vim.keymap.set('n', '<leader>gp', '<cmd>Git pull<cr>', { desc = '[g]it [p]ull' })
+-- vim.keymap.set('n', '<leader>gP', '<cmd>Git push<cr>', { desc = '[g]it [P]ush' })
+-- vim.keymap.set('n', '<leader>gc', '<cmd>Git commit<cr>', { desc = '[g]it [p]ush' })
 
 vim.pack.add { 'https://github.com/sindrets/diffview.nvim' }
 vim.keymap.set('n', '<leader>gdh', '<cmd>DiffviewFileHistory ', { desc = '[d]iff history' })
