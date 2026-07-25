@@ -58,24 +58,24 @@ gitsigns.setup {
       vim.keymap.set('n', ')', '<cmd>Gitsigns next_hunk<cr>')
     end
 
-    map('v', '<leader>hs', function() gitsigns.stage_hunk { vim.fn.line '.', vim.fn.line 'v' } end, { desc = '[h]unk [s]tage' })
-    map('v', '<leader>hr', function() gitsigns.reset_hunk { vim.fn.line '.', vim.fn.line 'v' } end, { desc = '[h]unk [r]eset' })
+    map('v', '<leader>hs', function() gitsigns.stage_hunk { vim.fn.line '.', vim.fn.line 'v' } end, { desc = '[s]tage' })
+    map('v', '<leader>hr', function() gitsigns.reset_hunk { vim.fn.line '.', vim.fn.line 'v' } end, { desc = '[r]eset' })
 
-    map('n', '<leader>hb', gitsigns.blame, { desc = '[h]unk [b]lame [b]uffer' })
-    map('n', '<leader>hi', gitsigns.toggle_current_line_blame, { desc = '[h]unk toggle [i]nline blame' })
-    map('n', '<leader>hd', gitsigns.preview_hunk_inline, { desc = '[h]unk toggle [d]eleted' })
-    map('n', '<leader>hdh', function() gitsigns.diffthis '@' end, { desc = '[h]unk [d]iff..HEAD' })
-    map('n', '<leader>hdi', gitsigns.diffthis, { desc = '[h]unk [d]iff..index' })
-    map('n', '<leader>hl', gitsigns.blame_line, { desc = '[h]unk blame [l]ine' })
-    map('n', '<leader>hp', gitsigns.preview_hunk, { desc = '[h]unk [p]review' })
-    map('n', '<leader>hQ', function() gitsigns.setqflist 'all' end, { desc = '[h]unk [q]uickfix Project' })
-    map('n', '<leader>hq', gitsigns.setqflist, { desc = '[h]unk [q]uickfix ' })
-    map('n', '<leader>hR', gitsigns.reset_buffer, { desc = '[h]unk [R]eset buffer' })
-    map('n', '<leader>hr', gitsigns.reset_hunk, { desc = '[h]unk [r]eset' })
-    map('n', '<leader>hS', gitsigns.stage_buffer, { desc = '[h]unk [S]tage buffer' })
-    map('n', '<leader>hs', gitsigns.stage_hunk, { desc = '[h]unk [s]tage' })
-    map('n', '<leader>hu', gitsigns.stage_hunk, { desc = '[h]unk [u]ndo stage' })
-    map('n', '<leader>hw', gitsigns.toggle_word_diff, { desc = '[h]unk toggle [w]ord diff' })
+    map('n', '<leader>hb', gitsigns.blame, { desc = '[b]lame [b]uffer' })
+    map('n', '<leader>hi', gitsigns.toggle_current_line_blame, { desc = 'toggle [i]nline blame' })
+    map('n', '<leader>hd', gitsigns.preview_hunk_inline, { desc = 'toggle [d]eleted' })
+    map('n', '<leader>hdh', function() gitsigns.diffthis '@' end, { desc = '[d]iff..HEAD' })
+    map('n', '<leader>hdi', gitsigns.diffthis, { desc = '[d]iff..index' })
+    map('n', '<leader>hl', gitsigns.blame_line, { desc = 'blame [l]ine' })
+    map('n', '<leader>hp', gitsigns.preview_hunk, { desc = '[p]review' })
+    map('n', '<leader>hq', function() gitsigns.setqflist 'all' end, { desc = '[q]uickfix project' })
+    map('n', '<localleader>h', gitsigns.setqflist, { desc = '[q]uickfix ' })
+    map('n', '<leader>hR', gitsigns.reset_buffer, { desc = '[R]eset buffer' })
+    map('n', '<leader>hr', gitsigns.reset_hunk, { desc = '[r]eset' })
+    map('n', '<leader>hS', gitsigns.stage_buffer, { desc = '[S]tage buffer' })
+    map('n', '<leader>hs', gitsigns.stage_hunk, { desc = '[s]tage' })
+    map('n', '<leader>hu', gitsigns.stage_hunk, { desc = '[u]ndo stage' })
+    map('n', '<leader>hw', gitsigns.toggle_word_diff, { desc = 'toggle [w]ord diff' })
 
     -- [h]unk as a vim text object
     vim.keymap.set({ 'o', 'x' }, 'ih', '<Cmd>Gitsigns select_hunk<CR>')
@@ -123,7 +123,7 @@ local function open_in_azdo()
   if pr_id and pr_id:match '^%d+$' then
     url = string.format('https://dev.azure.com/%s/%s/_git/%s/pullrequest/%s?_a=files&path=%s', org, project, repo, pr_id, rel_path)
   else
-  vim.notify('No PR found ', vim.log.levels.WARN)
+    vim.notify('No PR found ', vim.log.levels.WARN)
     url = string.format(
       'https://dev.azure.com/%s/%s/_git/%s?path=%s&version=GB%s&line=%d&lineEnd=%d&lineStartColumn=1&_a=contents',
       org,
