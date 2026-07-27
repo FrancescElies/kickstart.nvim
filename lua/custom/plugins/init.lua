@@ -37,7 +37,7 @@ end
 vim.api.nvim_create_user_command('SnipList', list_snips, {})
 
 vim.o.wrap = false
-vim.o.showbreak = '>> '
+vim.o.showbreak = '+++ '
 
 vim.o.swapfile = false
 

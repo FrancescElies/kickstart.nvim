@@ -50,6 +50,9 @@ vim.api.nvim_create_autocmd({ 'TextChanged', 'InsertLeave' }, {
 
 vim.api.nvim_create_user_command('ToggleAutosave', function()
   _G.autosave_enabled = not _G.autosave_enabled
+  if _G.autosave_enabled then
+    vim.cmd "write"
+  end
   print('Autosave ' .. (_G.autosave_enabled and 'enabled' or 'disabled'))
 end, {})
 vim.keymap.set('n', '<leader>ta', ':ToggleAutosave<cr>', { desc = '[t]oggle [a]utosave' })
