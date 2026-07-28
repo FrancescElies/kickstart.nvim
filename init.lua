@@ -318,17 +318,6 @@ do
   -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
   vim.cmd.colorscheme 'tokyonight-night'
 
-  -- Highlight todo, notes, etc in comments
-  vim.pack.add { gh 'folke/todo-comments.nvim' }
-  require('todo-comments').setup {
-    signs = false,
-    keywords = {
-      ONHOLD = { icon = '🪝', color = '#ddbe0b', alt = { 'HALTED' } },
-      WONT = { icon = '🛑', color = '#ab3e8f', alt = { 'HALTED' } },
-      DONE = { icon = '', color = '#00a087', alt = { 'HALTED' } },
-    },
-  }
-
   -- [[ mini.nvim ]]
   --  A collection of various small independent plugins/modules
   vim.pack.add { gh 'nvim-mini/mini.nvim' }
@@ -394,41 +383,19 @@ do
 
   local hipatterns = require 'mini.hipatterns'
 
-  local words = { red = '#aa0000', green = '#00aa00', blue = '#0000aa' }
-  local word_color_group = function(_, match)
-    local hex = words[match]
-    if hex == nil then return nil end
-    return hipatterns.compute_hex_color_group(hex, 'bg')
-  end
   hipatterns.setup {
     highlighters = {
       fixme = { pattern = 'FIXME', group = 'MiniHipatternsFixme' },
       hack = { pattern = 'HACK', group = 'MiniHipatternsHack' },
       todo = { pattern = 'TODO', group = 'MiniHipatternsTodo' },
       note = { pattern = 'NOTE', group = 'MiniHipatternsNote' },
+      done = { pattern = 'DONE', group = hipatterns.compute_hex_color_group('#caffbf', 'bg') },
+      delegated = { pattern = 'DELEGATED', group = hipatterns.compute_hex_color_group('#a0c4ff', 'bg') },
+      waiting = { pattern = 'WAITING', group = hipatterns.compute_hex_color_group('#a0a4dd', 'bg') },
+      onhold = { pattern = 'ONHOLD', group = hipatterns.compute_hex_color_group('#ddbe0b', 'bg') },
+      inprogress = { pattern = 'INPROGRESS', group = hipatterns.compute_hex_color_group('#fdffb6', 'bg') },
+      wont = { pattern = 'WONT', group = hipatterns.compute_hex_color_group('#ababab', 'bg') },
       hex_color = hipatterns.gen_highlighter.hex_color(),
-      word_color = {
-        pattern = '%S+',
-        group = function(_, match)
-          -- highlight words with certain colors
-          local words = {
-            red = '#c97c7c',
-            green = '#7baf7b',
-            blue = '#5b8db8',
-            delegated = '#a0c4ff',
-            waiting = '#a0a4dd',
-            todo = '#ffd6a5',
-            onhold = '#ddbe0b',
-            inprogress = '#fdffb6',
-            wont = '#ababab',
-            done = '#caffbf',
-          }
-          local stripped = string.lower(match:gsub(':$', ''))
-          local hex = words[stripped]
-          if hex == nil then return nil end
-          return hipatterns.compute_hex_color_group(hex, 'bg')
-        end,
-      },
       censor = {
         pattern = 'password: ()%S+()',
         group = '',
