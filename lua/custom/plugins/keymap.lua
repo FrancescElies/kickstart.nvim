@@ -50,6 +50,8 @@ local function yank_just_name()
   vim.fn.setreg('+', path)
 end
 
+vim.keymap.set('n', '<localleader>w', "<cmd>w<cr>", { desc = 'save buffer' })
+vim.keymap.set('n', '<localleader>wq', "<cmd>wq<cr>", { desc = 'save and quit buffer' })
 vim.keymap.set('n', '<leader>byr', yank_relative_path, { desc = '[b]uffer [y]ank [r]elative path' })
 vim.keymap.set('n', '<leader>bya', yank_abs_path, { desc = '[b]uffer [y]ank [a]bsolute path' })
 vim.keymap.set('n', '<leader>byn', yank_just_name, { desc = '[b]uffer [y]ank [n]ame' })
