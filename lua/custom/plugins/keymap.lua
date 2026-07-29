@@ -31,24 +31,26 @@ vim.keymap.set('n', 'yc', ':silent! normal! [s1z=<cr>', { desc = '[y]ou [c]orrec
 
 -- File
 local is_windows = vim.uv.os_uname().sysname == 'Windows_NT'
-local function yank_path()
-  local path = vim.api.nvim_buf_get_name(0)
+local function yank_relative_path()
+  local path = vim.fn.expand '%:.'
   if is_windows then path = path:gsub('/', '\\') end
+  vim.fn.setreg('"', path)
   vim.fn.setreg('+', path)
 end
 local function yank_abs_path()
   local path = vim.fn.expand '%:p'
   if is_windows then path = path:gsub('/', '\\') end
+  vim.fn.setreg('"', path)
   vim.fn.setreg('+', path)
 end
 local function yank_just_name()
   local path = vim.fn.expand '%:t'
   if is_windows then path = path:gsub('/', '\\') end
+  vim.fn.setreg('"', path)
   vim.fn.setreg('+', path)
 end
 
-
-vim.keymap.set('n', '<leader>byp', yank_path, { desc = '[b]uffer [y]ank [p]ath' })
+vim.keymap.set('n', '<leader>byr', yank_relative_path, { desc = '[b]uffer [y]ank [r]elative path' })
 vim.keymap.set('n', '<leader>bya', yank_abs_path, { desc = '[b]uffer [y]ank [a]bsolute path' })
 vim.keymap.set('n', '<leader>byn', yank_just_name, { desc = '[b]uffer [y]ank [n]ame' })
 vim.keymap.set('n', '<leader>bd', '<cmd>bd<cr>', { desc = 'delete buffer' })
