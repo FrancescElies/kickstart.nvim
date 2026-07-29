@@ -111,7 +111,6 @@ do
     },
   }
 
-
   -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
   -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
   -- is not what someone will guess without a bit more experience.
@@ -348,6 +347,11 @@ do
     search_method = 'cover_or_next',
   }
 
+  local mini_misc = require('mini.misc')
+  mini_misc.setup()
+  vim.keymap.set('n', '<leader>z', mini_misc.zoom, { desc = 'Zoom buffer' })
+  vim.keymap.set('n', '<localleader>z', mini_misc.zoom, { desc = 'Zoom buffer' })
+
   -- Simple and easy statusline.
   --  You could remove this setup call if you don't like it,
   --  and try some other statusline plugin
@@ -447,8 +451,8 @@ do
   local telescope_plugins = {
     gh 'nvim-lua/plenary.nvim',
     gh 'nvim-telescope/telescope.nvim',
-    -- It sets vim.ui.select to telescope. 
-    -- That means for example that neovim core stuff can fill the telescope picker. 
+    -- It sets vim.ui.select to telescope.
+    -- That means for example that neovim core stuff can fill the telescope picker.
     -- Example would be lua vim.lsp.buf.code_action().
     gh 'nvim-telescope/telescope-ui-select.nvim',
   }
@@ -530,8 +534,8 @@ do
       },
       git_status = {
         mappings = {
-          i = { ['c-c'] = { '<cmd>Neogit commit<cr>', type = 'command' } }, 
-          n = { ['c'] = { '<cmd>Neogit commit<cr>', type = 'command' } }, 
+          i = { ['c-c'] = { '<cmd>Neogit commit<cr>', type = 'command' } },
+          n = { ['c'] = { '<cmd>Neogit commit<cr>', type = 'command' } },
           -- i = { ['c-c'] = { '<cmd>Git commit<cr>', type = 'command' } }, -- fugitive
           -- n = { ['c'] = { '<cmd>Git commit<cr>', type = 'command' } }, -- fugitive
         },
