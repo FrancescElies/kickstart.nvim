@@ -12,18 +12,19 @@ local function find(opts)
   opts.cwd = opts.cwd and vim.fn.expand(opts.cwd) or vim.loop.cwd()
   local default_shortcuts = {
     ['c'] = '*.{c,h,cpp,hpp}',
-    ['h'] = '*.{h,hpp}',
+    ['cs'] = '*.{cs}',
     ['go'] = '*.go',
+    ['h'] = '*.{h,hpp}',
     ['js'] = '*.{js,ts,tsx,svelte,json}',
     ['lua'] = '*.lua',
-    ['max'] = '*.{maxpat,json}',
+    ['max'] = '*.{maxpat,json,maxhelp}',
     ['md'] = '*.md',
     ['py'] = '*.py',
     ['rs'] = '*.{rs,toml}',
     ['toml'] = '*.toml',
     ['ts'] = '*.{js,ts,tsx,svelte,json}',
-    ['v'] = '*.vim',
-    ['vl'] = '*.{vim,lua}',
+    ['vim'] = '*.vim',
+    ['vimlua'] = '*.{vim,lua}',
     ['yaml'] = '*.{yml,yaml}',
   }
 
