@@ -9,7 +9,7 @@ vim.keymap.set('n', '<localleader>l', function() quicker.toggle { loclist = true
 
 vim.keymap.set('n', '<leader>q', quicker.toggle, { desc = '[q]uickfix' })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = '[e]rror show' })
-vim.keymap.set('n', '<leader>D', vim.diagnostic.setqflist, { desc = '[d]iagnostics' })
+vim.keymap.set('n', '<leader>d', vim.diagnostic.setqflist, { desc = '[d]iagnostics' })
 
 local function quickfix_severity(severity)
   return function()
