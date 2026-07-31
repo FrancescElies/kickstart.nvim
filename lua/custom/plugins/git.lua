@@ -2,6 +2,7 @@
 -- practical.li gitlinker blame.nvim tinygit
 --
 
+local fn = require 'custom.fn'
 local tele = require 'telescope.builtin'
 
 -- vimdiff
@@ -29,72 +30,8 @@ vim.api.nvim_create_autocmd('BufEnter', {
   end,
 })
 
-vim.pack.add { 'https://github.com/lewis6991/gitsigns.nvim' }
-local gitsigns = require 'gitsigns'
-gitsigns.setup {
-  -- numhl = true, -- Toggle with `:Gitsigns toggle_numhl`
-  linehl = false, -- Toggle with `:Gitsigns toggle_linehl`
-  current_line_blame = false, -- Toggle with `:Gitsigns toggle_current_line_blame`
-  on_attach = function(bufnr)
-    local gitsigns = require 'gitsigns'
-
-    local function map(mode, l, r, opts)
-      opts = opts or {}
-      opts.buffer = bufnr
-      vim.keymap.set(mode, l, r, opts)
-    end
-
-    -- Navigation
-    if vim.wo.diff then
-      map('n', '(', function() vim.cmd.normal { ']c', bang = true } end, { desc = 'Jump to next hunk' })
-      map('n', ')', function() vim.cmd.normal { '[c', bang = true } end, { desc = 'Jump to previous hunk' })
-    else
-      map('n', ']c', function() gitsigns.nav_hunk 'next' end, { desc = 'Jump to next [h]unk' })
-      map('n', '[c', function() gitsigns.nav_hunk 'prev' end, { desc = 'Jump to previous [h]unk' })
-      vim.keymap.set('n', '(', '<cmd>Gitsigns prev_hunk<cr>')
-      vim.keymap.set('n', ')', '<cmd>Gitsigns next_hunk<cr>')
-    end
-
-    map('v', '<leader>hs', function() gitsigns.stage_hunk { vim.fn.line '.', vim.fn.line 'v' } end, { desc = '[s]tage' })
-    map('v', '<leader>hr', function() gitsigns.reset_hunk { vim.fn.line '.', vim.fn.line 'v' } end, { desc = '[r]eset' })
-
-    map('n', '<localleader>b', gitsigns.blame, { desc = '[b]lame buffer' })
-    map('n', '<leader>hb', gitsigns.blame, { desc = '[b]lame buffer' })
-    map('n', '<leader>hi', gitsigns.toggle_current_line_blame, { desc = 'toggle [i]nline blame' })
-    map('n', '<leader>hd', gitsigns.preview_hunk_inline, { desc = 'toggle [d]eleted' })
-    map('n', '<leader>hdh', function() gitsigns.diffthis '@' end, { desc = '[d]iff..HEAD' })
-    map('n', '<leader>hdi', gitsigns.diffthis, { desc = '[d]iff..index' })
-    map('n', '<leader>hl', gitsigns.blame_line, { desc = 'blame [l]ine' })
-    map('n', '<leader>hp', gitsigns.preview_hunk, { desc = '[p]review' })
-    map('n', '<leader>hq', function() gitsigns.setqflist 'all' end, { desc = '[q]uickfix project' })
-    map('n', '<localleader>h', gitsigns.setqflist, { desc = '[q]uickfix ' })
-    map('n', '<leader>hR', gitsigns.reset_buffer, { desc = '[R]eset buffer' })
-    map('n', '<leader>hr', gitsigns.reset_hunk, { desc = '[r]eset' })
-    map('n', '<leader>hS', gitsigns.stage_buffer, { desc = '[S]tage buffer' })
-    map('n', '<leader>hs', gitsigns.stage_hunk, { desc = '[s]tage' })
-    map('n', '<leader>hu', gitsigns.stage_hunk, { desc = '[u]ndo stage' })
-    map('n', '<leader>hw', gitsigns.toggle_word_diff, { desc = 'toggle [w]ord diff' })
-
-    -- [h]unk as a vim text object
-    vim.keymap.set({ 'o', 'x' }, 'ih', '<Cmd>Gitsigns select_hunk<CR>')
-  end,
-}
-vim.pack.add { 'https://github.com/NeogitOrg/neogit' }
-vim.keymap.set('n', '<leader>gs', '<cmd>Neogit<cr>', { desc = '[g]it [s]tatus' })
-
--- vim.pack.add { 'https://github.com/tpope/vim-fugitive' }
--- vim.keymap.set('n', '<leader>gs', '<cmd>G<cr>', { desc = '[g]it [s]tatus' })
--- vim.keymap.set('n', '<leader>gp', '<cmd>Git pull<cr>', { desc = '[g]it [p]ull' })
--- vim.keymap.set('n', '<leader>gP', '<cmd>Git push<cr>', { desc = '[g]it [P]ush' })
--- vim.keymap.set('n', '<leader>gc', '<cmd>Git commit<cr>', { desc = '[g]it [p]ush' })
-
-vim.pack.add { 'https://github.com/sindrets/diffview.nvim' }
-vim.keymap.set('n', '<leader>gdh', '<cmd>DiffviewFileHistory ', { desc = '[d]iff history' })
-vim.keymap.set('n', '<leader>gdo', '<cmd>DiffviewOpen ', { desc = '[d]iff [o]open ' })
-vim.keymap.set('n', '<leader>gdc', '<cmd>DiffviewClose<cr>', { desc = '[d]iff [c]lose' })
-
 -- Open current file+line in Azure DevOps (PR diff if PR exists, else file view)
-local function open_in_azdo()
+local function open_line_in_ado()
   local cwd = vim.fn.expand '%:p:h'
   local file = vim.fn.expand '%:p'
   local line = vim.fn.line '.'
@@ -144,14 +81,84 @@ local function open_in_azdo()
   vim.ui.open(url)
   vim.notify('Opened in browser: ' .. url)
 end
-vim.keymap.set('n', '<localleader>A', open_in_azdo, { desc = 'open [A]zure devops' })
+vim.api.nvim_create_user_command('OpenLineInAzureDevops', open_line_in_ado)
+
+vim.pack.add { fn.gh 'lewis6991/gitsigns.nvim' }
+local gitsigns = require 'gitsigns'
+gitsigns.setup {
+  -- numhl = true, -- Toggle with `:Gitsigns toggle_numhl`
+  linehl = false, -- Toggle with `:Gitsigns toggle_linehl`
+  current_line_blame = false, -- Toggle with `:Gitsigns toggle_current_line_blame`
+  on_attach = function(bufnr)
+    local gitsigns = require 'gitsigns'
+
+    local function map(mode, l, r, opts)
+      opts = opts or {}
+      opts.buffer = bufnr
+      vim.keymap.set(mode, l, r, opts)
+    end
+
+    -- Navigation
+    if vim.wo.diff then
+      map('n', '(', function() vim.cmd.normal { ']c', bang = true } end, { desc = 'Jump to next hunk' })
+      map('n', ')', function() vim.cmd.normal { '[c', bang = true } end, { desc = 'Jump to previous hunk' })
+    else
+      map('n', ']c', function() gitsigns.nav_hunk 'next' end, { desc = 'Jump to next [h]unk' })
+      map('n', '[c', function() gitsigns.nav_hunk 'prev' end, { desc = 'Jump to previous [h]unk' })
+      vim.keymap.set('n', '(', '<cmd>Gitsigns prev_hunk<cr>')
+      vim.keymap.set('n', ')', '<cmd>Gitsigns next_hunk<cr>')
+    end
+
+    map('v', '<leader>hs', function() gitsigns.stage_hunk { vim.fn.line '.', vim.fn.line 'v' } end, { desc = '[s]tage' })
+    map('v', '<leader>hr', function() gitsigns.reset_hunk { vim.fn.line '.', vim.fn.line 'v' } end, { desc = '[r]eset' })
+
+    map('n', '<localleader>b', gitsigns.blame, { desc = '[b]lame buffer' })
+    map('n', '<leader>hb', gitsigns.blame, { desc = '[b]lame buffer' })
+    map('n', '<leader>hi', gitsigns.toggle_current_line_blame, { desc = 'toggle [i]nline blame' })
+    map('n', '<leader>hd', gitsigns.preview_hunk_inline, { desc = 'toggle [d]eleted' })
+    map('n', '<leader>hdh', function() gitsigns.diffthis '@' end, { desc = '[d]iff..HEAD' })
+    map('n', '<leader>hdi', gitsigns.diffthis, { desc = '[d]iff..index' })
+    map('n', '<leader>hl', gitsigns.blame_line, { desc = 'blame [l]ine' })
+    map('n', '<leader>hp', gitsigns.preview_hunk, { desc = '[p]review' })
+    map('n', '<leader>hq', function() gitsigns.setqflist 'all' end, { desc = '[q]uickfix project' })
+    map('n', '<localleader>h', gitsigns.setqflist, { desc = '[q]uickfix ' })
+    map('n', '<leader>hR', gitsigns.reset_buffer, { desc = '[R]eset buffer' })
+    map('n', '<leader>hr', gitsigns.reset_hunk, { desc = '[r]eset' })
+    map('n', '<leader>hS', gitsigns.stage_buffer, { desc = '[S]tage buffer' })
+    map('n', '<leader>hs', gitsigns.stage_hunk, { desc = '[s]tage' })
+    map('n', '<leader>hu', gitsigns.stage_hunk, { desc = '[u]ndo stage' })
+    map('n', '<leader>hw', gitsigns.toggle_word_diff, { desc = 'toggle [w]ord diff' })
+
+    -- [h]unk as a vim text object
+    vim.keymap.set({ 'o', 'x' }, 'ih', '<Cmd>Gitsigns select_hunk<CR>')
+
+    vim.keymap.set('n', '<localleader>A', open_line_in_ado, { desc = 'open [A]zure devops' })
+  end,
+}
+vim.pack.add { fn.gh 'NeogitOrg/neogit' }
+vim.keymap.set('n', '<leader>gs', '<cmd>Neogit<cr>', { desc = '[g]it [s]tatus' })
+
+-- vim.pack.add { fn.gh 'tpope/vim-fugitive' }
+-- vim.keymap.set('n', '<leader>gs', '<cmd>G<cr>', { desc = '[g]it [s]tatus' })
+-- vim.keymap.set('n', '<leader>gp', '<cmd>Git pull<cr>', { desc = '[g]it [p]ull' })
+-- vim.keymap.set('n', '<leader>gP', '<cmd>Git push<cr>', { desc = '[g]it [P]ush' })
+-- vim.keymap.set('n', '<leader>gc', '<cmd>Git commit<cr>', { desc = '[g]it [p]ush' })
+
+--
+-- diffs
+--
+
+vim.pack.add { fn.gh 'sindrets/diffview.nvim' }
+vim.keymap.set('n', '<leader>gdh', '<cmd>DiffviewFileHistory ', { desc = '[d]iff history' })
+vim.keymap.set('n', '<leader>gdo', '<cmd>DiffviewOpen ', { desc = '[d]iff [o]open ' })
+vim.keymap.set('n', '<leader>gdc', '<cmd>DiffviewClose<cr>', { desc = '[d]iff [c]lose' })
 
 local function diff_orig() vim.cmd [[vert new | set buftype=nofile | read ++edit # | 0d_  | diffthis | wincmd p | diffthis]] end
 
 vim.keymap.set('n', '<localleader>o', diff_orig, { desc = '[d]iff [o]riginal (disk-file)' })
 vim.api.nvim_create_user_command('DiffOrig', diff_orig, {})
 
-vim.pack.add { 'https://github.com/aaronhallaert/advanced-git-search.nvim' }
+vim.pack.add { fn.gh 'aaronhallaert/advanced-git-search.nvim' }
 require('telescope').setup {
   extensions = {
     advanced_git_search = {
