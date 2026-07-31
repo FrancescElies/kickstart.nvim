@@ -18,3 +18,4 @@ vim.g.fff = {
 vim.keymap.set('n', 'sf', function() require('fff').find_files() end, { desc = '[s]earch [f]iles' })
 vim.keymap.set('n', 'sg', function() require('fff').live_grep() end, { desc = '[s]earch by [g]rep' })
 vim.keymap.set('n', 'sw', function() require('fff').live_grep_under_cursor() end, { desc = '[s]earch [w]ord / selection' })
+vim.keymap.set('n', 'sz', function() require('fff').live_grep { grep = { modes = { 'fuzzy', 'plain' } } } end, { desc = '[s]earch fu[zz]y' })
