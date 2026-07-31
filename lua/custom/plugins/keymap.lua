@@ -52,6 +52,7 @@ end
 
 vim.keymap.set('n', '<localleader>w', "<cmd>w<cr>", { desc = 'save buffer' })
 vim.keymap.set('n', '<localleader>wq', "<cmd>wq<cr>", { desc = 'save and quit buffer' })
+vim.keymap.set('n', '<localleader>wa', "<cmd>wa<cr>", { desc = 'save and quit all' })
 vim.keymap.set('n', '<localleader>q', "<cmd>q<cr>", { desc = 'quit buffer' })
 vim.keymap.set('n', '<leader>byr', yank_relative_path, { desc = '[b]uffer [y]ank [r]elative path' })
 vim.keymap.set('n', '<leader>bya', yank_abs_path, { desc = '[b]uffer [y]ank [a]bsolute path' })
