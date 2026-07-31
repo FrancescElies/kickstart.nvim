@@ -81,7 +81,7 @@ local function open_line_in_ado()
   vim.ui.open(url)
   vim.notify('Opened in browser: ' .. url)
 end
-vim.api.nvim_create_user_command('OpenLineInAzureDevops', open_line_in_ado)
+vim.api.nvim_create_user_command('OpenLineInAzureDevops', open_line_in_ado, {})
 
 vim.pack.add { fn.gh 'lewis6991/gitsigns.nvim' }
 local gitsigns = require 'gitsigns'
