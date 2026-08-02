@@ -119,6 +119,12 @@ do
   -- or just use <C-\><C-n> to exit terminal mode
   vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
+  -- Keybinds to make split navigation easier.
+  vim.keymap.set({ 'n', 't' }, '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
+  vim.keymap.set({ 'n', 't' }, '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
+  vim.keymap.set({ 'n', 't' }, '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
+  vim.keymap.set({ 'n', 't' }, '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+
   -- [[ Basic Autocommands ]]
   --  See `:help lua-guide-autocommands`
 
@@ -347,7 +353,7 @@ do
     search_method = 'cover_or_next',
   }
 
-  local mini_misc = require('mini.misc')
+  local mini_misc = require 'mini.misc'
   mini_misc.setup()
   vim.keymap.set('n', '<leader>z', mini_misc.zoom, { desc = 'Zoom buffer' })
   vim.keymap.set('n', '<localleader>z', mini_misc.zoom, { desc = 'Zoom buffer' })

@@ -1,13 +1,15 @@
 " viemu.com graphical cheat sheet - http://www.viemu.com/a_vi_vim_graphical_cheat_sheet_tutorial.html
 
 " https://github.com/wklken/vim-for-server/blob/master/vimrc
+let mapleader = " "
+let maplocalleader = ","
 
 " execute as shell command from cursor to EOL
 "nnoremap <F4> :execute system(getline('.')[col('.')-1:])<CR>
-nnoremap ,x "ey$:!<c-r>e<cr>
+nnoremap <localleader>x "ey$:!<c-r>e<cr>
 " execute as : command from cursor to EOL
 "nnoremap <F5> :execute getline('.')[col('.')-1:]<CR>
-nnoremap ,X "ey$:<c-r>e<cr>
+nnoremap <localleader>X "ey$:<c-r>e<cr>
 
 " TPOPE PLUGINS COMMON STEPS:
 " mkdir ~/.vim/pack/plugins/start
@@ -119,9 +121,35 @@ vmap H :m '>+1<CR>gv=gv
 vmap L :m '<-2<CR>gv=gv
 
 " QUICKLY NAVIGATE QUICKFIX LIST:
-nnoremap <C-k> :cprev<cr>zz
-nnoremap <C-j> :cnext<cr>zz
+function! ToggleQuickfix() abort
+  if empty(filter(getwininfo(), 'v:val.quickfix'))
+    copen
+  else
+    cclose
+  endif
+endfunction
+nnoremap <leader>q :call ToggleQuickfix()<CR>
+nnoremap <C-s-k> :cprev<cr>zz
+nnoremap <C-s-j> :cnext<cr>zz
 
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'qf',
+  callback = function()
+    local opts = { buffer = true, silent = true }
+    vim.keymap.set('n', 'J', ':cnext<CR>zz<C-w>p', opts)
+    vim.keymap.set('n', 'K', ':cprev<CR>zz<C-w>p', opts)
+  end,
+})
+
+" Keybinds to make split navigation easier.
+nnoremap <C-h> <C-w><C-h>
+tnoremap <C-h> <C-w><C-h>
+nnoremap <C-l> <C-w><C-l>
+tnoremap <C-l> <C-w><C-l>
+nnoremap <C-j> <C-w><C-j>
+tnoremap <C-j> <C-w><C-j>
+nnoremap <C-k> <C-w><C-k>
+tnoremap <C-k> <C-w><C-k>
 
 " KEEP THINGS VERTICALLY CENTERED DURING SEARCHES:
 nnoremap <C-d> <C-d>zz
@@ -143,8 +171,6 @@ nnoremap Q <nop>
 nnoremap ı  i
 
 " !ip!sort will sort the lines of the current paragraph.
-
-let mapleader = " "
 
 nnoremap <leader>y "+y
 vnoremap <leader>y "+yg_

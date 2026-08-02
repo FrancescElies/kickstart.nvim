@@ -59,6 +59,8 @@ vim.keymap.set('n', '<leader>bya', yank_abs_path, { desc = '[b]uffer [y]ank [a]b
 vim.keymap.set('n', '<leader>byn', yank_just_name, { desc = '[b]uffer [y]ank [n]ame' })
 vim.keymap.set('n', '<leader>bd', '<cmd>bd<cr>', { desc = 'delete buffer' })
 
+vim.keymap.set("n", "<localleader>x", '"ey$:!<C-r>e<CR>', { noremap = true , desc = 'execute . as shell command'})
+
 -- quick scape
 vim.keymap.set({ 'i', 'c' }, 'jk', '<Esc>')
 vim.keymap.set({ 'i', 'c' }, ',.', '<Enter>')

@@ -58,7 +58,7 @@ local function diagnostic_jump(opts)
   end
 end
 
-vim.keymap.set('n', '<c-k>', function()
+vim.keymap.set('n', '<c-s-k>', function()
   if is_quickfix_open() then
     vim.cmd 'cprevious'
   else
@@ -67,7 +67,7 @@ vim.keymap.set('n', '<c-k>', function()
   vim.cmd 'normal! zz'
 end, { desc = 'previous quickfix item' })
 
-vim.keymap.set('n', '<C-j>', function()
+vim.keymap.set('n', '<c-s-j>', function()
   if is_quickfix_open() then
     vim.cmd 'cnext' 
   else
@@ -82,7 +82,5 @@ vim.api.nvim_create_autocmd('FileType', {
     local opts = { buffer = true, silent = true }
     vim.keymap.set('n', 'J', ':cnext<CR>zz<C-w>p', opts)
     vim.keymap.set('n', 'K', ':cprev<CR>zz<C-w>p', opts)
-    vim.keymap.set('n', '>', function() quicker.expand { before = 2, after = 2, add_to_existing = true } end, opts)
-    vim.keymap.set('n', '<', quicker.collapse, opts)
   end,
 })
