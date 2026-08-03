@@ -129,8 +129,8 @@ function! ToggleQuickfix() abort
   endif
 endfunction
 nnoremap <leader>q :call ToggleQuickfix()<CR>
-nnoremap <C-s-k> :cprev<cr>zz
-nnoremap <C-s-j> :cnext<cr>zz
+nnoremap [[ :cprev<cr>zz
+nnoremap ]] :cnext<cr>zz
 
 vim.api.nvim_create_autocmd('FileType', {
   pattern = 'qf',
