@@ -125,6 +125,12 @@ do
   vim.keymap.set({ 'n', 't' }, '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
   vim.keymap.set({ 'n', 't' }, '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
+  -- Keybinds to make split resize easier.
+  vim.keymap.set('n', '<M-,>', '<c-w>5<', { desc = 'narrow window' })
+  vim.keymap.set('n', '<M-.>', '<c-w>5>', { desc = 'wider window' })
+  vim.keymap.set('n', '<M-t>', '<C-W>+', { desc = 'taller window' })
+  vim.keymap.set('n', '<M-s>', '<C-W>-', { desc = 'shorter window' })
+
   -- [[ Basic Autocommands ]]
   --  See `:help lua-guide-autocommands`
 
