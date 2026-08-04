@@ -7,7 +7,7 @@ vim.pack.add { fn.gh 'nvim-treesitter/nvim-treesitter-context' }
 
 require('treesitter-context').setup {
   enable = false,
-  max_lines = '3', -- How many lines the window should span. Values <= 0 mean no limit.
+  max_lines = 3, -- How many lines the window should span. Values <= 0 mean no limit.
   separator = '-',
 }
 
