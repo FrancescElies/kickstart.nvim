@@ -364,18 +364,37 @@ do
   vim.keymap.set('n', '<leader>z', mini_misc.zoom, { desc = 'Zoom buffer' })
   vim.keymap.set('n', '<localleader>z', mini_misc.zoom, { desc = 'Zoom buffer' })
 
-  -- Simple and easy statusline.
-  --  You could remove this setup call if you don't like it,
-  --  and try some other statusline plugin
   local statusline = require 'mini.statusline'
-  -- Set `use_icons` to true if you have a Nerd Font
-  statusline.setup { use_icons = vim.g.have_nerd_font }
 
-  -- You can configure sections in the statusline by overriding their
-  -- default behavior. For example, here we set the section for
-  -- cursor location to LINE:COLUMN
-  ---@diagnostic disable-next-line: duplicate-set-field
-  statusline.section_location = function() return '%2l:%-2v' end
+  require('mini.statusline').setup {
+    use_icons = vim.g.have_nerd_font,
+    content = {
+      active = function()
+        local mode, mode_hl = statusline.section_mode { trunc_width = 120 }
+        local git = statusline.section_git { trunc_width = 40 }
+        local diff = statusline.section_diff { trunc_width = 75 }
+        local diagnostics = statusline.section_diagnostics { trunc_width = 75 }
+        local lsp = statusline.section_lsp { trunc_width = 75 }
+        local filename = statusline.section_filename { trunc_width = 140 }
+        local fileinfo = statusline.section_fileinfo { trunc_width = 120 }
+        local location = statusline.section_location { trunc_width = 75 }
+        -- local location = function() return '%2l:%-2v' end
+        local search = statusline.section_searchcount { trunc_width = 75 }
+        local pid = tostring(vim.fn.getpid())
+
+        return statusline.combine_groups {
+          { hl = mode_hl, strings = { mode } },
+          { hl = 'MiniStatuslineDevinfo', strings = { git, diagnostics } },
+          '%<',
+          { hl = 'MiniStatuslineFilename', strings = { filename } },
+          '%=',
+          { hl = 'MiniStatuslineFileinfo', strings = { fileinfo } },
+          { hl = mode_hl, strings = { location } },
+          { hl = 'MiniStatuslineFilename', strings = { 'pid:' .. pid } },
+        }
+      end,
+    },
+  }
 
   -- ... and there is more!
   --  Check out: https://github.com/nvim-mini/mini.nvim
