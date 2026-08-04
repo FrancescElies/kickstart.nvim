@@ -2,12 +2,12 @@
 -- :InspectTree to show the parsed syntax tree ("TSPlayground")
 -- :EditQuery to open the Live Query Editor (Nvim 0.10+)
 
-local fn = require('custom.fn')
+local fn = require 'custom.fn'
 vim.pack.add { fn.gh 'nvim-treesitter/nvim-treesitter-context' }
 
 require('treesitter-context').setup {
   enable = false,
-  max_lines = '20%', -- How many lines the window should span. Values <= 0 mean no limit.
+  max_lines = '3', -- How many lines the window should span. Values <= 0 mean no limit.
   separator = '-',
 }
 
