@@ -390,6 +390,7 @@ do
           '%=',
           { hl = 'MiniStatuslineFileinfo', strings = { fileinfo } },
           { hl = mode_hl, strings = { location } },
+          { hl = mode_hl, strings = { 'pid:' .. pid } },
           { hl = 'MiniStatuslineFilename', strings = { 'pid:' .. pid } },
         }
       end,
