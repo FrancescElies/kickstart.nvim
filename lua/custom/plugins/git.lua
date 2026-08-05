@@ -149,9 +149,8 @@ vim.keymap.set('n', '<leader>gs', '<cmd>Neogit<cr>', { desc = '[g]it [s]tatus' }
 --
 
 vim.pack.add { fn.gh 'sindrets/diffview.nvim' }
-vim.keymap.set('n', '<leader>Dh', '<cmd>DiffviewFileHistory ', { desc = '[d]iff history' })
-vim.keymap.set('n', '<leader>Do', '<cmd>DiffviewOpen ', { desc = '[d]iff [o]open ' })
-vim.keymap.set('n', '<leader>Dc', '<cmd>DiffviewClose<cr>', { desc = '[d]iff [c]lose' })
+vim.keymap.set('n', '<leader>Dh', ':DiffviewFileHistory ', { desc = '[d]iff history' })
+vim.keymap.set('n', '<leader>Do', ':DiffviewOpen ', { desc = '[d]iff [o]open ' })
 
 local function diff_orig() vim.cmd [[vert new | set buftype=nofile | read ++edit # | 0d_  | diffthis | wincmd p | diffthis]] end
 
