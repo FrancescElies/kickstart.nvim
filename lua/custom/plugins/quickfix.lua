@@ -84,6 +84,3 @@ vim.api.nvim_create_autocmd('FileType', {
     vim.keymap.set('n', 'K', '<cmd>cprev<CR>zz<C-w>p', opts)
   end,
 })
-
-vim.keymap.set('n', '[[', '<cmd>cnext<CR>zz', opts)
-vim.keymap.set('n', ']]', '<cmd>cprev<CR>zz', opts)
