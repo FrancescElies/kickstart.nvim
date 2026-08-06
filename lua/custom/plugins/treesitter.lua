@@ -3,18 +3,15 @@
 -- :EditQuery to open the Live Query Editor (Nvim 0.10+)
 
 local fn = require 'custom.fn'
-vim.pack.add { fn.gh 'nvim-treesitter/nvim-treesitter-context' }
 
-require('treesitter-context').setup {
-  enable = false,
-  max_lines = 3, -- How many lines the window should span. Values <= 0 mean no limit.
+vim.pack.add { fn.gh 'nvim-treesitter/nvim-treesitter-context' }
+local tscontext = require 'treesitter-context'
+
+tscontext.setup {
+  enable = true,
+  max_lines = 2, -- How many lines the window should span. Values <= 0 mean no limit.
   separator = '-',
 }
 
-local function prev_context() require('treesitter-context').go_to_context(vim.v.count1) end
-local function next_context() require('treesitter-context').go_to_context(-vim.v.count1) end
-
-vim.keymap.set('n', '<leader>to', ':TSContext toggle<cr>', { desc = '[v]im treesitter-c[o]ntext toggle' })
-
-vim.keymap.set('n', '[o', prev_context, { silent = true, desc = 'prev c[o]ntext' })
-vim.keymap.set('n', ']o', next_context, { silent = true, desc = 'next c[o]ntext' })
+vim.keymap.set('n', '<leader>to', '<cmd>TSContext toggle<cr>', { desc = '[v]im treesitter-c[o]ntext toggle' })
+vim.keymap.set('n', '[o', function() tscontext.go_to_context(vim.v.count1) end, { silent = true, desc = 'prev c[o]ntext' })
