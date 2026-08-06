@@ -13,7 +13,7 @@ local fn = require 'custom.fn'
 -- ├── treesitter (syntax)
 -- └── ui         (user interaction)
 
-vim.opt.foldlevelstart = 2
+-- vim.opt.foldlevelstart = 2
 vim.opt.foldopen:remove 'block' -- avoid fold opening when moving {, [[ ...
 --- za                | Toggle fold
 --- zA                | Toggle fold recursively

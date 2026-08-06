@@ -80,7 +80,10 @@ vim.api.nvim_create_autocmd('FileType', {
   pattern = 'qf',
   callback = function()
     local opts = { buffer = true, silent = true }
-    vim.keymap.set('n', 'J', '<cmd>cnext<CR>zOzz<C-w>p', opts)
-    vim.keymap.set('n', 'K', '<cmd>cprev<CR>zOzz<C-w>p', opts)
+    vim.keymap.set('n', 'J', '<cmd>cnext<CR>zz<C-w>p', opts)
+    vim.keymap.set('n', 'K', '<cmd>cprev<CR>zz<C-w>p', opts)
   end,
 })
+
+vim.keymap.set('n', ')', '<cmd>cnext<CR>zz', opts)
+vim.keymap.set('n', '(', '<cmd>cprev<CR>zz', opts)
