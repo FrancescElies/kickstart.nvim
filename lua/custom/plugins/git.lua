@@ -100,8 +100,8 @@ gitsigns.setup {
 
     -- Navigation
     if vim.wo.diff then
-      map('n', '(', function() vim.cmd.normal { ']c', bang = true } end, { desc = 'Jump to next hunk' })
-      map('n', ')', function() vim.cmd.normal { '[c', bang = true } end, { desc = 'Jump to previous hunk' })
+      map('n', '[[', function() vim.cmd.normal { ']c', bang = true } end, { desc = 'Jump to next hunk' })
+      map('n', ']]', function() vim.cmd.normal { '[c', bang = true } end, { desc = 'Jump to previous hunk' })
     else
       map('n', ']c', function() gitsigns.nav_hunk 'next' end, { desc = 'Jump to next [h]unk' })
       map('n', '[c', function() gitsigns.nav_hunk 'prev' end, { desc = 'Jump to previous [h]unk' })
