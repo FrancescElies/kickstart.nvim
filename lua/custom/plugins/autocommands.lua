@@ -27,7 +27,7 @@ vim.api.nvim_create_autocmd({ 'FileReadPost', 'BufReadPost' }, {
     if vim.fn.line '\'"' > 0 and vim.fn.line '\'"' <= vim.fn.line '$' then
       vim.fn.setpos('.', vim.fn.getpos '\'"')
       vim.cmd 'normal zz' -- center buffer
-      vim.cmd 'silent! %foldopen!' -- open all folds
+      vim.cmd 'silent! foldopen!' -- open all folds where cursor is
     end
   end,
 })
