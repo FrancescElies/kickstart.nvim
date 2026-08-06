@@ -13,6 +13,18 @@ local fn = require 'custom.fn'
 -- ├── treesitter (syntax)
 -- └── ui         (user interaction)
 
+vim.opt.foldlevelstart = 2
+vim.opt.foldopen:remove 'block' -- avoid fold opening when moving {, [[ ...
+--- za                | Toggle fold
+--- zA                | Toggle fold recursively
+--- zc                | Close fold
+--- zo                | Open fold
+--- zM                | Close **all** folds
+--- zR                | Open **all** folds
+--- zm / zr           | Increase/decrease fold level
+--- :set foldenable   | Enable folding
+--- :set nofoldenable | Disable folding
+
 vim.lsp.inlay_hint.enable(false)
 
 -- https://www.reddit.com/r/neovim/comments/zhweuc/whats_a_fast_way_to_load_the_output_of_a_command/
@@ -60,7 +72,6 @@ end
 vim.opt.isfname:append '@'
 
 vim.o.complete = '.,w,b,u,t,i,kspell'
-
 
 if vim.env.SSH_CONNECTION then
   local function vim_paste()

@@ -1032,7 +1032,8 @@ do
     -- For more info on folds see `:help folds`
     vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
     vim.wo.foldmethod = 'expr'
-    -- vim.opt.foldopen:remove 'block' -- avoid fold opening when moving {, [[ ...
+    vim.opt.foldlevelstart = 2
+    vim.opt.foldopen:remove 'block' -- avoid fold opening when moving {, [[ ...
     --- za                | Toggle fold
     --- zA                | Toggle fold recursively
     --- zc                | Close fold
