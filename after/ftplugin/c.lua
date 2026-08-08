@@ -1,5 +1,5 @@
-vim.keymap.set('n', '<localleader>h', ':e %:r.h<cr>', { desc = 'goto [%.h] file' })
-vim.keymap.set('n', '<localleader>c', ':e %:r.c<cr>', { desc = 'goto [%.c] file' })
+vim.keymap.set('n', '<localleader>h', ':e %:r.h<cr>', { buffer = 0, desc = 'goto [%.h] file' })
+vim.keymap.set('n', '<localleader>c', ':e %:r.c<cr>', { buffer = 0, desc = 'goto [%.c] file' })
 
 -- vim.bo.formatprg = "clang-format --assume-filename=" .. vim.fn.expand("%")
 -- Then select lines and press gq — but plain formatprg reformats exactly the selected lines

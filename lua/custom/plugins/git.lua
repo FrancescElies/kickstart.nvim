@@ -121,7 +121,7 @@ gitsigns.setup {
     map('n', '<leader>hl', gitsigns.blame_line, { desc = 'blame [l]ine' })
     map('n', '<leader>hp', gitsigns.preview_hunk, { desc = '[p]review' })
     map('n', '<leader>hq', function() gitsigns.setqflist 'all' end, { desc = '[q]uickfix project' })
-    map('n', '<localleader>h', gitsigns.setqflist, { desc = '[q]uickfix ' })
+    map('n', '<localleader>h', gitsigns.setqflist, { desc = 'gitsigns [q]uickfix' })
     map('n', '<leader>hR', gitsigns.reset_buffer, { desc = '[R]eset buffer' })
     map('n', '<leader>hr', gitsigns.reset_hunk, { desc = '[r]eset' })
     map('n', '<leader>hS', gitsigns.stage_buffer, { desc = '[S]tage buffer' })

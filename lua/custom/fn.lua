@@ -28,4 +28,15 @@ M.run_build = function(name, cmd, cwd)
   end
 end
 
+M.open_in_system_default_app = function(path)
+  local sysname = vim.loop.os_uname().sysname
+  if sysname == 'Windows_NT' then
+    os.execute(string.format('start "" "%s"', path))
+  elseif sysname == 'Darwin' then
+    os.execute(string.format('open "%s"', path))
+  else
+    os.execute(string.format('xdg-open "%s"', path))
+  end
+end
+
 return M
