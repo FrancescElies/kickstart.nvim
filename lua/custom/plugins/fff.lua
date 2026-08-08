@@ -15,7 +15,11 @@ vim.g.fff = {
   debug = { enabled = false, show_scores = true },
 }
 
-vim.keymap.set('n', 'ff', function() require('fff').find_files() end, { desc = '[f]ind [f]iles' })
-vim.keymap.set('n', 'fg', function() require('fff').live_grep() end, { desc = '[f]ind by [g]rep' })
-vim.keymap.set('n', 'fw', function() require('fff').live_grep_under_cursor() end, { desc = '[f]ind [w]ord / selection' })
-vim.keymap.set('n', 'fz', function() require('fff').live_grep { grep = { modes = { 'fuzzy', 'plain' } } } end, { desc = '[f]ind fu[zz]y' })
+local fff = require 'fff'
+
+vim.keymap.set('n', 'ff', fff.find_files, { desc = '[f]ind [f]iles' })
+vim.keymap.set('n', 'fg', fff.live_grep, { desc = '[f]ind by [g]rep' })
+vim.keymap.set('n', 'fh', function() fff.find_files_in_dir(vim.fn.expand '%:p:h') end, { desc = '[f]ind files @ path [h]ead' })
+vim.keymap.set('n', 'fs', fff.scan_files, { desc = 'scan files' })
+vim.keymap.set('n', 'fw', fff.live_grep_under_cursor, { desc = '[f]ind [w]ord / selection' })
+vim.keymap.set('n', 'fz', function() fff.live_grep { grep = { modes = { 'fuzzy', 'plain' } } } end, { desc = '[f]ind fu[zz]y' })
