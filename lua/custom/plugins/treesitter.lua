@@ -14,4 +14,3 @@ tscontext.setup {
 }
 
 vim.keymap.set('n', '<leader>to', '<cmd>TSContext toggle<cr>', { desc = '[v]im treesitter-c[o]ntext toggle' })
-vim.keymap.set('n', '[o', function() tscontext.go_to_context(vim.v.count1) end, { silent = true, desc = 'prev c[o]ntext' })
