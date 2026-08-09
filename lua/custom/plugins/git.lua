@@ -10,7 +10,7 @@ vim.opt.diffopt:append 'context:1000' -- show more context lines in hunks/commit
 vim.keymap.set('n', 'gh', '<cmd>diffget //2<cr>', { desc = 'get left diff' })
 vim.keymap.set('n', 'gl', '<cmd>diffget //3<cr>', { desc = 'get right diff' })
 
-vim.keymap.set('n', '<leader>gB', tele.git_branches, { desc = '[g]it [b]ranches' })
+vim.keymap.set('n', '<leader>gb', tele.git_branches, { desc = '[g]it [b]ranches' })
 vim.keymap.set('n', '<leader>gL', tele.git_commits, { desc = '[g]it [l]og (cwd)' })
 vim.keymap.set('n', '<leader>gl', tele.git_bcommits, { desc = '[g]it [l]og buffer' })
 vim.keymap.set('n', '<leader>gt', tele.git_status, { desc = '[g]it [t]elescope status ' })

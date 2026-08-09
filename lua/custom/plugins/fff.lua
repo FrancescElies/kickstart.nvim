@@ -19,7 +19,7 @@ local fff = require 'fff'
 
 vim.keymap.set('n', 'ff', fff.find_files, { desc = '[f]ind [f]iles' })
 vim.keymap.set('n', 'fg', fff.live_grep, { desc = '[f]ind by [g]rep' })
-vim.keymap.set('n', 'fh', function() fff.find_files_in_dir(vim.fn.expand '%:p:h') end, { desc = '[f]ind files @ path [h]ead' })
+vim.keymap.set('n', 'fd', function() fff.find_files_in_dir(vim.fn.expand '%:p:h') end, { desc = '[f]ind files in buffer parent [d]ir'  })
 vim.keymap.set('n', 'fr', '<cmd>FFFResume<cr>', { desc = '[f]ind [r]esume' })
 vim.keymap.set('n', 'fs', fff.scan_files, { desc = 'scan files' })
 vim.keymap.set('n', 'fw', fff.live_grep_under_cursor, { desc = '[f]ind [w]ord / selection' })
