@@ -112,7 +112,7 @@ gitsigns.setup {
     map('v', '<leader>hs', function() gitsigns.stage_hunk { vim.fn.line '.', vim.fn.line 'v' } end, { desc = '[s]tage' })
     map('v', '<leader>hr', function() gitsigns.reset_hunk { vim.fn.line '.', vim.fn.line 'v' } end, { desc = '[r]eset' })
 
-    map('n', '<localleader>b', gitsigns.blame, { desc = '[b]lame buffer' })
+    map('n', '<localleader>hb', gitsigns.blame, { desc = '[b]lame buffer' })
     map('n', '<leader>hb', gitsigns.blame, { desc = '[b]lame buffer' })
     map('n', '<leader>hi', gitsigns.toggle_current_line_blame, { desc = 'toggle [i]nline blame' })
     map('n', '<leader>hd', gitsigns.preview_hunk_inline, { desc = 'toggle [d]eleted' })
@@ -154,7 +154,6 @@ vim.keymap.set('n', '<leader>Do', ':DiffviewOpen ', { desc = '[d]iff [o]open ' }
 
 local function diff_orig() vim.cmd [[vert new | set buftype=nofile | read ++edit # | 0d_  | diffthis | wincmd p | diffthis]] end
 
-vim.keymap.set('n', '<localleader>o', diff_orig, { desc = '[d]iff [o]riginal (disk-file)' })
 vim.api.nvim_create_user_command('DiffOrig', diff_orig, {})
 
 vim.pack.add { fn.gh 'aaronhallaert/advanced-git-search.nvim' }

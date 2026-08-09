@@ -74,15 +74,6 @@ vim.keymap.set({ 'n', 'x', 'o' }, 's', '<Nop>') -- disables default behaviour
 vim.keymap.set({ 'n', 'x', 'o' }, 'S', '<Nop>') -- disables default behaviour
 vim.keymap.set('n', 'se', '<cmd>e #<cr>', { desc = '[s]witch to alternat[e]' })
 
--- Commands Quick Execution
--- lua
-vim.keymap.set('n', '<leader>lf', '<cmd>source %<CR>', { desc = '[l]ua source [f]ile' })
-vim.keymap.set('n', '<leader>lb', '<cmd>so %<cr>', { desc = '[l]ua source current buffer' })
-vim.keymap.set('v', '<leader>l', "<cmd>'<,'>lua<CR>", { desc = '[l]ua source selection' })
-vim.keymap.set('n', '<leader>ll', '<cmd>.lua<cr>', { desc = '[l]ua source current [l]ine' })
--- :
-vim.keymap.set('n', '<leader>le', '"ey$:!<c-r>e<cr>', { desc = '[l]ua source vim command (:) to [e]nd of line' })
-
 -- Keep things vertically centered during search
 vim.keymap.set('n', '<C-d>', '<C-d>zz')
 vim.keymap.set('n', '<C-u>', '<C-u>zz')
