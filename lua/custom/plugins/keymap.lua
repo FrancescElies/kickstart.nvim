@@ -137,7 +137,7 @@ vim.keymap.set('n', '<leader>tw', '<cmd>set invwrap<cr>', { desc = '[t]oggle [w]
 vim.keymap.set('n', '<leader>t/', '<cmd>set invhlsearch<cr>', { desc = '[t]oggle highlight [/] search' })
 vim.keymap.set('n', '<leader>ts', '<cmd>set invspell<cr>', { desc = '[t]oggle [s]pell' })
 vim.keymap.set('n', '<leader>ti', '<cmd>set invignorecase<cr>', { desc = '[t]oggle [i]gnorecase' })
-vim.keymap.set('n', '<leader>tL', '<cmd>set invlist<cr>', { desc = '[t]oggle [l]ist (show invisible chars)' })
+vim.keymap.set('n', '<leader>tc', '<cmd>set invlist<cr>', { desc = '[t]oggle list (show invisible [c]hars)' })
 
 -- control splits size  <>., are on the same two keys
 -- width
