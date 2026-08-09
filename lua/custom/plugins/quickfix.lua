@@ -58,7 +58,7 @@ local function diagnostic_jump(opts)
   end
 end
 
-vim.keymap.set('n', '[[', function()
+vim.keymap.set('n', '<M-k>', function()
   if is_quickfix_open() then
     vim.cmd 'cprevious'
   else
@@ -67,7 +67,7 @@ vim.keymap.set('n', '[[', function()
   vim.cmd 'normal! zz'
 end, { desc = 'previous quickfix item' })
 
-vim.keymap.set('n', ']]', function()
+vim.keymap.set('n', '<M-j>', function()
   if is_quickfix_open() then
     vim.cmd 'cnext'
   else

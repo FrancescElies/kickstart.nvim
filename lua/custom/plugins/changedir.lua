@@ -35,15 +35,3 @@ end, { desc = "changes dir to git's root (toplevel)" })
 vim.keymap.set('n', 'cdd', ':CdBufDir<cr>', { desc = '[cd] buf [d]ir' })
 vim.keymap.set('n', 'cd', ':CdBufRootDir<cr>', { desc = '[cd] buf root dir' })
 
--- vim.api.nvim_create_autocmd('BufEnter', {
---   group = vim.api.nvim_create_augroup('my-cd', { clear = true }),
---   pattern = '*',
---   callback = function()
---     -- Only run for normal buffers, (no terminal, quickfix ...)
---     local filename = vim.fn.expand '%'
---     if vim.bo.buftype == '' and filename ~= '' and vim.fn.filereadable(filename) == 1 then
---       cdroot_of { cwd = vim.fn.expand '%:p:h' }
---     end
---   end,
--- })
-
