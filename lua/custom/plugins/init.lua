@@ -157,14 +157,20 @@ vim.keymap.set('n', '<localleader>t', function(args)
   if #vim.fn.getloclist(0) > 0 then vim.cmd 'lopen  2' end
 end, { desc = 'buf. TODOs loclist' })
 
-vim.keymap.set('v', '<localleader>s', ':!codesort', { desc = 'codesort' })
-vim.keymap.set('n', '<localleader>s', function()
-  local cursor_pos = vim.api.nvim_win_get_cursor(0)
-  local line = cursor_pos[1]
-  local cmd = string.format('%%!codesort --around %d --detect %s', line, vim.fn.shellescape(vim.fn.expand '%:t'))
-  vim.cmd(cmd)
-  vim.api.nvim_win_set_cursor(0, cursor_pos) -- restore cursor
-end, { desc = 'codesort optimal range around the current line', silent = true })
+vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufRead' }, {
+  pattern = { '*.rs', '*.js', '*.c', '*.zig', '*.java' },
+  group = vim.api.nvim_create_augroup('my-codesort', { clear = true }),
+  callback = function(event)
+    vim.keymap.set('v', '<localleader>s', ':!codesort', { buffer = event.buf, desc = 'codesort' })
+    vim.keymap.set('n', '<localleader>s', function()
+      local cursor_pos = vim.api.nvim_win_get_cursor(0)
+      local line = cursor_pos[1]
+      local cmd = string.format('%%!codesort --around %d --detect %s', line, vim.fn.shellescape(vim.fn.expand '%:t'))
+      vim.cmd(cmd)
+      vim.api.nvim_win_set_cursor(0, cursor_pos) -- restore cursor
+    end, { desc = 'codesort optimal range around the current line', silent = true, buffer = event.buf })
+  end,
+})
 
 vim.api.nvim_create_user_command('SetIndentationConfig', function(opts)
   local mode = opts.fargs[1]
