@@ -302,3 +302,10 @@ vim.keymap.set('n', '<c-up>', '<cmd>resize +5<cr>')
 -- connect to databases "tpope/vim-dadbod",
 -- https://github.com/wezm/rsspls rrs please, make rss from website
 -- https://github.com/wezm/titlecase titlecase - is a small tool and library (crate) that capitalizes English text according to a style defined by John Gruber
+
+vim.api.nvim_create_user_command('RemoveUmlauts', function()
+  local subs = { ['ä'] = 'ae', ['ö'] = 'oe', ['ü'] = 'ue', ['Ä'] = 'Ae', ['Ö'] = 'Oe', ['Ü'] = 'Ue' }
+  for from, to in pairs(subs) do
+    vim.cmd('%s/' .. from .. '/' .. to .. '/ge')
+  end
+end, {})
