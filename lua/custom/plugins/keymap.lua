@@ -72,7 +72,7 @@ vim.keymap.set('n', 'ı', 'i')
 -- Minisurround uses `sa` `sd` `sr` `sf` to manipulate and move to surrounding items
 vim.keymap.set({ 'n', 'x', 'o' }, 's', '<Nop>') -- disables default behaviour
 vim.keymap.set({ 'n', 'x', 'o' }, 'S', '<Nop>') -- disables default behaviour
-vim.keymap.set('n', 'se', '<cmd>e #<cr>', { desc = '[s]witch to alternat[e]' })
+vim.keymap.set('n', '<M-e>', '<cmd>e#<cr>', { desc = 'alternat[e] buffer' })
 
 -- Keep things vertically centered during search
 vim.keymap.set('n', '<C-d>', '<C-d>zz')
