@@ -654,14 +654,14 @@ do
   vim.keymap.set(
     'n',
     '<leader>sl',
-    function() require('telescope.builtin').find_files { cwd = vim.fs.joinpath(vim.fn.stdpath 'data') } end,
-    { desc = '[S]earch [l]ua packages' }
+    function() require('telescope.builtin').find_files { cwd = vim.fs.joinpath(vim.fn.stdpath 'config') } end,
+    { desc = '[S]earch [l]ua config' }
   )
   vim.keymap.set(
     'n',
     '<leader>su',
     function() require('telescope.builtin').find_files { cwd = vim.fs.joinpath(vim.fn.stdpath 'data') } end,
-    { desc = '[S]earch [l]ua packages' }
+    { desc = '[S]earch l[u]a packages' }
   )
   vim.keymap.set('n', '<leader>sz', builtin.spell_suggest, { desc = 'Spell suggest (Telescope)' })
 
