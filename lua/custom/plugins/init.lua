@@ -303,6 +303,8 @@ vim.keymap.set('n', '<c-up>', '<cmd>resize +5<cr>')
 -- https://github.com/wezm/rsspls rrs please, make rss from website
 -- https://github.com/wezm/titlecase titlecase - is a small tool and library (crate) that capitalizes English text according to a style defined by John Gruber
 
+
+require("custom.unslop").setup()
 vim.api.nvim_create_user_command('RemoveUmlauts', function()
   local subs = { ['ä'] = 'ae', ['ö'] = 'oe', ['ü'] = 'ue', ['Ä'] = 'Ae', ['Ö'] = 'Oe', ['Ü'] = 'Ue' }
   for from, to in pairs(subs) do
