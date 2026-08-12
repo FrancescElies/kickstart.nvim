@@ -3,10 +3,10 @@
   buffer or visual selection.
 
   USAGE
-    :Unslop            -- clean the whole buffer
-    :'<,'>Unslop        -- clean a visual selection
-    <leader>us          -- normal mode: clean whole buffer (mapping below)
-    <leader>us          -- visual mode: clean selection
+    :Unslop                 -- clean the whole buffer
+    :'<,'>Unslop            -- clean a visual selection
+    <localleader>u          -- normal mode: clean whole buffer
+    <localleader>u          -- visual mode: clean selection
 ]]
 
 local M = {}
