@@ -154,8 +154,6 @@ vim.keymap.set('n', '<leader>gc', '<cmd>Git commit<cr>', { desc = '[g]it [c]ommi
 --
 
 vim.pack.add { fn.gh 'sindrets/diffview.nvim' }
-vim.keymap.set('n', '<leader>Dh', ':DiffviewFileHistory ', { desc = '[d]iff history' })
-vim.keymap.set('n', '<leader>Do', ':DiffviewOpen ', { desc = '[d]iff [o]open ' })
 
 local function diff_orig() vim.cmd [[vert new | set buftype=nofile | read ++edit # | 0d_  | diffthis | wincmd p | diffthis]] end
 

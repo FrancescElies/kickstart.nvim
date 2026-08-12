@@ -280,7 +280,6 @@ do
     spec = {
 
       { '<leader>C', group = '[C]hat' },
-      { '<leader>D', group = '[D]iff', mode = { 'n', 'v' } },
       { '<leader>b', group = '[B]uffer' },
       { '<leader>by', group = '[B]uffer [Y]ank' },
       { '<leader>c', group = '[C]hat' },
