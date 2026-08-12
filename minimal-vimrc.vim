@@ -229,8 +229,13 @@ endif
 autocmd FileType python let b:match_words = '\<if\>:\<elif\>:\<else\>'
 
 " QUICKLY JUMP TO HEADER OR SOURCE FILE: https://github.com/mhinz/vim-galore?tab=readme-ov-file#quickly-jump-to-header-or-source-file
+autocmd BufLeave *.{h,hpp} mark H
+autocmd BufLeave *.js      mark J
+autocmd BufLeave *.lua     mark L
+autocmd BufLeave *.rs      mark R
+autocmd BufLeave *.py      mark P
+autocmd BufLeave *.ts      mark J
 autocmd BufLeave *.{c,cpp} mark C
-autocmd BufLeave *.h       mark H
 
 " RELOAD FILE ON SAVING: https://github.com/mhinz/vim-galore?tab=readme-ov-file#reload-a-file-on-saving
 " autocmd BufWritePost $MYVIMRC source $MYVIMRC

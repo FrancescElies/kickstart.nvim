@@ -1,3 +1,4 @@
+vim.api.nvim_create_augroup('automarks', { clear = true })
 vim.api.nvim_create_augroup('bufcheck', { clear = true })
 vim.api.nvim_create_augroup('markdown', { clear = true })
 
@@ -50,9 +51,7 @@ vim.api.nvim_create_autocmd({ 'TextChanged', 'InsertLeave' }, {
 
 vim.api.nvim_create_user_command('ToggleAutosave', function()
   _G.autosave_enabled = not _G.autosave_enabled
-  if _G.autosave_enabled then
-    vim.cmd "write"
-  end
+  if _G.autosave_enabled then vim.cmd 'write' end
   print('Autosave ' .. (_G.autosave_enabled and 'enabled' or 'disabled'))
 end, {})
 vim.keymap.set('n', '<leader>ta', ':ToggleAutosave<cr>', { desc = '[t]oggle [a]utosave' })
@@ -173,3 +172,20 @@ vim.api.nvim_create_autocmd('FileType', {
   callback = function(args) vim.keymap.set('n', 'q', '<cmd>close<cr>', { buffer = args.buf, silent = true }) end,
 })
 
+local ft_marks_map = {
+  [{ '*.c', '*.cpp' }] = 'C',
+  [{ '*.h', '*.hpp' }] = 'H',
+  [{ '*.js' }] = 'J',
+  [{ '*.lua' }] = 'L',
+  [{ '*.maxpat', '*.maxhelp' }] = 'M',
+  [{ '*.py' }] = 'P',
+  [{ '*.rs' }] = 'R',
+  [{ '*.ts' }] = 'T',
+}
+for pattern, mark in pairs(ft_marks_map) do
+  vim.api.nvim_create_autocmd('BufLeave', {
+    group = 'automarks',
+    pattern = pattern,
+    callback = function() vim.cmd('mark ' .. mark) end,
+  })
+end
