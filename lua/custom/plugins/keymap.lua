@@ -50,16 +50,16 @@ local function yank_just_name()
   vim.fn.setreg('+', path)
 end
 
-vim.keymap.set('n', '<localleader>w', "<cmd>w<cr>", { desc = 'save buffer' })
-vim.keymap.set('n', '<localleader>wq', "<cmd>wq<cr>", { desc = 'save and quit buffer' })
-vim.keymap.set('n', '<localleader>wa', "<cmd>wa<cr>", { desc = 'save and quit all' })
-vim.keymap.set('n', '<localleader>q', "<cmd>q<cr>", { desc = 'quit buffer' })
+vim.keymap.set('n', '<localleader>w', '<cmd>w<cr>', { desc = 'save buffer' })
+vim.keymap.set('n', '<localleader>wq', '<cmd>wq<cr>', { desc = 'save and quit buffer' })
+vim.keymap.set('n', '<localleader>wa', '<cmd>wa<cr>', { desc = 'save and quit all' })
+vim.keymap.set('n', '<localleader>q', '<cmd>q<cr>', { desc = 'quit buffer' })
 vim.keymap.set('n', '<leader>byr', yank_relative_path, { desc = '[b]uffer [y]ank [r]elative path' })
 vim.keymap.set('n', '<leader>bya', yank_abs_path, { desc = '[b]uffer [y]ank [a]bsolute path' })
 vim.keymap.set('n', '<leader>byn', yank_just_name, { desc = '[b]uffer [y]ank [n]ame' })
 vim.keymap.set('n', '<leader>bd', '<cmd>bd<cr>', { desc = 'delete buffer' })
 
-vim.keymap.set("n", "<localleader>x", '"ey$:!<C-r>e<CR>', { noremap = true , desc = 'execute . as shell command'})
+vim.keymap.set('n', '<localleader>x', '"ey$:!<C-r>e<CR>', { noremap = true, desc = 'execute . as shell command' })
 
 -- quick scape
 vim.keymap.set({ 'i', 'c' }, 'jk', '<Esc>')
@@ -126,7 +126,6 @@ vim.api.nvim_create_user_command('OpenVimPackDir', open_vim_pack_dir, {})
 -- vim.keymap.set({'n', 'v'}, '<leader>y', '"+y', { desc = 'yank to OS clipboard' })
 -- vim.keymap.set({'n', 'v'}, '<leader>p', '"+p', { desc = 'paste from OS clipboard' })
 
-
 vim.keymap.set('n', '<leader>ve', '<cmd>tabnew | e $MYVIMRC | CdBufRootDir <cr>', { desc = 'edit vimrc' })
 vim.keymap.set('n', '<leader>vp', open_vim_pack_dir, { desc = 'edit vimrc' })
 vim.keymap.set('n', '<leader>vm', "<cmd>new | put=execute('messages')<cr>", { desc = 'vim messages' })
@@ -153,12 +152,12 @@ vim.keymap.set('n', 'L', '<cmd>bnext<CR>', { desc = 'next buffer' })
 vim.keymap.set('n', '<localleader>bc', '<cmd>vs<cr><c-f>:set scb<cr><c-w>h<cmd>set scb<cr>', { desc = '[b]uf split & [c]ontinue view, (undo `:set noscb`)' })
 
 -- Move lines in visual mode
-vim.keymap.set({'n', 'x'}, '[e', ":m '<-2<CR>gv=gv", { desc = 'move line up' })
-vim.keymap.set({'n', 'x'}, ']e', ":m '>+1<CR>gv=gv", { desc = 'move line down' })
+vim.keymap.set({ 'n', 'x' }, '[e', ":m '<-2<CR>gv=gv", { desc = 'move line up' })
+vim.keymap.set({ 'n', 'x' }, ']e', ":m '>+1<CR>gv=gv", { desc = 'move line down' })
 
 -- Create empty lines
 vim.keymap.set('n', '[<space>', ":<c-u>put! =repeat(nr2char(10), v:count1)<cr>'[", { desc = 'add empty line up' })
-vim.keymap.set('n', '[<space>', ":<c-u>put =repeat(nr2char(10), v:count1)<cr>", { desc = 'add empty line down' })
+vim.keymap.set('n', '[<space>', ':<c-u>put =repeat(nr2char(10), v:count1)<cr>', { desc = 'add empty line down' })
 
 vim.keymap.set({ 'n', 'x' }, 's/', [[:s,/,\\,g<cr>]], { desc = 'substitute / with \\' })
 vim.keymap.set({ 'n', 'x' }, 's\\', [[:s,\\,/,g<cr>]], { desc = 'substitute \\ with /' })
@@ -170,12 +169,12 @@ vim.keymap.set({ 'n', 'x' }, 'ySu', [[:.,$S/\<<C-r><C-w>\>/<C-r><C-w>/gIc<Left><
 --   "qp paste the contents of the register to the current cursor position
 --   add the missing motion, then <Esc> return to visual mode
 --   "qyy yank this new modified macro back into the q register
--- vim.keymap.set(
---   'n',
---   '<leader>m',
---   ":<c-u><c-r><c-r>='let @'. v:register .' = '. string(getreg(v:register))<cr><c-f><left>p",
---   { desc = 'edit macro, e.g. "q<leader>m' }
--- )
+vim.keymap.set(
+  'n',
+  '<leader>m',
+  ":<c-u><c-r><c-r>='let @'. v:register .' = '. string(getreg(v:register))<cr><c-f><left>p",
+  { desc = 'edit [m]acro' }
+)
 
 --
 -- the end
