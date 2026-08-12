@@ -150,16 +150,20 @@ vim.keymap.set('n', '<leader>tc', '<cmd>set invlist<cr>', { desc = '[t]oggle lis
 
 vim.keymap.set('n', 'H', '<cmd>bprevious<CR>', { desc = 'prev buffer' })
 vim.keymap.set('n', 'L', '<cmd>bnext<CR>', { desc = 'next buffer' })
-vim.keymap.set('n', '<leader>bc', '<cmd>vs<cr><c-f>:set scb<cr><c-w>h<cmd>set scb<cr>', { desc = '[b]uf split & [c]ontinue view, (undo `:set noscb`)' })
+vim.keymap.set('n', '<localleader>bc', '<cmd>vs<cr><c-f>:set scb<cr><c-w>h<cmd>set scb<cr>', { desc = '[b]uf split & [c]ontinue view, (undo `:set noscb`)' })
 
 -- Move lines in visual mode
-vim.keymap.set('x', 'K', ":m '<-2<CR>gv=gv", { desc = 'move line up' })
-vim.keymap.set('x', 'J', ":m '>+1<CR>gv=gv", { desc = 'move line down' })
+vim.keymap.set({'n', 'x'}, '[e', ":m '<-2<CR>gv=gv", { desc = 'move line up' })
+vim.keymap.set({'n', 'x'}, ']e', ":m '>+1<CR>gv=gv", { desc = 'move line down' })
 
-vim.keymap.set({ 'n', 'v' }, 's/', [[:s,/,\\,g<cr>]], { desc = 'substitute / with \\' })
-vim.keymap.set({ 'n', 'v' }, 's\\', [[:s,\\,/,g<cr>]], { desc = 'substitute \\ with /' })
-vim.keymap.set({ 'n', 'v' }, 'ysu', [[:.,$s/\<<C-r><C-w>\>/<C-r><C-w>/gIc<Left><Left><Left><Left>]], { desc = '[y]ou [s]ubstitute cur. word' })
-vim.keymap.set({ 'n', 'v' }, 'ySu', [[:.,$S/\<<C-r><C-w>\>/<C-r><C-w>/gIc<Left><Left><Left><Left>]], { desc = '[y]ou [s]ubstitute cur. word' })
+-- Create empty lines
+vim.keymap.set('n', '[<space>', ":<c-u>put! =repeat(nr2char(10), v:count1)<cr>'[", { desc = 'add empty line up' })
+vim.keymap.set('n', '[<space>', ":<c-u>put =repeat(nr2char(10), v:count1)<cr>", { desc = 'add empty line down' })
+
+vim.keymap.set({ 'n', 'x' }, 's/', [[:s,/,\\,g<cr>]], { desc = 'substitute / with \\' })
+vim.keymap.set({ 'n', 'x' }, 's\\', [[:s,\\,/,g<cr>]], { desc = 'substitute \\ with /' })
+vim.keymap.set({ 'n', 'x' }, 'ysu', [[:.,$s/\<<C-r><C-w>\>/<C-r><C-w>/gIc<Left><Left><Left><Left>]], { desc = '[y]ou [s]ubstitute cur. word' })
+vim.keymap.set({ 'n', 'x' }, 'ySu', [[:.,$S/\<<C-r><C-w>\>/<C-r><C-w>/gIc<Left><Left><Left><Left>]], { desc = '[y]ou [s]ubstitute cur. word' })
 
 -- QUICKLY EDIT YOUR MACROS: https://github.com/mhinz/vim-galore?tab=readme-ov-file#quickly-edit-your-macros
 -- Also:
