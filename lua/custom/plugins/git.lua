@@ -140,14 +140,14 @@ gitsigns.setup {
     vim.keymap.set('n', '<localleader>A', open_line_in_ado, { desc = 'open [A]zure devops' })
   end,
 }
-vim.pack.add { fn.gh 'NeogitOrg/neogit' }
-vim.keymap.set('n', '<leader>gs', '<cmd>Neogit<cr>', { desc = '[g]it [s]tatus' })
+-- vim.pack.add { fn.gh 'NeogitOrg/neogit' }
+-- vim.keymap.set('n', '<leader>gs', '<cmd>Neogit<cr>', { desc = '[g]it [s]tatus' })
 
--- vim.pack.add { fn.gh 'tpope/vim-fugitive' }
--- vim.keymap.set('n', '<leader>gs', '<cmd>G<cr>', { desc = '[g]it [s]tatus' })
--- vim.keymap.set('n', '<leader>gp', '<cmd>Git pull<cr>', { desc = '[g]it [p]ull' })
--- vim.keymap.set('n', '<leader>gP', '<cmd>Git push<cr>', { desc = '[g]it [P]ush' })
--- vim.keymap.set('n', '<leader>gc', '<cmd>Git commit<cr>', { desc = '[g]it [p]ush' })
+vim.pack.add { fn.gh 'tpope/vim-fugitive' }
+vim.keymap.set('n', '<leader>gs', '<cmd>G<cr>', { desc = '[g]it [s]tatus' })
+vim.keymap.set('n', '<leader>gp', '<cmd>Git pull<cr>', { desc = '[g]it [p]ull' })
+vim.keymap.set('n', '<leader>gP', '<cmd>Git push<cr>', { desc = '[g]it [P]ush' })
+vim.keymap.set('n', '<leader>gc', '<cmd>Git commit<cr>', { desc = '[g]it [c]ommit' })
 
 --
 -- diffs
