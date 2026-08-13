@@ -148,6 +148,19 @@ vim.keymap.set('n', '<leader>gs', '<cmd>G<cr>', { desc = '[g]it [s]tatus' })
 vim.keymap.set('n', '<leader>gp', '<cmd>Git pull<cr>', { desc = '[g]it [p]ull' })
 vim.keymap.set('n', '<leader>gP', '<cmd>Git push<cr>', { desc = '[g]it [P]ush' })
 vim.keymap.set('n', '<leader>gc', '<cmd>Git commit<cr>', { desc = '[g]it [c]ommit' })
+local fugitive_group = vim.api.nvim_create_augroup('my-fugitive', {})
+vim.api.nvim_create_autocmd('BufWinEnter', {
+  group = fugitive_group,
+  pattern = '*',
+  callback = function(event)
+    if vim.bo.ft ~= 'fugitive' then return end
+    local opts = { buffer = event.buf }
+    vim.keymap.set('n', '<localleader>p', '<cmd>Git push<cr>', opts)
+    vim.keymap.set('n', '<localleader>f', '<cmd>Git push --force-with-lease<cr>', opts)
+    vim.keymap.set('n', '<localleader>P', '<cmd>Git pull --rebase<cr>', opts)
+    vim.keymap.set('n', '<localleader>t', ':Git push -u origin ', opts)
+  end,
+})
 
 --
 -- diffs
