@@ -855,7 +855,7 @@ do
   -- [[ Formatting ]]
   vim.pack.add { gh 'stevearc/conform.nvim' }
   require('conform').setup {
-    notify_on_error = false,
+    notify_on_error = true,
     format_on_save = false,
     default_format_opts = {
       lsp_format = 'fallback', -- Use external formatters if configured below, otherwise use LSP formatting. Set to `false` to disable LSP formatting entirely.
@@ -890,6 +890,7 @@ do
       json = { 'prettierd', 'prettier', stop_after_first = true, lsp_format = 'fallback' },
       -- You can use 'stop_after_first' to run the first available formatter from the list
       javascript = { 'prettierd', 'prettier', stop_after_first = true, lsp_format = 'fallback' },
+      typst = { 'typstyle', 'prettypst', stop_after_first = true, lsp_format = 'fallback' },
       --
       -- Use the "*" filetype to run formatters on all filetypes.
       -- ['*'] = { 'typos' },
