@@ -270,7 +270,7 @@ vim.pack.add {
 }
 
 require('mini.bracketed').setup {
-    comment    = { suffix = '' }, -- disabled, conflics with next diff change ]c [c
+    comment    = { suffix = 'm' }, -- diff change ]c [c already taken, thus co[m]ment
 }
 
 -- Iterate over all Lua files in the plugins directory and load them
