@@ -269,7 +269,9 @@ vim.pack.add {
   -- fn.gh 'godlygeek/tabular'
 }
 
-require('mini.bracketed').setup {}
+require('mini.bracketed').setup {
+    comment    = { suffix = '' }, -- disabled, conflics with next diff change ]c [c
+}
 
 -- Iterate over all Lua files in the plugins directory and load them
 local plugins_dir = vim.fs.joinpath(vim.fn.stdpath 'config', 'lua', 'custom', 'plugins')
