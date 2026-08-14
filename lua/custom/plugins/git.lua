@@ -101,17 +101,19 @@ gitsigns.setup {
     -- Navigation
     map('n', '[c', function()
       if vim.wo.diff then
-        vim.cmd.normal { '[czz', bang = true }
+        vim.cmd.normal { '[c', bang = true }
       else
         gitsigns.nav_hunk 'prev'
       end
+      vim.cmd 'normal! zz'
     end, { desc = 'previous hunk' })
-    map('n', ']czz', function()
+    map('n', ']c', function()
       if vim.wo.diff then
         vim.cmd.normal { ']c', bang = true }
       else
         gitsigns.nav_hunk 'next'
       end
+      vim.cmd 'normal! zz'
     end, { desc = 'next hunk' })
 
     map('v', '<leader>hs', function() gitsigns.stage_hunk { vim.fn.line '.', vim.fn.line 'v' } end, { desc = '[s]tage' })
