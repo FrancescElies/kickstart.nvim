@@ -316,12 +316,11 @@ end, {})
 
 
 vim.cmd([[
-  iabbrev ,todo TODO
-  iabbrev ,fix FIXME
-  iabbrev ,note NOTE
-  iabbrev ,hack HACK
-  iabbrev ,date <C-R>=strftime("%Y-%m-%d")<CR>
-  iabbrev ,time <C-R>=strftime("%H:%M:%S")<CR>
-  iabbrev ,rust ```rust<cr>```
-  iabbrev ,python ```python<cr>```
+  iabbrev atodo TODO:
+  iabbrev afix FIXME:
+  iabbrev anote NOTE:
+  iabbrev ahack HACK:
+  iabbrev adate <C-R>=strftime("%Y-%m-%d")<CR>
+  iabbrev atime <C-R>=strftime("%H:%M:%S")<CR>
 ]])
+
