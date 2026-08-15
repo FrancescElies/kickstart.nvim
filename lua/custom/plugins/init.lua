@@ -313,3 +313,15 @@ vim.api.nvim_create_user_command('RemoveUmlauts', function()
     vim.cmd('%s/' .. from .. '/' .. to .. '/ge')
   end
 end, {})
+
+
+vim.cmd([[
+  iabbrev ,todo TODO
+  iabbrev ,fix FIXME
+  iabbrev ,note NOTE
+  iabbrev ,hack HACK
+  iabbrev ,date <C-R>=strftime("%Y-%m-%d")<CR>
+  iabbrev ,time <C-R>=strftime("%H:%M:%S")<CR>
+  iabbrev ,rust ```rust<cr>```
+  iabbrev ,python ```python<cr>```
+]])
