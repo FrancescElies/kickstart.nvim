@@ -25,8 +25,8 @@ vim.api.nvim_create_autocmd('BufEnter', {
   pattern = '*COMMIT*',
   callback = function(_)
     -- vim.notify 'gitcommit n-keymap:\n  - [i]nsert [s]tory\n  - [i]nsert [t]ask'
-    vim.keymap.set('n', 'is', 'istoFya #$', { desc = '[i]nsert [s]tory' })
-    vim.keymap.set('n', 'it', 'itaskFka #$', { desc = '[i]nsert [t]ask' })
+    vim.keymap.set('n', '<localleader>s', 'istoFya #$', { desc = '[y]ou [i]nsert [s]tory' })
+    vim.keymap.set('n', '<localleader>t', 'itaskFka #$', { desc = '[y]ou [i]nsert [t]ask' })
   end,
 })
 
