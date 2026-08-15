@@ -90,8 +90,6 @@ do
 
       -- [h]unk as a vim text object
       vim.keymap.set({ 'o', 'x' }, 'ih', '<Cmd>Gitsigns select_hunk<CR>')
-
-      vim.keymap.set('n', '<localleader>A', open_line_in_ado, { desc = 'open [A]zure devops' })
     end,
   }
 end
@@ -146,60 +144,3 @@ do
   vim.keymap.set('n', '<leader>g/', '<cmd>AdvancedGitSearch<cr>', { desc = '[g]it [/] advanced search (menu)' })
 end
 
---
--- Azure DevOps
---
-do
-  -- Open current file+line in Azure DevOps (PR diff if PR exists, else file view)
-  local function open_line_in_ado()
-    local cwd = vim.fn.expand '%:p:h'
-    local file = vim.fn.expand '%:p'
-    local line = vim.fn.line '.'
-
-    local git_root = vim.trim(vim.system({ 'git', 'rev-parse', '--show-toplevel' }, { cwd = cwd, text = true }):wait().stdout)
-    if not git_root or git_root == '' then
-      vim.notify('Not inside a git repo', vim.log.levels.WARN)
-      return
-    end
-
-    -- Normalise path and make relative
-    local rel_path = '/' .. file:sub(#git_root + 2):gsub('\\', '/')
-
-    local org = os.getenv 'ORG'
-    local project = os.getenv 'PROJECT'
-    local repo = os.getenv 'REPO'
-    if org == nil or project == nil or repo == nil then
-      vim.notify('cwd=' .. vim.fn.getcwd() ' org=' .. org or '<nil>' .. ' project=' .. project or '<nil>' .. ' repo=' .. repo or '<nil>', vim.log.levels.ERROR)
-      return
-    end
-
-    -- strip trailing .git if present
-    repo = repo:gsub('%.git$', ''):gsub('%s+$', '')
-
-    -- find open PR for this branch
-    local branch = vim.trim(vim.system({ 'git', 'branch', '--show-current' }, { cwd = cwd, text = true }):wait().stdout)
-    local pr_id = vim.trim(vim.system({ 'az', 'repos', 'pr', 'list', '--source-branch', branch, '--query', '[0].pullRequestId', '-o', 'tsv' }):wait().stdout)
-
-    local url
-    if pr_id and pr_id:match '^%d+$' then
-      url = string.format('https://dev.azure.com/%s/%s/_git/%s/pullrequest/%s?_a=files&path=%s', org, project, repo, pr_id, rel_path)
-    else
-      vim.notify('No PR found ', vim.log.levels.WARN)
-      url = string.format(
-        'https://dev.azure.com/%s/%s/_git/%s?path=%s&version=GB%s&line=%d&lineEnd=%d&lineStartColumn=1&_a=contents',
-        org,
-        project,
-        repo,
-        rel_path,
-        branch,
-        line,
-        line
-      )
-    end
-
-    if vim.fn.has 'win32' == 1 then url = url:gsub('&', '^&') end
-    vim.ui.open(url)
-    vim.notify('Opened in browser: ' .. url)
-  end
-  vim.api.nvim_create_user_command('OpenLineInAzureDevops', open_line_in_ado, {})
-end
