@@ -316,6 +316,8 @@ end, {})
 
 
 vim.cmd([[
+  iabbrev teh the
+  iabbrev adn and
   iabbrev atodo TODO:
   iabbrev afix FIXME:
   iabbrev anote NOTE:
