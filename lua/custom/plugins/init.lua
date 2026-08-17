@@ -67,7 +67,7 @@ local is_win32 = vim.fn.has 'win32' == 1
 -- `gf` path shenaningans
 if is_win32 then
   vim.opt.isfname:append "'" -- allow single quotes
-  vim.opt.isfname:append '32' -- allow spaces in paths
+  -- vim.opt.isfname:append '32' -- allow spaces in paths, this causes other issues
 end
 vim.opt.isfname:append '@'
 
