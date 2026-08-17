@@ -36,7 +36,7 @@ end
 
 vim.api.nvim_create_user_command('OpenSimilarFiles', open_similar_files, {})
 
-vim.keymap.set('n', '<leader>bs', '<cmd>OpenSimilarFiles<cr>', { desc = '[b]uffer open [s]imilar files' })
+vim.keymap.set('n', '<localleader>S', '<cmd>OpenSimilarFiles<cr>', { desc = '[b]uffer open [s]imilar files' })
 
 -- vim.api.nvim_set_keymap('n', '<leader>x', '', {
 --   noremap = true,

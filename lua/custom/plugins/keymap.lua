@@ -54,10 +54,10 @@ vim.keymap.set('n', '<localleader>w', '<cmd>w<cr>', { desc = 'save buffer' })
 vim.keymap.set('n', '<localleader>wq', '<cmd>wq<cr>', { desc = 'save and quit buffer' })
 vim.keymap.set('n', '<localleader>wa', '<cmd>wa<cr>', { desc = 'save and quit all' })
 vim.keymap.set('n', '<localleader>q', '<cmd>q<cr>', { desc = 'quit buffer' })
-vim.keymap.set('n', '<leader>byr', yank_relative_path, { desc = '[b]uffer [y]ank [r]elative path' })
-vim.keymap.set('n', '<leader>bya', yank_abs_path, { desc = '[b]uffer [y]ank [a]bsolute path' })
-vim.keymap.set('n', '<leader>byn', yank_just_name, { desc = '[b]uffer [y]ank [n]ame' })
-vim.keymap.set('n', '<leader>bd', '<cmd>bd<cr>', { desc = 'delete buffer' })
+vim.keymap.set('n', '<localleader>yr', yank_relative_path, { desc = '[b]uffer [y]ank [r]elative path' })
+vim.keymap.set('n', '<localleader>ya', yank_abs_path, { desc = '[b]uffer [y]ank [a]bsolute path' })
+vim.keymap.set('n', '<localleader>yn', yank_just_name, { desc = '[b]uffer [y]ank [n]ame' })
+vim.keymap.set('n', '<localleader>q', '<cmd>bd<cr>', { desc = 'delete buffer' })
 
 vim.keymap.set('n', '<localleader>x', '"ey$:!<C-r>e<CR>', { noremap = true, desc = 'execute . as shell command' })
 
@@ -150,7 +150,8 @@ vim.keymap.set('n', '<leader>tc', '<cmd>set invlist<cr>', { desc = '[t]oggle lis
 
 vim.keymap.set('n', 'H', '<cmd>bprevious<CR>', { desc = 'prev buffer' })
 vim.keymap.set('n', 'L', '<cmd>bnext<CR>', { desc = 'next buffer' })
-vim.keymap.set('n', '<localleader>bc', '<cmd>vs<cr><c-f>:set scb<cr><c-w>h<cmd>set scb<cr>', { desc = '[b]uf split & [c]ontinue view, (undo `:set noscb`)' })
+vim.keymap.set('n', '<localleader>v', '<cmd>vs<cr><c-f>:set scb<cr><c-w>h<cmd>set scb<cr>', { desc = 'continue [v]iew' })
+vim.keymap.set('n', '<localleader>V', '<cmd>set noscb<cr>', { desc = 'stop continue [v]iew' })
 
 -- Move lines in visual mode
 vim.keymap.set({ 'n', 'x' }, '[e', ":m '<-2<CR>gv=gv", { desc = 'move line up' })
@@ -170,12 +171,7 @@ vim.keymap.set({ 'n', 'x' }, 'ySu', [[:.,$S/\<<C-r><C-w>\>/<C-r><C-w>/gIc<Left><
 --   "qp paste the contents of the register to the current cursor position
 --   add the missing motion, then <Esc> return to visual mode
 --   "qyy yank this new modified macro back into the q register
-vim.keymap.set(
-  'n',
-  '<leader>m',
-  ":<c-u><c-r><c-r>='let @'. v:register .' = '. string(getreg(v:register))<cr><c-f><left>p",
-  { desc = 'edit [m]acro' }
-)
+vim.keymap.set('n', '<leader>m', ":<c-u><c-r><c-r>='let @'. v:register .' = '. string(getreg(v:register))<cr><c-f><left>p", { desc = 'edit [m]acro' })
 
 --
 -- the end

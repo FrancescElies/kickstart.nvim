@@ -281,8 +281,6 @@ do
     spec = {
 
       { '<leader>C', group = '[C]hat' },
-      { '<leader>b', group = '[B]uffer' },
-      { '<leader>by', group = '[B]uffer [Y]ank' },
       { '<leader>c', group = '[C]hat' },
       { '<leader>d', group = '[v]im [d]iagnostic' },
       { '<leader>g', group = '[G]it', mode = { 'n', 'v' } },
@@ -409,7 +407,7 @@ do
 
   local mini_trailspace = require 'mini.trailspace'
   mini_trailspace.setup()
-  vim.keymap.set('n', '<leader>bt', function() mini_trailspace.trim() end, { desc = '[b]uffer [t]railspaces' })
+  vim.keymap.set('n', '<localleader><space>', function() mini_trailspace.trim() end, { desc = 'clean trailspaces' })
 
   -- - ga - [a]lign
   -- - gA - [a]lign with preview
