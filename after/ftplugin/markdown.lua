@@ -1,8 +1,7 @@
-
-vim.keymap.set('n', '<localleader><localleader>', function()
-  local file = vim.fn.expand '%:p'
-  vim.cmd 'write'
+local md_to_html = function(opts)
+  local file = opts.file or vim.fn.expand '%:p'
   local output = vim.fn.fnamemodify(file, ':r') .. '.html'
+  vim.cmd 'write'
   vim.fn.jobstart({ 'makurust', file }, {
     on_exit = function(_, code)
       if code == 0 then
@@ -18,7 +17,37 @@ vim.keymap.set('n', '<localleader><localleader>', function()
       if data and #data > 1 then vim.notify(table.concat(data, '\n'), vim.log.levels.ERROR) end
     end,
   })
-end, { buffer = 0, desc = 'Compile markdown to html' })
+end
+vim.api.nvim_create_user_command('MarkdownToHtml', md_to_html, { desc = 'Compile markdown to html' })
+vim.keymap.set('n', '<localleader><localleader>', '<cmd>MarkdownToHtml<cr>', { buffer = 0, desc = 'Compile markdown to html' })
+
+local md_with_mermaid_to_html = function()
+  local full_path = vim.fn.expand '%:p'
+  local dir = vim.fn.expand '%:p:h'
+  local stem = vim.fn.expand '%:t:r'
+  local ext = vim.fn.expand '%:e'
+  local output = dir .. '/' .. stem .. '-mmd.' .. ext
+  vim.cmd 'write'
+
+  -- NOTE: needs `npm install -g @mermaid-js/mermaid-cli`
+  vim.fn.jobstart({ 'mmdc', '-i', full_path, '-o', output }, {
+    on_exit = function(_, code)
+      if code == 0 then
+        vim.notify('mmdc: ' .. output, vim.log.levels.INFO)
+        local fn = require 'custom.fn'
+        md_to_html { file = output }
+      else
+        vim.notify('mmdc failed (exit ' .. code .. ')', vim.log.levels.ERROR)
+      end
+    end,
+    stderr_buffered = true,
+    on_stderr = function(_, data)
+      if data and #data > 1 then vim.notify(table.concat(data, '\n'), vim.log.levels.ERROR) end
+    end,
+  })
+end
+vim.api.nvim_create_user_command('MarkdownMermaidToHtml', md_with_mermaid_to_html, { desc = 'Compile markdown with mermaid to html' })
+vim.keymap.set('n', '<localleader><c-,>', '<cmd>MarkdownMermaidToHtml<cr>', { buffer = 0, desc = 'Compile markdown to html' })
 
 
 --
@@ -78,4 +107,4 @@ do
   end
   vim.api.nvim_create_user_command('OpenLineInAzureDevops', open_line_in_ado, {})
   vim.keymap.set('n', '<localleader>A', open_line_in_ado, { desc = 'open [A]zure devops' })
-end
+ end
