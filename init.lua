@@ -406,7 +406,7 @@ do
   local mini_trailspace = require 'mini.trailspace'
   mini_trailspace.setup()
   vim.keymap.set('n', '<localleader>T', function() mini_trailspace.trim() end, { desc = 'Trailspaces' })
-  vim.keymap.set('n', '<localleader><space>', ':g/^$/,/./-j', { desc = 'clean consecutive empty lines' })
+  vim.keymap.set('n', '<localleader><space>', '<cmd>g/^$/,/./-j<cr>', { desc = 'clean consecutive empty lines' })
 
   -- - ga - [a]lign
   -- - gA - [a]lign with preview
