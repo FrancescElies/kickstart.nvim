@@ -1,5 +1,5 @@
 vim.pack.add { 'https://github.com/stevearc/aerial.nvim' }
-vim.keymap.set('n', '<leader>a', '<cmd>AerialToggle! left<CR>', { desc = '[a]erial' })
+vim.keymap.set('n', '<leader>a', '<cmd>AerialToggle! left<CR>', { desc = 'aerial' })
 
 require('aerial').setup {
   on_attach = function(bufnr)
