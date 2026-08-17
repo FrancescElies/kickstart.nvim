@@ -106,5 +106,5 @@ do
     vim.notify('Opened in browser: ' .. url)
   end
   vim.api.nvim_create_user_command('OpenLineInAzureDevops', open_line_in_ado, {})
-  vim.keymap.set('n', '<localleader>A', open_line_in_ado, { desc = 'open [A]zure devops' })
+  vim.keymap.set('n', '<localleader>oa', open_line_in_ado, { desc = '[o]pen  [a]zure devops' })
  end
