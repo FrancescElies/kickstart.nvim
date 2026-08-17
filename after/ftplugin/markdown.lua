@@ -1,15 +1,29 @@
-local md_to_html = function(opts)
-  local file = opts.file or vim.fn.expand '%:p'
-  local output = vim.fn.fnamemodify(file, ':r') .. '.html'
-  vim.cmd 'write'
-  vim.fn.jobstart({ 'makurust', file }, {
+local fn = require 'custom.fn'
+
+local function file_contains(path, str)
+  local ok, lines = pcall(io.lines, path)
+  if not ok then return false end
+  for line in lines do
+    if line:find(str, 1, true) then return true end
+  end
+  return false
+end
+
+-- NOTE: needs `cargo install --locked --git https://github.com/fromgodd/makurust makurust`
+-- Alternatives:
+--   cargo install comrak
+--   uv tool install umarkdown[cli]
+--   uv tool install grip
+local function start_makurust(opts)
+  local input = vim.fs.normalize(opts.input)
+  vim.fn.jobstart({ 'makurust', input }, {
     on_exit = function(_, code)
       if code == 0 then
+        local output = vim.fn.fnamemodify(input, ':r') .. '.html'
         vim.notify('makurust: ' .. output, vim.log.levels.INFO)
-        local fn = require 'custom.fn'
         fn.open_in_system_default_app(output)
       else
-        vim.notify('makurust failed (exit ' .. code .. ')', vim.log.levels.ERROR)
+        vim.notify('makurust failed ' .. input .. ' (exit ' .. code .. ')', vim.log.levels.ERROR)
       end
     end,
     stderr_buffered = true,
@@ -18,26 +32,19 @@ local md_to_html = function(opts)
     end,
   })
 end
-vim.api.nvim_create_user_command('MarkdownToHtml', md_to_html, { desc = 'Compile markdown to html' })
-vim.keymap.set('n', '<localleader><localleader>', '<cmd>MarkdownToHtml<cr>', { buffer = 0, desc = 'Compile markdown to html' })
 
-local md_with_mermaid_to_html = function()
-  local full_path = vim.fn.expand '%:p'
-  local dir = vim.fn.expand '%:p:h'
-  local stem = vim.fn.expand '%:t:r'
-  local ext = vim.fn.expand '%:e'
-  local output = dir .. '/' .. stem .. '-mmd.' .. ext
-  vim.cmd 'write'
+-- NOTE: needs `npm install -g @mermaid-js/mermaid-cli`
+local function start_mermaid_cli(opts)
+  local input = vim.fs.normalize(opts.input)
+  local output = vim.fs.normalize(opts.output)
 
-  -- NOTE: needs `npm install -g @mermaid-js/mermaid-cli`
-  vim.fn.jobstart({ 'mmdc', '-i', full_path, '-o', output }, {
+  vim.fn.jobstart({ 'mmdc', '-i', input, '-o', output }, {
     on_exit = function(_, code)
       if code == 0 then
         vim.notify('mmdc: ' .. output, vim.log.levels.INFO)
-        local fn = require 'custom.fn'
-        md_to_html { file = output }
+        start_makurust { input = output }
       else
-        vim.notify('mmdc failed (exit ' .. code .. ')', vim.log.levels.ERROR)
+        vim.notify('mmdc failed ' .. input .. ' (exit ' .. code .. ')', vim.log.levels.ERROR)
       end
     end,
     stderr_buffered = true,
@@ -46,9 +53,24 @@ local md_with_mermaid_to_html = function()
     end,
   })
 end
-vim.api.nvim_create_user_command('MarkdownMermaidToHtml', md_with_mermaid_to_html, { desc = 'Compile markdown with mermaid to html' })
-vim.keymap.set('n', '<localleader><c-,>', '<cmd>MarkdownMermaidToHtml<cr>', { buffer = 0, desc = 'Compile markdown to html' })
 
+local md_to_html = function(opts)
+  local input = opts.input or vim.fn.expand '%:p'
+  vim.cmd 'write'
+  if file_contains(input, 'mermaid') then
+    local dir = vim.fn.expand '%:p:h'
+    local stem = vim.fn.expand '%:t:r'
+    local ext = vim.fn.expand '%:e'
+    local output = dir .. '/' .. stem .. '-mmd.' .. ext
+
+    start_mermaid_cli { input = input, output = output }
+  else
+    start_makurust { input = input }
+  end
+end
+
+vim.api.nvim_create_user_command('MarkdownToHtml', md_to_html, { desc = 'Compile markdown to html' })
+vim.keymap.set('n', '<localleader><localleader>', '<cmd>MarkdownToHtml<cr>', { buffer = 0, desc = 'Compile markdown to html' })
 
 --
 -- Azure DevOps
@@ -107,4 +129,4 @@ do
   end
   vim.api.nvim_create_user_command('OpenLineInAzureDevops', open_line_in_ado, {})
   vim.keymap.set('n', '<localleader>oa', open_line_in_ado, { desc = '[o]pen  [a]zure devops' })
- end
+end
