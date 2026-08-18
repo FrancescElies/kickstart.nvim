@@ -97,8 +97,8 @@ end
 do
   vim.pack.add { fn.gh 'tpope/vim-fugitive' }
   vim.keymap.set('n', '<leader>gs', '<cmd>G<cr>', { desc = '[g]it [s]tatus' })
-  vim.keymap.set('n', '<leader>gp', '<cmd>Git pull<cr>', { desc = '[g]it [p]ull' })
-  vim.keymap.set('n', '<leader>gP', '<cmd>Git push<cr>', { desc = '[g]it [P]ush' })
+  vim.keymap.set('n', '<leader>gP', '<cmd>Git pull<cr>', { desc = '[g]it [p]ull' })
+  vim.keymap.set('n', '<leader>gp', '<cmd>Git push<cr>', { desc = '[g]it [P]ush' })
   vim.keymap.set('n', '<leader>gc', '<cmd>Git commit<cr>', { desc = '[g]it [c]ommit' })
   local fugitive_group = vim.api.nvim_create_augroup('my-fugitive', {})
   vim.api.nvim_create_autocmd('BufWinEnter', {
