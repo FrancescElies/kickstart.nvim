@@ -9,6 +9,7 @@ local tscontext = require 'treesitter-context'
 
 tscontext.setup {
   enable = true,
+  multiwindow = true,
   max_lines = 2, -- How many lines the window should span. Values <= 0 mean no limit.
   separator = '-',
 }
