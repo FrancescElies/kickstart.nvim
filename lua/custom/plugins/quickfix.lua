@@ -58,23 +58,33 @@ local function diagnostic_jump(opts)
   end
 end
 
-vim.keymap.set('n', '<M-k>', function()
+local function qf_prev()
   if is_quickfix_open() then
     vim.cmd 'cprevious'
   else
     diagnostic_jump { count = -1, float = true }
   end
   vim.cmd 'normal! zz'
-end, { desc = 'previous quickfix item' })
-
-vim.keymap.set('n', '<M-j>', function()
+end
+local function qf_next()
   if is_quickfix_open() then
     vim.cmd 'cnext'
   else
     diagnostic_jump { count = 1, float = true }
   end
   vim.cmd 'normal! zz'
-end, { desc = 'quickfix next' })
+end
+
+vim.keymap.set('n', '<M-h>', function()
+  vim.cmd 'wincmd v'
+  qf_prev()
+end, { desc = 'quickfix previous' })
+vim.keymap.set('n', '<M-j>', qf_next, { desc = 'quickfix next' })
+vim.keymap.set('n', '<M-k>', qf_prev, { desc = 'quickfix previous' })
+vim.keymap.set('n', '<M-l>', function()
+  vim.cmd 'wincmd v'
+  qf_next()
+end, { desc = 'quickfix previous' })
 
 vim.api.nvim_create_autocmd('FileType', {
   pattern = 'qf',
