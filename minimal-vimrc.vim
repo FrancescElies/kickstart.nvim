@@ -132,14 +132,11 @@ nnoremap <leader>q :call ToggleQuickfix()<CR>
 nnoremap <M-k> :cprev<cr>zOzz
 nnoremap <M-j> :cnext<cr>zOzz
 
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = 'qf',
-  callback = function()
-    local opts = { buffer = true, silent = true }
-    vim.keymap.set('n', 'J', ':cnext<CR>zz<C-w>p', opts)
-    vim.keymap.set('n', 'K', ':cprev<CR>zz<C-w>p', opts)
-  end,
-})
+augroup QF_MyMaps
+  autocmd!
+  autocmd FileType qf nnoremap <buffer> J :cnext<CR>zz<C-w>p
+  autocmd FileType qf nnoremap <buffer> K :cprev<CR>zz<C-w>p
+augroup END
 
 " Keybinds to make split navigation easier.
 nnoremap <C-h> <C-w><C-h>
