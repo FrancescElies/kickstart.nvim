@@ -14,4 +14,4 @@ tscontext.setup {
   separator = '-',
 }
 
-vim.keymap.set('n', '<leader>to', '<cmd>TSContext toggle<cr>', { desc = '[v]im treesitter-c[o]ntext toggle' })
+vim.keymap.set('n', 'gco', '<cmd>TSContext toggle<cr>', { desc = 'goto treesitter-[co]ntext toggle' })
