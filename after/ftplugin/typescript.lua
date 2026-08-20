@@ -1,4 +1,4 @@
-local function start_npm_run_build(opts)
+local function start_npm_run_build()
   vim.fn.jobstart({ 'npm', 'run', 'build' }, {
     on_exit = function(_, code)
       if code == 0 then
@@ -14,4 +14,4 @@ local function start_npm_run_build(opts)
   })
 end
 
-vim.keymap.set('n', '<localleader><localleader>', '<cmd>MarkdownToHtml<cr>', { buffer = 0, desc = 'Compile markdown to html' })
+vim.keymap.set('n', '<localleader><localleader>', start_npm_run_build, { buffer = 0, desc = 'Compile markdown to html' })
