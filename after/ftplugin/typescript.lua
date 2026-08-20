@@ -14,4 +14,4 @@ local function start_npm_run_build()
   })
 end
 
-vim.keymap.set('n', '<localleader><localleader>', start_npm_run_build, { buffer = 0, desc = 'Compile markdown to html' })
+vim.keymap.set('n', '<localleader><localleader>', start_npm_run_build, { buffer = 0, desc = 'npm run build' })
