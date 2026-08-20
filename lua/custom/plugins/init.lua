@@ -318,11 +318,11 @@ end, {})
 vim.cmd([[
   iabbrev teh the
   iabbrev adn and
-  iabbrev ,todo TODO:
-  iabbrev ,fix FIXME:
-  iabbrev ,note NOTE:
-  iabbrev ,hack HACK:
-  iabbrev ,date <C-R>=strftime("%Y-%m-%d")<CR>
-  iabbrev ,time <C-R>=strftime("%H:%M:%S")<CR>
+  iabbrev ztodo TODO:
+  iabbrev zfix FIXME:
+  iabbrev znote NOTE:
+  iabbrev zhack HACK:
+  iabbrev zdate <C-R>=strftime("%Y-%m-%d")<CR>
+  iabbrev ztime <C-R>=strftime("%H:%M:%S")<CR>
 ]])
 
