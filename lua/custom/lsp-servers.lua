@@ -1,5 +1,35 @@
 vim.lsp.log.set_level 'debug'
 
+local js_format = {
+  format = {
+    baseIndentSize = 0,
+    convertTabsToSpaces = true,
+    indentSize = 2,
+    indentStyle = 'Smart',
+    insertSpaceAfterCommaDelimiter = true,
+    insertSpaceAfterConstructor = false,
+    insertSpaceAfterFunctionKeywordForAnonymousFunctions = true,
+    insertSpaceAfterKeywordsInControlFlowStatements = true,
+    insertSpaceAfterOpeningAndBeforeClosingEmptyBraces = true,
+    insertSpaceAfterOpeningAndBeforeClosingJsxExpressionBraces = false,
+    insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces = true,
+    insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets = false,
+    insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis = false,
+    insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces = false,
+    insertSpaceAfterSemicolonInForStatements = true,
+    insertSpaceAfterTypeAssertion = false,
+    insertSpaceBeforeAndAfterBinaryOperators = true,
+    insertSpaceBeforeFunctionParenthesis = false,
+    insertSpaceBeforeTypeAnnotation = false,
+    newLineCharacter = '\n',
+    placeOpenBraceOnNewLineForControlBlocks = false,
+    placeOpenBraceOnNewLineForFunctions = false,
+    semicolons = 'insert',
+    tabSize = 2,
+    trimTrailingWhitespace = true,
+  },
+}
+
 -- :LspLog
 -- Search for workspace/didChangeConfiguration or initializationOptions in the log to see what was sent.
 
@@ -134,6 +164,7 @@ local servers = {
       provideFormatter = false,
     },
     typescript = {
+      format = js_format,
       inlayHints = {
         includeInlayParameterNameHints = 'all', -- 'none' | 'literals' | 'all'
         includeInlayParameterNameHintsWhenArgumentMatchesName = true,
@@ -146,6 +177,7 @@ local servers = {
       },
     },
     javascript = {
+      format = js_format,
       inlayHints = {
         includeInlayParameterNameHints = 'all', -- 'none' | 'literals' | 'all'
         includeInlayParameterNameHintsWhenArgumentMatchesName = true,
