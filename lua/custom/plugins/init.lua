@@ -288,17 +288,21 @@ vim.treesitter.language.register('json', 'jsonl')
 vim.pack.add { fn.gh 'monaqa/dial.nvim' }
 local augend = require 'dial.augend'
 require('dial.config').augends:register_group {
-  -- default augends used when no group name is specified
   default = {
     augend.integer.alias.hex,
+    augend.integer.new { radix = 2, prefix = '0b' },
     augend.integer.new { radix = 10 },
     augend.constant.new { elements = { 'true', 'false' } },
     augend.constant.new { elements = { 'True', 'False' } },
     augend.constant.new { elements = { 'yes', 'no' } },
     augend.constant.new { elements = { 'Yes', 'No' } },
+    augend.constant.new { elements = { '&&', '||' } },
+    augend.constant.new { elements = { '==', '!=' } },
+    augend.constant.new { elements = { '<', '>' } },
     augend.semver.new { prefix = 'v' },
-    -- date (2022/02/19, etc.)
     augend.date.new { pattern = '%Y/%m/%d', default_kind = 'day' },
+    augend.date.new { pattern = '%Y-%m-%d', default_kind = 'day' },
+    augend.case.new { types = { 'camelCase', 'snake_case', 'kebab-case', 'PascalCase', 'SCREAMING_SNAKE_CASE' } },
   },
 }
 
@@ -311,7 +315,6 @@ vim.keymap.set('x', '<C-a>', function() dial.manipulate('increment', 'visual') e
 vim.keymap.set('x', '<C-x>', function() dial.manipulate('decrement', 'visual') end)
 vim.keymap.set('x', 'g<C-a>', function() dial.manipulate('increment', 'gvisual') end)
 vim.keymap.set('x', 'g<C-x>', function() dial.manipulate('decrement', 'gvisual') end)
-
 vim.keymap.set('n', '<c-left>', '<cmd>vertical resize -5<cr>')
 vim.keymap.set('n', '<c-right>', '<cmd>vertical resize +5<cr>')
 vim.keymap.set('n', '<c-down>', '<cmd>resize -5<cr>')
