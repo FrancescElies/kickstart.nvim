@@ -286,6 +286,22 @@ vim.filetype.add { extension = { jsonl = 'json' } }
 vim.treesitter.language.register('json', 'jsonl')
 
 vim.pack.add { fn.gh 'monaqa/dial.nvim' }
+local augend = require 'dial.augend'
+require('dial.config').augends:register_group {
+  -- default augends used when no group name is specified
+  default = {
+    augend.integer.alias.hex,
+    augend.integer.new { radix = 10 },
+    augend.constant.new { elements = { 'true', 'false' } },
+    augend.constant.new { elements = { 'True', 'False' } },
+    augend.constant.new { elements = { 'yes', 'no' } },
+    augend.constant.new { elements = { 'Yes', 'No' } },
+    augend.semver.new { prefix = 'v' },
+    -- date (2022/02/19, etc.)
+    augend.date.new { pattern = '%Y/%m/%d', default_kind = 'day' },
+  },
+}
+
 local dial = require 'dial.map'
 vim.keymap.set('n', '<C-a>', function() dial.manipulate('increment', 'normal') end)
 vim.keymap.set('n', '<C-x>', function() dial.manipulate('decrement', 'normal') end)
@@ -313,7 +329,7 @@ vim.api.nvim_create_user_command('RemoveUmlauts', function()
     vim.cmd('%s/' .. from .. '/' .. to .. '/ge')
   end
 end, {})
-
+local a = true
 vim.cmd [[
   iabbrev teh the
   iabbrev adn and
