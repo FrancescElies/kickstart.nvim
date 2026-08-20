@@ -270,7 +270,7 @@ vim.pack.add {
 }
 
 require('mini.bracketed').setup {
-    comment    = { suffix = 'm' }, -- diff change ]c [c already taken, thus co[m]ment
+  comment = { suffix = 'm' }, -- diff change ]c [c already taken, thus co[m]ment
 }
 
 -- Iterate over all Lua files in the plugins directory and load them
@@ -305,8 +305,8 @@ vim.keymap.set('n', '<c-up>', '<cmd>resize +5<cr>')
 -- https://github.com/wezm/rsspls rrs please, make rss from website
 -- https://github.com/wezm/titlecase titlecase - is a small tool and library (crate) that capitalizes English text according to a style defined by John Gruber
 
+require('custom.unslop').setup { keymap = '<localleader>u' }
 
-require("custom.unslop").setup()
 vim.api.nvim_create_user_command('RemoveUmlauts', function()
   local subs = { ['ä'] = 'ae', ['ö'] = 'oe', ['ü'] = 'ue', ['Ä'] = 'Ae', ['Ö'] = 'Oe', ['Ü'] = 'Ue' }
   for from, to in pairs(subs) do
@@ -314,8 +314,7 @@ vim.api.nvim_create_user_command('RemoveUmlauts', function()
   end
 end, {})
 
-
-vim.cmd([[
+vim.cmd [[
   iabbrev teh the
   iabbrev adn and
   iabbrev ztodo TODO:
@@ -324,5 +323,4 @@ vim.cmd([[
   iabbrev zhack HACK:
   iabbrev zdate <C-R>=strftime("%Y-%m-%d")<CR>
   iabbrev ztime <C-R>=strftime("%H:%M:%S")<CR>
-]])
-
+]]
