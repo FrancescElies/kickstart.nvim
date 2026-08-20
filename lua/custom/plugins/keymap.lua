@@ -62,7 +62,6 @@ vim.keymap.set('n', '<localleader>x', '"ey$:!<C-r>e<CR>', { noremap = true, desc
 
 -- quick scape
 vim.keymap.set({ 'i', 'c' }, 'jk', '<Esc>')
-vim.keymap.set({ 'i', 'c' }, 'kj', '<Esc>')
 vim.keymap.set({ 'i', 'c' }, ',.', '<Enter>')
 vim.keymap.set({ 'n', 'i' }, '<C-c>', '<Esc>')
 
