@@ -15,4 +15,5 @@ tscontext.setup {
 }
 
 vim.keymap.set('n', '<leader>to', '<cmd>TSContext toggle<cr>', { desc = 'toggle TS-c[o]ntext' })
-vim.keymap.set('n', 'gco', function() tscontext.go_to_context(vim.v.count1) end, { silent = true, desc = 'goto c[o]ntext' })
+-- [p is one of the few free keys :/, is nicely placed close to [
+vim.keymap.set('n', '[p', function() tscontext.go_to_context(vim.v.count1) end, { silent = true, desc = 'prev context' })
