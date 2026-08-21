@@ -64,6 +64,7 @@ local function qf_prev()
   else
     diagnostic_jump { count = -1, float = true }
   end
+  vim.cmd 'normal! zv'
   vim.cmd 'normal! zz'
 end
 local function qf_next()
@@ -72,6 +73,7 @@ local function qf_next()
   else
     diagnostic_jump { count = 1, float = true }
   end
+  vim.cmd 'normal! zv'
   vim.cmd 'normal! zz'
 end
 
@@ -90,7 +92,7 @@ vim.api.nvim_create_autocmd('FileType', {
   pattern = 'qf',
   callback = function()
     local opts = { buffer = true, silent = true }
-    vim.keymap.set('n', 'J', '<cmd>cnext<CR>zz<C-w>p', opts)
-    vim.keymap.set('n', 'K', '<cmd>cprev<CR>zz<C-w>p', opts)
+    vim.keymap.set('n', 'J', '<cmd>cnext<CR>zvzz<C-w>p', opts)
+    vim.keymap.set('n', 'K', '<cmd>cprev<CR>zvzz<C-w>p', opts)
   end,
 })

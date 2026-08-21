@@ -134,8 +134,8 @@ nnoremap <M-j> :cnext<cr>zOzz
 
 augroup QF_MyMaps
   autocmd!
-  autocmd FileType qf nnoremap <buffer> J :cnext<CR>zz<C-w>p
-  autocmd FileType qf nnoremap <buffer> K :cprev<CR>zz<C-w>p
+  autocmd FileType qf nnoremap <buffer> J :cnext<CR>zvzz<C-w>p
+  autocmd FileType qf nnoremap <buffer> K :cprev<CR>zvzz<C-w>p
 augroup END
 
 " Keybinds to make split navigation easier.
