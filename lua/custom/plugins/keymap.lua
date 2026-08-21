@@ -50,13 +50,14 @@ local function yank_just_name()
   vim.fn.setreg('+', path)
 end
 
-vim.keymap.set('n', '<localleader>w', '<cmd>w<cr>', { desc = 'save buffer' })
-vim.keymap.set('n', '<localleader>wq', '<cmd>wq<cr>', { desc = 'save and quit buffer' })
-vim.keymap.set('n', '<localleader>wa', '<cmd>wa<cr>', { desc = 'save and quit all' })
-vim.keymap.set('n', '<localleader>yr', yank_relative_path, { desc = '[b]uffer [y]ank [r]elative path' })
-vim.keymap.set('n', '<localleader>ya', yank_abs_path, { desc = '[b]uffer [y]ank [a]bsolute path' })
-vim.keymap.set('n', '<localleader>yn', yank_just_name, { desc = '[b]uffer [y]ank [n]ame' })
-vim.keymap.set('n', '<localleader>bd', '<cmd>bd<cr>', { desc = 'delete buffer' })
+vim.keymap.set('n', '<localleader>w', '<cmd>w<cr>', { desc = 'save buf.' })
+vim.keymap.set('n', '<localleader>wq', '<cmd>wq<cr>', { desc = 'save, quit buf.' })
+vim.keymap.set('n', '<localleader>wa', '<cmd>wa<cr>', { desc = 'save, quit all' })
+vim.keymap.set('n', '<localleader>yr', yank_relative_path, { desc = '[y]ank [r]elative path' })
+vim.keymap.set('n', '<localleader>yy', 'myggyG`a', { desc = '[y]ank whole buf.' })
+vim.keymap.set('n', '<localleader>ya', yank_abs_path, { desc = '[y]ank [a]bs. path' })
+vim.keymap.set('n', '<localleader>yn', yank_just_name, { desc = '[y]ank [n]ame' })
+vim.keymap.set('n', '<localleader>bd', '<cmd>bd<cr>', { desc = 'delete buf.' })
 
 vim.keymap.set('n', '<localleader>x', '"ey$:!<C-r>e<CR>', { noremap = true, desc = 'execute . as shell command' })
 
