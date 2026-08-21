@@ -158,6 +158,8 @@ end
 vim.api.nvim_create_user_command('RustFunctionsAndReflectionCalls', rust_functions_and_reflection_calls_qf, { nargs = '?' })
 vim.keymap.set('n', '<localleader>R', rust_functions_and_reflection_calls_qf, { desc = '[r]efernces & [r]eflection calls' })
 
+vim.api.nvim_create_user_command('RustStdDocs', function() vim.system { 'rustup', 'doc'  } end, {})
+
 vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufRead' }, {
   pattern = { '*.rs', '*.toml' },
   group = vim.api.nvim_create_augroup('my-rust-bacon', { clear = true }),
@@ -178,5 +180,6 @@ vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufRead' }, {
     -- end, 'bacon-ls: run check')
     nkeymap('<localleader>u', unwraps_to_qf, 'Find unwrap() calls')
     nkeymap('<localleader>U', unwraps_in_project_to_qf, 'Find unwrap() calls')
+    nkeymap('<localleader>rd', '<cmd>RustStdDocs<cr>', 'rust docs')
   end,
 })
