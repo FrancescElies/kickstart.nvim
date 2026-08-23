@@ -1,5 +1,7 @@
 local fn = require 'custom.fn'
 
+vim.opt_local.foldlevel = 1
+
 local function file_contains(path, str)
   local ok, lines = pcall(io.lines, path)
   if not ok then return false end
