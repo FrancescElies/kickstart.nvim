@@ -167,7 +167,7 @@ vim.keymap.set({ 'n', 't' }, '<C-,>', '<cmd>FloatTerm<cr>', { desc = 'float term
 vim.keymap.set({ 'n', 't' }, '\u{f8ff}', '<cmd>FloatTerm<cr>', { desc = 'float term' })
 vim.keymap.set({ 'n', 't' }, '\u{f8ff}', '<cmd>FloatTerm<cr>', { desc = 'float term' })
 
-vim.keymap.set({ 't' }, ',.', '<cmd>:startinsert<cr><C-c><C-p><cr>', { desc = 'change-opt. [r]estart last comamnd' })
+vim.keymap.set({ 'n' }, '<C-,><C-.>', '<cmd>FloatTerm<cr><cmd>startinsert<cr><C-c><C-p><cr><cmd>FloatTerm<cr>', { desc = '[r]estart last comamnd' })
 vim.keymap.set({ 'n', 't' }, '<leader>tn', ':term<cr>')
 vim.keymap.set({ 'n', 't' }, '<leader>tb', toggle_bottomterm, { desc = 'change-opt. [b]ottom term' })
 vim.keymap.set({ 'n', 't' }, '<leader>tB', win_stick_to_bottom, { desc = 'change-opt. [b]ottom term' })
