@@ -48,7 +48,7 @@ vim.api.nvim_create_user_command('ToggleDiagnosticVisitOrder', function()
   vim.g.diagnostic_visit_errors_first = not vim.g.diagnostic_visit_errors_first
   print('DiagnosticBySeverity ' .. (vim.g.diagnostic_visit_errors_first and 'enabled' or 'disabled'))
 end, {})
-vim.keymap.set('n', '<leader>td', '<cmd>ToggleDiagnosticVisitOrder<cr>', { desc = '[t]oggle [d]iagnostic visit order' })
+vim.keymap.set('n', 'cod', '<cmd>ToggleDiagnosticVisitOrder<cr>', { desc = 'change-opt. [d]iagnostic visit order' })
 
 local function diagnostic_jump(opts)
   if vim.g.diagnostic_visit_errors_first then

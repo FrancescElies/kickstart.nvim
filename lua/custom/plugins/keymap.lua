@@ -130,13 +130,13 @@ vim.keymap.set('n', '<leader>ve', '<cmd>tabnew | e $MYVIMRC | CdBufRootDir <cr>'
 vim.keymap.set('n', '<leader>vp', open_vim_pack_dir, { desc = 'edit vimrc' })
 vim.keymap.set('n', '<leader>vm', "<cmd>new | put=execute('messages')<cr>", { desc = 'vim messages' })
 
-vim.keymap.set('n', '<leader>tr', '<cmd>set invrelativenumber<cr>', { desc = '[t]oggle [r]elativenumber' })
-vim.keymap.set('n', '<leader>tw', '<cmd>set invwrapscan<cr>', { desc = '[t]oggle search [w]rap-around' })
-vim.keymap.set('n', '<leader>tw', '<cmd>set invwrap<cr>', { desc = '[t]oggle [w]rap' })
-vim.keymap.set('n', '<leader>t/', '<cmd>set invhlsearch<cr>', { desc = '[t]oggle highlight [/] search' })
-vim.keymap.set('n', '<leader>ts', '<cmd>set invspell<cr>', { desc = '[t]oggle [s]pell' })
-vim.keymap.set('n', '<leader>ti', '<cmd>set invignorecase<cr>', { desc = '[t]oggle [i]gnorecase' })
-vim.keymap.set('n', '<leader>tc', '<cmd>set invlist<cr>', { desc = '[t]oggle list (show invisible [c]hars)' })
+vim.keymap.set('n', 'cor', '<cmd>set invrelativenumber<cr>', { desc = 'change-opt. [r]elativenumber' })
+vim.keymap.set('n', 'cow', '<cmd>set invwrapscan<cr>', { desc = 'change-opt. search [w]rap-around' })
+vim.keymap.set('n', 'cow', '<cmd>set invwrap<cr>', { desc = 'change-opt. [w]rap' })
+vim.keymap.set('n', 'co/', '<cmd>set invhlsearch<cr>', { desc = 'change-opt. highlight [/] search' })
+vim.keymap.set('n', 'cos', '<cmd>set invspell<cr>', { desc = 'change-opt. [s]pell' })
+vim.keymap.set('n', 'coi', '<cmd>set invignorecase<cr>', { desc = 'change-opt. [i]gnorecase' })
+vim.keymap.set('n', 'coc', '<cmd>set invlist<cr>', { desc = 'change-opt. list (show invisible [c]hars)' })
 
 -- control splits size  <>., are on the same two keys
 -- width

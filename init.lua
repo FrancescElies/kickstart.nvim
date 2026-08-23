@@ -290,7 +290,7 @@ do
       { '<leader>n', group = 'Notes' },
       { '<leader>q', group = 'Quickfix' },
       { '<leader>s', group = 'Search' },
-      { '<leader>t', group = 'Toggle' },
+      { '<leader>t', group = 'Term' },
       { '<leader>v', group = 'Vim' },
       { '<localleader>y', group = 'Yank' },
       { 'Z', group = 'Session', mode = { 'n' } },
@@ -407,7 +407,7 @@ do
 
   local mini_trailspace = require 'mini.trailspace'
   mini_trailspace.setup()
-  vim.keymap.set('n', '<localleader>T', function() mini_trailspace.trim() end, { desc = 'Trailspaces' })
+  vim.keymap.set('n', '<localleader>W', function() mini_trailspace.trim() end, { desc = 'trailing [W]hitespaces' })
   vim.keymap.set('n', '<localleader><space>', '<cmd>g/^$/,/./-j<cr>', { desc = 'clean consecutive empty lines' })
 
   -- - ga - [a]lign
@@ -810,7 +810,7 @@ do
       --
       -- This may be unwanted, since they displace some of your code
       if client and client:supports_method('textDocument/inlayHint', event.buf) then
-        map('<leader>th', function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf }) end, '[T]oggle Inlay [H]ints')
+        map('coh', function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf }) end, 'Inlay [H]ints')
       end
     end,
   })
