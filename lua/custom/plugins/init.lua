@@ -302,7 +302,7 @@ require('dial.config').augends:register_group {
     augend.semver.new { prefix = 'v' },
     augend.date.new { pattern = '%Y/%m/%d', default_kind = 'day' },
     augend.date.new { pattern = '%Y-%m-%d', default_kind = 'day' },
-    augend.case.new { types = { 'camelCase', 'snake_case', 'kebab-case', 'PascalCase', 'SCREAMING_SNAKE_CASE' } },
+    -- augend.case.new { types = { 'camelCase', 'snake_case', 'kebab-case', 'PascalCase', 'SCREAMING_SNAKE_CASE' } },
   },
 }
 
