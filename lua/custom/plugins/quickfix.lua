@@ -59,20 +59,12 @@ local function diagnostic_jump(opts)
 end
 
 local function qf_prev()
-  if is_quickfix_open() then
-    vim.cmd 'cprevious'
-  else
-    diagnostic_jump { count = -1, float = true }
-  end
+  vim.cmd 'cprevious'
   vim.cmd 'normal! zv'
   vim.cmd 'normal! zz'
 end
 local function qf_next()
-  if is_quickfix_open() then
-    vim.cmd 'cnext'
-  else
-    diagnostic_jump { count = 1, float = true }
-  end
+  vim.cmd 'cnext'
   vim.cmd 'normal! zv'
   vim.cmd 'normal! zz'
 end
