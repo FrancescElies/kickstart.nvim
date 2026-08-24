@@ -1032,6 +1032,8 @@ do
     -- For more info on folds see `:help folds`
     vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
     vim.wo.foldmethod = 'expr'
+    vim.opt.foldlevelstart = 1
+    vim.opt.foldopen:remove 'block' -- avoid fold opening when moving {, [[ ...
 
     -- Check if treesitter indentation is available for this language, and if so enable it
     -- in case there is no indent query, the indentexpr will fallback to the vim's built in one

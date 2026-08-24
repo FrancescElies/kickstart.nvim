@@ -13,17 +13,8 @@ local fn = require 'custom.fn'
 -- ├── treesitter (syntax)
 -- └── ui         (user interaction)
 
--- vim.opt.foldlevelstart = 2
+vim.opt.foldlevelstart = 1
 vim.opt.foldopen:remove 'block' -- avoid fold opening when moving {, [[ ...
---- za                | Toggle fold
---- zA                | Toggle fold recursively
---- zc                | Close fold
---- zo                | Open fold
---- zM                | Close **all** folds
---- zR                | Open **all** folds
---- zm / zr           | Increase/decrease fold level
---- :set foldenable   | Enable folding
---- :set nofoldenable | Disable folding
 
 vim.lsp.inlay_hint.enable(false)
 
