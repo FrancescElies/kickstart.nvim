@@ -13,9 +13,6 @@ local fn = require 'custom.fn'
 -- ├── treesitter (syntax)
 -- └── ui         (user interaction)
 
-vim.opt.foldlevelstart = 1
-vim.opt.foldopen:remove 'block' -- avoid fold opening when moving {, [[ ...
-
 vim.lsp.inlay_hint.enable(false)
 
 -- https://www.reddit.com/r/neovim/comments/zhweuc/whats_a_fast_way_to_load_the_output_of_a_command/

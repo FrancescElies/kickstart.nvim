@@ -1,5 +1,3 @@
-vim.opt_local.foldlevel = 1
-
 local function json_path_at_cursor()
   local node = vim.treesitter.get_node()
   if not node then
