@@ -28,6 +28,26 @@ M.run_build = function(name, cmd, cwd)
   end
 end
 
+M.run_async = function(cmd)
+  vim.fn.jobstart(cmd, {
+    on_exit = function(me, code)
+      if code == 0 then
+        vim.notify(('%s -> ok'):format(table.concat(cmd, ' ')), vim.log.levels.INFO)
+      else
+        vim.notify(('%s -> failed (exit %s)'):format(table.concat(cmd, ' '), code), vim.log.levels.ERROR)
+      end
+    end,
+    stdout_buffered = true,
+    on_stdout = function(_, data)
+      if data and #data > 1 then vim.notify(table.concat(data, '\n'), vim.log.levels.INFO) end
+    end,
+    stderr_buffered = true,
+    on_stderr = function(_, data)
+      if data and #data > 1 then vim.notify(table.concat(data, '\n'), vim.log.levels.ERROR) end
+    end,
+  })
+end
+
 M.open_in_system_default_app = function(path)
   local sysname = vim.loop.os_uname().sysname
   if sysname == 'Windows_NT' then
