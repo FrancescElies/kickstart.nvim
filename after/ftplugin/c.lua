@@ -4,7 +4,7 @@ vim.keymap.set('n', '<localleader>c', ':e %:r.c<cr>', { buffer = 0, desc = 'goto
 -- vim.bo.formatprg = "clang-format --assume-filename=" .. vim.fn.expand("%")
 -- Then select lines and press gq — but plain formatprg reformats exactly the selected lines
 
-vim.keymap.set('x', '<leader>f', function()
+vim.keymap.set('x', '<localleader>f', function()
   local s = vim.fn.line 'v'
   local e = vim.fn.line '.'
   if s > e then

@@ -52,7 +52,6 @@ end
 
 vim.keymap.set('n', '<localleader>w', '<cmd>w<cr>', { desc = 'save buf.' })
 vim.keymap.set('n', '<localleader>wq', '<cmd>wq<cr>', { desc = 'save, quit buf.' })
-vim.keymap.set('n', '<localleader>wa', '<cmd>wa<cr>', { desc = 'save, quit all' })
 vim.keymap.set('n', '<localleader>yr', yank_relative_path, { desc = '[y]ank [r]elative path' })
 vim.keymap.set('n', '<localleader>yy', 'myggyG`y', { desc = '[y]ank whole buf.' })
 vim.keymap.set('n', '<localleader>ya', yank_abs_path, { desc = '[y]ank [a]bs. path' })
