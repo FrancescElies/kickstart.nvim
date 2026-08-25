@@ -353,9 +353,7 @@ do
   -- - sdb   - [S]urround [D]elete [B]alanced, either ], ) or }
   -- - sdq   - [S]urround [D]elete [q]uotes, either ' or "
   -- - sr)'  - [S]urround [R]eplace [)] [']
-  require('mini.surround').setup {
-    search_method = 'cover_or_next',
-  }
+  require('mini.surround').setup { }
 
   local mini_misc = require 'mini.misc'
   mini_misc.setup()
