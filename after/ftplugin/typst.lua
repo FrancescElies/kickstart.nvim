@@ -1,6 +1,6 @@
 vim.keymap.set('n', '<localleader><localleader>', function()
   local file = vim.fn.expand '%:p'
-  vim.cmd 'write'
+  vim.cmd 'wall'
   local output = vim.fn.fnamemodify(file, ':r') .. '.pdf'
   vim.fn.jobstart({ 'typst', 'compile', file, output }, {
     on_exit = function(_, code)
