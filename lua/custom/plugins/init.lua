@@ -13,6 +13,8 @@ local fn = require 'custom.fn'
 -- ├── treesitter (syntax)
 -- └── ui         (user interaction)
 
+vim.cmd('packadd cfilter')
+
 vim.lsp.inlay_hint.enable(false)
 
 -- https://www.reddit.com/r/neovim/comments/zhweuc/whats_a_fast_way_to_load_the_output_of_a_command/
