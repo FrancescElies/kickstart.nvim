@@ -43,7 +43,7 @@ vim.api.nvim_create_autocmd({ 'TextChanged', 'InsertLeave' }, {
     if not _G.autosave_enabled then return end
     local bufname = vim.api.nvim_buf_get_name(0)
     if vim.bo.modified and bufname ~= '' then
-      print('autosaved ' .. bufname)
+      -- print('autosaved ' .. bufname)
       vim.cmd 'silent write'
     end
   end,
