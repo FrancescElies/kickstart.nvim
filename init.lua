@@ -291,7 +291,6 @@ do
       { '<leader>q', group = 'Quickfix' },
       { '<leader>s', group = 'Search' },
       { '<leader>t', group = 'Term' },
-      { '<leader>v', group = 'Vim' },
       { '<localleader>y', group = 'Yank' },
       { 'Z', group = 'Session', mode = { 'n' } },
       { 'gr', group = 'LSP Actions', mode = { 'n' } },
