@@ -69,16 +69,12 @@ local function qf_next()
   vim.cmd 'normal! zz'
 end
 
-vim.keymap.set('n', '<M-h>', function()
-  vim.cmd 'wincmd v'
-  qf_prev()
-end, { desc = 'quickfix previous' })
 vim.keymap.set('n', '<M-j>', qf_next, { desc = 'quickfix next' })
+vim.keymap.set('n', '<M-S-j>', function() vim.cmd 'wincmd v' qf_next() end, { desc = 'quickfix next (vsplit)' })
 vim.keymap.set('n', '<M-k>', qf_prev, { desc = 'quickfix previous' })
-vim.keymap.set('n', '<M-l>', function()
-  vim.cmd 'wincmd v'
-  qf_next()
-end, { desc = 'quickfix previous' })
+vim.keymap.set('n', '<M-S-k>', function() vim.cmd 'wincmd v' qf_prev() end, { desc = 'quickfix previous (vsplit)' })
+vim.keymap.set('n', '<M-h>', "<cmd>colder<cr>", { desc = 'quickfix older' })
+vim.keymap.set('n', '<M-l>', "<cmd>cnewer<cr>", { desc = 'quickfix newer' })
 
 vim.api.nvim_create_autocmd('FileType', {
   pattern = 'qf',
