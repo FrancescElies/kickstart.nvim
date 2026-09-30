@@ -70,9 +70,9 @@ local function qf_next()
 end
 
 vim.keymap.set('n', '<M-j>', qf_next, { desc = 'quickfix next' })
-vim.keymap.set('n', '<M-S-j>', function() vim.cmd 'wincmd v' qf_next() end, { desc = 'quickfix next (vsplit)' })
+vim.keymap.set('n', '<M-S-j>', function() vim.cmd 'wincmd s' qf_next() end, { desc = 'quickfix next (split)' })
 vim.keymap.set('n', '<M-k>', qf_prev, { desc = 'quickfix previous' })
-vim.keymap.set('n', '<M-S-k>', function() vim.cmd 'wincmd v' qf_prev() end, { desc = 'quickfix previous (vsplit)' })
+vim.keymap.set('n', '<M-S-k>', function() vim.cmd 'wincmd s' qf_prev() end, { desc = 'quickfix previous (split)' })
 vim.keymap.set('n', '<M-h>', "<cmd>colder<cr>", { desc = 'quickfix older' })
 vim.keymap.set('n', '<M-l>', "<cmd>cnewer<cr>", { desc = 'quickfix newer' })
 
