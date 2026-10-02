@@ -126,6 +126,8 @@ vim.api.nvim_create_user_command('OpenVimPackDir', open_vim_pack_dir, {})
 -- vim.keymap.set({'n', 'v'}, '<leader>y', '"+y', { desc = 'yank to OS clipboard' })
 -- vim.keymap.set({'n', 'v'}, '<leader>p', '"+p', { desc = 'paste from OS clipboard' })
 
+vim.keymap.set('n', '<leader>va', '<cmd>ScreenAliveOn<cr>', { desc = 'keep vim alive ON (screen)' })
+vim.keymap.set('n', '<leader>vA', '<cmd>ScreenAliveOff<cr>', { desc = 'keep vim alive OFF (screen)' })
 vim.keymap.set('n', '<leader>ve', '<cmd>tabnew | e $MYVIMRC | CdBufRootDir <cr>', { desc = 'edit vimrc' })
 vim.keymap.set('n', '<leader>vp', open_vim_pack_dir, { desc = 'edit vimrc' })
 vim.keymap.set('n', '<leader>vm', "<cmd>new | put=execute('messages')<cr>", { desc = 'vim messages' })
