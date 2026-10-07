@@ -1,6 +1,10 @@
 local fn = require 'custom.fn'
 
 vim.opt_local.foldlevel = 9999
+ vim.opt_local.wrap = true         -- soft-wrap long lines on screen
+ vim.opt_local.linebreak = true    -- break at word boundaries, not mid-word
+ vim.opt_local.breakindent = true  -- wrapped lines keep the indent (lists, quotes)
+ vim.opt_local.showbreak = "↪ "    -- marker at the start of wrapped lines (optional)
 
 local function file_contains(path, str)
   local ok, lines = pcall(io.lines, path)
