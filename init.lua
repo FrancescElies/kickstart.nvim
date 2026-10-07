@@ -357,12 +357,38 @@ do
   local mini_misc = require 'mini.misc'
   mini_misc.setup()
 
+  local zoom_backdrop
   local zoom = function()
-    local w = 90
-    mini_misc.zoom(0, {
+    local w = math.min(120 + 8, vim.o.columns - 4) -- 120 text cols + gutter, never wider than the screen
+    local zoomed = mini_misc.zoom(0, {
       width = w,
       col = math.floor((vim.o.columns - w) / 2), -- center it
     })
+
+    if zoomed then
+      local buf = vim.api.nvim_create_buf(false, true)
+      zoom_backdrop = vim.api.nvim_open_win(buf, false, {
+        relative = 'editor',
+        row = 0,
+        col = 0,
+        width = vim.o.columns,
+        height = vim.o.lines,
+        style = 'minimal',
+        focusable = false,
+        zindex = 49, -- just below the zoom float (50)
+      })
+      vim.api.nvim_set_hl(0, 'ZoomBackdrop', { bg = '#000000' })
+      vim.wo[zoom_backdrop].winhighlight = 'Normal:ZoomBackdrop'
+      vim.wo[zoom_backdrop].winblend = 40
+      -- also remove the backdrop when the zoom float closes some other way (e.g. :q)
+      vim.api.nvim_create_autocmd('WinClosed', {
+        pattern = tostring(vim.api.nvim_get_current_win()),
+        once = true,
+        callback = function() pcall(vim.api.nvim_win_close, zoom_backdrop, true) end,
+      })
+    else
+      pcall(vim.api.nvim_win_close, zoom_backdrop, true)
+    end
   end
   vim.keymap.set('n', '<leader>z', zoom, { desc = 'Zoom buffer' })
   vim.keymap.set('n', '<localleader>z', zoom, { desc = 'Zoom buffer' })
