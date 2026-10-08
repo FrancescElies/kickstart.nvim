@@ -12,14 +12,28 @@ vim.keymap.set('n', '<leader>gt', tele.git_status, { desc = '[g]it [t]elescope s
 vim.keymap.set('n', '<leader>gz', tele.git_stash, { desc = '[g]it [z]stash' })
 vim.keymap.set('v', '<leader>gl', tele.git_bcommits_range, { desc = '[g]it [l]og (sel. lines)' })
 
-local commit_group = vim.api.nvim_create_augroup('my-git-commit', {})
-vim.api.nvim_create_autocmd('BufEnter', {
-  group = commit_group,
-  pattern = '*COMMIT*',
-  callback = function(_)
-    -- vim.notify 'gitcommit n-keymap:\n  - [i]nsert [s]tory\n  - [i]nsert [t]ask'
-    vim.keymap.set('n', '<localleader>s', 'istoFya #$', { desc = '[y]ou [i]nsert [s]tory' })
-    vim.keymap.set('n', '<localleader>t', 'itaskFka #$', { desc = '[y]ou [i]nsert [t]ask' })
+local function insert_my_commit_msg(buf)
+  buf = buf or 0
+  local path = 'MY_COMMIT_MSG.md'
+  local text = { '', '' }
+  if vim.fn.filereadable(path) == 0 then
+    vim.list_extend(text, { '# MY_COMMIT_MSG.md missing' })
+  else
+    vim.list_extend(text, vim.fn.readfile(path))
+  end
+  vim.api.nvim_buf_set_lines(buf, 0, 0, false, text)
+end
+
+vim.api.nvim_create_user_command('MyCommitMsg', function() insert_my_commit_msg() end, { desc = 'insert MY_COMMIT_MSG.md' })
+
+vim.api.nvim_create_autocmd('BufReadPost', {
+  pattern = 'COMMIT_EDITMSG',
+  callback = function(ev)
+    -- defer until git's template/comments are in place
+    vim.schedule(function()
+      if vim.api.nvim_buf_is_valid(ev.buf) and vim.api.nvim_buf_get_lines(ev.buf, 0, 1, false)[1] == '' then insert_my_commit_msg(ev.buf) end
+      if vim.api.nvim_get_current_buf() == ev.buf then vim.api.nvim_win_set_cursor(0, { 1, 0 }) end
+    end)
   end,
 })
 
@@ -143,4 +157,3 @@ do
   require('telescope').load_extension 'advanced_git_search'
   vim.keymap.set('n', '<leader>g/', '<cmd>AdvancedGitSearch<cr>', { desc = '[g]it [/] advanced search (menu)' })
 end
-
