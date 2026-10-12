@@ -134,6 +134,26 @@ end
 do
   vim.pack.add { fn.gh 'sindrets/diffview.nvim' }
 
+  -- ]c/[c: next/prev change; past the last/first change of a file, go to the next/prev file
+  local function change_or_file(key, select, start)
+    return function()
+      local before = vim.api.nvim_win_get_cursor(0)
+      pcall(vim.cmd, 'normal! ' .. key)
+      if vim.deep_equal(before, vim.api.nvim_win_get_cursor(0)) then
+        require('diffview.actions')[select]()
+        vim.schedule(function() pcall(vim.cmd, 'normal! ' .. start .. key) end) -- shortcut: misses a change on the first/last line
+      end
+    end
+  end
+  require('diffview').setup {
+    keymaps = {
+      view = {
+        { 'n', ']c', change_or_file(']c', 'select_next_entry', 'gg'), { desc = 'Next change / next file' } },
+        { 'n', '[c', change_or_file('[c', 'select_prev_entry', 'G'), { desc = 'Prev change / prev file' } },
+      },
+    },
+  }
+
   local function diff_orig() vim.cmd [[vert new | set buftype=nofile | read ++edit # | 0d_  | diffthis | wincmd p | diffthis]] end
   vim.api.nvim_create_user_command('DiffOrig', diff_orig, {})
 end
