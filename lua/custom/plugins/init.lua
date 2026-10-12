@@ -13,7 +13,15 @@ local fn = require 'custom.fn'
 -- ├── treesitter (syntax)
 -- └── ui         (user interaction)
 
-vim.cmd('packadd cfilter')
+vim.cmd 'packadd cfilter'
+
+local ec = require 'editorconfig'
+local orig = ec.properties.end_of_line
+
+ec.properties.end_of_line = function(bufnr, val, opts)
+  local path = vim.api.nvim_buf_get_name(bufnr)
+  if not vim.uv.fs_stat(path) then orig(bufnr, val, opts) end
+end
 
 vim.lsp.inlay_hint.enable(false)
 
