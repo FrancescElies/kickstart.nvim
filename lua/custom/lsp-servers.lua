@@ -251,16 +251,16 @@ local servers = {
 
   -- html = { filetypes = { 'html', 'twig', 'hbs' } },
 
-  -- omnisharp = {
-  --   -- cmd = { 'dotnet', '~/bin/omnisharp/Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.dll' },
-  --   enable_editorconfig_support = true,
-  --   enable_ms_build_load_projects_on_demand = false,
-  --   enable_roslyn_analyzers = true,
-  --   organize_imports_on_format = true,
-  --   enable_import_completion = false,
-  --   sdk_include_prereleases = true,
-  --   analyze_open_documents_only = false,
-  -- },
+  omnisharp = {
+    -- cmd = { 'dotnet', '~/bin/omnisharp/Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.dll' },
+    enable_editorconfig_support = true,
+    enable_ms_build_load_projects_on_demand = false,
+    enable_roslyn_analyzers = true,
+    organize_imports_on_format = true,
+    enable_import_completion = false,
+    sdk_include_prereleases = true,
+    analyze_open_documents_only = false,
+  },
 
   zls = {
     -- https://zigtools.org/zls/editors/vim/nvim-lspconfig/
