@@ -17,6 +17,10 @@
       "rev": "28fe6e822ae344544c379d60fcb13c9519a1f08a",
       "src": "https://github.com/stevearc/aerial.nvim"
     },
+    "age.nvim": {
+      "rev": "75cf31fa541dbd876599ec40672bfae1dbc517de",
+      "src": "https://github.com/abhinandh-s/age.nvim"
+    },
     "blink.cmp": {
       "rev": "78336bc89ee5365633bcf754d93df01678b5c08f",
       "src": "https://github.com/saghen/blink.cmp",
@@ -50,6 +54,10 @@
     "fidget.nvim": {
       "rev": "6f793b2bcd2d35e201c09520f698bb763220908a",
       "src": "https://github.com/j-hui/fidget.nvim"
+    },
+    "foldtext.nvim": {
+      "rev": "bfe4c68c7b318139e9b11124b7324e95cfd9f283",
+      "src": "https://github.com/OXY2DEV/foldtext.nvim"
     },
     "friendly-snippets": {
       "rev": "6cd7280adead7f586db6fccbd15d2cac7e2188b9",
