@@ -359,7 +359,7 @@ do
 
   local zoom_backdrop
   local zoom = function()
-    local w = math.min(120 + 8, vim.o.columns - 4) -- 120 text cols + gutter, never wider than the screen
+    local w = math.min(100 + 8, vim.o.columns - 4) -- 100 text cols + gutter, never wider than the screen
     local zoomed = mini_misc.zoom(0, {
       width = w,
       col = math.floor((vim.o.columns - w) / 2), -- center it
