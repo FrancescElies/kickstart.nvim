@@ -165,11 +165,26 @@ local fail_ns = vim.api.nvim_create_namespace 'cargo-test-fail'
 local function tests_to_qf(buf)
   local root = vim.fs.dirname(vim.fn.systemlist('cargo locate-project --workspace --message-format plain')[1] or '')
   local items = {}
-  for _, line in ipairs(vim.api.nvim_buf_get_lines(buf, 0, -1, false)) do
+  local lines = vim.api.nvim_buf_get_lines(buf, 0, -1, false)
+  local hl = vim.api.nvim_get_hl(0, { name = 'DiagnosticError', link = false })
+  hl.italic = true
+  vim.api.nvim_set_hl(0, 'CargoTestFail', hl)
+  for i, line in ipairs(lines) do
     -- panics: `panicked at src/x.rs:12:5:`; compile errors (--message-format=short): `src/x.rs:3:5: error...`
     local f, l, c = line:match 'panicked at ([^:]+):(%d+):(%d+)'
     local panic = f ~= nil
     local text = f and line
+    local msg
+    if panic then
+      -- the panic message follows on the next lines, up to a blank line or `note:`
+      local parts = {}
+      for j = i + 1, #lines do
+        if lines[j] == '' or lines[j]:match '^note:' then break end
+        table.insert(parts, vim.trim(lines[j]))
+      end
+      msg = table.concat(parts, ' ')
+      if msg ~= '' then text = line .. ': ' .. msg end
+    end
     if not f then
       f, l, c, text = line:match '^(%S-):(%d+):(%d+): (error.*)'
     end
@@ -179,7 +194,7 @@ local function tests_to_qf(buf)
       if panic then
         local b = vim.fn.bufadd(f)
         vim.fn.bufload(b)
-        pcall(vim.api.nvim_buf_set_extmark, b, fail_ns, tonumber(l) - 1, 0, { virt_text = { { ' ❌ failed', 'DiagnosticError' } } })
+        pcall(vim.api.nvim_buf_set_extmark, b, fail_ns, tonumber(l) - 1, 0, { virt_text = { { ' ❌ failed' .. (msg ~= '' and ': ' .. msg or ''), 'CargoTestFail' } } })
       end
     end
   end
@@ -196,6 +211,7 @@ local function cargo_test(filter)
   local buf, win = vim.api.nvim_get_current_buf(), vim.api.nvim_get_current_win()
   test_buf = buf
   vim.bo[buf].buftype = 'nofile'
+  vim.bo[buf].buflisted = false -- keep it out of sessions
   vim.bo[buf].bufhidden = 'hide'
   -- stream output into the buffer: chunk[1] continues the last line
   local function append(_, chunk)
