@@ -152,8 +152,23 @@ end, {})
 
 vim.keymap.set('n', '<localleader>T', function(args)
   vim.cmd 'silent! lvimgrep /TODO/j %' -- flag j prevents jump to first match
-  if #vim.fn.getloclist(0) > 0 then vim.cmd 'lopen  2' end
+  if #vim.fn.getloclist(0) > 0 then vim.cmd 'lopen' end
 end, { desc = 'buf. TODOs loclist' })
+
+-- quickfix and location list windows are always 5 lines tall
+-- winbar shows "<title> (<current>/<total>)"
+function _G.qf_info()
+  local loc = vim.fn.getwininfo(vim.fn.win_getid())[1].loclist == 1
+  local info = loc and vim.fn.getloclist(0, { size = 0, title = 0, idx = 0 }) or vim.fn.getqflist { size = 0, title = 0, idx = 0 }
+  return string.format('%s (%d/%d)', info.title, info.idx, info.size)
+end
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'qf',
+  callback = function()
+    vim.cmd 'resize 5'
+    vim.wo.winbar = '%{v:lua.qf_info()}'
+  end,
+})
 
 vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufRead' }, {
   pattern = { '*.rs', '*.js', '*.c', '*.zig', '*.java' },

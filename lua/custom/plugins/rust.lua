@@ -161,12 +161,14 @@ vim.keymap.set('n', '<localleader>R', rust_functions_and_reflection_calls_qf, { 
 vim.api.nvim_create_user_command('RustStdDocs', function() vim.system { 'rustup', 'doc' } end, {})
 
 local test_buf
+local fail_ns = vim.api.nvim_create_namespace 'cargo-test-fail'
 local function tests_to_qf(buf)
   local root = vim.fs.dirname(vim.fn.systemlist('cargo locate-project --workspace --message-format plain')[1] or '')
   local items = {}
   for _, line in ipairs(vim.api.nvim_buf_get_lines(buf, 0, -1, false)) do
     -- panics: `panicked at src/x.rs:12:5:`; compile errors (--message-format=short): `src/x.rs:3:5: error...`
     local f, l, c = line:match 'panicked at ([^:]+):(%d+):(%d+)'
+    local panic = f ~= nil
     local text = f and line
     if not f then
       f, l, c, text = line:match '^(%S-):(%d+):(%d+): (error.*)'
@@ -174,6 +176,11 @@ local function tests_to_qf(buf)
     if f then
       if not vim.uv.fs_stat(f) and root then f = vim.fs.joinpath(root, f) end
       table.insert(items, { filename = f, lnum = tonumber(l), col = tonumber(c), text = text })
+      if panic then
+        local b = vim.fn.bufadd(f)
+        vim.fn.bufload(b)
+        pcall(vim.api.nvim_buf_set_extmark, b, fail_ns, tonumber(l) - 1, 0, { virt_text = { { ' ❌ failed', 'DiagnosticError' } } })
+      end
     end
   end
   vim.fn.setqflist({}, 'r', { title = 'cargo test', items = items })
@@ -183,11 +190,13 @@ end
 local test_job
 local function cargo_test(filter)
   if test_job then vim.fn.jobstop(test_job) end
+  for _, b in ipairs(vim.api.nvim_list_bufs()) do vim.api.nvim_buf_clear_namespace(b, fail_ns, 0, -1) end
   if test_buf and vim.api.nvim_buf_is_valid(test_buf) then vim.api.nvim_buf_delete(test_buf, { force = true }) end
-  vim.cmd 'botright new'
+  vim.cmd 'botright 3new'
   local buf, win = vim.api.nvim_get_current_buf(), vim.api.nvim_get_current_win()
   test_buf = buf
   vim.bo[buf].buftype = 'nofile'
+  vim.bo[buf].bufhidden = 'hide'
   -- stream output into the buffer: chunk[1] continues the last line
   local function append(_, chunk)
     if not vim.api.nvim_buf_is_valid(buf) then return end
@@ -205,6 +214,7 @@ local function cargo_test(filter)
     on_stdout = append,
     on_stderr = append,
     on_exit = function()
+      if vim.api.nvim_win_is_valid(win) then vim.api.nvim_win_close(win, true) end -- buffer stays, only the window closes
       if vim.api.nvim_buf_is_valid(buf) then tests_to_qf(buf) end
     end,
   })
