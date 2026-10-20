@@ -427,7 +427,8 @@ do
 
   -- ... and there is more!
   --  Check out: https://github.com/nvim-mini/mini.nvim
-  require('mini.sessions').setup {}
+  -- close quickfix first, otherwise it is restored as an empty buffer
+  require('mini.sessions').setup { hooks = { pre = { write = function() vim.cmd 'cclose' end } } }
   vim.o.sessionoptions = 'blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions'
   vim.keymap.set('n', 'ZW', ':lua MiniSessions.write()<cr>', { desc = '[s]ession [w]rite' })
   vim.keymap.set('n', 'ZD', ':lua MiniSessions.delete()<cr>', { desc = '[s]ession [d]elete' })
