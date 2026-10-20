@@ -150,7 +150,7 @@ vim.api.nvim_create_user_command('ExecuteEveryXMinutesCancel', function(opts)
   if timers.every_x_min ~= nil then timers.every_x_min:stop() end
 end, {})
 
-vim.keymap.set('n', '<localleader>t', function(args)
+vim.keymap.set('n', '<localleader>T', function(args)
   vim.cmd 'silent! lvimgrep /TODO/j %' -- flag j prevents jump to first match
   if #vim.fn.getloclist(0) > 0 then vim.cmd 'lopen  2' end
 end, { desc = 'buf. TODOs loclist' })

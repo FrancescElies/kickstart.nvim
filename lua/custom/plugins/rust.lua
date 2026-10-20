@@ -160,6 +160,56 @@ vim.keymap.set('n', '<localleader>R', rust_functions_and_reflection_calls_qf, { 
 
 vim.api.nvim_create_user_command('RustStdDocs', function() vim.system { 'rustup', 'doc' } end, {})
 
+local test_buf
+local function tests_to_qf(buf)
+  local root = vim.fs.dirname(vim.fn.systemlist('cargo locate-project --workspace --message-format plain')[1] or '')
+  local items = {}
+  for _, line in ipairs(vim.api.nvim_buf_get_lines(buf, 0, -1, false)) do
+    -- panics: `panicked at src/x.rs:12:5:`; compile errors (--message-format=short): `src/x.rs:3:5: error...`
+    local f, l, c = line:match 'panicked at ([^:]+):(%d+):(%d+)'
+    local text = f and line
+    if not f then
+      f, l, c, text = line:match '^(%S-):(%d+):(%d+): (error.*)'
+    end
+    if f then
+      if not vim.uv.fs_stat(f) and root then f = vim.fs.joinpath(root, f) end
+      table.insert(items, { filename = f, lnum = tonumber(l), col = tonumber(c), text = text })
+    end
+  end
+  vim.fn.setqflist({}, 'r', { title = 'cargo test', items = items })
+  vim.cmd 'cwindow'
+end
+
+local test_job
+local function cargo_test(filter)
+  if test_job then vim.fn.jobstop(test_job) end
+  if test_buf and vim.api.nvim_buf_is_valid(test_buf) then vim.api.nvim_buf_delete(test_buf, { force = true }) end
+  vim.cmd 'botright new'
+  local buf, win = vim.api.nvim_get_current_buf(), vim.api.nvim_get_current_win()
+  test_buf = buf
+  vim.bo[buf].buftype = 'nofile'
+  -- stream output into the buffer: chunk[1] continues the last line
+  local function append(_, chunk)
+    if not vim.api.nvim_buf_is_valid(buf) then return end
+    chunk = vim.tbl_map(function(l) return (l:gsub('\r', '')) end, chunk)
+    local n = vim.api.nvim_buf_line_count(buf)
+    local last = vim.api.nvim_buf_get_lines(buf, n - 1, n, false)[1]
+    chunk[1] = last .. chunk[1]
+    vim.api.nvim_buf_set_lines(buf, n - 1, n, false, chunk)
+    if vim.api.nvim_win_is_valid(win) then vim.api.nvim_win_set_cursor(win, { vim.api.nvim_buf_line_count(buf), 0 }) end
+  end
+  local cmd = { 'cargo', 'test', '--message-format=short' }
+  if filter ~= '' then table.insert(cmd, filter) end
+  vim.list_extend(cmd, { '--', '--nocapture' })
+  test_job = vim.fn.jobstart(cmd, {
+    on_stdout = append,
+    on_stderr = append,
+    on_exit = function()
+      if vim.api.nvim_buf_is_valid(buf) then tests_to_qf(buf) end
+    end,
+  })
+end
+
 vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufRead' }, {
   pattern = { '*.rs', '*.toml' },
   group = vim.api.nvim_create_augroup('my-rust-bacon', { clear = true }),
@@ -181,5 +231,17 @@ vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufRead' }, {
     nkeymap('<localleader>u', unwraps_to_qf, 'Find unwrap() calls')
     nkeymap('<localleader>U', unwraps_in_project_to_qf, 'Find unwrap() calls')
     nkeymap('<localleader>rd', '<cmd>RustStdDocs<cr>', 'rust docs')
+    nkeymap('<localleader>tt', function()
+      local node = vim.treesitter.get_node()
+      while node and node:type() ~= 'function_item' do
+        node = node:parent()
+      end
+      local prev = node and node:prev_named_sibling()
+      local is_test = prev and prev:type() == 'attribute_item' and vim.treesitter.get_node_text(prev, 0):find 'test'
+      -- not on a #[test] fn: fall back to the file's tests
+      cargo_test(is_test and vim.treesitter.get_node_text(node:field('name')[1], 0) or vim.fn.expand '%:t:r')
+    end, 'rust: cargo test fn under cursor')
+    nkeymap('<localleader>tf', function() cargo_test(vim.fn.expand '%:t:r') end, 'rust: cargo test file')
+    nkeymap('<localleader>ta', function() cargo_test '' end, 'rust: cargo test all')
   end,
 })
