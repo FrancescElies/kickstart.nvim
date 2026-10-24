@@ -43,3 +43,8 @@ local function json_path_at_cursor()
 end
 
 vim.keymap.set('n', '<localleader>p', json_path_at_cursor, { desc = 'Yank JSONPath under cursor' })
+
+   vim.api.nvim_create_user_command("SortJsonKeys", function(opts)
+     local range = opts.range == 2 and "'<,'>" or "%"
+     vim.cmd(range .. "!python3 -c 'import json,sys; print(json.dumps(json.load(sys.stdin), indent=2, sort_keys=True))'")
+   end, { range = true })
