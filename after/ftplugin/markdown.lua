@@ -15,21 +15,47 @@ local function file_contains(path, str)
   return false
 end
 
--- NOTE: needs `cargo install --locked --git https://github.com/fromgodd/makurust makurust`
--- Alternatives:
---   cargo install comrak
---   uv tool install umarkdown[cli]
---   uv tool install grip
-local function start_makurust(opts)
+-- Switch with :MarkdownConverter makurust|comrak (or vim.g.markdown_converter)
+-- makurust: `cargo install --locked --git https://github.com/fromgodd/makurust makurust` (writes <input>.html itself)
+-- comrak:   `cargo binstall comrak` (bare fragment, so we prepend CSS to cap image width)
+local converters = {
+  makurust = {
+    cmd = function(input, _) return { 'makurust', input } end,
+  },
+  comrak = {
+    cmd = function(input, output) return { 'comrak', '--unsafe', '-e', 'table,tasklist,strikethrough,autolink', '-o', output, input } end,
+    post = function(output)
+      local f = assert(io.open(output, 'rb'))
+      local html = f:read '*a'
+      f:close()
+      f = assert(io.open(output, 'wb'))
+      f:write('<style>body{max-width:60em;margin:2em auto}img{width:100%;height:auto}</style>\n', html)
+      f:close()
+    end,
+  },
+}
+-- last used converter is persisted across sessions; default comrak
+local state_file = vim.fn.stdpath 'state' .. '/markdown_converter'
+if not vim.g.markdown_converter then
+  local ok, lines = pcall(vim.fn.readfile, state_file)
+  local saved = ok and lines[1] or nil
+  vim.g.markdown_converter = converters[saved] and saved or 'comrak'
+end
+
+local function start_converter(opts)
+  local name = vim.g.markdown_converter
+  local conv = converters[name]
   local input = vim.fs.normalize(opts.input)
-  vim.fn.jobstart({ 'makurust', input }, {
+  local output = vim.fn.fnamemodify(input, ':r') .. '.html'
+  local t0 = vim.uv.hrtime()
+  vim.fn.jobstart(conv.cmd(input, output), {
     on_exit = function(_, code)
       if code == 0 then
-        local output = vim.fn.fnamemodify(input, ':r') .. '.html'
-        vim.notify('makurust: ' .. output, vim.log.levels.INFO)
+        if conv.post then conv.post(output) end
+        vim.notify(('%s: %s (%.1fs)'):format(name, output, (vim.uv.hrtime() - t0) / 1e9), vim.log.levels.INFO)
         fn.open_in_system_default_app(output)
       else
-        vim.notify('makurust failed ' .. input .. ' (exit ' .. code .. ')', vim.log.levels.ERROR)
+        vim.notify(name .. ' failed ' .. input .. ' (exit ' .. code .. ')', vim.log.levels.ERROR)
       end
     end,
     stderr_buffered = true,
@@ -48,7 +74,7 @@ local function start_mermaid_cli(opts)
     on_exit = function(_, code)
       if code == 0 then
         vim.notify('mmdc: ' .. output, vim.log.levels.INFO)
-        start_makurust { input = output }
+        start_converter { input = output }
       else
         vim.notify('mmdc failed ' .. input .. ' (exit ' .. code .. ')', vim.log.levels.ERROR)
       end
@@ -71,10 +97,22 @@ local md_to_html = function(opts)
 
     start_mermaid_cli { input = input, output = output }
   else
-    start_makurust { input = input }
+    start_converter { input = input }
   end
 end
 
+-- :MarkdownConverter <name> picks the converter and runs it; bare shows the current one
+vim.api.nvim_create_user_command('MarkdownConverter', function(o)
+  if o.args == '' then return vim.notify('markdown converter: ' .. vim.g.markdown_converter) end
+  if not converters[o.args] then return vim.notify('unknown converter ' .. o.args, vim.log.levels.ERROR) end
+  vim.g.markdown_converter = o.args
+  vim.fn.writefile({ o.args }, state_file)
+  md_to_html {}
+end, {
+  nargs = '?',
+  complete = function() return vim.tbl_keys(converters) end,
+  desc = 'Choose markdown->html converter and run it',
+})
 vim.api.nvim_create_user_command('MarkdownToHtml', md_to_html, { desc = 'Compile markdown to html' })
 vim.keymap.set('n', '<localleader><localleader>', '<cmd>MarkdownToHtml<cr>', { buffer = 0, desc = 'Compile markdown to html' })
 
