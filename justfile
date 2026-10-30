@@ -1,3 +1,0 @@
-bootstrap:
-    nu bootstrap.nu
-
