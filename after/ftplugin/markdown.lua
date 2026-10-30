@@ -29,8 +29,12 @@ local converters = {
       local html = f:read '*a'
       f:close()
       f = assert(io.open(output, 'wb'))
-      f:write('<style>body{max-width:60em;margin:2em auto}img{width:100%;height:auto}</style>\n', html)
+      local name = vim.fs.basename(output) .. '.stamp.js'
+      -- polls a sibling stamp file (fetch is blocked on file://) and reloads when it changes
+      local js = ('<script>var v;setInterval(function(){var e=document.createElement("script");e.src=%q+"?"+Date.now();e.onload=function(){if(v&&v!=window.__stamp)location.reload();v=window.__stamp;e.remove()};document.head.appendChild(e)},1000)</script>\n'):format(name)
+      f:write('<style>body{max-width:60em;margin:2em auto}img{width:100%;height:auto}table{border-collapse:collapse}th,td{border:1px solid #888;padding:.3em .6em}</style>\n', js, html)
       f:close()
+      vim.fn.writefile({ 'window.__stamp=' .. vim.uv.hrtime() }, vim.fs.dirname(output) .. '/' .. name)
     end,
   },
 }
@@ -41,6 +45,8 @@ if not vim.g.markdown_converter then
   local saved = ok and lines[1] or nil
   vim.g.markdown_converter = converters[saved] and saved or 'comrak'
 end
+
+local opened = {}
 
 local function start_converter(opts)
   local name = vim.g.markdown_converter
@@ -53,7 +59,11 @@ local function start_converter(opts)
       if code == 0 then
         if conv.post then conv.post(output) end
         vim.notify(('%s: %s (%.1fs)'):format(name, output, (vim.uv.hrtime() - t0) / 1e9), vim.log.levels.INFO)
-        fn.open_in_system_default_app(output)
+        -- shortcut: can't detect a real open tab; open once per file per nvim session, the page auto-reloads itself
+        if not opened[output] then
+          opened[output] = true
+          fn.open_in_system_default_app(output)
+        end
       else
         vim.notify(name .. ' failed ' .. input .. ' (exit ' .. code .. ')', vim.log.levels.ERROR)
       end
