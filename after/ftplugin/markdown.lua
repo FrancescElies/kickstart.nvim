@@ -1,10 +1,10 @@
 local fn = require 'custom.fn'
 
 vim.opt_local.foldlevel = 9999
- vim.opt_local.wrap = false         -- soft-wrap long lines on screen
- vim.opt_local.linebreak = true    -- break at word boundaries, not mid-word
- vim.opt_local.breakindent = true  -- wrapped lines keep the indent (lists, quotes)
- vim.opt_local.showbreak = "↪ "    -- marker at the start of wrapped lines (optional)
+vim.opt_local.wrap = false -- soft-wrap long lines on screen
+vim.opt_local.linebreak = true -- break at word boundaries, not mid-word
+vim.opt_local.breakindent = true -- wrapped lines keep the indent (lists, quotes)
+vim.opt_local.showbreak = '↪ ' -- marker at the start of wrapped lines (optional)
 
 local function file_contains(path, str)
   local ok, lines = pcall(io.lines, path)
@@ -23,7 +23,9 @@ local converters = {
     cmd = function(input, _) return { 'makurust', input } end,
   },
   comrak = {
-    cmd = function(input, output) return { 'comrak', '--unsafe', '-e', 'table,tasklist,strikethrough,autolink', '-o', output, input } end,
+    cmd = function(input, output)
+      return { 'comrak', '--unsafe', '--syntax-highlighting', 'InspiredGitHub', '-e', 'table,tasklist,strikethrough,autolink', '-o', output, input }
+    end,
     post = function(output)
       local f = assert(io.open(output, 'rb'))
       local html = f:read '*a'
@@ -31,8 +33,19 @@ local converters = {
       f = assert(io.open(output, 'wb'))
       local name = vim.fs.basename(output) .. '.stamp.js'
       -- polls a sibling stamp file (fetch is blocked on file://) and reloads when it changes
-      local js = ('<script>var v;setInterval(function(){var e=document.createElement("script");e.src=%q+"?"+Date.now();e.onload=function(){if(v&&v!=window.__stamp)location.reload();v=window.__stamp;e.remove()};document.head.appendChild(e)},1000)</script>\n'):format(name)
-      f:write('<style>body{max-width:60em;margin:2em auto}img{width:100%;height:auto}table{border-collapse:collapse}th,td{border:1px solid #888;padding:.3em .6em}</style>\n', js, html)
+      local js = ('<script>var v;setInterval(function(){var e=document.createElement("script");e.src=%q+"?"+Date.now();e.onload=function(){if(v&&v!=window.__stamp)location.reload();v=window.__stamp;e.remove()};document.head.appendChild(e)},1000)</script>\n'):format(
+        name
+      )
+      -- toc: fixed sidebar built client-side from h1-h3 (hidden on narrow screens)
+      local toc =
+        [[<script>addEventListener("DOMContentLoaded",function(){var h=document.querySelectorAll("h1,h2,h3");if(h.length<2)return;var n=document.createElement("nav");n.id="toc";h.forEach(function(x,i){x.id=x.id||"h"+i;var a=document.createElement("a");a.href="#"+x.id;a.textContent=x.textContent;a.className=x.tagName.toLowerCase();n.appendChild(a)});document.body.appendChild(n)})</script>
+]]
+      f:write(
+        '<style>body{max-width:60em;margin:2em auto}img{width:100%;height:auto}pre{background:#f3f4f6!important;padding:.6em .8em;border-radius:4px;overflow-x:auto}table{border-collapse:collapse}th,td{border:1px solid #888;padding:.3em .6em}#toc{position:fixed;top:1em;right:1em;width:16em;max-height:90vh;overflow:auto;font-size:.8em;display:none}#toc a{display:block;padding:.1em 0;text-decoration:none}#toc .h2{padding-left:1em}#toc .h3{padding-left:2em}@media(min-width:90em){#toc{display:block}}</style>\n',
+        js,
+        toc,
+        html
+      )
       f:close()
       vim.fn.writefile({ 'window.__stamp=' .. vim.uv.hrtime() }, vim.fs.dirname(output) .. '/' .. name)
     end,
