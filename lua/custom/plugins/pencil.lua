@@ -48,7 +48,6 @@ vim.api.nvim_create_autocmd('FileType', {
 
     -- vim.cmd('setlocal spell wrap')
     vim.opt_local.spell = true
-    vim.opt_local.wrap = true
 
     -- Base pencil options
     vim.opt_local.wrap = true
@@ -68,22 +67,6 @@ vim.api.nvim_create_autocmd('FileType', {
       callback = function() refresh_autoformat(hard_textwidth) end,
     })
 
-    -- Set markdown-specific surrounding in 'mini.surround'
-    vim.b.minisurround_config = {
-      custom_surroundings = {
-        -- Markdown link. Common usage:
-        -- `saiwL` + [type/paste link] + <CR> - add link
-        -- `sdL` - delete link
-        -- `srLL` + [type/paste link] + <CR> - replace link
-        L = {
-          input = { '%[().-()%]%(.-%)' },
-          output = function()
-            local link = require('mini.surround').user_input 'Link: '
-            return { left = '[', right = '](' .. link .. ')' }
-          end,
-        },
-      },
-    }
   end,
 })
 
