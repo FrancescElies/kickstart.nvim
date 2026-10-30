@@ -91,6 +91,7 @@ do
       map('n', '<leader>hd', gitsigns.preview_hunk_inline, { desc = 'toggle [d]eleted' })
       map('n', '<leader>hdh', function() gitsigns.diffthis '@' end, { desc = '[d]iff..HEAD' })
       map('n', '<leader>hdi', gitsigns.diffthis, { desc = '[d]iff..index' })
+      map('n', '<leader>hw', gitsigns.toggle_word_diff, { desc = 'toggle [w]ord diff' })
       map('n', '<leader>hl', gitsigns.blame_line, { desc = 'blame [l]ine' })
       map('n', '<leader>hp', gitsigns.preview_hunk, { desc = '[p]review' })
       map('n', '<leader>hq', function() gitsigns.setqflist 'all' end, { desc = '[q]uickfix project' })
