@@ -151,6 +151,11 @@ vim.keymap.set('n', 'coc', '<cmd>set invlist<cr>', { desc = 'change-opt. list (s
 
 vim.keymap.set('n', 'H', '<cmd>bprevious<CR>', { desc = 'prev buffer' })
 vim.keymap.set('n', 'L', '<cmd>bnext<CR>', { desc = 'next buffer' })
+-- unimpaired-style line moves
+vim.keymap.set('n', '[e', ':m .-2<CR>==', { desc = 'move line up' })
+vim.keymap.set('n', ']e', ':m .+1<CR>==', { desc = 'move line down' })
+vim.keymap.set('v', '[e', ":m '<-2<CR>gv=gv", { desc = 'move selection up' })
+vim.keymap.set('v', ']e', ":m '>+1<CR>gv=gv", { desc = 'move selection down' })
 vim.keymap.set('n', '<localleader>v', '<cmd>vs<cr><c-f>:set scb<cr><c-w>h<cmd>set scb<cr>', { desc = 'continue [v]iew' })
 vim.keymap.set('n', '<localleader>V', '<cmd>set noscb<cr>', { desc = 'stop continue [v]iew' })
 

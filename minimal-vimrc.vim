@@ -115,10 +115,13 @@ endif
 " WHICH KEYS TO MAP: :h map-which-keys
 
 " H/L defaults top/bottom barely used, us them to move current or selected lines
-nmap H :m .-2<CR>==
-nmap L :m .+1<CR>==
-vmap H :m '>+1<CR>gv=gv
-vmap L :m '<-2<CR>gv=gv
+nnoremap H :bprevious<CR>
+nnoremap L :bnext<CR>
+" unimpaired-style line moves
+nnoremap [e :m .-2<CR>==
+nnoremap ]e :m .+1<CR>==
+vnoremap [e :m '<-2<CR>gv=gv
+vnoremap ]e :m '>+1<CR>gv=gv
 
 " QUICKLY NAVIGATE QUICKFIX LIST:
 function! ToggleQuickfix() abort
@@ -169,15 +172,16 @@ nnoremap ı  i
 
 " !ip!sort will sort the lines of the current paragraph.
 
-nnoremap <leader>y "+y
-vnoremap <leader>y "+yg_
-nnoremap <leader>d "_d
-vnoremap <leader>d "_d
-nnoremap <leader>p "+p
-vnoremap <leader>p "+p
+"nnoremap <leader>y "+y
+"vnoremap <leader>y "+yg_
+"nnoremap <leader>d "_d
+"vnoremap <leader>d "_d
+"nnoremap <leader>p "+p
+"vnoremap <leader>p "+p
 
 
 nnoremap <leader>ve  :e $MYVIMRC<cr>
+nnoremap <localleader>wq :wq<cr>
 
 " quickly cd to current file dir or it's root dir project
 function! FindRootAndCd()
