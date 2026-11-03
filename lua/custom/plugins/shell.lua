@@ -38,8 +38,7 @@ vim.opt.shellquote = ""
 
 -- string to be used with `:make` command to:
 -- 1. save the stderr of `makeprg` in the temp file which Neovim reads using `errorformat` to populate the `quickfix` buffer
--- 2. show the stdout, stderr and the return_code on the screen
+-- 2. write stdout+stderr to the file, print nothing (a `tee` closure runs async and gets cut off at exit)
 -- NOTE: `ansi strip` removes all ansi coloring from nushell errors
-vim.opt.shellpipe = '| complete | update stderr { ansi strip } | tee { get stderr | save --force --raw %s } | into record'
+vim.opt.shellpipe = '| complete | ($in.stdout + $in.stderr) | ansi strip | save --force --raw %s'
 end
-

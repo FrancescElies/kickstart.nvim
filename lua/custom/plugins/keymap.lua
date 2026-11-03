@@ -11,6 +11,7 @@ function _G.p(v) print(vim.inspect(v)) end
 -- Ask nvim where variables last set:
 -- :verbose setlocal ts? sts? et? sw?
 vim.opt.grepprg = 'rg --vimgrep --smart-case --follow'
+vim.api.nvim_create_autocmd('QuickFixCmdPost', { pattern = '[^l]*grep*', command = 'cwindow' }) -- open quickfix after :grep/:vimgrep
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 
