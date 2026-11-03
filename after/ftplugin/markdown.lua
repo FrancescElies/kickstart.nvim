@@ -38,7 +38,7 @@ local converters = {
       )
       -- toc: fixed sidebar built client-side from h1-h6 (hidden on narrow screens)
       local toc =
-        [[<script>addEventListener("DOMContentLoaded",function(){var h=document.querySelectorAll("h1,h2,h3,h4,h5,h6");if(h.length<2)return;var n=document.createElement("nav");n.id="toc";h.forEach(function(x,i){x.id=x.id||"h"+i;var a=document.createElement("a");a.href="#"+x.id;a.textContent=x.textContent;a.className=x.tagName.toLowerCase();n.appendChild(a)});document.body.appendChild(n)})</script>
+        [[<script>addEventListener("DOMContentLoaded",function(){var h=document.querySelectorAll("h1,h2,h3,h4,h5,h6"),seen={};if(h.length<2)return;var n=document.createElement("nav");n.id="toc";h.forEach(function(x){var slug=x.textContent.toLowerCase().replace(/[^a-z0-9\s_-]/g,"").trim().replace(/\s+/g,"-"),count=seen[slug]||0;seen[slug]=count+1;x.id=slug+(count?"-"+count:"");var a=document.createElement("a");a.href="#"+x.id;a.textContent=x.textContent;a.className=x.tagName.toLowerCase();n.appendChild(a)});document.body.appendChild(n)})</script>
 ]]
       f:write(
         '<style>body{max-width:60em;margin:2em auto}img{width:100%;height:auto}pre{background:#f3f4f6!important;padding:.6em .8em;border-radius:4px;overflow-x:auto}table{border-collapse:collapse}th,td{border:1px solid #888;padding:.3em .6em}#toc{position:fixed;top:1em;right:1em;width:16em;max-height:90vh;overflow:auto;font-size:.8em;display:none}#toc a{display:block;padding:.1em 0;text-decoration:none}#toc .h2{padding-left:1em}#toc .h3{padding-left:2em}#toc .h4{padding-left:3em}#toc .h5{padding-left:4em}#toc .h6{padding-left:5em}@media(min-width:90em){#toc{display:block}}</style>\n',
@@ -196,4 +196,89 @@ do
   end
   vim.api.nvim_create_user_command('OpenLineInAzureDevops', open_line_in_ado, {})
   vim.keymap.set('n', '<localleader>oa', open_line_in_ado, { desc = '[o]pen  [a]zure devops' })
+end
+
+--
+-- Table of contents: <localleader>t inserts/refreshes a TOC between <!-- toc --> markers
+--
+do
+  local function add_toc()
+    local ok, parser = pcall(vim.treesitter.get_parser, 0, 'markdown')
+    if not ok then return vim.notify('Markdown Tree-sitter parser is unavailable', vim.log.levels.ERROR) end
+    local query = vim.treesitter.query.parse('markdown', [[
+      (atx_heading) @heading
+      (setext_heading) @heading
+    ]])
+    local tree = parser:parse()[1]
+    local root = tree:root()
+    local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+    local s, e
+    for i, l in ipairs(lines) do
+      if l == '<!-- toc -->' then s = i elseif l == '<!-- /toc -->' then e = i end
+    end
+
+    local toc, seen = { '<!-- toc -->' }, {}
+    for _, node in query:iter_captures(root, 0) do
+      local sr, _, er = node:range()
+      local title_line = lines[sr + 1] or ''
+      local hashes, title = title_line:match '^%s*(#+)%s+(.-)%s*#*%s*$'
+      local depth = hashes and #hashes or ((lines[sr + 2] or ''):match '^%s*=') and 1 or 2
+      title = title or title_line
+      if depth <= 6 and not (s and e and sr + 1 > s and sr + 1 < e) then
+        local slug = title:lower():gsub('`', ''):gsub('[^%w%s_-]', ''):gsub('%s+', '-')
+        local n = seen[slug]
+        seen[slug] = (n or 0) + 1
+        if n then slug = slug .. '-' .. n end
+        table.insert(toc, ('%s- [%s](#%s)'):format(('  '):rep(depth - 1), title, slug))
+      end
+    end
+    table.insert(toc, '<!-- /toc -->')
+    if s and e and s < e then
+      vim.api.nvim_buf_set_lines(0, s - 1, e, false, toc)
+    else
+      local row = vim.api.nvim_win_get_cursor(0)[1]
+      vim.api.nvim_buf_set_lines(0, row, row, false, toc)
+    end
+  end
+  vim.keymap.set('n', '<localleader>t', add_toc, { buffer = 0, desc = 'Add/refresh markdown [t]oc' })
+
+  vim.keymap.set('n', '<leader>st', function()
+    local ok, parser = pcall(vim.treesitter.get_parser, 0, 'markdown')
+    if not ok then return vim.notify('Markdown Tree-sitter parser is unavailable', vim.log.levels.ERROR) end
+    local query = vim.treesitter.query.parse('markdown', [[
+      (atx_heading) @heading
+      (setext_heading) @heading
+    ]])
+    local root = parser:parse()[1]:root()
+    local buf = vim.api.nvim_get_current_buf()
+    local results = {}
+    for _, node in query:iter_captures(root, buf) do
+      local row = node:range()
+      local text = vim.api.nvim_buf_get_lines(buf, row, row + 1, false)[1]
+      if text then
+        text = text:gsub('^%s*#+%s*', ''):gsub('%s*#+%s*$', '')
+        table.insert(results, { line = row + 1, text = text })
+      end
+    end
+    local actions = require 'telescope.actions'
+    local state = require 'telescope.actions.state'
+    require('telescope.pickers').new({}, {
+      prompt_title = 'Markdown Headings',
+      finder = require('telescope.finders').new_table {
+        results = results,
+        entry_maker = function(item)
+          return { value = item, display = item.text, ordinal = item.text }
+        end,
+      },
+      sorter = require('telescope.config').values.generic_sorter({}),
+      attach_mappings = function(prompt_bufnr)
+        actions.select_default:replace(function()
+          local entry = state.get_selected_entry()
+          actions.close(prompt_bufnr)
+          if entry then vim.api.nvim_win_set_cursor(0, { entry.value.line, 0 }) end
+        end)
+        return true
+      end,
+    }):find()
+  end, { buffer = 0, desc = '[S]earch [T]ree-sitter headings' })
 end
