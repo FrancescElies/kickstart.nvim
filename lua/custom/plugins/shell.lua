@@ -7,38 +7,37 @@
 -- INFO: settings to set nushell as the shell for the :! command
 -- --
 
+if vim.env.SHELL == 'nu' then
+  -- path to the Nushell executable
+  -- vim.opt.sh = "nu"
 
-if vim.env.SHELL == "nu" then
--- path to the Nushell executable
--- vim.opt.sh = "nu"
+  -- WARN: disable the usage of temp files for shell commands
+  -- because Nu doesn't support `input redirection` which Neovim uses to send buffer content to a command:
+  --      `{shell_command} < {temp_file_with_selected_buffer_content}`
+  -- When set to `false` the stdin pipe will be used instead.
+  -- NOTE: some info about `shelltemp`: https://github.com/neovim/neovim/issues/1008
+  vim.opt.shelltemp = false
 
--- WARN: disable the usage of temp files for shell commands
--- because Nu doesn't support `input redirection` which Neovim uses to send buffer content to a command:
---      `{shell_command} < {temp_file_with_selected_buffer_content}`
--- When set to `false` the stdin pipe will be used instead.
--- NOTE: some info about `shelltemp`: https://github.com/neovim/neovim/issues/1008
-vim.opt.shelltemp = false
+  -- string to be used to put the output of shell commands in a temp file
+  -- 1. when 'shelltemp' is `true`
+  -- 2. in the `diff-mode` (`nvim -d file1 file2`) when `diffopt` is set
+  --    to use an external diff command: `set diffopt-=internal`
+  vim.opt.shellredir = 'out+err> %s'
 
--- string to be used to put the output of shell commands in a temp file
--- 1. when 'shelltemp' is `true` 
--- 2. in the `diff-mode` (`nvim -d file1 file2`) when `diffopt` is set 
---    to use an external diff command: `set diffopt-=internal`
-vim.opt.shellredir = "out+err> %s"
+  -- flags for nu:
+  -- * `--stdin`       redirect all input to -c
+  -- * `--no-newline`  do not append `\n` to stdout
+  -- * `--commands -c` execute a command
+  vim.opt.shellcmdflag = '--stdin --no-newline -c'
 
--- flags for nu:
--- * `--stdin`       redirect all input to -c
--- * `--no-newline`  do not append `\n` to stdout
--- * `--commands -c` execute a command
-vim.opt.shellcmdflag = "--stdin --no-newline -c"
+  -- disable all escaping and quoting
+  vim.opt.shellxescape = ''
+  vim.opt.shellxquote = ''
+  vim.opt.shellquote = ''
 
--- disable all escaping and quoting
-vim.opt.shellxescape = ""
-vim.opt.shellxquote = ""
-vim.opt.shellquote = ""
-
--- string to be used with `:make` command to:
--- 1. save the stderr of `makeprg` in the temp file which Neovim reads using `errorformat` to populate the `quickfix` buffer
--- 2. write stdout+stderr to the file, print nothing (a `tee` closure runs async and gets cut off at exit)
--- NOTE: `ansi strip` removes all ansi coloring from nushell errors
-vim.opt.shellpipe = '| complete | ($in.stdout + $in.stderr) | ansi strip | save --force --raw %s'
+  -- string to be used with `:make` command to:
+  -- 1. save the stderr of `makeprg` in the temp file which Neovim reads using `errorformat` to populate the `quickfix` buffer
+  -- 2. write stdout+stderr to the file, print nothing (a `tee` closure runs async and gets cut off at exit)
+  -- NOTE: `ansi strip` removes all ansi coloring from nushell errors
+  vim.opt.shellpipe = '| complete | ($in.stdout + $in.stderr) | ansi strip | save --force --raw %s'
 end
