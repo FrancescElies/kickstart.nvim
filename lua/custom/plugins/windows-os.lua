@@ -65,6 +65,7 @@ vim.api.nvim_create_user_command('ScreenAliveOff', function()
   if ret == 0 then
     error 'Failed to reset thread execution state'
   else
+    vim.api.nvim_set_hl(0, 'StatuslinePid', { link = 'MiniStatuslineFilename' })
     print 'Not taking notes anymore'
   end
   if mouse_timer and mouse_timer:is_active() then
@@ -96,6 +97,7 @@ vim.api.nvim_create_user_command('ScreenAliveOn', function()
   if ret == 0 then
     error 'Failed to set thread execution state'
   else
+    vim.api.nvim_set_hl(0, 'StatuslinePid', { fg = '#ffffff', bg = '#d20f39', bold = true })
     print 'Ready to take quick notes anytime!'
   end
   if mouse_timer then mouse_timer:start(0, 100, function()

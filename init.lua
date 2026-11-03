@@ -435,7 +435,7 @@ do
           '%=',
           { hl = 'MiniStatuslineFileinfo', strings = { fileinfo } },
           { hl = mode_hl, strings = { location } },
-          { hl = 'MiniStatuslineFilename', strings = { 'pid:' .. pid } },
+          { hl = 'StatuslinePid', strings = { 'pid:' .. pid } },
         }
       end,
     },
