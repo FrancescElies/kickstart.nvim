@@ -312,7 +312,7 @@ do
     on_colors = function(color) color.comment = '#92b2d4' end,
     on_highlights = function(hl, color)
       hl.LineNr = { fg = color.green }
-      hl.Comment = { fg = '#ff79c6', italic = true }
+      hl.Comment = { fg = '#bb9af7', italic = true }
       hl.LineNrAbove = { fg = color.comment }
       hl.LineNrBelow = { fg = color.comment }
       hl.StatusLineNC = { fg = color.comment }
