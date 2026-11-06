@@ -982,6 +982,9 @@ do
   end
   require('luasnip.loaders.from_lua').lazy_load { include = { 'all', 'cpp', 'c' } }
 
+  -- create a snippet from the visual selection, appended to lua/custom/snippets/<filetype>.lua
+  vim.keymap.set('v', '<localleader>S', function() require('custom.snippet_from_selection').create() end, { desc = '[S]nippet from selection' })
+
   -- `friendly-snippets` contains a variety of premade snippets.
   --    See the README about individual language/framework/plugin snippets:
   --    https://github.com/rafamadriz/friendly-snippets
