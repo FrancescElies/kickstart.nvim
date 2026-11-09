@@ -31,3 +31,5 @@ require('custom.at_file_mention').setup {
   filetypes = { 'markdown', 'markdown.mdx' },
   picker = { hidden = true, follow = true },
 }
+
+vim.schedule(function() vim.o.clipboard = 'unnamedplus' end)
