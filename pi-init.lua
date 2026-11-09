@@ -2,7 +2,9 @@
 -- Used via: nvim -u <this file>
 local cfg = vim.fn.stdpath 'config'
 vim.opt.runtimepath:prepend(cfg) -- lua/custom/*, after/ftplugin/markdown.lua
-vim.opt.runtimepath:append(vim.fn.stdpath 'data' .. '/site/pack/core/opt/LuaSnip')
+for _, p in ipairs { 'LuaSnip', 'plenary.nvim', 'telescope.nvim' } do
+  vim.opt.runtimepath:append(vim.fn.stdpath 'data' .. '/site/pack/core/opt/' .. p)
+end
 vim.cmd 'filetype plugin indent on'
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
@@ -24,3 +26,8 @@ end, { silent = true })
 vim.api.nvim_create_autocmd({ 'BufEnter', 'BufNewFile' }, {
   callback = function() vim.bo.filetype = 'markdown' end,
 })
+
+require('custom.at_file_mention').setup {
+  filetypes = { 'markdown', 'markdown.mdx' },
+  picker = { hidden = true, follow = true },
+}
