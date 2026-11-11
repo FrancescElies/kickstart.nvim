@@ -682,16 +682,33 @@ do
   vim.keymap.set('n', '<leader>sM', builtin.man_pages, { desc = '[S]earch [M]an pages' })
   vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
   vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
-  vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
+  -- Picker backend for <leader>sf / <leader>sg: 'telescope' or 'fff' (toggle with <leader>sx)
+  vim.g.search_backend = vim.g.search_backend or 'telescope'
+  local function use_fff() return vim.g.search_backend == 'fff' end
+  local function toggle_search_backend()
+    vim.g.search_backend = use_fff() and 'telescope' or 'fff'
+    vim.notify('Search backend: ' .. vim.g.search_backend)
+  end
+  vim.api.nvim_create_user_command('SearchBackendToggle', toggle_search_backend, { desc = 'Toggle sf/sg/sr picker between telescope and fff' })
+  vim.keymap.set('n', '<leader>sx', toggle_search_backend, { desc = '[S]earch e[x]change picker (telescope/fff)' })
+  vim.keymap.set('n', '<leader>sf', function()
+    if use_fff() then require('fff').find_files() else builtin.find_files() end
+  end, { desc = '[S]earch [F]iles' })
   vim.keymap.set('n', '<leader>sF', find_files_buf_dir, { desc = "[S]earch [F]iles in buf's dir" })
   vim.keymap.set('n', '<leader>sa', tele_find_all_files, { desc = '[S]earch [A]ll files' })
   vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
-  vim.keymap.set({ 'n', 'v' }, '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
+  vim.keymap.set({ 'n', 'v' }, '<leader>sw', function()
+    if use_fff() then require('fff').live_grep_under_cursor() else builtin.grep_string() end
+  end, { desc = '[S]earch current [W]ord' })
   vim.keymap.set('n', '<leader>si', builtin.git_status, { desc = '[s]earch git [i]ndex' })
-  vim.keymap.set('n', '<leader>sg', ':Telescope live-multi-grep<cr>', { desc = '[S]earch by [G]rep' })
+  vim.keymap.set('n', '<leader>sg', function()
+    if use_fff() then require('fff').live_grep() else vim.cmd 'Telescope live-multi-grep' end
+  end, { desc = '[S]earch by [G]rep' })
   -- vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
   vim.keymap.set('n', '<leader>sp', require('custom.repo-select').project_file_picker, { desc = '[S]earch [P]roject files' })
-  vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
+  vim.keymap.set('n', '<leader>sr', function()
+    if use_fff() then vim.cmd 'FFFResume' else builtin.resume() end
+  end, { desc = '[S]earch [R]esume' })
   vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
   vim.keymap.set('n', '<leader>st', builtin.treesitter, { desc = '[S]earch [T]reesitter' })
   vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
