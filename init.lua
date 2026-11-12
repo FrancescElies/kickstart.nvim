@@ -683,7 +683,7 @@ do
   vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
   vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
   -- Picker backend for <leader>sf / <leader>sg: 'telescope' or 'fff' (toggle with <leader>sx)
-  vim.g.search_backend = vim.g.search_backend or 'telescope'
+  vim.g.search_backend = vim.g.search_backend or 'fff'
   local function use_fff() return vim.g.search_backend == 'fff' end
   local function toggle_search_backend()
     vim.g.search_backend = use_fff() and 'telescope' or 'fff'
