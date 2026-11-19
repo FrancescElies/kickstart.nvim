@@ -44,7 +44,7 @@ vim.api.nvim_create_autocmd('FileType', {
   pattern = { 'markdown', 'text', 'gitcommit' },
   callback = function(args)
     local buf = args.buf
-    local hard_textwidth = 80 -- change to taste, or make buffer-local var
+    local hard_textwidth = vim.bo[buf].filetype == 'markdown' and 100 or 72
 
     -- vim.cmd('setlocal spell wrap')
     vim.opt_local.spell = true
