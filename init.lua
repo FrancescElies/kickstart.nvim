@@ -1054,6 +1054,9 @@ do
 
     sources = {
       default = { 'lsp', 'path', 'snippets', 'buffer' },
+      per_filetype = {
+        markdown = { 'lsp', 'path', 'snippets' },
+      },
     },
     snippets = { preset = 'luasnip' },
 
